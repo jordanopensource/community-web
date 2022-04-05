@@ -1,7 +1,7 @@
 FROM node:16-alpine3.14
 
 # install node_modules
-COPY package*.json /tmp
+COPY package*.json /tmp/
 RUN cd /tmp && npm install
 
 # copy application into image
