@@ -1,0 +1,4 @@
+<template>
+  <HeroBanner />
+  <RegisterForm />
+</template>
