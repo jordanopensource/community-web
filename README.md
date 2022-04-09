@@ -32,7 +32,7 @@ The Member community hub for the JOSANS.
       </ul>
     </li>
     <li>
-      <a href="#getting-started-🚀">Getting Started</a>
+      <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -40,10 +40,10 @@ The Member community hub for the JOSANS.
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap-%EF%B8%8F">Roadmap</a></li>
-    <li><a href="#contributing-🤝">Contributing</a></li>
-    <li><a href="#license-💳">License</a></li>
-    <li><a href="#contact-📧">Contact</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
@@ -63,7 +63,7 @@ We recommend to look at the [documentation](https://v3.nuxtjs.org).
 ___
 
 <!-- GETTING STARTED -->
-## Getting Started 🚀
+## Getting Started
 
 To get a local copy up and running follow these simple steps.
 
@@ -120,14 +120,14 @@ Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment).
 ___
 
 <!-- ROADMAP -->
-## Roadmap 🗺️
+## Roadmap
 
 See the [open issues](https://github.com/jordanopensource/portal-web/issues) for a list of proposed features (and known issues).
 
 ___
 
 <!-- CONTRIBUTING -->
-## Contributing 🤝
+## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -140,14 +140,14 @@ Contributions are what make the open source community such an amazing place to b
 ___
 
 <!-- LICENSE -->
-## License 💳
+## License
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ___
 
 <!-- CONTACT -->
-## Contact 📧
+## Contact
 
 Jordan Open Source Association - [@jo_osa](https://twitter.com/@jo_osa) - info@josa.ngo
 
