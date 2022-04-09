@@ -1,6 +1,5 @@
 <!-- PROJECT LOGO -->
-<center>
-
+<div align="center">
 <a href="https://github.com/jordanopensource/community-web">
   <img src=".github/images/logo.svg" alt="Logo" width="80" height="80">
 </a>
@@ -20,7 +19,7 @@ The Member community hub for the JOSANS.
 
 [![Build Status](https://builds.josa.dev/api/badges/jordanopensource/community-web/status.svg)](https://builds.josa.dev/jordanopensource/community-web)
 
-</center>
+</div>
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -33,7 +32,7 @@ The Member community hub for the JOSANS.
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#getting-started-🚀">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -41,10 +40,10 @@ The Member community hub for the JOSANS.
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#roadmap-%EF%B8%8F">Roadmap</a></li>
+    <li><a href="#contributing-🤝">Contributing</a></li>
+    <li><a href="#license-💳">License</a></li>
+    <li><a href="#contact-📧">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
