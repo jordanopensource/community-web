@@ -1,6 +1,6 @@
 // Visit https://tailwindcss.com/docs/configuration#configuration-options for more info
 module.exports = {
-  content: [ 
+  content: [
     './assets/**/*.{vue,js,css}',
     './components/**/*.{vue,js}',
     './layouts/**/*.vue',
@@ -41,9 +41,9 @@ module.exports = {
           DEFAULT: '#8dbd63',
           dark: '#5c813d',
         },
-        'josa-black':{
-          DEFAULT:'#2e3436',
-          darker: '#282e30'
+        'josa-black': {
+          DEFAULT: '#2e3436',
+          darker: '#1a1f21',
         },
         grey90: '#e5e5e5',
       },
