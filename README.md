@@ -142,13 +142,13 @@ ___
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
+Distributed under the Apache License 2.0. See [LICENSE](LICENSE) for more information.
 
 ___
 
 <!-- CONTACT -->
 ## Contact
 
-Jordan Open Source Association - [@jo_osa](https://twitter.com/@jo_osa) - info@josa.ngo
+Jordan Open Source Association - [@jo_osa](https://twitter.com/@jo_osa)
 
 Project Link: [https://github.com/jordanopensource/community-web](https://github.com/jordanopensource/community-web)

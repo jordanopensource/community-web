@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <div class="container">
-      <div class="px-6 md:px-12 flex justify-between flex-wrap lg:flex-nowrap items-center">
+      <div
+        class="px-6 md:px-12 flex justify-between flex-wrap lg:flex-nowrap items-center"
+      >
         <div class="flex items-center flex-shrink-0">
           <NuxtLink id="brand" to="/">
             <div role="link">
@@ -48,22 +50,22 @@
   </header>
 </template>
 <script setup>
-
-import { reactive } from 'vue';
+import { reactive } from 'vue'
 
 const state = reactive({
-  isOpen: false
-});
-
+  isOpen: false,
+})
 </script>
 <style lang="postcss" scoped>
 .header {
   @apply py-8 bg-josa-black-darker;
   border-bottom: 1px solid #e0e0e0;
 }
+
 .menu-icon {
   @apply text-josa-warm-grey-light w-6 h-6 !important;
 }
+
 @screen sm {
   .menu-icon {
     @apply w-8 h-8 !important;

@@ -3,15 +3,27 @@
     <div class="container flex flex-col md:flex-row">
       <div class="logo text-center md:text-left">
         <p class="w-full">
-          <img class="w-6 inline-block" src="@/static/icons/code-solid.svg" alt="JOSA Logo" /> with
-          <img class="w-6 inline-block" src="@/static/icons/heart.svg" alt="JOSA Logo" /> by JOSA
+          <img
+            class="w-6 inline-block"
+            src="@/static/icons/code-solid.svg"
+            alt="JOSA Logo"
+          />
+          with
+          <img
+            class="w-6 inline-block"
+            src="@/static/icons/heart.svg"
+            alt="JOSA Logo"
+          />
+          by JOSA
         </p>
       </div>
       <div class="block md:hidden py-8">
         <hr />
       </div>
       <div id="copyright-info" class="flex-col md:flex-row">
-        <div class="flex flex-row justify-center md:justify-start py-2 md:px-2 md:py-0">
+        <div
+          class="flex flex-row justify-center md:justify-start py-2 md:px-2 md:py-0"
+        >
           <a
             v-for="link in state.socialMediaLinks"
             :key="link.id"
@@ -19,12 +31,22 @@
             :href="link.path"
             target="_blank"
           >
-            <img class="w-6 text-josa-warm-grey-light" :src="getIconUrl(link.icon)" />
+            <img
+              class="w-6 text-josa-warm-grey-light"
+              :src="getIconUrl(link.icon)"
+            />
           </a>
         </div>
         <div class="flex flex-row justify-center md:justify-start">
-          <img class="cc-logo w-5 mx-2" src="@/static/logo/cc.svg" alt="cc-logo" loading="lazy" />
-          <p class="text-sm licenseText text-justify">2022, JOSA - Jordan Open Source Assosiation</p>
+          <img
+            class="cc-logo w-5 mx-2"
+            src="@/static/logo/cc.svg"
+            alt="cc-logo"
+            loading="lazy"
+          />
+          <p class="text-sm licenseText text-justify">
+            2022, JOSA - Jordan Open Source Assosiation
+          </p>
         </div>
       </div>
     </div>
@@ -32,7 +54,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive } from 'vue'
 
 const state = reactive({
   socialMediaLinks: [
@@ -46,23 +68,22 @@ const state = reactive({
       path: 'https://twitter.com/jo_osa',
       id: '@jo_osa',
     },
-    // {
-    //   icon: 'instagram',
-    //   path: 'https://instagram.com/jordanopensource',
-    //   id: '/jordanopensource',
-    // },
     {
       icon: 'github',
       path: 'https://github.com/jordanopensource',
       id: '/josa-portal-web',
     },
-  ]
-});
+  ],
+})
 
 const getIconUrl = (iconName) => {
-  return '/' + new URL(`../static/icons/${iconName}.svg`, import.meta.url).href.split('3000/')[1];
+  return (
+    '/' +
+    new URL(`../static/icons/${iconName}.svg`, import.meta.url).href.split(
+      '3000/'
+    )[1]
+  )
 }
-
 </script>
 
 <style lang="postcss" scoped>
