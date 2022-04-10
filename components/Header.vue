@@ -58,7 +58,7 @@ const state = reactive({
 </script>
 <style lang="postcss" scoped>
 .header {
-  @apply py-8 bg-josa-black;
+  @apply py-8 bg-josa-black-darker;
   border-bottom: 1px solid #e0e0e0;
 }
 .menu-icon {

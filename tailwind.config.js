@@ -41,7 +41,10 @@ module.exports = {
           DEFAULT: '#8dbd63',
           dark: '#5c813d',
         },
-        'josa-black': '#2e3436',
+        'josa-black':{
+          DEFAULT:'#2e3436',
+          darker: '#282e30'
+        },
         grey90: '#e5e5e5',
       },
       fontFamily: {
