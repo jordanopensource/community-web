@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
-    <Footer />
+    <PageHeader />
+    <PageFooter />
   </div>
 </template>
