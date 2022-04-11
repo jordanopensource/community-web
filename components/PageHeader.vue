@@ -6,7 +6,11 @@
         class="px-6 md:px-12 flex justify-between flex-wrap lg:flex-nowrap items-center"
       > -->
         <div class="nav-bar">
-          <NuxtLink id="brand" to="/">
+          <NuxtLink
+            id="brand"
+            to="/"
+            class="flex flex-col md:flex-row items-end z-10"
+          >
             <img
               class="w-36 h-10"
               src="@/static/logo/logo.svg"
@@ -15,6 +19,9 @@
               height="40"
               loading="eager"
             />
+            <span class="text-xl text-josa-warm-grey-light italic">
+              .community
+            </span>
           </NuxtLink>
           <ul class="menu">
             <li class="menu-item">
@@ -55,7 +62,7 @@ li a {
 }
 
 .nav-bar {
-  @apply flex items-center py-6 mx-8 md:mx-11 lg:ml-24 md:py-11;
+  @apply flex items-center py-6 mx-11 md:mx-11 lg:ml-24 md:py-11;
 }
 .menu-item {
   @apply inline-block lg:mx-7;
