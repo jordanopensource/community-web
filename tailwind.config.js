@@ -7,6 +7,7 @@ module.exports = {
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
     './nuxt.config.{js,ts}',
+    './app.{vue,js}',
   ],
   theme: {
     maxWidth: {
@@ -42,7 +43,7 @@ module.exports = {
           dark: '#5c813d',
         },
         'josa-black': {
-          DEFAULT: '#2e3436',
+          DEFAULT: '#22292c',
           darker: '#1a1f21',
         },
         grey90: '#e5e5e5',
