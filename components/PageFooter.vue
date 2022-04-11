@@ -84,7 +84,7 @@
               height="16"
               loading="lazy"
             />
-            2021, JOSA - Jordan Open Source Association
+            2022, JOSA - Jordan Open Source Association
           </p>
         </div>
       </div>
@@ -101,7 +101,7 @@
   @apply lg:h-64 lg:pt-28 lg:w-full mx-auto lg:mx-0 pb-7 lg:pb-0;
 }
 .footer-container {
-  background-color: #1a1f21;
+  @apply bg-josa-black;
   @apply lg:flex h-full text-white items-center lg:justify-between lg:px-24 lg:mx-0;
 }
 </style>
