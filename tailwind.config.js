@@ -6,7 +6,7 @@ module.exports = {
     './layouts/**/*.vue',
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
-    './nuxt.config.{js,ts}',
+    // './nuxt.config.{js,ts}', // All I needed is to remove this damn line
     './app.{vue,js}',
   ],
   theme: {

@@ -62,7 +62,7 @@ li a {
 }
 
 .nav-bar {
-  @apply flex items-center py-6 mx-11 md:mx-11 lg:ml-24 md:py-11;
+  @apply flex items-center py-6 mx-11 md:mx-11 md:py-11;
 }
 .menu-item {
   @apply inline-block lg:mx-7;
@@ -70,10 +70,6 @@ li a {
 
 .menu {
   @apply text-white hidden lg:flex font-medium text-lg lg:text-xl w-full justify-end;
-}
-
-.nav-bar {
-  @apply flex items-center py-6 mx-8 md:mx-11 lg:ml-24 md:py-11;
 }
 
 #login {
