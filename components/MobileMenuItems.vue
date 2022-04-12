@@ -21,7 +21,7 @@ const props = defineProps({
 
 <style lang="postcss" scoped>
 .mobile-menu {
-  @apply mx-8 py-8 text-white font-medium text-base md:mx-11;
+  @apply mx-8 px-7 py-8 text-white font-medium text-base md:mx-11;
 }
 
 .border-gray {
