@@ -2,9 +2,6 @@
   <header>
     <nav>
       <div class="container">
-        <!-- <div
-        class="px-6 md:px-12 flex justify-between flex-wrap lg:flex-nowrap items-center"
-      > -->
         <div class="nav-bar">
           <NuxtLink
             id="brand"
@@ -62,14 +59,16 @@ li a {
 }
 
 .nav-bar {
-  @apply flex items-center py-6 mx-11 md:mx-11 md:py-11;
+  @apply flex items-center;
+  @apply px-16 py-6 md:py-11;
 }
 .menu-item {
   @apply inline-block lg:mx-7;
 }
 
 .menu {
-  @apply text-white hidden lg:flex font-medium text-lg lg:text-xl w-full justify-end;
+  @apply text-white hidden font-medium text-lg lg:text-xl;
+  @apply lg:flex justify-end w-full;
 }
 
 #login {

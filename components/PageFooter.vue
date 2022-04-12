@@ -1,6 +1,6 @@
 <template>
   <footer class="footer-section">
-    <div class="footer-container">
+    <div class="footer-container container">
       <div class="flex items-center justify-center lg:justify-start p-8 lg:p-0">
         <img
           class="h-5"
@@ -98,10 +98,13 @@
 } */
 .footer-section {
   background-color: #edeeef;
-  @apply lg:h-64 lg:pt-28 lg:w-full mx-auto lg:mx-0 pb-7 lg:pb-0;
+  @apply bg-josa-black;
+  @apply lg:h-32 lg:w-full;
+  @apply lg:mt-28;
 }
 .footer-container {
-  @apply bg-josa-black;
-  @apply lg:flex h-full text-white items-center lg:justify-between lg:px-24 lg:mx-0;
+  @apply bg-josa-black text-white;
+  @apply lg:flex h-full items-center lg:justify-between;
+  @apply px-16;
 }
 </style>
