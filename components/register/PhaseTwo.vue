@@ -1,18 +1,20 @@
 <template>
   <div class="input-control">
     <form @submit.prevent="onSubmit">
-      <label>How can you help JOSA</label>
-      <textarea
-        rows="5"
-        required="required"
-        v-model="form.offerMessage"
-      ></textarea>
-      <label>How JOSA can help you</label>
-      <textarea
-        rows="5"
-        required="required"
-        v-model="form.requestMessage"
-      ></textarea>
+      <FormAppControlInput
+        v-model:value="form.offerMessage"
+        isRequired="required"
+        inputType="textarea"
+      >
+        How can you help JOSA
+      </FormAppControlInput>
+      <FormAppControlInput
+        v-model:value="form.requestMessage"
+        isRequired="required"
+        inputType="textarea"
+      >
+        How JOSA can help you
+      </FormAppControlInput>
       <div class="text-right">
         <button class="button-flat button-blue-full" type="submit">
           Next &rarr;

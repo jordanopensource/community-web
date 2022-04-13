@@ -1,3 +1,4 @@
+// Todo: Make this into its separate component
 <template>
   <div class="input-control">
     <form @submit.prevent="onSubmit">
