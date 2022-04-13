@@ -1,17 +1,39 @@
 <template>
-  <div id="register-form" class="container form-container">
-    <RegisterPhaseOne
-      v-if="step === 1"
-      @toggleNext="(formData) => nextStep(formData)"
-    />
-    <RegisterPhaseTwo
-      v-else-if="step === 2"
-      @toggleNext="(formData) => nextStep(formData)"
-    />
-    <RegisterPhaseThree
-      v-else-if="step === 3"
-      @toggleSubmit="(formData) => submitForm(formData)"
-    />
+  <div id="register-form" class="main container">
+    <div class="flex flex-col">
+      <RegisterIndicator
+        :step="step"
+        :phaseNumber="`1`"
+        :phaseText="`Personal Details`"
+      />
+      <RegisterIndicator
+        :step="step"
+        :phaseNumber="`2`"
+        :phaseText="`Motivation`"
+      />
+      <RegisterIndicator
+        :step="step"
+        :phaseNumber="`3`"
+        :phaseText="`Vouching`"
+      />
+    </div>
+    <div class="form-container">
+      <RegisterPhaseOne
+        v-if="step === 1"
+        class="form-wrapper"
+        @toggleNext="(formData) => nextStep(formData)"
+      />
+      <RegisterPhaseTwo
+        v-else-if="step === 2"
+        class="form-wrapper"
+        @toggleNext="(formData) => nextStep(formData)"
+      />
+      <RegisterPhaseThree
+        v-else-if="step === 3"
+        class="form-wrapper"
+        @toggleSubmit="(formData) => submitForm(formData)"
+      />
+    </div>
   </div>
 </template>
 <script setup>
@@ -29,8 +51,17 @@ const submitForm = (data) => {
 }
 </script>
 <style lang="postcss" scoped>
+.main {
+  @apply my-14;
+  @apply flex flex-col lg:flex-row;
+}
+.main,
+.form-container {
+  @apply p-10;
+}
+
 .form-container {
   @apply bg-white;
-  @apply p-10 my-14;
+  flex-grow: 1;
 }
 </style>
