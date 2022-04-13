@@ -57,7 +57,7 @@ const submitForm = (data) => {
 }
 .main,
 .form-container {
-  @apply p-10;
+  @apply p-10 px-8 lg:px-20;
 }
 
 .form-container {
