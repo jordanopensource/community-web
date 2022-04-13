@@ -16,9 +16,9 @@
         How JOSA can help you
       </FormAppControlInput>
       <div class="text-right">
-        <button class="button-flat button-blue-full" type="submit">
-          Next &rarr;
-        </button>
+        <FormAppButton btn-style="button-flat button-blue-full" type="submit"
+          >Next &rarr;</FormAppButton
+        >
       </div>
     </form>
   </div>

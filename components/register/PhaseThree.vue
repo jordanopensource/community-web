@@ -47,9 +47,9 @@
           </div>
         </div>
         <div class="floating-button">
-          <button class="button-flat button-blue-full" type="submit">
-            Submit
-          </button>
+          <FormAppButton btn-style="button-flat button-blue-full" type="submit"
+            >Submit</FormAppButton
+          >
         </div>
       </div>
     </form>
