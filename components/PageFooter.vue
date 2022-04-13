@@ -93,14 +93,10 @@
 </template>
 
 <style lang="postcss" scoped>
-/* * {
-  font-family: 'IBM Mono';
-} */
 .footer-section {
   background-color: #edeeef;
   @apply bg-josa-black;
   @apply lg:h-32 lg:w-full;
-  @apply lg:mt-28;
 }
 .footer-container {
   @apply bg-josa-black text-white;
