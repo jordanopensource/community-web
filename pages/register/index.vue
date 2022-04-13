@@ -1,4 +1,6 @@
 <template>
-  <HeroBanner />
-  <RegisterForm />
+  <div id="register">
+    <HeroBanner />
+    <RegisterForm />
+  </div>
 </template>
