@@ -3,11 +3,11 @@
     :class="
       props.step == props.phaseNumber ? 'indicator-wrapper' : 'grayed-out'
     "
-    class="p-8"
+    class="p-10 pb-28 md:p-8"
   >
     <p class="text-wrapper">
       <span class="phase-number">{{ props.phaseNumber }}.</span>
-      <span>{{ props.phaseText }}</span>
+      <span class="phase-text">{{ props.phaseText }}</span>
     </p>
   </div>
 </template>
@@ -34,6 +34,9 @@ const props = defineProps({
 }
 .text-wrapper {
   @apply text-2xl font-bold;
+}
+.phase-text {
+  @apply uppercase;
 }
 .phase-number {
   @apply text-5xl;

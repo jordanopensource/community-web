@@ -1,6 +1,6 @@
 <template>
   <div id="register-form" class="main container">
-    <div class="flex flex-col">
+    <div v-if="step < 4" class="flex flex-col">
       <RegisterIndicator
         :step="step"
         :phaseNumber="`1`"
@@ -33,6 +33,7 @@
         class="form-wrapper"
         @toggleSubmit="(formData) => submitForm(formData)"
       />
+      <RegisterFormThanks v-else />
     </div>
   </div>
 </template>
@@ -47,6 +48,7 @@ const nextStep = (data) => {
 
 const submitForm = (data) => {
   formData = { ...formData, ...data }
+  step.value++
   console.log(formData)
 }
 </script>
