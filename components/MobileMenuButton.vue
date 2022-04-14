@@ -4,10 +4,10 @@
       <img
         v-if="props.isOpen"
         class="w-9 h-9"
-        src="@/static/icons/x-circle.svg"
+        src=" /icons/x-circle.svg"
         alt=""
       />
-      <img v-else class="w-9 h-9" src="@/static/icons/bars-solid.svg" alt="" />
+      <img v-else class="w-9 h-9" src=" /icons/bars-solid.svg" alt="" />
     </button>
   </div>
 </template>

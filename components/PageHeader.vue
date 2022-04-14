@@ -10,7 +10,7 @@
           >
             <img
               class="w-36 h-10"
-              src="@/static/logo/logo.svg"
+              src=" /logo/logo.svg"
               alt="Jordan Open Source Association Logo"
               width="128"
               height="40"
