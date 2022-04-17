@@ -58,7 +58,7 @@
         <p>
           {{
             props.member.member_since
-              ? props.member.member_since
+              ? formatDate(props.member.member_since)
               : 'January 2023'
           }}
         </p>
@@ -103,6 +103,15 @@ const props = defineProps({
     default: {},
   },
 })
+
+const formatDate = (date) => {
+  const newDate = new Date(date)
+  const [month, year] = [
+    newDate.toLocaleString('en-US', { month: 'long' }),
+    newDate.getFullYear(),
+  ]
+  return `${month} ${year}`
+}
 </script>
 <style lang="postcss" scoped>
 .details-container {
