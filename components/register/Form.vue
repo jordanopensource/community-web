@@ -59,11 +59,12 @@ const submitForm = (data) => {
 }
 .main,
 .form-container {
-  @apply py-10 px-3;
+  @apply py-10 px-20;
 }
 
 .form-container {
   @apply bg-white;
+  @apply px-10;
   flex-grow: 1;
 }
 </style>
