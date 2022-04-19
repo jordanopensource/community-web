@@ -15,7 +15,7 @@
             props.member.avatar ? props.member.avatar : placeHolderImages.avatar
           "
         />
-        <div class="mr-4 w-64 2xl:w-auto 2xl:mr-0"></div>
+        <div class="invisible-white-space"></div>
         <div class="general-info">
           <div class="flex flex-col items-center lg:items-start">
             <p class="member-name">
@@ -78,14 +78,14 @@
           : 'Lorem Ipsum is what the good animal did, and when they were safely on the other side, and had walked on a little while, the woods grew more and more familiar to them.'
       }}
     </p>
-    <div class="skills">
+    <!-- <div class="skills">
       <h5 class="heading">Skills</h5>
       <ul>
         <li v-for="(skill, index) in memberSkills" :key="`skill-${index}`">
           {{ skill }}
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup>
@@ -94,7 +94,7 @@ const placeHolderImages = {
   avatar: '/images/placeholders/avatar.png',
 }
 
-const memberSkills = ['Linux Operating System', 'File System']
+// const memberSkills = ['Linux Oper  ating System', 'File System']
 
 const props = defineProps({
   member: {
@@ -181,14 +181,25 @@ img {
   z-index: 1;
 }
 
+.invisible-white-space {
+  @apply mr-4 w-64;
+  @apply xl:w-44;
+  @apply 2xl:w-0 2xl:mr-0;
+}
+
 .member-card {
-  @apply flex flex-col justify-between;
+  @apply flex flex-col;
+  @apply xl:justify-evenly;
   @apply lg:flex-row;
   @apply w-full;
   @apply bg-slate-100;
   @apply rounded-xl;
   @apply p-4 mt-20 mb-4;
   @apply font-semibold;
+
+  div {
+    @apply mr-36 xl:mr-48;
+  }
 
   h5 {
     @apply font-light;
