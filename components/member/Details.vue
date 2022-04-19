@@ -53,7 +53,7 @@
     <div class="member-card">
       <div class="badge-details">
         <div class="badge-color"></div>
-        <p>{{ memberType[props.member.type] }}</p>
+        <p>JOSA Member</p>
       </div>
       <div>
         <h5>Member ID</h5>
@@ -89,16 +89,9 @@
   </div>
 </template>
 <script setup>
-const memberType = {
-  1: 'Board Member',
-  2: 'JOSA Member',
-  3: 'Supporter Member',
-  4: 'Staff Member',
-}
-
 const placeHolderImages = {
   cover: '/images/placeholders/729x164.png',
-  avatar: '/images/placeholders/200x200.png',
+  avatar: '/images/placeholders/avatar.png',
 }
 
 const memberSkills = ['Linux Operating System', 'File System']
