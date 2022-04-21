@@ -1,10 +1,10 @@
 <template>
   <div class="input-control">
     <form @submit.prevent="onSubmit">
-      <FormAppControlInput v-model:value="form.nameEn" isRequired="required">
+      <FormAppControlInput v-model:value="form.name_en" isRequired="required">
         Full Name (English)
       </FormAppControlInput>
-      <FormAppControlInput v-model:value="form.nameAr" isRequired="required">
+      <FormAppControlInput v-model:value="form.name_ar" isRequired="required">
         Full Name (Arabic)
       </FormAppControlInput>
       <FormAppControlInput
@@ -35,8 +35,8 @@
 import { reactive } from 'vue'
 
 const form = reactive({
-  nameEn: '',
-  nameAr: '',
+  name_en: '',
+  name_ar: '',
   phone: '',
   email: '',
   github: '',
