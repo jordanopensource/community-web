@@ -1,7 +1,7 @@
 <template>
   <footer class="footer-section">
     <div class="footer-container container">
-      <div class="flex items-center justify-center lg:justify-start p-8 lg:p-0">
+      <div class="flex items-center p-8 lg:p-0">
         <img
           class="h-5"
           src=" /icons/icon-small-coded.svg"
@@ -30,7 +30,7 @@
         />
       </div>
       <div class="lg:flex px-8 pb-8 lg:px-0 lg:pb-0">
-        <div class="flex items-center justify-center lg:justify-end">
+        <div class="flex items-center justify-end">
           <div class="flex lg:px-5">
             <a
               href="https://github.com/jordanopensource"
@@ -74,7 +74,7 @@
             </a>
           </div>
         </div>
-        <div class="text-center lg:text-right pt-5 lg:pt-0">
+        <div class="text-right pt-5 lg:pt-0">
           <p class="text-xs lg:text-sm font-light">
             <img
               class="h-4 inline"
@@ -96,7 +96,7 @@
 .footer-section {
   background-color: #edeeef;
   @apply bg-josa-black;
-  @apply lg:h-32 lg:w-full;
+  @apply lg:h-64 w-full lg:mx-0 pb-7 lg:pb-0;
 }
 .footer-container {
   @apply bg-josa-black text-white;
