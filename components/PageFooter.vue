@@ -101,6 +101,6 @@
 .footer-container {
   @apply bg-josa-black text-white;
   @apply lg:flex h-full items-center lg:justify-between;
-  @apply px-16;
+  @apply px-0 lg:px-16;
 }
 </style>

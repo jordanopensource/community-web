@@ -68,7 +68,7 @@ li a {
 
 .menu {
   @apply text-white hidden font-medium text-lg lg:text-xl;
-  @apply lg:flex justify-end w-full;
+  @apply lg:flex justify-end w-full items-baseline;
 }
 
 #login {
