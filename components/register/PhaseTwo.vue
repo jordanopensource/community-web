@@ -2,14 +2,14 @@
   <div class="input-control">
     <form @submit.prevent="onSubmit">
       <FormAppControlInput
-        v-model:value="form.offerMessage"
+        v-model:value="form.help_josa"
         isRequired="required"
         inputType="textarea"
       >
         How can you help JOSA
       </FormAppControlInput>
       <FormAppControlInput
-        v-model:value="form.requestMessage"
+        v-model:value="form.josa_helps"
         isRequired="required"
         inputType="textarea"
       >
@@ -27,8 +27,8 @@
 import { reactive } from 'vue'
 
 const form = reactive({
-  offerMessage: '',
-  requestMessage: '',
+  help_josa: '',
+  josa_helps: '',
 })
 
 const emit = defineEmits(['toggleNext'])
