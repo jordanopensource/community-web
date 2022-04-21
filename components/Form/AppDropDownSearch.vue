@@ -2,8 +2,19 @@
   <div class="input-control">
     <label><slot /></label>
     <div class="dropdown-wrapper">
-      <div class="selected-item">
-        <span v-if="state.selectedItem">{{ state.selectedItem.name }}</span>
+      <div v-if="state.selectedItem" class="selected-item">
+        <img
+          class="w-1/12"
+          :src="
+            state.selectedItem.avatar
+              ? state.selectedItem.avatar
+              : '/images/placeholders/avatar.png'
+          "
+        />
+        <span class="my-auto ml-4"
+          >{{ state.selectedItem.first_name }}
+          {{ state.selectedItem.last_name }}</span
+        >
       </div>
       <div class="dropdown-popover">
         <!-- @focusin="state.isVisible = true" -->
@@ -33,8 +44,17 @@
               @click="selectedItem(item)"
               v-for="(item, index) in filteredItems"
               :key="`item-${index}`"
+              class="flex flex-row"
             >
-              {{ item.name }}
+              <img
+                class="w-1/12"
+                :src="
+                  item.avatar ? item.avatar : '/images/placeholders/avatar.png'
+                "
+              />
+              <span class="my-auto ml-4">
+                {{ item.first_name }} {{ item.last_name }}
+              </span>
             </li>
           </ul>
         </div>
@@ -43,7 +63,7 @@
   </div>
 </template>
 <script setup>
-import { reactive, computed, onMounted } from 'vue'
+import { reactive, computed } from 'vue'
 
 // Define emit events
 const emit = defineEmits(['emitSelected'])
@@ -53,7 +73,6 @@ const state = reactive({
   searchQuery: '',
   selectedItem: null,
   isVisible: false,
-  dataArray: [],
 })
 
 // Define passed props
@@ -62,15 +81,19 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  listData: {
+    type: Array,
+    default: [],
+  },
 })
 
 // Computed value to filter the data
 const filteredItems = computed(() => {
   if (state.searchQuery === '') {
-    return state.dataArray
+    return props.listData
   }
   const query = state.searchQuery.toLowerCase()
-  return state.dataArray.filter((item) => {
+  return props.listData.filter((item) => {
     return Object.values(item).some((word) => {
       return String(word).toLowerCase().includes(query)
     })
@@ -95,15 +118,6 @@ const selectedItem = (item) => {
 
   emit('emitSelected', state.selectedItem)
 }
-
-// Lifecycle method to get the userData
-onMounted(() => {
-  fetch('https://jsonplaceholder.typicode.com/users')
-    .then((res) => res.json())
-    .then((json) => {
-      state.dataArray = json
-    })
-})
 </script>
 <style lang="postcss" scoped>
 input {
@@ -115,12 +129,12 @@ input {
 }
 
 .selected-item {
-  @apply h-10;
+  @apply flex flex-row;
 }
 
 .dropdown-popover {
   @apply absolute;
-  @apply top-11 left-0 right-0;
+  @apply top-24 left-0 right-0;
   @apply bg-white;
 
   svg {

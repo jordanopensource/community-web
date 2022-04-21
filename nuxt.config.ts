@@ -34,5 +34,8 @@ export default defineNuxtConfig({
     config: {},
     injectPosition: 0,
     viewer: true,
-  }
+  },
+  publicRuntimeConfig: {
+    API_BASE_URL: process.env.API_BASE_URL
+  },
 });

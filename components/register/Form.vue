@@ -1,6 +1,6 @@
 <template>
   <div id="register-form" class="main container">
-    <div v-if="step < 4" class="flex flex-col">
+    <div v-if="step < 4" class="flex flex-row lg:flex-col">
       <RegisterIndicator
         :step="step"
         :phaseNumber="`1`"
@@ -39,6 +39,8 @@
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
+
+const config = useRuntimeConfig()
 const step = ref(1)
 let formData = reactive({})
 const nextStep = (data) => {
@@ -48,8 +50,18 @@ const nextStep = (data) => {
 
 const submitForm = (data) => {
   formData = { ...formData, ...data }
-  step.value++
-  console.log(formData)
+  fetch(`${config.API_BASE_URL}/submission/create`, {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify(formData),
+  })
+    .then((res) => {
+      console.log(res)
+      step.value++
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 </script>
 <style lang="postcss" scoped>
@@ -59,7 +71,7 @@ const submitForm = (data) => {
 }
 .main,
 .form-container {
-  @apply py-10 px-20;
+  @apply py-10 px-0 lg:px-20;
 }
 
 .form-container {
