@@ -1,18 +1,20 @@
 <template>
   <div class="container px-20 mb-16">
-    <section class="flex flex-col justify-between lg:flex-row mb-16">
-      <p class="w-full mr-8">
-        The JOSA's community is made by efforts of members like you! Join JOSA
-        to not only develop soft and organizational skills, but become part of a
-        dynamic and exceptional network of geeks and agents of change by giving
-        back to the community.
-      </p>
-      <NuxtLink
-        class="mt-8 lg:mt-0 button-flat button-blue-full w-full h-fit"
-        to="/register"
-      >
-        Fill the form <span class="text-right">&rarr;</span>
-      </NuxtLink>
+    <section class="p-8">
+      <div class="flex flex-col justify-between lg:flex-row mb-16">
+        <p class="w-full mr-8">
+          The JOSA's community is made by efforts of members like you! Join JOSA
+          to not only develop soft and organizational skills, but become part of
+          a dynamic and exceptional network of geeks and agents of change by
+          giving back to the community.
+        </p>
+        <NuxtLink
+          class="mt-8 lg:mt-0 button-flat button-blue-full w-full h-fit"
+          to="/register"
+        >
+          Fill the form <span class="text-right">&rarr;</span>
+        </NuxtLink>
+      </div>
     </section>
     <div class="slash-separator"></div>
   </div>
