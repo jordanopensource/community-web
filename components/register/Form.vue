@@ -1,6 +1,6 @@
 <template>
   <div id="register-form" class="main container">
-    <div v-if="step < 4" class="flex flex-col">
+    <div v-if="step < 4" class="flex flex-row lg:flex-col">
       <RegisterIndicator
         :step="step"
         :phaseNumber="`1`"
@@ -71,7 +71,7 @@ const submitForm = (data) => {
 }
 .main,
 .form-container {
-  @apply py-10 px-20;
+  @apply py-10 px-0 lg:px-20;
 }
 
 .form-container {
