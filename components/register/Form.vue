@@ -50,7 +50,7 @@ const nextStep = (data) => {
 
 const submitForm = (data) => {
   formData = { ...formData, ...data }
-  fetch(`${config.API_BASE_URL}/submission/create`, {
+  fetch(`${config.BASE_API_URL}/submission/create`, {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify(formData),

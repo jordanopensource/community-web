@@ -35,7 +35,7 @@ const onSubmit = () => {
 }
 
 onMounted(() => {
-  fetch(`${config.API_BASE_URL}/member/all`)
+  fetch(`${config.BASE_API_URL}/member/all`)
     .then((res) => res.json())
     .then((json) => {
       members.value = json
