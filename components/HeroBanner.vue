@@ -1,34 +1,39 @@
 <template>
-  <div>
-    <section class="banner">
-      <div class="banner-container container">
-        <div class="banner-header">
-          <h1>{{ props.bannerText }}</h1>
-        </div>
-        <div class="slash-section"></div>
+  <div
+    class="banner"
+    :class="!props.whiteBackground ? 'black-background' : 'white-background'"
+  >
+    <div class="banner-container container">
+      <div class="banner-header">
+        <h1>{{ props.bannerText }}</h1>
       </div>
-    </section>
+      <div class="slash-section"></div>
+    </div>
   </div>
 </template>
 <script setup>
 const props = defineProps({
   bannerText: { type: String, default: '' },
+  whiteBackground: { type: Boolean, default: false },
 })
 </script>
 <style lang="postcss" scoped>
-* {
-  @apply bg-josa-black;
-}
-
 .banner {
-  @apply py-28 mx-9;
   @apply h-auto;
 }
 
+.black-background {
+  @apply bg-josa-black;
+  @apply text-josa-warm-grey;
+}
+.white-background {
+  @apply bg-josa-warm-grey;
+  @apply text-josa-black;
+}
 .banner-container {
   @apply flex flex-col md:flex-row justify-between;
-  @apply text-josa-warm-grey;
   @apply relative;
+  @apply py-28;
   @apply px-20;
 }
 
