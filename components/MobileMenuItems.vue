@@ -5,15 +5,23 @@
         <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
       </li>
       <li class="py-4 border-gray">
-        <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
+        <NuxtLink :to="config.BETA_RELEASE ? '' : '/members'" class="nav-link"
+          >JOSA Members</NuxtLink
+        >
       </li>
       <li class="py-4">
-        <NuxtLink id="login" to="/login" class="nav-link">Sign In</NuxtLink>
+        <NuxtLink
+          id="login"
+          :to="config.BETA_RELEASE ? '' : '/login'"
+          class="nav-link"
+          >Sign In</NuxtLink
+        >
       </li>
     </ul>
   </div>
 </template>
 <script setup>
+const config = useRuntimeConfig()
 const props = defineProps({
   isOpen: Boolean,
 })
