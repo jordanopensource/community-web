@@ -51,8 +51,11 @@ const nextStep = (data) => {
 const submitForm = (data) => {
   formData = { ...formData, ...data }
   fetch(`${config.BASE_API_URL}/submission/create`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
     method: 'POST',
-    mode: 'cors',
     body: JSON.stringify(formData),
   })
     .then((res) => {
