@@ -15,22 +15,25 @@
             our community
           </h1>
         </div>
+        <p class="community-description font-bold">
+          The JOSA's community is made by the efforts of members like you!
+        </p>
         <p class="community-description">
-          The JOSA community is composed of tech enthusiasts that love to share
-          their knowledge and cooperate on open source projects for a brighter
-          tech ecosystem.
+          Join JOSA to not only develop soft and organizational skills, but
+          become part of a dynamic and exceptional network of geeks and agents
+          of change by giving back to the community.
         </p>
 
         <NuxtLink class="button-flat button-blue-full" to="/register">
           Become a JOSA member &rarr;
         </NuxtLink>
-        <p class="sub-heading">
+        <!-- <p class="sub-heading">
           Already a member?
           <NuxtLink class="link" to="/login"> Sign In</NuxtLink>
-        </p>
+        </p> -->
       </div>
       <div class="banner-cover">
-        <!-- <img src="/images/background.svg" /> -->
+        <img src="/images/background.svg" />
       </div>
     </div>
   </div>
@@ -40,19 +43,20 @@
 .banner {
   @apply bg-josa-black;
   @apply h-auto;
-  @apply bg-homeHero bg-no-repeat bg-right-bottom lg:bg-right-top bg-contain;
+  @apply md:bg-homeHero bg-no-repeat bg-right-bottom lg:bg-right-top bg-contain;
 }
 
 .banner-container {
   @apply flex flex-col lg:flex-row justify-between;
   @apply text-josa-warm-grey;
   @apply relative;
-  @apply py-28;
-  @apply px-8  md:px-20;
+  @apply pb-0 pt-28 md:py-28;
+  @apply px-8 md:px-20;
 }
 
 .banner-cover {
-  @apply w-3/12;
+  @apply md:w-3/12;
+  @apply block md:invisible;
 }
 
 .banner-header {
