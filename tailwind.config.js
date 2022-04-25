@@ -78,6 +78,9 @@ module.exports = {
       inset: {
         12: '3rem',
       },
+      backgroundImage:{
+        'homeHero':"url('/images/background.svg')"
+      }
     },
   },
   variants: {
