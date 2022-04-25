@@ -36,7 +36,8 @@ export default defineNuxtConfig({
     viewer: true,
   },
   publicRuntimeConfig: {
-    BASE_API_URL: process.env.BASE_API_URL
+    BASE_API_URL: process.env.BASE_API_URL,
+    BETA_RELEASE: process.env.BETA_RELEASE
   },
   healthcheck: {
     path: '/healthcheck',

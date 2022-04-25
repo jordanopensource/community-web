@@ -15,6 +15,7 @@ RUN mv /tmp/node_modules .
 ENV BASE_API_URL http://api.localhost
 ENV HOST    0.0.0.0
 ENV PORT 3000
+ENV BETA_RELEASE true
 
 # build NuxtJS project
 RUN npm run build
