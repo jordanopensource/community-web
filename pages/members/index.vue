@@ -1,5 +1,7 @@
 <template>
-  <h1>Members directory</h1>
+  <UnderConstruction v-if="config.BETA_RELEASE" />
 </template>
 
-<script setup></script>
+<script setup>
+const config = useRuntimeConfig()
+</script>
