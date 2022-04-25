@@ -21,7 +21,7 @@
 defineEmits(['update:value'])
 const value = ref('')
 const props = defineProps({
-  isRequired: { type: String, default: '' },
+  isRequired: { type: Boolean, default: false },
   placeholder: { type: String, default: '' },
   inputType: String,
 })
