@@ -2,10 +2,10 @@
   <div id="homepage">
     <!-- Banner -->
     <HomeBanner />
-    <!-- Become a member -->
-    <HeroBanner bannerText="Become a JOSA Member" whiteBackground="true" />
-    <HomeCallToAction />
     <!-- Why JOSA -->
     <HomeDetails />
+    <!-- Become a member -->
+    <HeroBanner bannerText="Already a JOSA Member?" whiteBackground="true" />
+    <HomeCallToAction />
   </div>
 </template>
