@@ -19,12 +19,12 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 const config = useRuntimeConfig()
 
 const referral = ref(0)
-let members = ref([])
+const { data: members } = await useFetch(`${config.BASE_API_URL}/member/all`)
 
 const assignReferralValue = (referralID) => (referral.value = referralID)
 
@@ -33,12 +33,4 @@ const emit = defineEmits(['toggleSubmit'])
 const onSubmit = () => {
   emit('toggleSubmit', { vouched_by: referral.value.id })
 }
-
-onMounted(() => {
-  fetch(`${config.BASE_API_URL}/member/all`)
-    .then((res) => res.json())
-    .then((json) => {
-      members.value = json
-    })
-})
 </script>
