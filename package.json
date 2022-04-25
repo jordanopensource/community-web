@@ -15,5 +15,8 @@
     "eslint-plugin-vue": "^8.6.0",
     "nuxt3": "latest",
     "prettier": "^2.6.2"
+  },
+  "dependencies": {
+    "nuxt-healthcheck": "^1.0.1"
   }
 }

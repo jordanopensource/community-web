@@ -19,7 +19,7 @@ export default defineNuxtConfig({
       link: [{ hid: 'icon', rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
   },
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-healthcheck'],
   css: [
     // '@/assets/css/typography.css',
     // '@/assets/css/fonts/ibm-plex.css',
@@ -37,5 +37,12 @@ export default defineNuxtConfig({
   },
   publicRuntimeConfig: {
     BASE_API_URL: process.env.BASE_API_URL
+  },
+  healthcheck: {
+    path: '/healthcheck',
+    contentType: 'application/json',
+    healthy: () => {
+      return JSON.stringify({ result: `All is well in Wayne's town!!!` })
+    },
   },
 });
