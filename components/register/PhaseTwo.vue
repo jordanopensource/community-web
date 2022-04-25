@@ -3,14 +3,14 @@
     <form @submit.prevent="onSubmit">
       <FormAppControlInput
         v-model:value="form.help_josa"
-        isRequired="required"
+        :isRequired="true"
         inputType="textarea"
       >
         How can you help JOSA
       </FormAppControlInput>
       <FormAppControlInput
         v-model:value="form.josa_helps"
-        isRequired="required"
+        :isRequired="true"
         inputType="textarea"
       >
         How JOSA can help you
