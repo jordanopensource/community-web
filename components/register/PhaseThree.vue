@@ -31,7 +31,7 @@ const assignReferralValue = (referralID) => (referral.value = referralID)
 const emit = defineEmits(['toggleSubmit'])
 
 const onSubmit = () => {
-  emit('toggleSubmit', { vouched_byId: referral.value.member_id })
+  emit('toggleSubmit', { vouched_by: referral.value.id })
 }
 
 onMounted(() => {
