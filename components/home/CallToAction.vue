@@ -21,7 +21,7 @@
               v-model:value="form.email"
               inputType="email"
               placeholder="email@email.com"
-              isRequired="required"
+              :isRequired="true"
               class="w-full"
             >
               Enter email for early access:
