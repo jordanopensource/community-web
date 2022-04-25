@@ -1,22 +1,22 @@
 <template>
   <div class="input-control">
     <form @submit.prevent="onSubmit">
-      <FormAppControlInput v-model:value="form.name_en" isRequired="required">
+      <FormAppControlInput v-model:value="form.name_en" :isRequired="true">
         Full Name (English)
       </FormAppControlInput>
-      <FormAppControlInput v-model:value="form.name_ar" isRequired="required">
+      <FormAppControlInput v-model:value="form.name_ar" :isRequired="true">
         Full Name (Arabic)
       </FormAppControlInput>
       <FormAppControlInput
         v-model:value="form.phone"
         inputType="number"
-        isRequired="required"
+        :isRequired="true"
         >Phone Number</FormAppControlInput
       >
       <FormAppControlInput
         v-model:value="form.email"
         inputType="email"
-        isRequired="required"
+        :isRequired="true"
       >
         E-mail
       </FormAppControlInput>
