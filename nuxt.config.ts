@@ -22,7 +22,6 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', 'nuxt-healthcheck'],
   css: [
     '@/assets/css/typography.css',
-    '@/assets/css/layout.css',
     '@/assets/css/form.css',
     '@/assets/css/global.css'
   ],
