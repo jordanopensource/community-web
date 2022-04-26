@@ -4,6 +4,7 @@
     <input
       v-if="props.inputType !== 'textarea'"
       @input="$emit('update:value', $event.target.value)"
+      :name="props.name"
       :required="props.isRequired"
       :placeholder="props.placeholder"
       :type="props.inputType"
@@ -23,6 +24,7 @@ const value = ref('')
 const props = defineProps({
   isRequired: { type: Boolean, default: false },
   placeholder: { type: String, default: '' },
+  name: { type: String, default: '' },
   inputType: String,
 })
 </script>
