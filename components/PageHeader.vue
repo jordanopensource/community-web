@@ -67,10 +67,10 @@ li a {
 
 .nav-bar {
   @apply flex items-center;
-  @apply px-16 py-6 md:py-11;
+  @apply px-8 py-6 md:p-16;
 }
 .menu-item {
-  @apply inline-block lg:mx-7;
+  @apply inline-block lg:mx-2;
 }
 
 .menu {
@@ -79,7 +79,7 @@ li a {
 }
 
 #login {
-  @apply text-josa-blue border-josa-blue p-2 pt-1 pb-1;
+  @apply text-josa-blue border-josa-blue ml-3 p-2 pt-1 pb-1;
   border-width: thin;
 }
 

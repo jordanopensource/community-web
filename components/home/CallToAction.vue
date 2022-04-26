@@ -1,5 +1,5 @@
 <template>
-  <div class="container px-20 mb-16">
+  <div class="container px-16 md:px-20 mb-16">
     <section>
       <div class="flex flex-col justify-between lg:flex-row mb-16">
         <div class="flex flex-col justify-center">
