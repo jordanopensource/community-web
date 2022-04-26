@@ -6,7 +6,6 @@ module.exports = {
     './layouts/**/*.vue',
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
-    // './nuxt.config.{js,ts}', // All I needed is to remove this damn line
     './app.{vue,js}',
   ],
   theme: {
@@ -79,7 +78,8 @@ module.exports = {
         12: '3rem',
       },
       backgroundImage:{
-        'homeHero':"url('/images/background.svg')"
+        'homeHero':"url('/images/background.svg')",
+        'homeHero-mobile':"url('/images/background-2.svg')"
       }
     },
   },

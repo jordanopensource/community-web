@@ -15,14 +15,16 @@
             our community
           </h1>
         </div>
-        <p class="community-description font-bold">
-          The JOSA's community is made by the efforts of members like you!
-        </p>
-        <p class="community-description">
-          Join JOSA to not only develop soft and organizational skills, but
-          become part of a dynamic and exceptional network of geeks and agents
-          of change by giving back to the community.
-        </p>
+        <div class="community-description">
+          <p class="font-bold">
+            The JOSA's community is made by the efforts of members like you!
+          </p>
+          <p>
+            Join JOSA to not only develop soft and organizational skills, but
+            become part of a dynamic and exceptional network of geeks and agents
+            of change by giving back to the community.
+          </p>
+        </div>
 
         <NuxtLink class="button-flat button-blue-full" to="/register">
           Become a JOSA member &rarr;
@@ -33,7 +35,7 @@
         </p> -->
       </div>
       <div class="banner-cover">
-        <img src="/images/background.svg" />
+        <!-- <img src="/images/background-2.svg" /> -->
       </div>
     </div>
   </div>
@@ -43,7 +45,8 @@
 .banner {
   @apply bg-josa-black;
   @apply h-auto;
-  @apply md:bg-homeHero bg-no-repeat bg-right-bottom lg:bg-right-top bg-contain;
+  @apply lg:bg-homeHero lg:bg-right-top;
+  @apply bg-homeHero-mobile bg-no-repeat bg-right-bottom  bg-contain;
 }
 
 .banner-container {
@@ -56,11 +59,10 @@
 
 .banner-cover {
   @apply md:w-3/12;
-  @apply block md:invisible;
+  height: 35vh;
 }
 
 .banner-header {
-  /* font-family: 'IBM Mono'; */
   @apply w-full lg:w-2/5;
 
   .heading {
@@ -76,7 +78,7 @@
 
   .community-description {
     @apply my-16;
-    @apply text-2xl;
+    @apply text-xl;
   }
 
   .sub-heading {
@@ -90,6 +92,18 @@
     .link:hover {
       @apply text-white;
     }
+  }
+}
+
+@media screen and (width: 1024px) {
+  .banner {
+    background-size: 67% !important;
+  }
+}
+
+@media screen and (width: 768px) {
+  .banner-cover {
+    height: 50vh;
   }
 }
 </style>

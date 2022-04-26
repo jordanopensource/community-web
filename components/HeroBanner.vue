@@ -38,7 +38,6 @@ const props = defineProps({
 }
 
 .banner-header {
-  /* font-family: 'IBM Mono'; */
   @apply text-3xl lg:text-4xl tracking-wide font-normal;
   @apply w-full;
 }
