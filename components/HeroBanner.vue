@@ -24,10 +24,10 @@ const props = defineProps({
 
 .black-background {
   @apply bg-josa-black;
-  @apply text-josa-warm-grey;
+  @apply text-josa-warm-grey-light;
 }
 .white-background {
-  @apply bg-josa-warm-grey;
+  @apply bg-josa-warm-grey-light;
   @apply text-josa-black;
 }
 .banner-container {
@@ -35,6 +35,8 @@ const props = defineProps({
   @apply relative;
   @apply py-28;
   @apply px-20;
+  @apply gap-x-8;
+  /* @apply bg-slashes bg-no-repeat bg-right  bg-contain;N */
 }
 
 .banner-header {
@@ -59,10 +61,10 @@ const props = defineProps({
   bottom: calc(var(--border-width) * -1);
   background: repeating-linear-gradient(
     -45deg,
-    #4b5563,
+    #bababa,
     transparent 1px,
     transparent var(--stripe-distance),
-    #4b5563 calc(var(--stripe-distance) + 1px)
+    #bababa calc(var(--stripe-distance) + 1px)
   );
   z-index: 1;
 }

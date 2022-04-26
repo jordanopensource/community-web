@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-josa-warm-grey">
+  <div class="bg-josa-warm-grey-light">
     <PageHeader />
     <NuxtPage />
     <PageFooter />

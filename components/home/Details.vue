@@ -72,6 +72,7 @@
   @apply flex flex-col;
   @apply lg:flex-row lg:flex-wrap;
   @apply gap-32;
+  @apply mt-32;
 
   .heading {
     @apply text-xl font-bold;
@@ -105,10 +106,10 @@
   bottom: calc(var(--border-width) * -1);
   background: repeating-linear-gradient(
     -45deg,
-    #4b5563,
+    #bababa,
     transparent 1px,
     transparent var(--stripe-distance),
-    #4b5563 calc(var(--stripe-distance) + 1px)
+    #bababa calc(var(--stripe-distance) + 1px)
   );
   z-index: 1;
 }
