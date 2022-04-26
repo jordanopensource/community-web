@@ -71,7 +71,7 @@
 .perks-container {
   @apply flex flex-col;
   @apply lg:flex-row lg:flex-wrap;
-  @apply gap-48 md:gap-32;
+  @apply gap-32;
 
   .heading {
     @apply text-xl font-bold;
@@ -85,13 +85,13 @@
   img {
     @apply lg:pr-8;
     @apply mb-8 lg:mb-0;
-    @apply w-2/5 md:w-1/2;
+    @apply w-2/5 md:w-1/2 h-fit;
   }
 }
 
 .slash-separator {
   @apply relative;
-  @apply mt-8;
+  @apply mt-24;
 }
 .slash-separator:before {
   @apply h-3;

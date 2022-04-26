@@ -1,7 +1,9 @@
 <template>
-  <div class="container px-16 md:px-20 mb-16">
+  <div class="container px-14 md:px-20 mb-32">
     <section>
-      <div class="flex flex-col justify-between lg:flex-row mb-16">
+      <div
+        class="flex flex-col justify-between lg:flex-row mb-16 lg:gap-x-32 xl:gap-x-40"
+      >
         <div class="flex flex-col justify-center">
           <p class="font-bold mb-2">
             Be the first to have a JOSA account on josa.community
@@ -12,7 +14,9 @@
             developing new ones.
           </p>
         </div>
-        <div class="input-control mt-8 lg:mt-0 w-full h-fit bg-gray-200 p-8">
+        <div
+          class="input-control mt-8 lg:mt-0 w-full h-fit bg-gray-200 p-4 md:p-8"
+        >
           <form
             @submit.prevent="onSubmit"
             class="w-full h-fit flex flex-row items-center"

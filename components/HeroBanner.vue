@@ -38,7 +38,7 @@ const props = defineProps({
 }
 
 .banner-header {
-  @apply text-3xl lg:text-4xl tracking-wide font-normal;
+  @apply text-3xl lg:text-5xl tracking-wide font-normal;
   @apply w-full;
 }
 .slash-section {
