@@ -18,13 +18,16 @@
             class="w-full h-fit flex flex-row items-center"
           >
             <FormAppControlInput
-              v-model:value="form.email"
+              name="email"
               inputType="email"
               placeholder="email@email.com"
               :isRequired="true"
               class="w-full"
             >
               Enter email for early access:
+              <span v-if="onSubmission.success">
+                {{ onSubmission.text }}
+              </span>
             </FormAppControlInput>
             <FormAppButton
               btn-style="button-flat button-blue-full"
@@ -40,12 +43,37 @@
 <script setup>
 import { reactive } from 'vue'
 
-const form = reactive({
-  email: '',
+const config = useRuntimeConfig()
+const onSubmission = reactive({
+  text: 'Thanks! You will be notified when its ready!',
+  success: false,
 })
-const onSubmit = () => {
-  // Fetch post request
-  console.log(form)
+
+const hideSubmissionText = () => {
+  setTimeout(() => {
+    onSubmission.success = false
+  }, 5000)
+}
+
+const onSubmit = (e) => {
+  fetch(`${config.BASE_API_URL}/earlyaccess/create`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({ email: e.target.email.value }),
+  })
+    .then(() => {
+      onSubmission.success = true
+      hideSubmissionText()
+    })
+    .catch((error) => {
+      console.log(error)
+      onSubmission.text = 'Something went wrong 😞, probably a server error 🤷'
+      onSubmission.success = true
+      hideSubmissionText()
+    })
 }
 </script>
 <style lang="postcss" scoped>
