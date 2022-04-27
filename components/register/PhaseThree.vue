@@ -9,6 +9,12 @@
       >
         Do you know how a current JOSA member that would vouch for you?
       </FormAppDropDownSearch>
+      <div v-else>
+        <p class="my-8">
+          No Members are available to vouch for you atm , please processed with
+          the registration
+        </p>
+      </div>
 
       <div
         class="flex flex-col md:flex-row md:justify-between items-end md:items-baseline"
