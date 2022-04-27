@@ -1,7 +1,7 @@
 <template>
   <footer class="footer-section">
     <div class="footer-container container">
-      <div class="flex items-center p-12 lg:p-0">
+      <div class="flex items-center py-12 px-8 lg:p-0">
         <img
           class="h-5"
           src=" /icons/icon-small-coded.svg"
@@ -29,7 +29,7 @@
           loading="lazy"
         />
       </div>
-      <div class="lg:flex px-12 pb-8 lg:px-0 lg:pb-0">
+      <div class="lg:flex px-8 pb-8 lg:px-0 lg:pb-0">
         <div class="flex items-center justify-end">
           <div class="flex lg:px-5">
             <a

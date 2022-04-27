@@ -60,7 +60,7 @@ li a {
 
 .nav-bar {
   @apply flex items-center;
-  @apply px-8 py-6 md:p-16;
+  @apply px-4 py-6 md:p-16;
 }
 .menu-item {
   @apply inline-block lg:mx-2;

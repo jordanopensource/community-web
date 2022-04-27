@@ -1,5 +1,5 @@
 <template>
-  <div class="container px-14 md:px-20 my-16">
+  <div class="container px-8 md:px-20 my-16">
     <section class="mt-28">
       <h3 class="heading">Many reasons to become a member of JOSA</h3>
 
