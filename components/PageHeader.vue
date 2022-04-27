@@ -24,18 +24,11 @@
             <li class="menu-item">
               <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
             </li>
-            <li class="menu-item">
-              <NuxtLink
-                :to="config.BETA_RELEASE ? '' : '/members'"
-                class="nav-link"
-                >JOSA Members</NuxtLink
-              >
+            <li v-if="!config.BETA_RELEASE" class="menu-item">
+              <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
             </li>
-            <li class="menu-item">
-              <NuxtLink
-                id="login"
-                :to="config.BETA_RELEASE ? '' : '/login'"
-                class="nav-link"
+            <li v-if="!config.BETA_RELEASE" class="menu-item">
+              <NuxtLink id="login" to="/login" class="nav-link"
                 >Sign In</NuxtLink
               >
             </li>
