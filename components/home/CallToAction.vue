@@ -1,5 +1,5 @@
 <template>
-  <div class="container px-14 md:px-20 mb-32">
+  <div class="container px-4 md:px-20 mb-32">
     <section>
       <div
         class="flex flex-col justify-between lg:flex-row mb-16 lg:gap-x-32 xl:gap-x-40"
@@ -17,27 +17,33 @@
         <div
           class="input-control mt-8 lg:mt-0 w-full h-fit bg-gray-200 p-4 md:p-8"
         >
-          <form
-            @submit.prevent="onSubmit"
-            class="w-full h-fit flex flex-row items-center"
-          >
-            <FormAppControlInput
-              name="email"
-              inputType="email"
-              placeholder="email@email.com"
-              :isRequired="true"
-              class="w-full"
-            >
-              Enter email for early access:
-              <span v-if="onSubmission.success">
-                {{ onSubmission.text }}
-              </span>
+          <form @submit.prevent="onSubmit" class="w-full h-fit flex flex-col">
+            <div class="flex flex-row items-center">
+              <FormAppControlInput
+                name="email"
+                inputType="email"
+                placeholder="email@email.com"
+                :isRequired="true"
+                class="w-full input-container"
+              >
+                Enter email for early access:
+                <span v-if="onSubmission.success">
+                  {{ onSubmission.text }}
+                </span>
+              </FormAppControlInput>
+              <FormAppButton
+                btn-style="button-flat button-blue-full"
+                type="submit"
+                >&rarr;</FormAppButton
+              >
+            </div>
+
+            <FormAppControlInput inputType="checkbox" :isRequired="true">
+              I accept and understand
+              <NuxtLink class="underline text-josa-blue hover:text-josa-black">
+                JOSA's Privacy Policy
+              </NuxtLink>
             </FormAppControlInput>
-            <FormAppButton
-              btn-style="button-flat button-blue-full"
-              type="submit"
-              >&rarr;</FormAppButton
-            >
           </form>
         </div>
       </div>

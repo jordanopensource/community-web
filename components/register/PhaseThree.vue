@@ -10,10 +10,20 @@
         Do you know how a current JOSA member that would vouch for you?
       </FormAppDropDownSearch>
 
-      <div class="text-right">
-        <FormAppButton btn-style="button-flat button-blue-full" type="submit"
-          >Submit</FormAppButton
-        >
+      <div
+        class="flex flex-col md:flex-row md:justify-between items-end md:items-baseline"
+      >
+        <FormAppControlInput inputType="checkbox" :isRequired="true">
+          I accept and understand
+          <NuxtLink class="underline text-josa-blue hover:text-josa-black">
+            JOSA's Privacy Policy
+          </NuxtLink>
+        </FormAppControlInput>
+        <div class="text-right">
+          <FormAppButton btn-style="button-flat button-blue-full" type="submit"
+            >Submit</FormAppButton
+          >
+        </div>
       </div>
     </form>
   </div>
