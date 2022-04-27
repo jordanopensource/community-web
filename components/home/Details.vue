@@ -9,7 +9,7 @@
           <div>
             <h4 class="heading">Join a community of like-minded geeks</h4>
             <p>
-              JOSA's Biggest asset is its community, a varid group of
+              JOSA's Biggest asset is its community, a varied group of
               individuals that are always seeking to learn and teach, spanning
               different fields and interests you are sure to find peers to both
               program and have fun with.
