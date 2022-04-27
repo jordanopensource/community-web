@@ -15,7 +15,10 @@
       >
         <FormAppControlInput inputType="checkbox" :isRequired="true">
           I accept and understand
-          <NuxtLink class="underline text-josa-blue hover:text-josa-black">
+          <NuxtLink
+            to="https://www.josa.ngo/info/privacypolicy"
+            class="underline text-josa-blue hover:text-josa-black"
+          >
             JOSA's Privacy Policy
           </NuxtLink>
         </FormAppControlInput>
