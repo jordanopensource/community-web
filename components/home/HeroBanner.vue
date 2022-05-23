@@ -45,8 +45,8 @@
 .banner {
   @apply bg-josa-black;
   @apply h-auto;
-  @apply lg:bg-homeHero lg:bg-right-top;
   @apply bg-homeHero-mobile bg-no-repeat bg-right-bottom  bg-contain;
+  @apply lg:bg-homeHero lg:bg-right-top;
 }
 
 .banner-container {
@@ -54,7 +54,6 @@
   @apply text-josa-warm-grey;
   @apply relative;
   @apply pb-0 pt-28 md:py-28;
-  @apply px-8 md:px-20;
 }
 
 .banner-cover {
