@@ -64,9 +64,7 @@
   @apply mb-16;
 }
 .perks-container {
-  @apply flex flex-col;
-  @apply lg:flex-row lg:flex-wrap;
-  @apply gap-32;
+  @apply grid grid-cols-1 md:grid-cols-2 gap-20;
   @apply mt-32;
 
   .heading {
