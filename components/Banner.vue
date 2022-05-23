@@ -3,7 +3,7 @@
     class="banner"
     :class="!props.whiteBackground ? 'black-background' : 'white-background'"
   >
-    <div class="banner-container container">
+    <div class="banner-container" :class="props.enableContainer && 'container'">
       <div class="banner-header">
         <h1>{{ props.bannerText }}</h1>
       </div>
@@ -15,6 +15,7 @@
 const props = defineProps({
   bannerText: { type: String, default: '' },
   whiteBackground: { type: Boolean, default: false },
+  enableContainer: { type: Boolean, default: true },
 })
 </script>
 <style lang="postcss" scoped>
@@ -31,12 +32,11 @@ const props = defineProps({
   @apply text-josa-black;
 }
 .banner-container {
+  /* @apply container; */
   @apply flex flex-col md:flex-row justify-between;
   @apply relative;
   @apply py-28;
-  @apply px-20;
   @apply gap-x-8;
-  /* @apply bg-slashes bg-no-repeat bg-right  bg-contain;N */
 }
 
 .banner-header {
