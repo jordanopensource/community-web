@@ -29,16 +29,7 @@
             >&rarr;</FormAppButton
           >
         </div>
-
-        <FormAppControlInput inputType="checkbox" :isRequired="true">
-          I accept and understand
-          <NuxtLink
-            to="https://www.josa.ngo/info/privacypolicy"
-            class="underline text-josa-blue hover:text-josa-black"
-          >
-            JOSA's Privacy Policy
-          </NuxtLink>
-        </FormAppControlInput>
+        <FormAppTermsAndConditions />
       </form>
     </div>
   </section>
