@@ -1,5 +1,5 @@
 <template>
-  <div id="register-form" class="main container">
+  <div id="register-form" class="main">
     <div v-if="step < 4" class="flex flex-row lg:flex-col">
       <RegisterIndicator
         :step="step"
@@ -69,12 +69,13 @@ const submitForm = (data) => {
 </script>
 <style lang="postcss" scoped>
 .main {
+  @apply container;
   @apply my-14;
   @apply flex flex-col lg:flex-row;
 }
 .main,
 .form-container {
-  @apply py-10 px-0 lg:px-20;
+  @apply py-10;
 }
 
 .form-container {
