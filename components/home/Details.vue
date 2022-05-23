@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-    <div class="slash-separator"></div>
+    <SlashSeparator />
   </section>
 </template>
 <style lang="postcss" scoped>
@@ -84,29 +84,5 @@
     @apply mb-8 lg:mb-0;
     @apply w-2/5 md:w-1/2;
   }
-}
-
-.slash-separator {
-  @apply relative;
-  @apply mt-24;
-}
-.slash-separator:before {
-  @apply h-3;
-  --border-width: 6px;
-  --stripe-distance: 10px;
-  position: absolute;
-  content: '';
-  left: calc(var(--border-width) * -1);
-  right: calc(var(--border-width) * -1);
-  top: calc(var(--border-width) * -1);
-  bottom: calc(var(--border-width) * -1);
-  background: repeating-linear-gradient(
-    -45deg,
-    #bababa,
-    transparent 1px,
-    transparent var(--stripe-distance),
-    #bababa calc(var(--stripe-distance) + 1px)
-  );
-  z-index: 1;
 }
 </style>
