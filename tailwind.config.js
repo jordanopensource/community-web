@@ -78,8 +78,7 @@ module.exports = {
         12: '3rem',
       },
       backgroundImage:{
-        'homeHero':"url('/images/background.svg')",
-        'homeHero-mobile':"url('/images/background-2.svg')"
+        'homeHero':"url('/images/background.svg')"
       }
     },
   },

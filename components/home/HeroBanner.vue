@@ -43,7 +43,7 @@
 .banner {
   @apply bg-josa-black;
   @apply h-auto;
-  @apply bg-homeHero-mobile bg-no-repeat  bg-contain;
+  @apply bg-homeHero bg-no-repeat  bg-contain;
   @apply bg-right-bottom;
 }
 
