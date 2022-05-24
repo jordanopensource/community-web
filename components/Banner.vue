@@ -1,13 +1,20 @@
 <template>
   <div
     class="banner"
-    :class="!props.whiteBackground ? 'black-background' : 'white-background'"
+    :class="[
+      !props.whiteBackground ? 'black-background' : 'white-background',
+      props.enableContainer ? 'bg-slashes' : 'bg-slashesHome',
+    ]"
   >
-    <div class="banner-container" :class="props.enableContainer && 'container'">
-      <div class="banner-header">
-        <h1>{{ props.bannerText }}</h1>
-      </div>
-      <div class="slash-section"></div>
+    <div :class="props.enableContainer && 'container'">
+      <h1
+        class="banner-header"
+        :class="
+          !props.whiteBackground ? 'black-background' : 'white-background'
+        "
+      >
+        {{ props.bannerText }}
+      </h1>
     </div>
   </div>
 </template>
@@ -20,7 +27,8 @@ const props = defineProps({
 </script>
 <style lang="postcss" scoped>
 .banner {
-  @apply h-auto;
+  @apply py-28;
+  @apply bg-right bg-no-repeat;
 }
 
 .black-background {
@@ -31,41 +39,9 @@ const props = defineProps({
   @apply bg-josa-warm-grey-light;
   @apply text-josa-black;
 }
-.banner-container {
-  /* @apply container; */
-  @apply flex flex-col md:flex-row justify-between;
-  @apply relative;
-  @apply py-28;
-  @apply gap-x-8;
-}
 
 .banner-header {
   @apply text-3xl lg:text-5xl tracking-wide font-normal;
-  @apply w-full;
-}
-.slash-section {
-  @apply relative;
-  @apply w-full;
-  @apply mt-12 md:mt-0;
-  @apply self-center;
-}
-.slash-section:before {
-  @apply h-8;
-  --border-width: 6px;
-  --stripe-distance: 26px;
-  position: absolute;
-  content: '';
-  left: calc(var(--border-width) * -1);
-  right: calc(var(--border-width) * -1);
-  top: calc(var(--border-width) * -1);
-  bottom: calc(var(--border-width) * -1);
-  background: repeating-linear-gradient(
-    -45deg,
-    #bababa,
-    transparent 1px,
-    transparent var(--stripe-distance),
-    #bababa calc(var(--stripe-distance) + 1px)
-  );
-  z-index: 1;
+  @apply inline;
 }
 </style>
