@@ -1,7 +1,7 @@
 <template>
   <section class="wrapper">
     <div class="text-wrapper">
-      <h2 class="font-bold mb-2">
+      <h2 class="font-bold mb-2 sans">
         Be the first to have a JOSA account on josa.community
       </h2>
       <p class="w-full mr-8">
