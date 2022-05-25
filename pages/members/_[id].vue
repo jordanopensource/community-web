@@ -1,5 +1,5 @@
 <template>
-  <HeroBanner bannerText="JOSA Members" />
+  <Banner bannerText="JOSA Members" />
   <MemberDetails v-if="state.memberData" :member="state.memberData" />
   <MemberExperience
     v-if="state.memberExperience"

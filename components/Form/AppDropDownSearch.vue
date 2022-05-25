@@ -5,6 +5,7 @@
       <div v-if="state.selectedItem" class="selected-item">
         <img
           class="w-1/12"
+          alt="avatar"
           :src="
             state.selectedItem.avatar
               ? state.selectedItem.avatar
@@ -48,6 +49,7 @@
             >
               <img
                 class="w-1/12"
+                alt="avatar"
                 :src="
                   item.avatar ? item.avatar : '/images/placeholders/avatar.png'
                 "

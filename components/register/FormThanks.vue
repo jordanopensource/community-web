@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <img class="w-64 mx-auto" src="/images/contact_us.svg" />
+    <img class="w-64 mx-auto" src="/images/contact_us.svg" alt="contact-us" />
     <div class="text-center">
       <p>Thank you for volunteering for JOSA!</p>
       <p>Our admins will be reviewing your application</p>

@@ -22,15 +22,18 @@ const props = defineProps({
 
 <style lang="postcss" scoped>
 .mobile-menu {
-  @apply mx-0 px-3 py-8 text-white font-medium text-base md:mx-11;
+  @apply text-white;
+  @apply font-medium text-base;
+  @apply py-8;
 }
 
 .border-gray {
   border-bottom: solid 2px #22292c;
 }
 
-li {
+ul > li {
   @apply block;
+  @apply ml-auto;
 }
 
 li a {

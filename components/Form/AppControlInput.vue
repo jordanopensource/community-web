@@ -2,6 +2,7 @@
   <div class="input-control">
     <div v-if="props.inputType === 'checkbox'" class="inline-flex">
       <input
+        id="check-box"
         @input="$emit('update:value', $event.target.value)"
         :name="props.name"
         :required="props.isRequired"
@@ -9,7 +10,7 @@
         :type="props.inputType"
         class="checkbox form-check-input border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
       />
-      <label class="items-center"> <slot /></label>
+      <label class="items-center" for="check-box"> <slot /></label>
     </div>
     <div v-else>
       <label> <slot /></label>

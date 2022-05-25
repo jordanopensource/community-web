@@ -34,9 +34,7 @@
           <NuxtLink class="link" to="/login"> Sign In</NuxtLink>
         </p> -->
       </div>
-      <div class="banner-cover">
-        <!-- <img src="/images/background-2.svg" /> -->
-      </div>
+      <div class="banner-cover"></div>
     </div>
   </div>
 </template>
@@ -45,8 +43,9 @@
 .banner {
   @apply bg-josa-black;
   @apply h-auto;
-  @apply lg:bg-homeHero lg:bg-right-top;
-  @apply bg-homeHero-mobile bg-no-repeat bg-right-bottom  bg-contain;
+  @apply bg-homeHero bg-no-repeat;
+  @apply bg-contain;
+  @apply bg-right-bottom;
 }
 
 .banner-container {
@@ -54,12 +53,11 @@
   @apply text-josa-warm-grey;
   @apply relative;
   @apply pb-0 pt-28 md:py-28;
-  @apply px-8 md:px-20;
 }
 
 .banner-cover {
   @apply md:w-3/12;
-  height: 35vh;
+  height: 43vh;
 }
 
 .banner-header {
@@ -77,6 +75,7 @@
   }
 
   .community-description {
+    @apply bg-josa-black;
     @apply my-16;
     @apply text-xl;
   }

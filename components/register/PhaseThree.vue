@@ -19,15 +19,7 @@
       <div
         class="flex flex-col md:flex-row md:justify-between items-end md:items-baseline"
       >
-        <FormAppControlInput inputType="checkbox" :isRequired="true">
-          I accept and understand
-          <NuxtLink
-            to="https://www.josa.ngo/info/privacypolicy"
-            class="underline text-josa-blue hover:text-josa-black"
-          >
-            JOSA's Privacy Policy
-          </NuxtLink>
-        </FormAppControlInput>
+        <FormAppTermsAndConditions />
         <div class="text-right">
           <FormAppButton btn-style="button-flat button-blue-full" type="submit"
             >Submit</FormAppButton

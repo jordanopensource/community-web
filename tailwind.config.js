@@ -79,7 +79,7 @@ module.exports = {
       },
       backgroundImage:{
         'homeHero':"url('/images/background.svg')",
-        'homeHero-mobile':"url('/images/background-2.svg')"
+        'slashes':"url('/images/slashes.svg')"
       }
     },
   },

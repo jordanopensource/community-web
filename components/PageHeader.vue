@@ -60,15 +60,15 @@ li a {
 
 .nav-bar {
   @apply flex items-center;
-  @apply px-4 py-6 md:p-16;
-}
-.menu-item {
-  @apply inline-block lg:mx-2;
+  @apply py-6 md:py-16;
 }
 
 .menu {
   @apply text-white hidden font-medium text-lg lg:text-xl;
   @apply lg:flex justify-end w-full items-baseline;
+  .menu-item {
+    @apply inline-block lg:mx-2;
+  }
 }
 
 #login {
@@ -78,11 +78,5 @@ li a {
 
 #login:hover {
   @apply text-josa-warm-grey-light;
-}
-
-@screen sm {
-  .menu-icon {
-    @apply w-8 h-8 !important;
-  }
 }
 </style>
