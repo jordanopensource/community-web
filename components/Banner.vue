@@ -1,12 +1,12 @@
 <template>
   <div
-    class="banner"
-    :class="[
-      !props.whiteBackground ? 'black-background' : 'white-background',
-      props.enableContainer ? 'bg-slashes' : 'bg-slashesHome',
-    ]"
+    class="py-28"
+    :class="[!props.whiteBackground ? 'black-background' : 'white-background']"
   >
-    <div :class="props.enableContainer && 'container'">
+    <div
+      class="banner-background"
+      :class="[props.enableContainer && 'container']"
+    >
       <h1
         class="banner-header"
         :class="
@@ -26,9 +26,11 @@ const props = defineProps({
 })
 </script>
 <style lang="postcss" scoped>
-.banner {
-  @apply py-28;
-  @apply bg-no-repeat bg-local bg-center;
+.banner-background {
+  @apply bg-slashes;
+  @apply bg-repeat;
+  @apply bg-right;
+  /* @apply bg-cover; */
 }
 
 .black-background {
@@ -43,5 +45,6 @@ const props = defineProps({
 .banner-header {
   @apply text-3xl lg:text-5xl tracking-wide font-normal;
   @apply inline;
+  @apply pr-4;
 }
 </style>

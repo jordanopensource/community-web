@@ -43,7 +43,8 @@
 .banner {
   @apply bg-josa-black;
   @apply h-auto;
-  @apply bg-homeHero bg-no-repeat  bg-contain;
+  @apply bg-homeHero bg-no-repeat;
+  @apply bg-contain;
   @apply bg-right-bottom;
 }
 
@@ -74,6 +75,7 @@
   }
 
   .community-description {
+    @apply bg-josa-black;
     @apply my-16;
     @apply text-xl;
   }
