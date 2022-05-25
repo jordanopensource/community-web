@@ -3,7 +3,13 @@
     <h2 class="heading">Many reasons to become a member of JOSA</h2>
     <div class="perks-container">
       <div class="bot-container">
-        <img src="/images/bots/bot-1.svg" />
+        <img
+          width="20"
+          height="20"
+          alt="bot-lightbulb"
+          src="/images/bots/bot-1.svg"
+          loading="lazy"
+        />
         <div>
           <h3 class="heading">Join a community of like-minded geeks</h3>
           <p>
@@ -15,7 +21,13 @@
         </div>
       </div>
       <div class="bot-container">
-        <img src="/images/bots/bot-2.svg" />
+        <img
+          width="20"
+          height="20"
+          alt="bot-puzzle"
+          src="/images/bots/bot-2.svg"
+          loading="lazy"
+        />
         <div>
           <h3 class="heading">
             Collaborate on great projects with other open-source enthusiasts
@@ -29,7 +41,13 @@
         </div>
       </div>
       <div class="bot-container">
-        <img src="/images/bots/bot-3.svg" />
+        <img
+          width="20"
+          height="20"
+          alt="bot-trophy"
+          src="/images/bots/bot-3.svg"
+          loading="lazy"
+        />
         <div>
           <h3 class="heading">
             Get access to special events, activities and perks
@@ -43,7 +61,13 @@
         </div>
       </div>
       <div class="bot-container">
-        <img src="/images/bots/bot-4.svg" />
+        <img
+          width="20"
+          height="20"
+          alt="bot-love"
+          src="/images/bots/bot-4.svg"
+          loading="lazy"
+        />
         <div>
           <h3 class="heading">Develop your skills</h3>
           <p>

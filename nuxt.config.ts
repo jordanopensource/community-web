@@ -4,6 +4,9 @@ import { defineNuxtConfig } from 'nuxt3';
 export default defineNuxtConfig({
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'en'
+      },
       title: 'JOSA Community',
       meta: [
         { charset: 'utf-8' },
@@ -12,14 +15,15 @@ export default defineNuxtConfig({
           hid: 'description',
           name: 'description',
           content:
-            '',
+            'Join JOSA to not only develop soft and organizational skills, but become part of a dynamic and exceptional network of geeks and agents of change by giving back to the community.',
         },
         { name: 'format-detection', content: 'telephone=no' },
+        { name: 'theme-color', content: '#1a1f21' },
       ],
       link: [{ hid: 'icon', rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
   },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-healthcheck'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-healthcheck', '@nuxtjs/pwa'],
   css: [
     '@/assets/css/typography.css',
     '@/assets/css/form.css',
@@ -42,6 +46,11 @@ export default defineNuxtConfig({
     contentType: 'application/json',
     healthy: () => {
       return JSON.stringify({ result: `All is well in Wayne's town!!!` })
+    },
+  },
+  pwa: {
+    manifest: {
+      lang: 'en',
     },
   },
 });

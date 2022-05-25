@@ -5,7 +5,7 @@
         v-if="props.isOpen"
         class="w-9 h-9"
         src=" /icons/x-circle.svg"
-        alt=""
+        alt="burger-menu"
       />
       <img v-else class="w-9 h-9" src=" /icons/bars-solid.svg" alt="" />
     </button>

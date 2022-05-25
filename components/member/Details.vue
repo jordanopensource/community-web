@@ -3,6 +3,7 @@
     <div class="relative">
       <img
         class="cover"
+        alt="cover"
         :src="props.member.cover ? props.member.cover : placeHolderImages.cover"
       />
       <div
@@ -11,6 +12,7 @@
       >
         <img
           class="avatar"
+          alt="avatar"
           :src="
             props.member.avatar ? props.member.avatar : placeHolderImages.avatar
           "

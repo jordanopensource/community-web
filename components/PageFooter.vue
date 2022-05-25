@@ -77,7 +77,7 @@
             class="h-4 inline"
             src=" /icons/icon-small-cc.svg"
             alt="CC"
-            width="auto"
+            width="16"
             height="16"
             loading="lazy"
           />
