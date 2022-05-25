@@ -28,7 +28,7 @@ const props = defineProps({
 <style lang="postcss" scoped>
 .banner {
   @apply py-28;
-  @apply bg-right bg-no-repeat;
+  @apply bg-no-repeat bg-local bg-center;
 }
 
 .black-background {
