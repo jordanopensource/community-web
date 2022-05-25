@@ -5,5 +5,3 @@ nuxt.d.ts
 .output
 .env
 .vscode
-
-assets/data

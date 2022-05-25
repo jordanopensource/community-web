@@ -1,7 +1,17 @@
 /*****/
 
+.card {
+  @apply flex flex-col border rounded bg-white p-6 border-grey90;
+}
+
 .button {
   @apply border border-solid rounded-md uppercase py-2 px-4 inline-block;
+  transition: background-color, color, border-color, 0.25s linear;
+  -webkit-transition: background-color, color, border-color, 0.25s linear;
+}
+
+.button-sharp {
+  @apply border border-solid py-3 px-10 text-center rounded-none normal-case;
   transition: background-color, color, border-color, 0.25s linear;
   -webkit-transition: background-color, color, border-color, 0.25s linear;
 }
@@ -14,6 +24,14 @@
   @apply bg-josa-blue text-white !important;
 }
 
+.button-grey {
+  @apply border-josa-warm-grey-dark text-josa-warm-grey-dark;
+}
+
+.button-grey:hover {
+  @apply bg-josa-warm-grey-dark text-josa-warm-grey !important;
+}
+
 .button-blue-full {
   @apply border-josa-blue bg-josa-blue;
   color: #fff !important;
@@ -24,12 +42,33 @@
   border-color: #2f80a2;
 }
 
+.button-dark-blue-full {
+  @apply border-josa-blue-dark bg-josa-blue-dark;
+  color: #fff !important;
+}
+
+.button-dark-blue-full:hover {
+  @apply border-josa-blue-veryDark bg-josa-blue-veryDark;
+}
+
+.button-light {
+  @apply border-josa-warm-grey text-josa-warm-grey;
+}
+
+.button-light:hover {
+  @apply bg-josa-warm-grey text-josa-black !important;
+}
+
 .button-flat {
-  @apply rounded-none border-none normal-case py-3 px-6 text-josa-black font-semibold;
+  @apply rounded-none normal-case py-3 px-6 text-josa-black border-josa-black font-bold;
 }
 
 .button-flat:hover {
   @apply opacity-75;
+}
+
+.content-wrapper a {
+  @apply text-josa-blue;
 }
 
 a {
@@ -66,7 +105,12 @@ ul {
   list-style: disc;
 }
 
-ol > li,
-ul > li {
+[dir='ltr'] ol > li,
+[dir='ltr'] ul > li {
   @apply ml-4;
+}
+
+[dir='rtl'] ol > li,
+[dir='rtl'] ul > li {
+  @apply mr-4;
 }
