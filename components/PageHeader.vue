@@ -2,9 +2,6 @@
   <header>
     <nav>
       <div class="container">
-        <!-- <div
-        class="px-6 md:px-12 flex justify-between flex-wrap lg:flex-nowrap items-center"
-      > -->
         <div class="nav-bar">
           <NuxtLink
             id="brand"
@@ -13,7 +10,7 @@
           >
             <img
               class="w-36 h-10"
-              src="@/static/logo/logo.svg"
+              src=" /logo/logo.svg"
               alt="Jordan Open Source Association Logo"
               width="128"
               height="40"
@@ -27,10 +24,10 @@
             <li class="menu-item">
               <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
             </li>
-            <li class="menu-item">
+            <li v-if="!config.BETA_RELEASE" class="menu-item">
               <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
             </li>
-            <li class="menu-item">
+            <li v-if="!config.BETA_RELEASE" class="menu-item">
               <NuxtLink id="login" to="/login" class="nav-link"
                 >Sign In</NuxtLink
               >
@@ -45,7 +42,7 @@
 </template>
 <script setup>
 import { reactive } from 'vue'
-
+const config = useRuntimeConfig()
 const state = reactive({
   isOpen: false,
 })
@@ -62,28 +59,24 @@ li a {
 }
 
 .nav-bar {
-  @apply flex items-center py-6 mx-11 md:mx-11 md:py-11;
-}
-.menu-item {
-  @apply inline-block lg:mx-7;
+  @apply flex items-center;
+  @apply py-6 md:py-16;
 }
 
 .menu {
-  @apply text-white hidden lg:flex font-medium text-lg lg:text-xl w-full justify-end;
+  @apply text-white hidden font-medium text-lg lg:text-xl;
+  @apply lg:flex justify-end w-full items-baseline;
+  .menu-item {
+    @apply inline-block lg:mx-2;
+  }
 }
 
 #login {
-  @apply text-josa-blue border-josa-blue p-2 pt-1 pb-1;
+  @apply text-josa-blue border-josa-blue ml-3 p-2 pt-1 pb-1;
   border-width: thin;
 }
 
 #login:hover {
   @apply text-josa-warm-grey-light;
-}
-
-@screen sm {
-  .menu-icon {
-    @apply w-8 h-8 !important;
-  }
 }
 </style>
