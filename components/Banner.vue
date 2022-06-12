@@ -3,18 +3,17 @@
     class="py-28"
     :class="[!props.whiteBackground ? 'black-background' : 'white-background']"
   >
-    <div
-      class="banner-background"
-      :class="[props.enableContainer && 'container']"
-    >
-      <h1
-        class="banner-header"
-        :class="
-          !props.whiteBackground ? 'black-background' : 'white-background'
-        "
-      >
-        {{ props.bannerText }}
-      </h1>
+    <div :class="[props.enableContainer && 'container']">
+      <div class="banner-background">
+        <h1
+          class="banner-header"
+          :class="
+            !props.whiteBackground ? 'black-background' : 'white-background'
+          "
+        >
+          {{ props.bannerText }}
+        </h1>
+      </div>
     </div>
   </div>
 </template>
