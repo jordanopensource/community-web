@@ -13,7 +13,7 @@ RUN mv /tmp/node_modules .
 
 # declare environment variables
 ENV BASE_API_URL https://community.api.dev.josa.ngo
-ENV HOST    0.0.0.0
+ENV HOST 0.0.0.0
 ENV PORT 3000
 ENV BETA_RELEASE true
 ENV PORTAL_API_URL https://portal.api.prod.josa.ngo
