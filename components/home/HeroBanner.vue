@@ -67,7 +67,7 @@
     @apply text-3xl lg:text-4xl tracking-wide font-normal;
   }
   .heading > h1 {
-    @apply block md:inline-flex items-baseline;
+    @apply inline-flex items-baseline;
 
     img {
       @apply px-1 pt-1;
