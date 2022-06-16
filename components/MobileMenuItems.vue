@@ -4,7 +4,7 @@
       <li class="py-4 border-gray">
         <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
       </li>
-      <li v-if="!config.BETA_RELEASE" class="py-4 border-gray">
+      <li class="py-4 border-gray">
         <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
       </li>
       <li v-if="!config.BETA_RELEASE" class="py-4">
