@@ -7,7 +7,7 @@
 
 ### community-web
 
-The Member community hub for the JOSANS.
+The community hub for JOSA.
 
 [Explore the docs »](https://github.com/jordanopensource/community-web)
 
