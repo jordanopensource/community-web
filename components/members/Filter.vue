@@ -20,29 +20,39 @@
       </button>
     </div>
     <div class="input-control form-wrapper" v-if="state.isOpen">
-      <form class="w-full h-fit flex flex-col my-8">
+      <div class="w-full h-fit flex flex-col my-8">
         <p>Search members by name:</p>
-        <div class="flex flex-row items-baseline">
+        <form class="flex flex-row items-baseline" @submit.prevent="onSubmit">
           <FormAppControlInput
             name="name"
             inputType="text"
             class="w-full input-container"
+            v-model:value="state.name"
           >
           </FormAppControlInput>
           <FormAppButton btn-style="search-button" type="submit"
             >&rarr;</FormAppButton
           >
-        </div>
+        </form>
         <div>
-          <FormAppControlInput inputType="checkbox">
+          <FormAppControlInput
+            v-model:value="state.noneJosaMembers"
+            inputType="checkbox"
+            @change="() => onCheck()"
+          >
             Show contributors who are not members</FormAppControlInput
           >
         </div>
-      </form>
+      </div>
       <div class="border-b-2 border-dotted"></div>
       <div class="my-6">
         <h4 class="font-light mb-8">Sort by:</h4>
-        <FormAppDropDown selectName="sortBy" :listOfItems="sortItems" />
+        <FormAppDropDown
+          selectName="sortBy"
+          :listOfItems="sortItems"
+          v-model:value="state.selected"
+          @change="() => onSelect()"
+        />
       </div>
     </div>
   </div>
@@ -51,8 +61,12 @@
 import { reactive } from 'vue'
 
 const state = reactive({
-  isOpen: false,
+  isOpen: true,
+  name: '',
+  noneJosaMembers: false,
+  selected: '',
 })
+
 const sortItems = [
   {
     value: 'firstName',
@@ -71,6 +85,19 @@ const sortItems = [
     text: 'Last Name (Z -> A)',
   },
 ]
+
+const emit = defineEmits(['sortMembers', 'searchMember', 'filterMembers'])
+
+const onCheck = () => {
+  emit('filterMembers', state.noneJosaMembers)
+}
+
+const onSubmit = () => {
+  emit('searchMember', state.name)
+}
+const onSelect = () => {
+  emit('sortMembers', state.selected)
+}
 </script>
 <style lang="postcss" scoped>
 .filter-container {

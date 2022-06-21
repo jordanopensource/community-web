@@ -6,6 +6,7 @@
         :name="selectName"
         :id="selectName"
         class="w-full px-4 py-4 rounded-lg dd-bg-blue"
+        @change="$emit('update:value', $event.target.value)"
       >
         <option
           v-for="(item, index) in listOfItems"
@@ -19,8 +20,6 @@
   </div>
 </template>
 <script setup>
-const emit = defineEmits(['emitSelected'])
-
 const props = defineProps({
   listOfItems: {
     type: Array,
@@ -32,8 +31,9 @@ const props = defineProps({
   },
 })
 
-const selectedItem = (item) => {
-  emit('emitSelected', item)
+const logMyShit = (e) => {
+  console.log(e.target.value)
+  $emit('update:modelValue', e.target.value)
 }
 </script>
 <style lang="postcss" scoped>

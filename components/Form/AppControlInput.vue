@@ -3,7 +3,7 @@
     <div v-if="props.inputType === 'checkbox'" class="inline-flex">
       <input
         id="check-box"
-        @input="$emit('update:value', $event.target.value)"
+        @input="$emit('update:value', $event.target.checked)"
         :name="props.name"
         :required="props.isRequired"
         :placeholder="props.placeholder"
