@@ -5,7 +5,7 @@ COPY package*.json /tmp/
 RUN cd /tmp && npm install
 
 # copy application into image
-WORKDIR /srv/app
+WORKDIR /app
 COPY . .
 
 # move node_modules into application root
