@@ -7,14 +7,19 @@
             width="100"
             height="100"
             alt="bot-lightbulb"
-            :src="member.avatar ? member.avatar : avatarPlaceholder"
+            :src="props.member.avatar ? props.member.avatar : avatarPlaceholder"
             class="rounded w-full"
             loading="lazy"
           />
         </div>
         <div>
           <h3 class="text-xl lg:text-3xl font-semibold mb-2">
-            {{ member.first_name }} {{ member.last_name }}
+            <NuxtLink
+              :to="`/members/${props.member.id}`"
+              target="_blank"
+            >
+              {{ props.member.first_name }} {{ props.member.last_name }}
+            </NuxtLink>
           </h3>
           <p>
             {{
