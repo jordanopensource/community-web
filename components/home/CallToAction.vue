@@ -10,66 +10,9 @@
         developing new ones.
       </p>
     </div>
-    <div class="input-control form-wrapper">
-      <form @submit.prevent="onSubmit" class="w-full h-fit flex flex-col">
-        <div class="flex flex-row items-center">
-          <FormAppControlInput
-            name="email"
-            inputType="email"
-            placeholder="email@email.com"
-            :isRequired="true"
-            class="w-full input-container"
-          >
-            Enter email for early access:
-            <span v-if="onSubmission.success">
-              {{ onSubmission.text }}
-            </span>
-          </FormAppControlInput>
-          <FormAppButton btn-style="button-flat button-blue-full" type="submit"
-            >&rarr;</FormAppButton
-          >
-        </div>
-        <FormAppTermsAndConditions />
-      </form>
-    </div>
+    <FormEarlyAccess />
   </section>
 </template>
-<script setup>
-import { reactive } from 'vue'
-
-const config = useRuntimeConfig()
-const onSubmission = reactive({
-  text: 'Thanks! You will be notified when its ready!',
-  success: false,
-})
-
-const hideSubmissionText = () => {
-  setTimeout(() => {
-    onSubmission.success = false
-  }, 5000)
-}
-
-const onSubmit = (e) => {
-  fetch(`${config.BASE_API_URL}/earlyaccess/create`, {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify({ email: e.target.email.value }),
-  })
-    .then(() => {
-      onSubmission.success = true
-      hideSubmissionText()
-    })
-    .catch((error) => {
-      console.log(error)
-      onSubmission.text = 'Something went wrong 😞, probably a server error 🤷'
-      onSubmission.success = true
-      hideSubmissionText()
-    })
-}
-</script>
 <style lang="postcss" scoped>
 section.wrapper {
   @apply flex flex-col justify-between lg:flex-row;
