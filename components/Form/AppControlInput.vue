@@ -21,6 +21,7 @@
         :required="props.isRequired"
         :placeholder="props.placeholder"
         :type="props.inputType"
+        :pattern="props.pattern"
       />
       <textarea
         v-else
@@ -39,6 +40,7 @@ const props = defineProps({
   isRequired: { type: Boolean, default: false },
   placeholder: { type: String, default: '' },
   name: { type: String, default: '' },
+  pattern: '',
   inputType: String,
 })
 </script>
