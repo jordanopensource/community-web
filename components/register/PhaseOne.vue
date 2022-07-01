@@ -11,7 +11,7 @@
         v-model:value="form.phone"
         inputType="tel"
         :isRequired="true"
-        placeholder="962799840311"
+        placeholder="962799888777"
         pattern="[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{3}"
         >Phone Number</FormAppControlInput
       >
