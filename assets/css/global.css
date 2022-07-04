@@ -6,12 +6,6 @@
   -webkit-transition: background-color, color, border-color, 0.25s linear;
 }
 
-.search-button {
-  @apply rounded-none !important;
-  @apply button-blue-full h-full;
-  padding: 0.65rem 1rem;
-}
-
 .button-blue {
   @apply border-josa-blue text-josa-blue;
 }

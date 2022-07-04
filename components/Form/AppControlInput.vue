@@ -3,7 +3,7 @@
     <div v-if="props.inputType === 'checkbox'" class="inline-flex">
       <input
         id="check-box"
-        @input="$emit('update:value', $event.target.checked)"
+        @input="$emit('update:value', $event.target.value)"
         :name="props.name"
         :required="props.isRequired"
         :placeholder="props.placeholder"
@@ -21,7 +21,6 @@
         :required="props.isRequired"
         :placeholder="props.placeholder"
         :type="props.inputType"
-        :pattern="props.pattern"
       />
       <textarea
         v-else
@@ -40,7 +39,6 @@ const props = defineProps({
   isRequired: { type: Boolean, default: false },
   placeholder: { type: String, default: '' },
   name: { type: String, default: '' },
-  pattern: '',
   inputType: String,
 })
 </script>
