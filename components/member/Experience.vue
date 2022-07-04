@@ -63,6 +63,7 @@ const formatDate = (date) => {
 .details-container {
   @apply bg-white;
   @apply p-10 px-8;
+  @apply mb-14;
   @apply text-sm md:text-lg;
 }
 
@@ -94,6 +95,11 @@ const formatDate = (date) => {
   @apply text-gray-500;
   @apply mb-2;
   @apply font-light;
+}
+
+.experience,
+.education {
+  @apply mt-16;
 }
 
 ul {
