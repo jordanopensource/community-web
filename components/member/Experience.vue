@@ -3,7 +3,7 @@
     <h2>Experience and Education</h2>
     <div class="slash-separator"></div>
 
-    <div v-if="props.experience" class="experience">
+    <div v-if="props.experience.length" class="experience">
       <h5 class="heading">Work Experience</h5>
       <ul>
         <li v-for="(experience, index) in props.experience" :key="index">
@@ -22,7 +22,7 @@
       </ul>
     </div>
 
-    <div v-if="props.education" class="education">
+    <div v-if="props.education.length" class="education">
       <h5 class="heading">Education</h5>
       <ul>
         <li v-for="(education, index) in props.education" :key="index">
@@ -63,8 +63,8 @@ const formatDate = (date) => {
 .details-container {
   @apply bg-white;
   @apply my-14;
-  @apply p-10 px-8 lg:px-20;
-  @apply text-lg;
+  @apply p-10 px-8;
+  @apply text-sm md:text-lg;
 }
 
 .slash-separator {
@@ -111,14 +111,14 @@ li {
   @apply w-full;
   @apply ml-0 mt-2 py-3;
   @apply border-dotted border-t-2 border-gray-500;
-  @apply flex flex-col lg:flex-row justify-between;
+  @apply flex flex-row justify-between;
 
   .title {
-    @apply font-semibold text-2xl;
+    @apply font-semibold text-sm md:text-2xl;
   }
 
   .sub-title {
-    @apply text-lg;
+    @apply text-sm md:text-lg;
   }
 
   .date-container {

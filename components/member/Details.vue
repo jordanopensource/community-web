@@ -8,7 +8,7 @@
       />
       <div
         id="avatar-info-container"
-        class="flex flex-col lg:flex-row mx-8 relative justify-center items-center"
+        class="flex flex-row justify-around relative gap-x-4"
       >
         <img
           class="avatar"
@@ -17,9 +17,9 @@
             props.member.avatar ? props.member.avatar : placeHolderImages.avatar
           "
         />
-        <div class="invisible-white-space"></div>
+        <!-- <div class="invisible-white-space"></div> -->
         <div class="general-info">
-          <div class="flex flex-col items-center lg:items-start">
+          <div class="flex flex-col items-start">
             <p class="member-name">
               {{ props.member.first_name }} {{ props.member.last_name }}
             </p>
@@ -119,7 +119,7 @@ const formatDate = (date) => {
   @apply bg-white;
   @apply my-14;
   @apply p-10 px-8 lg:px-20;
-  @apply text-lg;
+  @apply text-sm md:text-lg;
 }
 
 img {
@@ -130,25 +130,25 @@ img {
   @apply w-64 mr-8;
 }
 .avatar {
-  width: 200px;
-  height: 200px;
+  @apply w-24 h-24 md:w-52 md:h-52;
   @apply lg:self-start;
-  @apply mb-10;
-  @apply lg:absolute left-0 bottom-0;
+  @apply ml-4;
+  @apply lg:absolute left-4 bottom-0;
 }
 
 .cover {
-  @apply -mb-8 lg:mb-4;
+  @apply w-full h-16 md:h-44;
+  @apply -mb-8 lg:-mb-3;
 }
 
 .general-info {
-  @apply self-center flex;
+  @apply self-center flex mt-9 lg:mt-8;
   .member-name {
-    @apply text-3xl font-semibold;
+    @apply text-sm md:text-3xl font-semibold;
   }
   .member-headline {
-    @apply text-xl;
-    @apply text-center lg:text-left;
+    @apply text-sm md:text-xl;
+    @apply text-left;
     @apply my-2;
   }
 
@@ -190,18 +190,13 @@ img {
 }
 
 .member-card {
-  @apply flex flex-col;
-  @apply xl:justify-evenly;
-  @apply lg:flex-row;
+  @apply flex flex-row;
+  @apply justify-between;
   @apply w-full;
   @apply bg-slate-100;
   @apply rounded-xl;
   @apply p-4 mt-20 mb-4;
   @apply font-semibold;
-
-  div {
-    @apply mr-36 xl:mr-48;
-  }
 
   h5 {
     @apply font-light;
@@ -231,7 +226,7 @@ img {
 .skills {
   ul {
     @apply list-none;
-    @apply flex flex-col lg:flex-row;
+    @apply flex flex-row;
   }
 
   li {
