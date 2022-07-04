@@ -19,8 +19,8 @@ import { watch } from 'vue'
 const config = useRuntimeConfig()
 const state = reactive({
   passedName: '',
-  isNoneMember: false,
-  sortBy: '',
+  disabledMember: false,
+  order_by: '',
   members: {},
   metaData: {},
   page: 1,
@@ -41,8 +41,21 @@ const props = defineProps({
   },
 })
 
-const getMembers = async (currentPage) => {
-  fetch(`${config.BASE_API_URL}/member/page/${currentPage}`)
+const getMembers = async (currentPage = state.page) => {
+  fetch(
+    `${config.BASE_API_URL}/member/page/${currentPage}?disabled=${state.disabledMember}`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      state.members = Object.create(data.items)
+      state.metaData = Object.create(data.meta)
+    })
+}
+
+const getOrderedMembers = async (query) => {
+  fetch(
+    `${config.BASE_API_URL}/member/page/${state.page}?disabled=${state.disabledMember}&order_by=${query.orderBy}&order_criteria=${query.criteria}`
+  )
     .then((response) => response.json())
     .then((data) => {
       state.members = Object.create(data.items)
@@ -56,7 +69,7 @@ const searchMember = async (query) => {
     .then((data) => (state.members = Object.create(data)))
 }
 
-await getMembers(state.page)
+await getMembers()
 
 // search member by name
 watch(
@@ -72,46 +85,19 @@ watch(
 
 // filter none members
 watch(
-  () => (state.isNoneMember = props.isChecked),
-  async (checked) => {
-    if (checked) {
-      state.members.items = state.allMembers.items.filter(
-        (member) => !member.josa_id
-      )
-    } else {
-      await getMembers()
-    }
+  () => (state.disabledMember = props.isChecked),
+  async () => {
+    await getMembers()
   }
 )
 
 // Order members
 watch(
-  () => (state.sortBy = props.sortBy),
+  () => (state.order_by = props.sortBy),
   (sortKey) => {
-    switch (sortKey) {
-      case 'firstName':
-        state.members.items.sort((a, b) =>
-          a.first_name.toLowerCase() > b.first_name.toLowerCase() ? 1 : -1
-        )
-        break
-      case 'lastName':
-        state.members.items.sort((a, b) =>
-          a.last_name.toLowerCase() > b.last_name.toLowerCase() ? 1 : -1
-        )
-        break
-      case 'firstNameRev':
-        state.members.items.sort((a, b) =>
-          a.first_name.toLowerCase() < b.first_name.toLowerCase() ? 1 : -1
-        )
-        break
-      case 'lastNameRev':
-        state.members.items.sort((a, b) =>
-          a.last_name.toLowerCase() < b.last_name.toLowerCase() ? 1 : -1
-        )
-        break
-      default:
-        break
-    }
+    const sortArr = sortKey.split(',')
+    const query = { orderBy: sortArr[1], criteria: sortArr[0] }
+    getOrderedMembers(query)
   }
 )
 </script>
