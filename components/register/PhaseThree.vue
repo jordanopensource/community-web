@@ -2,19 +2,17 @@
   <div>
     <form @submit.prevent="onSubmit">
       <FormAppDropDownSearch
-        v-if="members.length > 0"
         placeholderText="Search JOSA member"
-        :listData="members"
         @emitSelected="(referralID) => assignReferralValue(referralID)"
       >
         Do you know how a current JOSA member that would vouch for you?
       </FormAppDropDownSearch>
-      <div v-else>
+      <!-- <div v-else>
         <p class="my-8">
           No Members are available to vouch for you atm , please processed with
           the registration
         </p>
-      </div>
+      </div> -->
 
       <div
         class="flex flex-col md:flex-row md:justify-between items-end md:items-baseline"
@@ -32,10 +30,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const config = useRuntimeConfig()
-
 const referral = ref(0)
-const { data: members } = await useFetch(`${config.BASE_API_URL}/member/all`)
 
 const assignReferralValue = (referralID) => (referral.value = referralID)
 

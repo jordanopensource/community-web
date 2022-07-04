@@ -10,7 +10,7 @@
       <div class="flex flex-col w-full">
         <MemberDetails v-if="!pendingMember" :member="memberData" />
         <MemberExperience
-          v-if="!pendingEducation && !pendingEducation"
+          v-if="memberExperience.length || memberEducation.length"
           :experience="memberExperience"
           :education="memberEducation"
         />

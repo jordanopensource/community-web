@@ -8,7 +8,7 @@
             aria-label="Previous Page"
             @click="fetchCurrentPage(currentPage - 1)"
           >
-            &lt; Previous
+            &lt;
           </button></span
         >
       </li>
@@ -35,7 +35,7 @@
             aria-label="Next Page"
             @click="fetchCurrentPage(currentPage + 1)"
           >
-            Next &gt;
+            &gt;
           </button></span
         >
       </li>
