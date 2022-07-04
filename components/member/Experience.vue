@@ -90,11 +90,6 @@ const formatDate = (date) => {
   z-index: 1;
 }
 
-.experience,
-.education {
-  @apply mt-16;
-}
-
 .heading {
   @apply text-gray-500;
   @apply mb-2;
