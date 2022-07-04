@@ -1,13 +1,14 @@
 <template>
   <Banner bannerText="JOSA Members" />
   <div class="container">
-    <MemberDetails v-if="!pendingMember" :member="memberData" />
+    <MemberAvatar v-if="!pendingMember" :member="memberData" />
     <div class="flex gap-x-4">
-      <div class="sm:hidden lg:block">
+      <div class="hidden lg:block">
         <MemberCard v-if="!pendingMember" :member="memberData" />
         <MemberScore />
       </div>
       <div class="flex flex-col w-full">
+        <MemberDetails v-if="!pendingMember" :member="memberData" />
         <MemberExperience
           v-if="!pendingEducation && !pendingEducation"
           :experience="memberExperience"
