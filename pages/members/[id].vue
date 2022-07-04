@@ -6,6 +6,7 @@
     :experience="memberExperience"
     :education="memberEducation"
   />
+  <MemberContribution />
 </template>
 <script setup>
 const config = useRuntimeConfig()
