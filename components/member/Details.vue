@@ -1,5 +1,5 @@
 <template>
-  <div id="member-detail" class="container details-container">
+  <div id="member-detail" class="details-container">
     <div class="relative">
       <img
         class="cover"
@@ -51,26 +51,9 @@
         </div>
       </div>
     </div>
-    <div class="slash-separator"></div>
-    <div class="member-card">
-      <div class="badge-details">
-        <div class="badge-color"></div>
-        <p>JOSA Member</p>
-      </div>
-      <div>
-        <h5>Member ID</h5>
-        <p>{{ props.member.member_id }}</p>
-      </div>
-      <div>
-        <h5>Member Since</h5>
-        <p>
-          {{
-            props.member.member_since
-              ? formatDate(props.member.member_since)
-              : 'January 2023'
-          }}
-        </p>
-      </div>
+    <div class="slash-separator mb-20"></div>
+    <div class="lg:hidden">
+      <MemberCard :member="props.member" />
     </div>
     <h5 class="heading">About</h5>
     <p class="member-about">
@@ -187,35 +170,6 @@ img {
   @apply mr-4 w-64;
   @apply xl:w-44;
   @apply 2xl:w-0 2xl:mr-0;
-}
-
-.member-card {
-  @apply flex flex-row;
-  @apply justify-between;
-  @apply w-full;
-  @apply bg-slate-100;
-  @apply rounded-xl;
-  @apply p-4 mt-20 mb-4;
-  @apply font-semibold;
-
-  h5 {
-    @apply font-light;
-  }
-
-  .badge-details {
-    @apply flex flex-row;
-    @apply items-center;
-    .badge-color {
-      @apply w-5 h-5;
-      @apply mr-2;
-      @apply rounded-sm;
-      @apply bg-josa-blue;
-    }
-  }
-}
-
-.member-card > div {
-  @apply my-3 lg:my-auto;
 }
 
 .heading {
