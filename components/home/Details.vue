@@ -104,7 +104,7 @@
   img {
     @apply lg:pr-8;
     @apply mb-8 lg:mb-0;
-    @apply w-2/5 md:w-1/2;
+    @apply w-28 md:w-52;
   }
 }
 </style>

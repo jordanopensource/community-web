@@ -5,20 +5,24 @@ services:
   # Nuxt Frontend
   community-web:
     container_name: community-web
-    image: josaorg/community-web:latest
     build:
       context: .
     environment:
       BASE_API_URL: http://contributions-api:8080
       PORT: 3000
       HOST: contributions-web
-    networks:
-      - contributions-network
     ports:
       - "3000:3000"
+    volumes:
+      - ./:/app/
 
   # Nest Backend
   community-api:
     container_name: community-api
     image: josaorg/community-api:latest
     # do additional stuff here
+
+networks:
+  default:
+    name: host
+    external: true
