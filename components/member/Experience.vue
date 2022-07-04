@@ -62,7 +62,6 @@ const formatDate = (date) => {
 <style lang="postcss" scoped>
 .details-container {
   @apply bg-white;
-  @apply my-14;
   @apply p-10 px-8;
   @apply text-sm md:text-lg;
 }
