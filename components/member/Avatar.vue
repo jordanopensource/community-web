@@ -6,9 +6,10 @@
         alt="cover"
         :src="props.member.cover ? props.member.cover : placeHolderImages.cover"
       />
+      <div class="invisible-white-space"></div>
       <div
         id="avatar-info-container"
-        class="flex flex-row justify-around relative gap-x-4"
+        class="flex flex-row relative gap-x-4 -mt-8 lg:-mt-12"
       >
         <img
           class="avatar"
@@ -17,7 +18,6 @@
             props.member.avatar ? props.member.avatar : placeHolderImages.avatar
           "
         />
-        <!-- <div class="invisible-white-space"></div> -->
         <div class="general-info">
           <div class="flex flex-col items-start">
             <p class="member-name">
@@ -83,14 +83,11 @@ img {
 }
 .avatar {
   @apply w-24 h-24 md:w-52 md:h-52;
-  @apply lg:self-start;
   @apply ml-4;
-  @apply lg:absolute left-4 bottom-0;
 }
 
 .cover {
   @apply w-full h-16 md:h-44;
-  @apply -mb-8 lg:-mb-3;
 }
 
 .general-info {
