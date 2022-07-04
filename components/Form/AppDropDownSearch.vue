@@ -18,44 +18,46 @@
         >
       </div>
       <div class="dropdown-popover">
-        <!-- @focusin="state.isVisible = true" -->
-        <input
-          @focus="(e) => checkFocusLocation(e)"
-          class="input-field"
-          type="text"
-          :placeholder="placeholderText"
-          v-model="state.searchQuery"
-        />
-
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="24"
-          height="24"
-        >
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path
-            d="M11 2c4.968 0 9 4.032 9 9s-4.032 9-9 9-9-4.032-9-9 4.032-9 9-9zm0 16c3.867 0 7-3.133 7-7 0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7zm8.485.071l2.829 2.828-1.415 1.415-2.828-2.829 1.414-1.414z"
-            fill="rgba(153,153,153,1)"
+        <form @submit.prevent="onSubmit">
+          <input
+            class="input-field"
+            type="text"
+            :placeholder="placeholderText"
+            v-model="state.searchQuery"
           />
-        </svg>
+          <svg
+            @submit="onSubmit"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path
+              d="M11 2c4.968 0 9 4.032 9 9s-4.032 9-9 9-9-4.032-9-9 4.032-9 9-9zm0 16c3.867 0 7-3.133 7-7 0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7zm8.485.071l2.829 2.828-1.415 1.415-2.828-2.829 1.414-1.414z"
+              fill="rgba(153,153,153,1)"
+            />
+          </svg>
+        </form>
         <div class="options" :class="state.isVisible ? 'visible' : 'invisible'">
           <ul>
             <li
-              @click="selectedItem(item)"
-              v-for="(item, index) in filteredItems"
-              :key="`item-${index}`"
+              @click="selectedItem(member)"
+              v-for="(member, index) in state.members"
+              :key="`member-${index}`"
               class="flex flex-row"
             >
               <img
                 class="w-1/12"
                 alt="avatar"
                 :src="
-                  item.avatar ? item.avatar : '/images/placeholders/avatar.png'
+                  member.avatar
+                    ? member.avatar
+                    : '/images/placeholders/avatar.png'
                 "
               />
               <span class="my-auto ml-4">
-                {{ item.first_name }} {{ item.last_name }}
+                {{ member.first_name }} {{ member.last_name }}
               </span>
             </li>
           </ul>
@@ -66,6 +68,7 @@
 </template>
 <script setup>
 import { reactive, computed } from 'vue'
+const config = useRuntimeConfig()
 
 // Define emit events
 const emit = defineEmits(['emitSelected'])
@@ -75,6 +78,7 @@ const state = reactive({
   searchQuery: '',
   selectedItem: null,
   isVisible: false,
+  members: [],
 })
 
 // Define passed props
@@ -83,29 +87,16 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  listData: {
-    type: Array,
-    default: [],
-  },
 })
 
-// Computed value to filter the data
-const filteredItems = computed(() => {
-  if (state.searchQuery === '') {
-    return props.listData
-  }
-  const query = state.searchQuery.toLowerCase()
-  return props.listData.filter((item) => {
-    return Object.values(item).some((word) => {
-      return String(word).toLowerCase().includes(query)
+const onSubmit = async () => {
+  await fetch(`${config.BASE_API_URL}/member/search?q=${state.searchQuery}`)
+    .then((response) => response.json())
+    .then((data) => {
+      state.members = Object.assign([], data)
     })
-  })
-})
 
-// Event callback function to check page onFocus state
-const checkFocusLocation = (e) => {
-  const classList = ['input-field', 'options']
-  if (classList.includes(e.target.className)) {
+  if (state.members.length) {
     state.isVisible = true
   } else {
     state.isVisible = false
