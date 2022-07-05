@@ -20,16 +20,16 @@
         />
         <div class="general-info">
           <div class="flex flex-col items-start">
-            <p class="member-name">
+            <h1 class="member-name">
               {{ props.member.first_name }} {{ props.member.last_name }}
-            </p>
-            <p class="member-headline">
+            </h1>
+            <h2 class="member-headline">
               {{
                 props.member.headline
                   ? props.member.headline
                   : 'This is the headline but it can get longer than you can imagine.'
               }}
-            </p>
+            </h2>
             <p class="member-location">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ const placeHolderImages = {
   @apply bg-white;
   @apply my-14;
   @apply p-10 px-8 lg:px-20;
-  @apply text-lg;
+  @apply text-base;
 }
 
 img {
@@ -93,10 +93,9 @@ img {
 .general-info {
   @apply self-center flex mt-9 lg:mt-8;
   .member-name {
-    @apply text-3xl font-semibold;
+    @apply text-lg font-semibold;
   }
   .member-headline {
-    @apply text-xl;
     @apply text-left;
     @apply my-2;
   }

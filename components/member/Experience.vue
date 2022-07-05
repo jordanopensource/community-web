@@ -4,12 +4,12 @@
     <div class="slash-separator"></div>
 
     <div v-if="props.experience.length" class="experience">
-      <h5 class="heading">Work Experience</h5>
+      <h3 class="heading">Work Experience</h3>
       <ul>
         <li v-for="(experience, index) in props.experience" :key="index">
           <div>
-            <p class="title">{{ experience.company_name }}</p>
-            <p class="sub-title">{{ experience.position }}</p>
+            <h4 class="title">{{ experience.company_name }}</h4>
+            <h5 class="sub-title">{{ experience.position }}</h5>
           </div>
           <div class="date-container">
             <p>
@@ -23,12 +23,12 @@
     </div>
 
     <div v-if="props.education.length" class="education">
-      <h5 class="heading">Education</h5>
+      <h3 class="heading">Education</h3>
       <ul>
         <li v-for="(education, index) in props.education" :key="index">
           <div>
-            <p class="title">{{ education.institution_name }}</p>
-            <p class="sub-title">{{ education.degree }}</p>
+            <h4 class="title">{{ education.institution_name }}</h4>
+            <h5 class="sub-title">{{ education.degree }}</h5>
           </div>
           <div class="date-container">
             <p>{{ formatDate(education.graduated) }}</p>
@@ -64,7 +64,6 @@ const formatDate = (date) => {
   @apply bg-white;
   @apply p-10 px-8;
   @apply mb-14;
-  @apply text-sm md:text-lg;
 }
 
 .slash-separator {
@@ -92,6 +91,7 @@ const formatDate = (date) => {
 }
 
 .heading {
+  @apply text-lg;
   @apply text-gray-500;
   @apply mb-2;
   @apply font-light;
@@ -114,11 +114,7 @@ li {
   @apply flex flex-row justify-between;
 
   .title {
-    @apply font-semibold text-sm md:text-2xl;
-  }
-
-  .sub-title {
-    @apply text-sm md:text-lg;
+    @apply font-semibold text-lg;
   }
 
   .date-container {
