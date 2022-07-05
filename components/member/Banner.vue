@@ -75,7 +75,7 @@ const placeHolderImages = {
 }
 
 img {
-  @apply rounded;
+  @apply rounded-lg;
 }
 
 .placeholder {

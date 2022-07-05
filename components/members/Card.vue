@@ -8,7 +8,7 @@
             height="100"
             alt="bot-lightbulb"
             :src="props.member.avatar ? props.member.avatar : avatarPlaceholder"
-            class="rounded w-full"
+            class="rounded-lg w-full"
             loading="lazy"
           />
         </div>
