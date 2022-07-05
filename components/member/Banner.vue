@@ -71,7 +71,7 @@ const placeHolderImages = {
   @apply bg-white;
   @apply my-14;
   @apply p-10 px-8 lg:px-20;
-  @apply text-sm md:text-lg;
+  @apply text-lg;
 }
 
 img {
@@ -93,10 +93,10 @@ img {
 .general-info {
   @apply self-center flex mt-9 lg:mt-8;
   .member-name {
-    @apply text-sm md:text-3xl font-semibold;
+    @apply text-3xl font-semibold;
   }
   .member-headline {
-    @apply text-sm md:text-xl;
+    @apply text-xl;
     @apply text-left;
     @apply my-2;
   }

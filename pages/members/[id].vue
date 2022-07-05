@@ -1,7 +1,7 @@
 <template>
   <Banner bannerText="JOSA Members" />
   <div class="container">
-    <MemberAvatar v-if="!pendingMember" :member="memberData" />
+    <MemberBanner v-if="!pendingMember" :member="memberData" />
     <div class="flex gap-x-4">
       <div class="hidden lg:block">
         <MemberCard v-if="!pendingMember" :member="memberData" />
