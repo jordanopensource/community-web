@@ -23,7 +23,7 @@
             <li class="menu-item">
               <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
             </li>
-            <li v-if="!config.BETA_RELEASE" class="menu-item">
+            <li class="menu-item">
               <NuxtLink id="login" to="/login" class="nav-link"
                 >Sign In</NuxtLink
               >

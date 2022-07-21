@@ -2,22 +2,19 @@
   <div class="card-container">
     <div class="border-b-2 border-josa-warm-grey-light">
       <div class="flex p-4">
-        <div class="mr-8">
+        <div class="mr-8 w-40 item-min-width">
           <img
             width="100"
             height="100"
             alt="bot-lightbulb"
             :src="props.member.avatar ? props.member.avatar : avatarPlaceholder"
-            class="rounded w-full"
+            class="rounded-lg w-full"
             loading="lazy"
           />
         </div>
         <div>
           <h3 class="text-xl lg:text-3xl font-semibold mb-2">
-            <NuxtLink
-              :to="`/members/${props.member.id}`"
-              target="_blank"
-            >
+            <NuxtLink :to="`/members/${props.member.id}`" target="_blank">
               {{ props.member.first_name }} {{ props.member.last_name }}
             </NuxtLink>
           </h3>
@@ -66,6 +63,9 @@ const props = defineProps({
   @apply bg-white my-10;
 }
 
+.item-min-width {
+  min-width: 150px;
+}
 .member-card {
   @apply text-sm;
   @apply flex flex-row gap-x-4;

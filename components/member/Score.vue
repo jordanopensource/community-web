@@ -1,11 +1,11 @@
 <template>
   <div class="member-card">
     <div>
-      <h5>Score</h5>
+      <p class="header">Score</p>
       <p>2344</p>
     </div>
     <div>
-      <h5>Last seen Online</h5>
+      <p class="header">Last seen Online</p>
       <p>2 weeks ago</p>
     </div>
   </div>
@@ -23,7 +23,7 @@
   @apply md:mr-24;
   @apply font-semibold;
 
-  h5 {
+  .header {
     @apply font-light;
   }
 }

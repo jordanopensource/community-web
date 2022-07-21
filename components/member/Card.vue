@@ -2,14 +2,14 @@
   <div class="member-card">
     <div class="badge-details">
       <div class="badge-color"></div>
-      <p>JOSA Member</p>
+      <p class="header">JOSA Member</p>
     </div>
     <div>
-      <h5>Member ID</h5>
+      <p class="header">Member ID</p>
       <p>{{ props.member.member_id }}</p>
     </div>
     <div>
-      <h5>Member Since</h5>
+      <p class="header">Member Since</p>
       <p>
         {{
           props.member.member_since
@@ -41,7 +41,7 @@ const props = defineProps({
   @apply md:mr-24;
   @apply font-semibold;
 
-  h5 {
+  .header {
     @apply font-light;
   }
 

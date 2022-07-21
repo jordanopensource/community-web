@@ -1,7 +1,7 @@
 <template>
   <Banner bannerText="JOSA Members" />
   <div class="container">
-    <MemberAvatar v-if="!pendingMember" :member="memberData" />
+    <MemberBanner v-if="!pendingMember" :member="memberData" />
     <div class="flex gap-x-4">
       <div class="hidden lg:block">
         <MemberCard v-if="!pendingMember" :member="memberData" />
@@ -29,10 +29,10 @@ const { data: memberData, pending: pendingMember } = await useFetch(
 )
 
 const { data: memberExperience, pending: pendingExperience } = await useFetch(
-  `${config.BASE_API_URL}/experience/find-by-member?member_id=${user_id}`
+  `${config.BASE_API_URL}/experience/${user_id}`
 )
 
 const { data: memberEducation, pending: pendingEducation } = await useFetch(
-  `${config.BASE_API_URL}/education/find-by-member?member_id=${user_id}`
+  `${config.BASE_API_URL}/education/${user_id}`
 )
 </script>

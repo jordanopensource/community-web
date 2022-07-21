@@ -4,12 +4,12 @@
     <div class="slash-separator"></div>
 
     <div class="contribution">
-      <h5 class="heading">JOSA Contributions</h5>
+      <h3 class="heading">JOSA Contributions</h3>
       <ul>
         <li>
           <div>
-            <p class="title">Contribution Description</p>
-            <p class="sub-title">Role</p>
+            <h4 class="title">Contribution Description</h4>
+            <h5 class="sub-title">Role</h5>
           </div>
           <div class="date-container">
             <p>February 2020</p>
@@ -17,8 +17,8 @@
         </li>
         <li>
           <div>
-            <p class="title">JOSA Tech Talks - Image processing</p>
-            <p class="sub-title">Speaker</p>
+            <h4 class="title">JOSA Tech Talks - Image processing</h4>
+            <h5 class="sub-title">Speaker</h5>
           </div>
           <div class="date-container">
             <p>April 2018</p>
@@ -33,7 +33,6 @@
   @apply bg-white;
   @apply mb-14;
   @apply p-10 px-8;
-  @apply text-sm md:text-lg;
 }
 
 .slash-separator {
@@ -68,6 +67,7 @@
   @apply text-gray-500;
   @apply mb-2;
   @apply font-light;
+  @apply text-lg;
 }
 
 ul {
@@ -82,11 +82,7 @@ li {
   @apply flex flex-row justify-between;
 
   .title {
-    @apply font-semibold text-sm md:text-2xl;
-  }
-
-  .sub-title {
-    @apply text-sm md:text-lg;
+    @apply font-semibold text-lg;
   }
 
   .date-container {

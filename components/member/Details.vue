@@ -3,7 +3,7 @@
     <div class="lg:hidden">
       <MemberCard :member="props.member" />
     </div>
-    <h5 class="heading">About</h5>
+    <p class="heading">About</p>
     <p class="member-about mb-8">
       {{
         props.member.about
@@ -12,7 +12,7 @@
       }}
     </p>
     <div class="skills">
-      <h5 class="heading">Skills</h5>
+      <p class="heading">Skills</p>
       <ul>
         <li v-for="(skill, index) in memberSkills" :key="`skill-${index}`">
           {{ skill }}
