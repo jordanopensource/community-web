@@ -30,11 +30,6 @@ const props = defineProps({
     default: '',
   },
 })
-
-const logMyShit = (e) => {
-  console.log(e.target.value)
-  $emit('update:modelValue', e.target.value)
-}
 </script>
 <style lang="postcss" scoped>
 .dd-bg-blue {
