@@ -22,3 +22,5 @@ LICENSE
 
 # Drone
 .drone.yml
+
+.env
