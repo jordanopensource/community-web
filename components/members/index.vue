@@ -43,7 +43,7 @@ const props = defineProps({
 
 const getMembers = async (currentPage = state.page) => {
   fetch(
-    `${config.BASE_API_URL}/member/page/${currentPage}?disabled=${state.disabledMember}`
+    `${config.COMMUNITY_API_URL}/member/page/${currentPage}?disabled=${state.disabledMember}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -54,7 +54,7 @@ const getMembers = async (currentPage = state.page) => {
 
 const getOrderedMembers = async (query) => {
   fetch(
-    `${config.BASE_API_URL}/member/page/${state.page}?disabled=${state.disabledMember}&order_by=${query.orderBy}&order_criteria=${query.criteria}`
+    `${config.COMMUNITY_API_URL}/member/page/${state.page}?disabled=${state.disabledMember}&order_by=${query.orderBy}&order_criteria=${query.criteria}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -64,7 +64,7 @@ const getOrderedMembers = async (query) => {
 }
 
 const searchMember = async (query) => {
-  fetch(`${config.BASE_API_URL}/member/search?q=${query}`)
+  fetch(`${config.COMMUNITY_API_URL}/member/search?q=${query}`)
     .then((response) => response.json())
     .then((data) => (state.members = Object.create(data)))
 }

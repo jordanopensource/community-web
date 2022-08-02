@@ -90,7 +90,9 @@ const props = defineProps({
 })
 
 const onSubmit = async () => {
-  await fetch(`${config.BASE_API_URL}/member/search?q=${state.searchQuery}`)
+  await fetch(
+    `${config.COMMUNITY_API_URL}/member/search?q=${state.searchQuery}`
+  )
     .then((response) => response.json())
     .then((data) => {
       state.members = Object.assign([], data)
