@@ -1,5 +1,5 @@
 # set global args
-ARG BASE_API_URL=https://community.api.dev.josa.ngo/v1 HOST=0.0.0.0 PORT=3000 USER=node
+ARG COMMUNITY_API_URL=https://community.api.dev.josa.ngo/v1 HOST=0.0.0.0 PORT=3000 USER=node
 
 ###########
 # BUILDER #
@@ -7,7 +7,7 @@ ARG BASE_API_URL=https://community.api.dev.josa.ngo/v1 HOST=0.0.0.0 PORT=3000 US
 FROM node:16-alpine3.14 AS builder
 
 # pass the global args
-ARG BASE_API_URL
+ARG COMMUNITY_API_URL
 ARG HOST
 ARG PORT
 
@@ -17,7 +17,7 @@ COPY . .
 RUN npm install
 
 # inject build args as enviroment variables
-ENV BASE_API_URL=${BASE_API_URL} HOST=${HOST} PORT=${PORT}
+ENV COMMUNITY_API_URL=${COMMUNITY_API_URL} HOST=${HOST} PORT=${PORT}
 
 # build NuxtJS project
 RUN npm run build
@@ -28,7 +28,7 @@ RUN npm run build
 FROM node:16-slim
 
 # pass the global args
-ARG BASE_API_URL
+ARG COMMUNITY_API_URL
 ARG HOST
 ARG PORT
 ARG USER
@@ -41,7 +41,7 @@ COPY --from=builder --chown=${USER}:${USER} /workspace/node_modules /app/node_mo
 COPY --from=builder --chown=${USER}:${USER} /workspace/package.json /app/
 
 # inject build args as enviroment variables
-ENV BASE_API_URL=${BASE_API_URL} HOST=${HOST} PORT=${PORT}
+ENV COMMUNITY_API_URL=${COMMUNITY_API_URL} HOST=${HOST} PORT=${PORT}
 
 # set user context
 USER ${USER}

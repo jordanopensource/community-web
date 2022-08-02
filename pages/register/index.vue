@@ -53,7 +53,7 @@ const nextStep = (data) => {
 
 const submitForm = (data) => {
   formData = { ...formData, ...data }
-  fetch(`${config.BASE_API_URL}/submission/`, {
+  fetch(`${config.COMMUNITY_API_URL}/submission/`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
