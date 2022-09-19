@@ -25,14 +25,14 @@ const route = useRoute()
 const user_id = route.params.id
 
 const { data: memberData, pending: pendingMember } = await useFetch(
-  `${config.BASE_API_URL}/member/${user_id}`
+  `${config.COMMUNITY_API_URL}/member/${user_id}`
 )
 
 const { data: memberExperience, pending: pendingExperience } = await useFetch(
-  `${config.BASE_API_URL}/experience/${user_id}`
+  `${config.COMMUNITY_API_URL}/experience/${user_id}`
 )
 
 const { data: memberEducation, pending: pendingEducation } = await useFetch(
-  `${config.BASE_API_URL}/education/${user_id}`
+  `${config.COMMUNITY_API_URL}/education/${user_id}`
 )
 </script>
