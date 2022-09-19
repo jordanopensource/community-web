@@ -7,7 +7,7 @@
   <div v-else>
     <p>No Members found</p>
   </div>
-  <MembersPaginationBar
+  <PaginationBar
     :currentPage="state.page"
     :totalPages="state.metaData.totalPages"
     @switchPage="(newPage) => getMembers((state.page = newPage))"
