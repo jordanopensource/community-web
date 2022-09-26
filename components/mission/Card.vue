@@ -233,7 +233,7 @@ hr {
   height: 1.5rem;
 }
 
-.profilepic {
+.memberAvatar {
   max-width: 50px;
   border-radius: 15%;
   margin-top: 0.5rem;
