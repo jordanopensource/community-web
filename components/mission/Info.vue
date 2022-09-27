@@ -68,33 +68,43 @@
     <div class="wrapper">
       <div class="info">
         <p class="description">
-          JOSA pushes for more transparency in government through the release of
-          open government data, improving access to government information, and
-          releasing data and content under an open government license. We
-          believe an open government improves accountability and is a driver to
-          economic growth.
+          {{ props.mission.description }}
         </p>
-        <img
+        <!-- <img
           class="missionImage"
           src="https://josa-api.fra1.digitaloceanspaces.com/portal/bots_new_34369aabb5.svg"
-        />
+        /> -->
       </div>
       <div id="two">
         <div class="personel">
           <h5>Owner</h5>
           <img
             class="memberAvatar"
-            src="https://avatars.githubusercontent.com/u/7326249?v=4"
+            :src="
+              props.mission.assigned.avatar_url
+                ? props.mission.assigned.avatar_url
+                : placeHolderImages.avatar
+            "
           />
-          <h3 class="memberName">Issa Mahasneh</h3>
+          <h3 class="memberName">
+            {{ props.mission.owner.first_name_en }}
+            {{ props.mission.owner.last_name_en }}
+          </h3>
           <br /><br />
           <h5>Assigned to</h5>
           <!-- <div class="flex gap-x-4 items-center"> -->
           <img
             class="memberAvatar"
-            src="https://avatars.githubusercontent.com/u/79845228?v=4"
+            :src="
+              props.mission.assigned.avatar_url
+                ? props.mission.assigned.avatar_url
+                : placeHolderImages.avatar
+            "
           />
-          <h3 class="mamberName">Marina Alsahawneh</h3>
+          <h3 class="memberName">
+            {{ props.mission.assigned.first_name_en }}
+            {{ props.mission.assigned.last_name_en }}
+          </h3>
           <!-- </div> -->
         </div>
       </div>
@@ -129,7 +139,10 @@
   </div>
 </template>
 <script setup>
-const avatarPlaceholder = '/images/placeholders/avatar.png'
+const placeHolderImages = {
+  cover: '/images/placeholders/729x164.png',
+  avatar: '/images/placeholders/avatar.png',
+}
 const props = defineProps({
   mission: {
     type: Object,
