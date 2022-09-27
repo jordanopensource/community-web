@@ -28,7 +28,7 @@ const props = defineProps({
 .banner-background {
   @apply bg-slashes;
   @apply bg-repeat;
-  @apply bg-right;
+  @apply bg-right bg-top;
   /* @apply bg-cover; */
 }
 
@@ -41,8 +41,15 @@ const props = defineProps({
   @apply text-josa-black;
 }
 
+/* .banner-header {
+  @apply leading-5 lg:leading-10;
+  @apply text-3xl lg:text-5xl tracking-normal font-normal;
+  @apply inline;
+  @apply pr-4;
+} */
+
 .banner-header {
-  @apply text-3xl lg:text-5xl tracking-wide font-normal;
+  @apply text-4xl;
   @apply inline;
   @apply pr-4;
 }
