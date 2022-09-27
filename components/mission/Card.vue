@@ -1,16 +1,23 @@
 <template>
   <div class="card-container">
-    <div class="p-4 flex gap-x-4">
-      <h3 class="text-2xl lg:text-4xl font-semibold mb-2">
-        <NuxtLink :to="`/mission/${props.mission.id}`" target="_blank">
-          {{ props.mission.title }}
-        </NuxtLink>
-      </h3>
-      <span
-        class="badge"
-        :class="props.mission.assignedId ? 'assigned' : 'open'"
-        >{{ props.mission.assignedId ? 'Assigned' : 'Open' }}</span
-      >
+    <div class="px-6 py-5">
+      <div>
+        <span class="text-josa-blue text-xl">
+          {{ props.mission.category.title }}
+        </span>
+      </div>
+      <div class="flex gap-x-4">
+        <h3 class="text-2xl lg:text-4xl font-semibold mb-2">
+          <NuxtLink :to="`/mission/${props.mission.id}`" target="_blank">
+            {{ props.mission.title }}
+          </NuxtLink>
+        </h3>
+        <span
+          class="badge"
+          :class="props.mission.assignedId ? 'assigned' : 'open'"
+          >{{ props.mission.assignedId ? 'Assigned' : 'Open' }}</span
+        >
+      </div>
     </div>
     <div class="mission-summary">
       <div class="flex flex-col gap-y-4">

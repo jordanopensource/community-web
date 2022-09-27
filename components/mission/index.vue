@@ -45,32 +45,27 @@ const props = defineProps({
 })
 
 const getMissions = async (currentPage = state.page) => {
-  console.log(
-    `${config.COMMUNITY_API_URL}/contribution/page/${currentPage}?assigned=${state.assignedMission}`
-  )
-  fetch(
-    `${config.COMMUNITY_API_URL}/contribution/page/${currentPage}?assigned=${state.assignedMission}`
-  )
+  fetch(`${config.COMMUNITY_API_URL}/mission/page/${currentPage}`)
     .then((response) => response.json())
     .then((data) => {
-      state.missions = Object.create(data.items)
-      state.metaData = Object.create(data.meta)
+      state.missions = Object.create(data.paginate.items)
+      state.metaData = Object.create(data.paginate.meta)
     })
 }
 
 const getOrderedMissions = async (query) => {
   fetch(
-    `${config.COMMUNITY_API_URL}/contribution/page/${state.page}?assigned=${state.assignedMission}&order_by=${query.orderBy}&order_criteria=${query.criteria}`
+    `${config.COMMUNITY_API_URL}/mission/page/${state.page}?assigned=${state.assignedMission}&order_by=${query.orderBy}&order_criteria=${query.criteria}`
   )
     .then((response) => response.json())
     .then((data) => {
-      state.missions = Object.create(data.items)
-      state.metaData = Object.create(data.meta)
+      state.missions = Object.create(data.paginate.items)
+      state.metaData = Object.create(data.paginate.meta)
     })
 }
 
 const searchMission = async (query) => {
-  fetch(`${config.COMMUNITY_API_URL}/contribution/search?q=${query}`)
+  fetch(`${config.COMMUNITY_API_URL}/mission/search?q=${query}`)
     .then((response) => response.json())
     .then((data) => (state.missions = Object.create(data)))
 }
