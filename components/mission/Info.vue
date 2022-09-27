@@ -5,7 +5,7 @@
     </div>
     <div class="p-4 flex gap-x-4">
       <h3 class="text-2xl lg:text-4xl font-semibold mb-2">
-        <NuxtLink :to="`/contribute/${props.mission.id}`" target="_blank">
+        <NuxtLink :to="`/mission/${props.mission.id}`" target="_blank">
           Create a custom error page for community web
         </NuxtLink>
       </h3>
