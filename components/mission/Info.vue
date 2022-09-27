@@ -1,13 +1,11 @@
 <template>
   <div class="card-container">
     <div>
-      <h5 class="breadcrumb">Software Development</h5>
+      <h5 class="breadcrumb">{{ props.mission.category.title }}</h5>
     </div>
     <div class="p-4 flex gap-x-4">
       <h3 class="text-2xl lg:text-4xl font-semibold mb-2">
-        <NuxtLink :to="`/mission/${props.mission.id}`" target="_blank">
-          Create a custom error page for community web
-        </NuxtLink>
+        {{ props.mission.title }}
       </h3>
       <span
         class="badge"
@@ -25,9 +23,8 @@
                 d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1M15.08 16L12 14.15L8.93 16L9.74 12.5L7.03 10.16L10.61 9.85L12 6.55L13.39 9.84L16.97 10.15L14.26 12.5L15.08 16Z"
               />
             </svg>
-            Points:
           </span>
-          70
+          {{ props.mission.points }}
         </p>
         <p class="flex flex-row gap-x-2 items-end">
           <span class="prefix"
@@ -39,7 +36,7 @@
             </svg>
             Due Date:
           </span>
-          29/09/2022
+          {{ formatDate(props.mission.due_date) }}
         </p>
       </div>
       <p class="flex flex-row gap-x-2">
@@ -92,11 +89,13 @@
           <h3 class="memberName">Issa Mahasneh</h3>
           <br /><br />
           <h5>Assigned to</h5>
+          <!-- <div class="flex gap-x-4 items-center"> -->
           <img
             class="memberAvatar"
             src="https://avatars.githubusercontent.com/u/79845228?v=4"
           />
           <h3 class="mamberName">Marina Alsahawneh</h3>
+          <!-- </div> -->
         </div>
       </div>
     </div>
