@@ -22,41 +22,9 @@
       <div class="input-control form-wrapper" v-if="state.isOpen">
         <div class="w-full h-fit flex flex-col my-8">
             <div>
-                <p>Software Development</p>
-                <p>Research and Analysis</p>
-                <p>Translation</p>
-            </div> 
-        </div>
-      </div>
-      <div class="flex flex-row justify-between border-b-2 border-dotted pb-3" v-if="state.isOpen">
-        <h3 class="text-xl lg:text-2xl">Difficulty Level</h3>
-      </div>
-      <div class="input-control form-wrapper" v-if="state.isOpen">
-        <div class="w-full h-fit flex flex-col my-8">
-            <div>
-                <p>Beginner</p>
-                <p>Intermediate</p>
-                <p>Advanced</p>
-            </div> 
-        </div>
-      </div>
-      <div class="flex flex-row justify-between border-b-2 border-dotted pb-3" v-if="state.isOpen">
-        <h3 class="text-xl lg:text-2xl">Points</h3>
-      </div>
-      <div class="input-control form-wrapper" v-if="state.isOpen">
-        <div class="w-full h-fit flex flex-col my-8">
-            <div>
-                <p>More than 1000</p>
-            </div> 
-        </div>
-      </div>
-      <div class="flex flex-row justify-between border-b-2 border-dotted pb-3" v-if="state.isOpen">
-        <h3 class="text-xl lg:text-2xl">Due date</h3>
-      </div>
-      <div class="input-control form-wrapper" v-if="state.isOpen">
-        <div class="w-full h-fit flex flex-col my-8">
-            <div>
-                <p>After 3 weeks</p>
+                <button class="block pb-2">Software Development <span class="number">9</span></button> 
+                <button class="block pb-2">Research and Analysis <span class="number">12</span></button>
+                <button class="block pb-2">Translation <span class="number">3</span></button>
             </div> 
         </div>
       </div>
@@ -88,6 +56,13 @@
     transition-duration: 0.5s;
     transform: rotate(0deg);
     @apply cursor-pointer  outline-none lg:hidden;
+  }
+
+  .number {
+    @apply px-2 py-0;
+    background-color: #e9ecee;
+    color: #8b8d8d;
+    border-radius: 20%;
   }
   </style>
   
