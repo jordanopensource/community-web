@@ -7,6 +7,9 @@
       <li class="py-4 border-gray">
         <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
       </li>
+      <li class="py-4 border-gray">
+        <NuxtLink to="/mission" class="nav-link">Contribute</NuxtLink>
+      </li>
       <li class="py-4">
         <NuxtLink id="login" to="/login" class="nav-link">Sign In</NuxtLink>
       </li>

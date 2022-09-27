@@ -24,6 +24,9 @@
               <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
             </li>
             <li class="menu-item">
+              <NuxtLink to="/mission" class="nav-link">Contribute</NuxtLink>
+            </li>
+            <li class="menu-item">
               <NuxtLink id="login" to="/login" class="nav-link"
                 >Sign In</NuxtLink
               >
