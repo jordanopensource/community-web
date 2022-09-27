@@ -1,5 +1,5 @@
 <template>
-    <div>
-        Under Construction...
+    <div class="category-container">
+
     </div>
 </template>
