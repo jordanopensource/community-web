@@ -9,6 +9,9 @@
           @sortMissions="(orderBy) => (state.sortBy = orderBy)"
         />
       </div>
+      <div>
+        <MissionCategoryFilter />
+      </div>
       <div class="grow">
         <Mission
           :mission="state.searchMission"
@@ -21,7 +24,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive } from 'vue';
 
 const state = reactive({
   sortBy: '',
@@ -29,4 +32,3 @@ const state = reactive({
   isAssignedMission: false,
 })
 </script>
-f
