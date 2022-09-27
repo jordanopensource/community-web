@@ -8,8 +8,6 @@
           @filterMissions="(isChecked) => (state.isAssignedMission = isChecked)"
           @sortMissions="(orderBy) => (state.sortBy = orderBy)"
         />
-      </div>
-      <div>
         <MissionCategoryFilter />
       </div>
       <div class="grow">
