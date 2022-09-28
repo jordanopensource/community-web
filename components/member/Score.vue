@@ -2,15 +2,22 @@
   <div class="member-card">
     <div>
       <p class="header">Score</p>
-      <p>2344</p>
+      <p>{{ props.member.points }}</p>
     </div>
-    <div>
+    <div v-if="props.member.last_online">
       <p class="header">Last seen Online</p>
       <p>2 weeks ago</p>
     </div>
   </div>
 </template>
-
+<script setup>
+const props = defineProps({
+  member: {
+    type: Object,
+    default: {},
+  },
+})
+</script>
 <style lang="postcss" scoped>
 .member-card {
   @apply flex flex-row lg:flex-col;
