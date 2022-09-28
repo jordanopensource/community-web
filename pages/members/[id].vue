@@ -14,7 +14,10 @@
           :experience="memberData.experience"
           :education="memberData.education"
         />
-        <MemberContribution />
+        <MemberContribution
+          v-if="!pendingMember"
+          :contributions="memberData.contributions"
+        />
       </div>
     </div>
   </div>

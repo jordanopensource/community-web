@@ -6,28 +6,36 @@
     <div class="contribution">
       <h3 class="heading">JOSA Contributions</h3>
       <ul>
-        <li>
+        <li v-for="(contribution, index) in props.contributions" :key="index">
           <div>
-            <h4 class="title">Contribution Description</h4>
-            <h5 class="sub-title">Role</h5>
+            <h4 class="title">{{ contribution.description }}</h4>
+            <h5 class="sub-title">{{ contribution.role }}</h5>
           </div>
           <div class="date-container">
-            <p>February 2020</p>
-          </div>
-        </li>
-        <li>
-          <div>
-            <h4 class="title">JOSA Tech Talks - Image processing</h4>
-            <h5 class="sub-title">Speaker</h5>
-          </div>
-          <div class="date-container">
-            <p>April 2018</p>
+            <p>{{ formatDate(contribution.finished_at) }}</p>
           </div>
         </li>
       </ul>
     </div>
   </div>
 </template>
+<script setup>
+const props = defineProps({
+  contributions: {
+    type: Array,
+    default: [],
+  },
+})
+
+const formatDate = (date) => {
+  const newDate = new Date(date)
+  const [month, year] = [
+    newDate.toLocaleString('default', { month: 'long' }),
+    newDate.getFullYear(),
+  ]
+  return `${month} ${year}`
+}
+</script>
 <style lang="postcss" scoped>
 .details-container {
   @apply bg-white;
