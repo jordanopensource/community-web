@@ -11,7 +11,7 @@
           : 'Lorem Ipsum is what the good animal did, and when they were safely on the other side, and had walked on a little while, the woods grew more and more familiar to them.'
       }}
     </p>
-    <div class="skills">
+    <div v-if="props.skills.length" class="skills">
       <p class="heading">Skills</p>
       <ul>
         <li v-for="(skill, index) in memberSkills" :key="`skill-${index}`">
@@ -22,10 +22,14 @@
   </div>
 </template>
 <script setup>
-const memberSkills = ['Linux Oper  ating System', 'File System']
+const memberSkills = ['Linux Operating System', 'File System']
 
 const props = defineProps({
   member: {
+    type: Object,
+    default: {},
+  },
+  skills: {
     type: Object,
     default: {},
   },
