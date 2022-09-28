@@ -7,7 +7,11 @@
             width="100"
             height="100"
             alt="bot-lightbulb"
-            :src="props.member.avatar ? props.member.avatar : avatarPlaceholder"
+            :src="
+              props.member.avatar_url
+                ? props.member.avatar_url
+                : avatarPlaceholder
+            "
             class="rounded-lg w-full"
             loading="lazy"
           />
@@ -15,7 +19,7 @@
         <div>
           <h3 class="text-xl lg:text-3xl font-semibold mb-2">
             <NuxtLink :to="`/members/${props.member.id}`" target="_blank">
-              {{ props.member.first_name }} {{ props.member.last_name }}
+              {{ props.member.first_name_en }} {{ props.member.last_name_en }}
             </NuxtLink>
           </h3>
           <p>
@@ -29,11 +33,14 @@
       </div>
     </div>
     <div class="member-card">
-      <div class="badge-details">
+      <div v-if="props.member.type > 0" class="badge-details">
         <div class="badge-color"></div>
         <p>JOSA Member</p>
       </div>
-      <div class="border-r-2 border-l-2 border-josa-warm-grey-light px-4">
+      <div
+        v-if="props.member.type > 0"
+        class="border-r-2 border-l-2 border-josa-warm-grey-light px-4"
+      >
         <p><span>Member ID:</span> {{ props.member.member_id }}</p>
       </div>
       <div>

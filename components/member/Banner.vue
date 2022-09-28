@@ -4,7 +4,11 @@
       <img
         class="cover"
         alt="cover"
-        :src="props.member.cover ? props.member.cover : placeHolderImages.cover"
+        :src="
+          props.member.cover_url
+            ? props.member.cover_url
+            : placeHolderImages.cover
+        "
       />
       <div class="invisible-white-space"></div>
       <div
@@ -15,13 +19,15 @@
           class="avatar"
           alt="avatar"
           :src="
-            props.member.avatar ? props.member.avatar : placeHolderImages.avatar
+            props.member.avatar_url
+              ? props.member.avatar_url
+              : placeHolderImages.avatar
           "
         />
         <div class="general-info">
           <div class="flex flex-col items-start">
             <h1 class="member-name">
-              {{ props.member.first_name }} {{ props.member.last_name }}
+              {{ props.member.first_name_en }} {{ props.member.last_name_en }}
             </h1>
             <h2 class="member-headline">
               {{

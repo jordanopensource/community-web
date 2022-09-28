@@ -19,7 +19,7 @@ import { watch } from 'vue'
 const config = useRuntimeConfig()
 const state = reactive({
   passedName: '',
-  disabledMember: false,
+  noneJosaMembers: false,
   order_by: '',
   members: {},
   metaData: {},
@@ -43,7 +43,7 @@ const props = defineProps({
 
 const getMembers = async (currentPage = state.page) => {
   fetch(
-    `${config.COMMUNITY_API_URL}/member/page/${currentPage}?disabled=${state.disabledMember}`
+    `${config.COMMUNITY_API_URL}/member/page/${currentPage}?is_none_josa_member=${state.noneJosaMembers}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -54,7 +54,7 @@ const getMembers = async (currentPage = state.page) => {
 
 const getOrderedMembers = async (query) => {
   fetch(
-    `${config.COMMUNITY_API_URL}/member/page/${state.page}?disabled=${state.disabledMember}&order_by=${query.orderBy}&order_criteria=${query.criteria}`
+    `${config.COMMUNITY_API_URL}/member/page/${state.page}?order_by=${query.orderBy}&order_criteria=${query.criteria}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -85,7 +85,7 @@ watch(
 
 // filter none members
 watch(
-  () => (state.disabledMember = props.isChecked),
+  () => (state.noneJosaMembers = props.isChecked),
   async () => {
     await getMembers()
   }

@@ -1,20 +1,23 @@
 <template>
   <Banner bannerText="JOSA Members" />
   <div class="container">
-    <MemberBanner v-if="!pendingMember" :member="memberData" />
+    <MemberBanner v-if="!pendingMember" :member="memberData.member" />
     <div class="flex gap-x-4">
       <div class="hidden lg:block">
-        <MemberCard v-if="!pendingMember" :member="memberData" />
-        <MemberScore />
+        <MemberCard v-if="!pendingMember" :member="memberData.member" />
+        <MemberScore v-if="!pendingMember" :member="memberData.member" />
       </div>
       <div class="flex flex-col w-full">
-        <MemberDetails v-if="!pendingMember" :member="memberData" />
+        <MemberDetails v-if="!pendingMember" :member="memberData.member" />
         <MemberExperience
-          v-if="memberExperience.length || memberEducation.length"
-          :experience="memberExperience"
-          :education="memberEducation"
+          v-if="memberData.experience.length || memberData.education.length"
+          :experience="memberData.experience"
+          :education="memberData.education"
         />
-        <MemberContribution />
+        <MemberContribution
+          v-if="!pendingMember"
+          :contributions="memberData.contributions"
+        />
       </div>
     </div>
   </div>
@@ -26,13 +29,5 @@ const user_id = route.params.id
 
 const { data: memberData, pending: pendingMember } = await useFetch(
   `${config.COMMUNITY_API_URL}/member/${user_id}`
-)
-
-const { data: memberExperience, pending: pendingExperience } = await useFetch(
-  `${config.COMMUNITY_API_URL}/experience/${user_id}`
-)
-
-const { data: memberEducation, pending: pendingEducation } = await useFetch(
-  `${config.COMMUNITY_API_URL}/education/${user_id}`
 )
 </script>
