@@ -1,10 +1,13 @@
 <template>
   <div class="member-card">
-    <div class="badge-details">
+    <div
+      v-if="props.member.member_id && props.member.type !== 0"
+      class="badge-details"
+    >
       <div class="badge-color"></div>
       <p class="header">JOSA Member</p>
     </div>
-    <div>
+    <div v-if="props.member.member_id && props.member.type !== 0">
       <p class="header">Member ID</p>
       <p>{{ props.member.member_id }}</p>
     </div>
