@@ -30,11 +30,23 @@
         <div
           v-for="(category, index) in props.categories"
           :key="`cat-${index}`"
+          class="flex items-start gap-x-4 cursor-pointer"
         >
-          <button class="block pb-2">
+          <button
+            @click="() => onCategoryClick(category.id)"
+            class="block pb-2"
+          >
             {{ category.title }}
             <!-- <span class="number">9</span> -->
           </button>
+          <span
+            @click="() => onCategoryClick('', false)"
+            v-if="
+              state.categorySelected && state.selectedCategoryId === category.id
+            "
+            class="clear"
+            >x</span
+          >
         </div>
       </div>
     </div>
@@ -111,6 +123,8 @@ import { reactive } from 'vue'
 
 const state = reactive({
   isOpen: true,
+  categorySelected: false,
+  selectedCategoryId: '',
 })
 
 const props = defineProps({
@@ -119,6 +133,14 @@ const props = defineProps({
     default: [],
   },
 })
+
+const emit = defineEmits(['filterCategory'])
+
+const onCategoryClick = (categoryId, isSelected = true) => {
+  state.categorySelected = isSelected
+  state.selectedCategoryId = categoryId
+  emit('filterCategory', categoryId)
+}
 </script>
 
 <style lang="postcss" scoped>
@@ -145,6 +167,13 @@ const props = defineProps({
   @apply px-1 py-0;
   background-color: #e9ecee;
   color: #8b8d8d;
+  border-radius: 20%;
+  font-size: 0.7rem;
+}
+
+.clear {
+  @apply px-1 py-0;
+  @apply text-red-800 bg-red-400;
   border-radius: 20%;
   font-size: 0.7rem;
 }

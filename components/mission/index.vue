@@ -27,6 +27,7 @@ const state = reactive({
   missions: {},
   metaData: {},
   page: 1,
+  selectedCategory: '',
 })
 
 const props = defineProps({
@@ -42,12 +43,18 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  selectedMissionCategory: {
+    type: String,
+    default: '',
+  },
 })
 
 const emit = defineEmits(['setCategories'])
 
 const getMissions = async (currentPage = state.page) => {
-  fetch(`${config.COMMUNITY_API_URL}/mission/page/${currentPage}`)
+  fetch(
+    `${config.COMMUNITY_API_URL}/mission/page/${currentPage}?categoryId=${props.selectedMissionCategory}`
+  )
     .then((response) => response.json())
     .then((data) => {
       state.missions = Object.create(data.paginate?.items)
@@ -91,7 +98,14 @@ watch(
 watch(
   () => (state.assignedMission = props.isChecked),
   async () => {
-    console.log(props.isChecked)
+    await getMissions()
+  }
+)
+
+// filter missions by category
+watch(
+  () => (state.selectedCategory = props.selectedMissionCategory),
+  async () => {
     await getMissions()
   }
 )
