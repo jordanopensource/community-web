@@ -1,0 +1,19 @@
+default_stages: [commit]
+repos:
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v2.32.2
+    hooks:
+      - id: commitizen
+  - repo: https://github.com/jordanopensource/pre-commit-hooks
+    rev: v0.2.2
+    hooks:
+      - id: validate-eslint
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: no-commit-to-branch
+        name: check branch naming convention
+        args:
+          ["--pattern", '^(?!((fix|feature|patch|task)\/[a-zA-Z0-9\-]+)$).*']
