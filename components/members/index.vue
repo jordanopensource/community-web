@@ -47,8 +47,8 @@ const getMembers = async (currentPage = state.page) => {
   )
     .then((response) => response.json())
     .then((data) => {
-      state.members = Object.create(data.items)
-      state.metaData = Object.create(data.meta)
+      state.members = Object.create(data?.items)
+      state.metaData = Object.create(data?.meta)
     })
 }
 
@@ -58,8 +58,8 @@ const getOrderedMembers = async (query) => {
   )
     .then((response) => response.json())
     .then((data) => {
-      state.members = Object.create(data.items)
-      state.metaData = Object.create(data.meta)
+      state.members = Object.create(data?.items)
+      state.metaData = Object.create(data?.meta)
     })
 }
 

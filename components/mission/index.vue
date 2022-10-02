@@ -48,8 +48,8 @@ const getMissions = async (currentPage = state.page) => {
   fetch(`${config.COMMUNITY_API_URL}/missions/page/${currentPage}`)
     .then((response) => response.json())
     .then((data) => {
-      state.missions = Object.create(data.paginate.items)
-      state.metaData = Object.create(data.paginate.meta)
+      state.missions = Object.create(data.paginate?.items)
+      state.metaData = Object.create(data.paginate?.meta)
     })
 }
 
@@ -59,8 +59,8 @@ const getOrderedMissions = async (query) => {
   )
     .then((response) => response.json())
     .then((data) => {
-      state.missions = Object.create(data.paginate.items)
-      state.metaData = Object.create(data.paginate.meta)
+      state.missions = Object.create(data.paginate?.items)
+      state.metaData = Object.create(data.paginate?.meta)
     })
 }
 
