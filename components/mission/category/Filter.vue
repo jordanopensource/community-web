@@ -1,6 +1,9 @@
 <template>
   <div class="category-container">
-    <div class="flex flex-row justify-between border-b-2 border-dotted pb-3">
+    <div
+      v-if="props.categories.length"
+      class="flex flex-row justify-between border-b-2 border-dotted pb-3"
+    >
       <h3 class="text-xl lg:text-2xl">Category</h3>
 
       <button
@@ -19,17 +22,18 @@
         </svg>
       </button>
     </div>
-    <div class="input-control form-wrapper" v-if="state.isOpen">
+    <div
+      class="input-control form-wrapper"
+      v-if="state.isOpen && props.categories.length"
+    >
       <div class="w-full h-fit flex flex-col my-8">
-        <div>
+        <div
+          v-for="(category, index) in props.categories"
+          :key="`cat-${index}`"
+        >
           <button class="block pb-2">
-            Software Development <span class="number">9</span>
-          </button>
-          <button class="block pb-2">
-            Research and Analysis <span class="number">12</span>
-          </button>
-          <button class="block pb-2">
-            Translation <span class="number">3</span>
+            {{ category.title }}
+            <!-- <span class="number">9</span> -->
           </button>
         </div>
       </div>
@@ -104,6 +108,13 @@ import { reactive } from 'vue'
 
 const state = reactive({
   isOpen: true,
+})
+
+const props = defineProps({
+  categories: {
+    type: Array,
+    default: [],
+  },
 })
 </script>
 

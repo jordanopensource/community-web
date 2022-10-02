@@ -44,12 +44,15 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['setCategories'])
+
 const getMissions = async (currentPage = state.page) => {
   fetch(`${config.COMMUNITY_API_URL}/mission/page/${currentPage}`)
     .then((response) => response.json())
     .then((data) => {
       state.missions = Object.create(data.paginate?.items)
       state.metaData = Object.create(data.paginate?.meta)
+      emit('setCategories', data?.categories)
     })
 }
 
