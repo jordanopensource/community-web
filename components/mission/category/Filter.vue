@@ -54,7 +54,8 @@
               <span class="dot"></span>
             </span>
             Beginner
-            <span class="number"> 5 </span>
+
+            <!-- <span class="number"> 5 </span> -->
           </button>
           <button class="prefix items-baseline block pb-2">
             <span class="level-container">
@@ -62,7 +63,8 @@
               <span class="dot selected"></span>
               <span class="dot"></span>
             </span>
-            Intermediate <span class="number">10</span>
+            Intermediate
+            <!-- <span class="number">10</span> -->
           </button>
           <button class="prefix items-baseline block pb-2">
             <span class="level-container">
@@ -70,7 +72,8 @@
               <span class="dot selected"></span>
               <span class="dot selected"></span>
             </span>
-            Advanced <span class="number">13</span>
+            Advanced
+            <!-- <span class="number">13</span> -->
           </button>
         </div>
       </div>
