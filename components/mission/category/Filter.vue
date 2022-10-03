@@ -103,7 +103,11 @@
     <div class="input-control form-wrapper" v-if="state.isOpen">
       <div class="w-full h-fit flex flex-col my-8">
         <div>
-          <p>More than 1000</p>
+          <FormAppSlider
+            @emitRange="(points) => onSliderChange('points', points)"
+            :min="100"
+            :max="2000"
+          />
         </div>
       </div>
     </div>
@@ -116,7 +120,11 @@
     <div class="input-control form-wrapper" v-if="state.isOpen">
       <div class="w-full h-fit flex flex-col my-8">
         <div>
-          <p>After 3 weeks</p>
+          <FormAppSlider
+            @emitRange="(weeks) => onSliderChange('due_date', weeks)"
+            :min="1"
+            :max="4"
+          />
         </div>
       </div>
     </div>
@@ -140,12 +148,16 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['filterMissionBy'])
+const emit = defineEmits(['filterMissionBy', 'filterByPoints'])
 
 const onClick = (key, value, isSelected = true) => {
   state.filterSelected = isSelected
   state.selectedFilter = value
   emit('filterMissionBy', { key, value })
+}
+
+const onSliderChange = (key, value) => {
+  emit('filterByPoints', { key, value })
 }
 </script>
 

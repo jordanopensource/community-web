@@ -13,6 +13,7 @@
           @filterMissionBy="
             (criteria) => (state.selectedMissionCriteria = criteria)
           "
+          @filterByPoints="(points) => (state.selectedMissionCriteria = points)"
         />
       </div>
       <div class="grow">
