@@ -33,17 +33,15 @@
           class="flex items-start gap-x-4 cursor-pointer"
         >
           <button
-            @click="() => onCategoryClick(category.id)"
+            @click="() => onClick('categoryId', category.id)"
             class="block pb-2"
           >
             {{ category.title }}
             <!-- <span class="number">9</span> -->
           </button>
           <span
-            @click="() => onCategoryClick('', false)"
-            v-if="
-              state.categorySelected && state.selectedCategoryId === category.id
-            "
+            @click="() => onClick('', false)"
+            v-if="state.filterSelected && state.selectedFilter === category.id"
             class="clear"
             >x</span
           >
@@ -58,35 +56,41 @@
     </div>
     <div class="input-control form-wrapper" v-if="state.isOpen">
       <div class="w-full h-fit flex flex-col my-8">
-        <div>
-          <button class="prefix items-baseline block pb-2">
+        <div
+          v-for="(level, index) in levels"
+          :key="`level-${index}`"
+          class="flex items-start gap-x-4 cursor-pointer"
+        >
+          <button
+            @click="onClick('level', level.toUpperCase())"
+            class="prefix items-baseline block pb-2"
+          >
             <span class="level-container">
               <span class="dot selected"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
+              <span
+                :class="
+                  (level === 'Intermediate' || level === 'Advanced') &&
+                  'selected'
+                "
+                class="dot"
+              ></span>
+              <span
+                :class="level === 'Advanced' && 'selected'"
+                class="dot"
+              ></span>
             </span>
-            Beginner
-
+            {{ level }}
             <!-- <span class="number"> 5 </span> -->
           </button>
-          <button class="prefix items-baseline block pb-2">
-            <span class="level-container">
-              <span class="dot selected"></span>
-              <span class="dot selected"></span>
-              <span class="dot"></span>
-            </span>
-            Intermediate
-            <!-- <span class="number">10</span> -->
-          </button>
-          <button class="prefix items-baseline block pb-2">
-            <span class="level-container">
-              <span class="dot selected"></span>
-              <span class="dot selected"></span>
-              <span class="dot selected"></span>
-            </span>
-            Advanced
-            <!-- <span class="number">13</span> -->
-          </button>
+          <span
+            @click="() => onClick('', false)"
+            v-if="
+              state.filterSelected &&
+              state.selectedFilter === level.toUpperCase()
+            "
+            class="clear"
+            >x</span
+          >
         </div>
       </div>
     </div>
@@ -121,10 +125,12 @@
 <script setup>
 import { reactive } from 'vue'
 
+const levels = ['Beginner', 'Intermediate', 'Advanced']
+
 const state = reactive({
   isOpen: true,
-  categorySelected: false,
-  selectedCategoryId: '',
+  filterSelected: false,
+  selectedFilter: '',
 })
 
 const props = defineProps({
@@ -134,12 +140,12 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['filterCategory'])
+const emit = defineEmits(['filterMissionBy'])
 
-const onCategoryClick = (categoryId, isSelected = true) => {
-  state.categorySelected = isSelected
-  state.selectedCategoryId = categoryId
-  emit('filterCategory', categoryId)
+const onClick = (key, value, isSelected = true) => {
+  state.filterSelected = isSelected
+  state.selectedFilter = value
+  emit('filterMissionBy', { key, value })
 }
 </script>
 

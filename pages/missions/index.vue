@@ -10,8 +10,8 @@
         />
         <MissionCategoryFilter
           :categories="state.categories"
-          @filterCategory="
-            (category) => (state.selectedMissionCategory = category)
+          @filterMissionBy="
+            (criteria) => (state.selectedMissionCriteria = criteria)
           "
         />
       </div>
@@ -20,7 +20,7 @@
           :mission="state.searchMission"
           :isChecked="state.isAssignedMission"
           :sortBy="state.sortBy"
-          :selectedMissionCategory="state.selectedMissionCategory"
+          :selectedMissionCriteria="state.selectedMissionCriteria"
           @setCategories="(categories) => (state.categories = categories)"
         />
       </div>
@@ -36,8 +36,6 @@ const state = reactive({
   searchMission: '',
   isAssignedMission: false,
   categories: [],
-  selectedMissionCategory: '',
-  selectedMissionDifficulty: '',
-  selectedMissionPoints: '',
+  selectedMissionCriteria: '',
 })
 </script>
