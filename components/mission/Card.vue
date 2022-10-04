@@ -8,7 +8,7 @@
       </div>
       <div class="flex gap-x-4">
         <h3 class="text-2xl lg:text-4xl font-semibold mb-2">
-          <NuxtLink :to="`/mission/${props.mission.id}`" target="_blank">
+          <NuxtLink :to="`/missions/${props.mission.id}`" target="_blank">
             {{ props.mission.title }}
           </NuxtLink>
         </h3>

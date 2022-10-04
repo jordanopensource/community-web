@@ -1,6 +1,9 @@
 <template>
   <div class="category-container">
-    <div class="flex flex-row justify-between border-b-2 border-dotted pb-3">
+    <div
+      v-if="props.categories.length"
+      class="flex flex-row justify-between border-b-2 border-dotted pb-3"
+    >
       <h3 class="text-xl lg:text-2xl">Category</h3>
 
       <button
@@ -19,18 +22,29 @@
         </svg>
       </button>
     </div>
-    <div class="input-control form-wrapper" v-if="state.isOpen">
+    <div
+      class="input-control form-wrapper"
+      v-if="state.isOpen && props.categories.length"
+    >
       <div class="w-full h-fit flex flex-col my-8">
-        <div>
-          <button class="block pb-2">
-            Software Development <span class="number">9</span>
+        <div
+          v-for="(category, index) in props.categories"
+          :key="`cat-${index}`"
+          class="flex items-start gap-x-4 cursor-pointer"
+        >
+          <button
+            @click="() => onClick('categoryId', category.id)"
+            class="block pb-2"
+          >
+            {{ category.title }}
+            <!-- <span class="number">9</span> -->
           </button>
-          <button class="block pb-2">
-            Research and Analysis <span class="number">12</span>
-          </button>
-          <button class="block pb-2">
-            Translation <span class="number">3</span>
-          </button>
+          <span
+            @click="() => onClick('', false)"
+            v-if="state.filterSelected && state.selectedFilter === category.id"
+            class="clear"
+            >x</span
+          >
         </div>
       </div>
     </div>
@@ -42,32 +56,41 @@
     </div>
     <div class="input-control form-wrapper" v-if="state.isOpen">
       <div class="w-full h-fit flex flex-col my-8">
-        <div>
-          <button class="prefix items-baseline block pb-2">
+        <div
+          v-for="(level, index) in levels"
+          :key="`level-${index}`"
+          class="flex items-start gap-x-4 cursor-pointer"
+        >
+          <button
+            @click="onClick('level', level.toUpperCase())"
+            class="prefix items-baseline block pb-2"
+          >
             <span class="level-container">
               <span class="dot selected"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
+              <span
+                :class="
+                  (level === 'Intermediate' || level === 'Advanced') &&
+                  'selected'
+                "
+                class="dot"
+              ></span>
+              <span
+                :class="level === 'Advanced' && 'selected'"
+                class="dot"
+              ></span>
             </span>
-            Beginner
-            <span class="number"> 5 </span>
+            {{ level }}
+            <!-- <span class="number"> 5 </span> -->
           </button>
-          <button class="prefix items-baseline block pb-2">
-            <span class="level-container">
-              <span class="dot selected"></span>
-              <span class="dot selected"></span>
-              <span class="dot"></span>
-            </span>
-            Intermediate <span class="number">10</span>
-          </button>
-          <button class="prefix items-baseline block pb-2">
-            <span class="level-container">
-              <span class="dot selected"></span>
-              <span class="dot selected"></span>
-              <span class="dot selected"></span>
-            </span>
-            Advanced <span class="number">13</span>
-          </button>
+          <span
+            @click="() => onClick('', false)"
+            v-if="
+              state.filterSelected &&
+              state.selectedFilter === level.toUpperCase()
+            "
+            class="clear"
+            >x</span
+          >
         </div>
       </div>
     </div>
@@ -80,7 +103,11 @@
     <div class="input-control form-wrapper" v-if="state.isOpen">
       <div class="w-full h-fit flex flex-col my-8">
         <div>
-          <p>More than 1000</p>
+          <FormAppSlider
+            @emitRange="(points) => onSliderChange('points', points)"
+            :min="100"
+            :max="2000"
+          />
         </div>
       </div>
     </div>
@@ -93,7 +120,11 @@
     <div class="input-control form-wrapper" v-if="state.isOpen">
       <div class="w-full h-fit flex flex-col my-8">
         <div>
-          <p>After 3 weeks</p>
+          <FormAppSlider
+            @emitRange="(weeks) => onSliderChange('due_date', weeks)"
+            :min="1"
+            :max="4"
+          />
         </div>
       </div>
     </div>
@@ -102,9 +133,32 @@
 <script setup>
 import { reactive } from 'vue'
 
+const levels = ['Beginner', 'Intermediate', 'Advanced']
+
 const state = reactive({
   isOpen: true,
+  filterSelected: false,
+  selectedFilter: '',
 })
+
+const props = defineProps({
+  categories: {
+    type: Array,
+    default: [],
+  },
+})
+
+const emit = defineEmits(['filterMissionBy', 'filterByPoints'])
+
+const onClick = (key, value, isSelected = true) => {
+  state.filterSelected = isSelected
+  state.selectedFilter = value
+  emit('filterMissionBy', { key, value })
+}
+
+const onSliderChange = (key, value) => {
+  emit('filterByPoints', { key, value })
+}
 </script>
 
 <style lang="postcss" scoped>
@@ -131,6 +185,13 @@ const state = reactive({
   @apply px-1 py-0;
   background-color: #e9ecee;
   color: #8b8d8d;
+  border-radius: 20%;
+  font-size: 0.7rem;
+}
+
+.clear {
+  @apply px-1 py-0;
+  @apply text-red-800 bg-red-400;
   border-radius: 20%;
   font-size: 0.7rem;
 }

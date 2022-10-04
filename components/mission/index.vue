@@ -27,6 +27,7 @@ const state = reactive({
   missions: {},
   metaData: {},
   page: 1,
+  selectedCriteria: '',
 })
 
 const props = defineProps({
@@ -42,14 +43,23 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  selectedMissionCriteria: {
+    type: String,
+    default: '',
+  },
 })
 
+const emit = defineEmits(['setCategories'])
+
 const getMissions = async (currentPage = state.page) => {
-  fetch(`${config.COMMUNITY_API_URL}/mission/page/${currentPage}`)
+  fetch(
+    `${config.COMMUNITY_API_URL}/mission/page/${currentPage}?${props.selectedMissionCriteria?.key}=${props.selectedMissionCriteria?.value}`
+  )
     .then((response) => response.json())
     .then((data) => {
-      state.missions = Object.create(data.paginate.items)
-      state.metaData = Object.create(data.paginate.meta)
+      state.missions = Object.create(data.paginate?.items)
+      state.metaData = Object.create(data.paginate?.meta)
+      emit('setCategories', data?.categories)
     })
 }
 
@@ -59,8 +69,8 @@ const getOrderedMissions = async (query) => {
   )
     .then((response) => response.json())
     .then((data) => {
-      state.missions = Object.create(data.paginate.items)
-      state.metaData = Object.create(data.paginate.meta)
+      state.missions = Object.create(data.paginate?.items)
+      state.metaData = Object.create(data.paginate?.meta)
     })
 }
 
@@ -88,7 +98,14 @@ watch(
 watch(
   () => (state.assignedMission = props.isChecked),
   async () => {
-    console.log(props.isChecked)
+    await getMissions()
+  }
+)
+
+// filter missions by category
+watch(
+  () => (state.selectedCriteria = props.selectedMissionCriteria),
+  async () => {
     await getMissions()
   }
 )
