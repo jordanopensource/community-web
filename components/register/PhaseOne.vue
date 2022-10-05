@@ -1,11 +1,47 @@
 <template>
   <div class="input-control">
     <form @submit.prevent="onSubmit">
-      <FormAppControlInput v-model:value="form.name_en" :isRequired="true">
-        Full Name (English)
+      <FormAppControlInput
+        v-model:value="form.first_name_en"
+        :isRequired="true"
+      >
+        First Name (English)
       </FormAppControlInput>
-      <FormAppControlInput v-model:value="form.name_ar" :isRequired="true">
-        Full Name (Arabic)
+      <FormAppControlInput
+        v-model:value="form.first_middle_name_en"
+        :isRequired="true"
+      >
+        Second Name (English)
+      </FormAppControlInput>
+      <FormAppControlInput
+        v-model:value="form.second_middle_name_en"
+        :isRequired="true"
+      >
+        Middle Name (English)
+      </FormAppControlInput>
+      <FormAppControlInput v-model:value="form.last_name_en" :isRequired="true">
+        Last Name (English)
+      </FormAppControlInput>
+      <FormAppControlInput
+        v-model:value="form.first_name_ar"
+        :isRequired="true"
+      >
+        First Name (Arabic)
+      </FormAppControlInput>
+      <FormAppControlInput
+        v-model:value="form.first_middle_name_ar"
+        :isRequired="true"
+      >
+        Second Name (Arabic)
+      </FormAppControlInput>
+      <FormAppControlInput
+        v-model:value="form.second_middle_name_ar"
+        :isRequired="true"
+      >
+        Middle Name (Arabic)
+      </FormAppControlInput>
+      <FormAppControlInput v-model:value="form.last_name_ar" :isRequired="true">
+        Last Name (Arabic)
       </FormAppControlInput>
       <FormAppControlInput
         v-model:value="form.phone"
@@ -37,8 +73,14 @@
 import { reactive } from 'vue'
 
 const form = reactive({
-  name_en: '',
-  name_ar: '',
+  first_name_en: '',
+  first_middle_name_en: '',
+  second_middle_name_en: '',
+  last_name_en: '',
+  first_name_ar: '',
+  first_middle_name_ar: '',
+  second_middle_name_ar: '',
+  last_name_ar: '',
   phone: '',
   email: '',
   github: '',
