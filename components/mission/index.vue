@@ -14,6 +14,7 @@
     :currentPage="state.page"
     :totalPages="state.metaData.totalPages"
     @switchPage="(newPage) => getMissions((state.page = newPage))"
+    v-if="state.missions?.length"
   />
 </template>
 <script setup>
@@ -24,7 +25,7 @@ const state = reactive({
   searchedMission: '',
   assignedMission: false,
   order_by: '',
-  missions: {},
+  missions: [],
   metaData: {},
   page: 1,
   selectedCriteria: '',
