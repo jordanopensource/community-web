@@ -58,6 +58,9 @@ const getMissions = async (currentPage = state.page) => {
       state.metaData = Object.create(data.paginate?.meta)
       emit('setCategories', data?.categories)
     })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 const getOrderedMissions = async (query) => {
@@ -69,12 +72,18 @@ const getOrderedMissions = async (query) => {
       state.missions = Object.create(data.paginate?.items)
       state.metaData = Object.create(data.paginate?.meta)
     })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 const searchMission = async (query) => {
   fetch(`${config.COMMUNITY_API_URL}/mission/search?q=${query}`)
     .then((response) => response.json())
     .then((data) => (state.missions = Object.create(data)))
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 await getMissions()

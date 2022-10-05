@@ -50,6 +50,9 @@ const getMembers = async (currentPage = state.page) => {
       state.members = Object.create(data?.items)
       state.metaData = Object.create(data?.meta)
     })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 const getOrderedMembers = async (query) => {
@@ -61,12 +64,18 @@ const getOrderedMembers = async (query) => {
       state.members = Object.create(data?.items)
       state.metaData = Object.create(data?.meta)
     })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 const searchMember = async (query) => {
   fetch(`${config.COMMUNITY_API_URL}/member/search?q=${query}`)
     .then((response) => response.json())
     .then((data) => (state.members = Object.create(data)))
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 await getMembers()
