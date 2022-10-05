@@ -14,8 +14,8 @@
         </h3>
         <span
           class="badge"
-          :class="props.mission.assignedId ? 'assigned' : 'open'"
-          >{{ props.mission.assignedId ? 'Assigned' : 'Open' }}</span
+          :class="props.mission.status === 'ASSIGNED' ? 'assigned' : 'open'"
+          >{{ props.mission.status === 'ASSIGNED' ? 'Assigned' : 'Open' }}</span
         >
       </div>
     </div>

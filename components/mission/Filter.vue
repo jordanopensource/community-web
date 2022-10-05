@@ -82,7 +82,7 @@ const sortItems = [
 const emit = defineEmits(['sortMissions', 'searchMission', 'filterMissions'])
 
 const onCheck = () => {
-  emit('filterMissions', state.isAssignedMission)
+  emit('filterMissions', { key: 'assigned', value: state.isAssignedMission })
 }
 
 const onSubmit = () => {

@@ -5,7 +5,9 @@
       <div class="shrink-0">
         <MissionFilter
           @searchMission="(mission) => (state.searchMission = mission)"
-          @filterMissions="(isChecked) => (state.isAssignedMission = isChecked)"
+          @filterMissions="
+            (isChecked) => (state.selectedMissionCriteria = isChecked)
+          "
           @sortMissions="(orderBy) => (state.sortBy = orderBy)"
         />
         <MissionCategoryFilter
@@ -19,7 +21,6 @@
       <div class="grow">
         <Mission
           :mission="state.searchMission"
-          :isChecked="state.isAssignedMission"
           :sortBy="state.sortBy"
           :selectedMissionCriteria="state.selectedMissionCriteria"
           @setCategories="(categories) => (state.categories = categories)"
@@ -35,7 +36,6 @@ import { reactive } from 'vue'
 const state = reactive({
   sortBy: '',
   searchMission: '',
-  isAssignedMission: false,
   categories: [],
   selectedMissionCriteria: '',
 })
