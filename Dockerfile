@@ -1,5 +1,5 @@
 # set global args
-ARG COMMUNITY_API_URL=https://community.api.dev.josa.ngo/v1 HOST=0.0.0.0 PORT=3000 USER=node
+ARG COMMUNITY_API_URL=https://community.api.dev.josa.ngo/v2 HOST=0.0.0.0 PORT=3000 USER=node
 
 ###########
 # BUILDER #
