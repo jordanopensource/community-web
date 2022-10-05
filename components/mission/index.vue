@@ -35,10 +35,6 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  isChecked: {
-    type: Boolean,
-    default: false,
-  },
   sortBy: {
     type: String,
     default: '',
@@ -91,14 +87,6 @@ watch(
     } else {
       await getMissions()
     }
-  }
-)
-
-// filter none missions
-watch(
-  () => (state.assignedMission = props.isChecked),
-  async () => {
-    await getMissions()
   }
 )
 
