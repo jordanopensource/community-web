@@ -4,9 +4,9 @@
       <div class="badge-color"></div>
       <p class="header">JOSA Member</p>
     </div>
-    <div v-if="props.member.josa_id && props.member.type !== 0">
+    <div v-if="props.member.josa_member_id && props.member.type !== 0">
       <p class="header">Member ID</p>
-      <p># {{ props.member.type }}-{{ props.member.josa_id }}</p>
+      <p># {{ props.member.type }}-{{ props.member.josa_member_id }}</p>
     </div>
     <div>
       <p class="header">Member Since</p>
@@ -26,7 +26,7 @@ const props = defineProps({
     type: Object,
     default: {},
   },
-})
+});
 </script>
 
 <style lang="postcss" scoped>

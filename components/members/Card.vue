@@ -38,12 +38,12 @@
         <p>JOSA Member</p>
       </div>
       <div
-        v-if="props.member.josa_id && props.member.type !== 0"
+        v-if="props.member.josa_member_id && props.member.type !== 0"
         class="border-r-2 border-l-2 border-josa-warm-grey-light px-4"
       >
         <p>
           <span>Member ID:</span> #{{ props.member.type }}-{{
-            props.member.josa_id
+            props.member.josa_member_id
           }}
         </p>
       </div>
@@ -61,13 +61,13 @@
   </div>
 </template>
 <script setup>
-const avatarPlaceholder = '/images/placeholders/avatar.png'
+const avatarPlaceholder = '/images/placeholders/avatar.png';
 const props = defineProps({
   member: {
     type: Object,
     default: {},
   },
-})
+});
 </script>
 <style lang="postcss" scoped>
 .card-container {
