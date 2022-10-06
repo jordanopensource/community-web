@@ -1,7 +1,10 @@
 <template>
   <Banner bannerText="Contribute" />
   <div class="container">
-    <MissionInfo v-if="!pendingMission" :mission="missionData" />
+    <MissionInfo
+      v-if="!pendingMission && missionData?.id"
+      :mission="missionData"
+    />
   </div>
 </template>
 <script setup></script>
@@ -12,6 +15,6 @@ const route = useRoute()
 const MISSION_ID = route.params.id
 
 const { data: missionData, pending: pendingMission } = await useFetch(
-  `${config.COMMUNITY_API_URL}/missions/${MISSION_ID}`
+  `${config.COMMUNITY_API_URL}/mission/${MISSION_ID}`
 )
 </script>
