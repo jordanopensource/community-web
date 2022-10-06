@@ -10,9 +10,9 @@
       <li class="py-4 border-gray">
         <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
       </li>
-      <li class="py-4">
+      <!-- <li class="py-4">
         <NuxtLink id="login" to="/login" class="nav-link">Sign In</NuxtLink>
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>

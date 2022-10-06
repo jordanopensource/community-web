@@ -14,7 +14,11 @@
           <div class="date-container">
             <p>
               {{ formatDate(experience.start_date) }} -
-              {{ formatDate(experience.end_date) }}
+              {{
+                experience.end_date
+                  ? formatDate(experience.end_date)
+                  : 'Current'
+              }}
             </p>
             <!-- <p></p> -->
           </div>

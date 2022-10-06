@@ -1,23 +1,25 @@
 <template>
-  <Banner bannerText="JOSA Members" />
-  <div class="container">
-    <MemberBanner v-if="!pendingMember" :member="memberData.member" />
-    <div class="flex gap-x-4">
-      <div class="hidden lg:block">
-        <MemberCard v-if="!pendingMember" :member="memberData.member" />
-        <MemberScore v-if="!pendingMember" :member="memberData.member" />
-      </div>
-      <div class="flex flex-col w-full">
-        <MemberDetails v-if="!pendingMember" :member="memberData.member" />
-        <MemberExperience
-          v-if="memberData.experience.length || memberData.education.length"
-          :experience="memberData.experience"
-          :education="memberData.education"
-        />
-        <MemberContribution
-          v-if="!pendingMember"
-          :contributions="memberData.contributions"
-        />
+  <div>
+    <Banner bannerText="JOSA Members" />
+    <div class="container">
+      <MemberBanner v-if="!pendingMember" :member="memberData.member" />
+      <div class="flex gap-x-4">
+        <div class="hidden lg:block">
+          <MemberCard v-if="!pendingMember" :member="memberData.member" />
+          <MemberScore v-if="!pendingMember" :member="memberData.member" />
+        </div>
+        <div class="flex flex-col w-full">
+          <MemberDetails v-if="!pendingMember" :member="memberData.member" />
+          <MemberExperience
+            v-if="memberData.experience.length || memberData.education.length"
+            :experience="memberData.experience"
+            :education="memberData.education"
+          />
+          <MemberContribution
+            v-if="!pendingMember && memberData.contributions.length"
+            :contributions="memberData.contributions"
+          />
+        </div>
       </div>
     </div>
   </div>

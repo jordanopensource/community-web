@@ -91,9 +91,9 @@
             {{ props.mission.owner.last_name_en }}
           </h3>
           <br /><br />
-          <h5>Assigned to</h5>
-          <!-- <div class="flex gap-x-4 items-center"> -->
           <div v-if="props.mission.assigned !== null">
+            <h5>Assigned to</h5>
+            <!-- <div class="flex gap-x-4 items-center"> -->
             <img
               class="memberAvatar"
               :src="

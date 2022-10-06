@@ -33,15 +33,19 @@
       </div>
     </div>
     <div class="member-card">
-      <div v-if="props.member.type > 0" class="badge-details">
+      <div v-if="props.member.type !== 0" class="badge-details">
         <div class="badge-color"></div>
         <p>JOSA Member</p>
       </div>
       <div
-        v-if="props.member.type > 0"
+        v-if="props.member.josa_id && props.member.type !== 0"
         class="border-r-2 border-l-2 border-josa-warm-grey-light px-4"
       >
-        <p><span>Member ID:</span> {{ props.member.member_id }}</p>
+        <p>
+          <span>Member ID:</span> #{{ props.member.type }}-{{
+            props.member.josa_id
+          }}
+        </p>
       </div>
       <div>
         <p>

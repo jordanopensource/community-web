@@ -1,15 +1,12 @@
 <template>
   <div class="member-card">
-    <div
-      v-if="props.member.member_id && props.member.type !== 0"
-      class="badge-details"
-    >
+    <div v-if="props.member.type !== 0" class="badge-details">
       <div class="badge-color"></div>
       <p class="header">JOSA Member</p>
     </div>
-    <div v-if="props.member.member_id && props.member.type !== 0">
+    <div v-if="props.member.josa_id && props.member.type !== 0">
       <p class="header">Member ID</p>
-      <p>{{ props.member.member_id }}</p>
+      <p># {{ props.member.type }}-{{ props.member.josa_id }}</p>
     </div>
     <div>
       <p class="header">Member Since</p>

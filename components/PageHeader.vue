@@ -26,11 +26,11 @@
             <li class="menu-item">
               <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
             </li>
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <NuxtLink id="login" to="/login" class="nav-link"
                 >Sign In</NuxtLink
               >
-            </li>
+            </li> -->
           </ul>
           <MobileMenuButton :is-open="state.isOpen" @toggle="ToggleIsOpen()" />
         </div>
