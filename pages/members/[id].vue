@@ -15,7 +15,7 @@
           :education="memberData.education"
         />
         <MemberContribution
-          v-if="!pendingMember"
+          v-if="!pendingMember && memberData.contributions.length"
           :contributions="memberData.contributions"
         />
       </div>
