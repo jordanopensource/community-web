@@ -1,10 +1,12 @@
 <template>
-  <Banner bannerText="Contribute" />
-  <div class="container">
-    <MissionInfo
-      v-if="!pendingMission && missionData?.id"
-      :mission="missionData"
-    />
+  <div>
+    <Banner bannerText="Contribute" />
+    <div class="container">
+      <MissionInfo
+        v-if="!pendingMission && missionData?.id"
+        :mission="missionData"
+      />
+    </div>
   </div>
 </template>
 <script setup></script>
