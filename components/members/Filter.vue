@@ -69,20 +69,20 @@ const state = reactive({
 
 const sortItems = [
   {
-    value: 'first_name_en,ASC',
-    text: 'First Name (A -> Z)',
+    value: 'member_since,DESC',
+    text: 'Member since (Newest)',
   },
   {
-    value: 'last_name_en,ASC',
-    text: 'Last Name (A -> Z)',
+    value: 'member_since,ASC',
+    text: 'Member since (Oldest)',
   },
   {
-    value: 'first_name_en,DESC',
-    text: 'First Name (Z -> A)',
+    value: 'name,ASC',
+    text: 'By Name (A -> Z)',
   },
   {
-    value: 'last_name_en,DESC',
-    text: 'Last Name (Z -> A)',
+    value: 'name,DESC',
+    text: 'By Name (Z -> A)',
   },
 ]
 

@@ -61,13 +61,22 @@
   </div>
 </template>
 <script setup>
-const avatarPlaceholder = '/images/placeholders/avatar.png';
+const avatarPlaceholder = '/images/placeholders/avatar.png'
 const props = defineProps({
   member: {
     type: Object,
     default: {},
   },
-});
+})
+
+const formatDate = (date) => {
+  const newDate = new Date(date)
+  const [month, year] = [
+    newDate.toLocaleString('default', { month: 'long' }),
+    newDate.getFullYear(),
+  ]
+  return `${month} ${year}`
+}
 </script>
 <style lang="postcss" scoped>
 .card-container {
