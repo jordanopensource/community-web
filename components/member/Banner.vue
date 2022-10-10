@@ -13,7 +13,7 @@
       <div class="invisible-white-space"></div>
       <div
         id="avatar-info-container"
-        class="flex flex-row relative gap-x-4 -mt-8 lg:-mt-12"
+        class="flex flex-row relative gap-x-7 -mt-8 lg:-mt-12"
       >
         <img
           class="avatar"
@@ -75,7 +75,7 @@ const placeHolderImages = {
 <style lang="postcss" scoped>
 .details-container {
   @apply bg-white;
-  @apply my-14;
+  @apply mt-20 mb-7;
   @apply p-10 px-8 lg:px-20;
   @apply text-base;
 }
