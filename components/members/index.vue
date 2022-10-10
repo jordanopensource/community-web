@@ -1,5 +1,6 @@
 <template>
   <div v-if="state.members?.length">
+    <h2 class="text-2xl mono">{{ state.metaData.totalItems }} members found</h2>
     <div v-for="(member, index) in state.members" :key="`item-${index}`">
       <MembersCard :member="member" />
     </div>
@@ -8,6 +9,7 @@
     <p>No Members found</p>
   </div>
   <PaginationBar
+    v-if="state.members?.length"
     :currentPage="state.page"
     :totalPages="state.metaData.totalPages"
     @switchPage="(newPage) => getMembers((state.page = newPage))"
@@ -70,9 +72,12 @@ const getOrderedMembers = async (query) => {
 }
 
 const searchMember = async (query) => {
-  fetch(`${config.COMMUNITY_API_URL}/member/search?q=${query}`)
+  fetch(`${config.COMMUNITY_API_URL}/member/page/${state.page}?name=${query}`)
     .then((response) => response.json())
-    .then((data) => (state.members = Object.create(data)))
+    .then((data) => {
+      state.members = Object.create(data?.items)
+      state.metaData = Object.create(data?.meta)
+    })
     .catch((error) => {
       console.log(error)
     })
