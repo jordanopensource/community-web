@@ -13,8 +13,8 @@
           "
         />
         <span class="my-auto ml-4"
-          >{{ state.selectedItem.first_name }}
-          {{ state.selectedItem.last_name }}</span
+          >{{ state.selectedItem.first_name_en }}
+          {{ state.selectedItem.last_name_en }}</span
         >
       </div>
       <div class="dropdown-popover">
@@ -57,7 +57,7 @@
                 "
               />
               <span class="my-auto ml-4">
-                {{ member.first_name }} {{ member.last_name }}
+                {{ member.first_name_en }} {{ member.last_name_en }}
               </span>
             </li>
           </ul>
