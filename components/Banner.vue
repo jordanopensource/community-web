@@ -1,6 +1,6 @@
 <template>
   <div
-    class="py-28"
+    class="py-20 lg:py-36"
     :class="[!props.whiteBackground ? 'black-background' : 'white-background']"
   >
     <div :class="[props.enableContainer && 'container']">
@@ -51,6 +51,6 @@ const props = defineProps({
 .banner-header {
   @apply text-4xl;
   @apply inline;
-  @apply pr-4;
+  @apply pr-16 lg:pr-20;
 }
 </style>
