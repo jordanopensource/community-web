@@ -94,7 +94,8 @@ const onSelect = () => {
 </script>
 <style lang="postcss" scoped>
 .filter-container {
-  @apply bg-white mb-10 p-4;
+  @apply bg-white p-4;
+  margin: 72px 0;
 }
 .form-wrapper {
   @apply h-fit;
