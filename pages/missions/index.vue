@@ -1,7 +1,7 @@
 <template>
   <div>
     <Banner bannerText=" Contribute" />
-    <section class="container my-16">
+    <section class="container my-16 lg:my-28">
       <div class="flex flex-col lg:flex-row-reverse lg:gap-x-8">
         <div class="shrink-0">
           <MissionFilter

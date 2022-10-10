@@ -3,7 +3,7 @@
     <!-- Banner -->
     <HomeHeroBanner />
     <!-- Why JOSA -->
-    <div class="container my-16">
+    <div class="container my-16 lg:my-28">
       <HomeDetails class="mt-28" />
       <!-- Become a member -->
       <Banner
