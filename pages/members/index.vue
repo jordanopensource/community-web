@@ -1,9 +1,9 @@
 <template>
   <div>
     <Banner bannerText="JOSA Members" />
-    <section class="container my-16">
+    <section class="container my-16 lg:my-28">
       <h2 class="text-2xl lg:text-4xl mb-8">Directory of JOSA Members</h2>
-      <div class="flex flex-col lg:flex-row-reverse lg:gap-x-8">
+      <div class="flex flex-col lg:flex-row-reverse lg:gap-x-10">
         <div class="shrink-0">
           <MembersFilter
             @searchMember="(name) => (state.searchName = name)"
