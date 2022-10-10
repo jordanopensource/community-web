@@ -1,6 +1,6 @@
 <template>
   <div class="input-control">
-    <div v-if="props.inputType === 'checkbox'" class="inline-flex">
+    <div v-if="props.inputType === 'checkbox'" class="inline">
       <input
         id="check-box"
         @input="$emit('update:value', $event.target.checked)"
