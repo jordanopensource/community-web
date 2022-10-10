@@ -7,18 +7,18 @@
       >
         First Name (English)
       </FormAppControlInput>
-      <FormAppControlInput
+      <!-- <FormAppControlInput
         v-model:value="form.first_middle_name_en"
         :isRequired="true"
       >
         Second Name (English)
-      </FormAppControlInput>
-      <FormAppControlInput
+      </FormAppControlInput> -->
+      <!-- <FormAppControlInput
         v-model:value="form.second_middle_name_en"
         :isRequired="true"
       >
         Middle Name (English)
-      </FormAppControlInput>
+      </FormAppControlInput> -->
       <FormAppControlInput v-model:value="form.last_name_en" :isRequired="true">
         Last Name (English)
       </FormAppControlInput>
@@ -28,7 +28,7 @@
       >
         First Name (Arabic)
       </FormAppControlInput>
-      <FormAppControlInput
+      <!-- <FormAppControlInput
         v-model:value="form.first_middle_name_ar"
         :isRequired="true"
       >
@@ -39,7 +39,7 @@
         :isRequired="true"
       >
         Middle Name (Arabic)
-      </FormAppControlInput>
+      </FormAppControlInput> -->
       <FormAppControlInput v-model:value="form.last_name_ar" :isRequired="true">
         Last Name (Arabic)
       </FormAppControlInput>
@@ -48,7 +48,7 @@
         inputType="tel"
         :isRequired="true"
         placeholder="962799888777"
-        pattern="[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{3}"
+        pattern="+[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{3}"
         >Phone Number</FormAppControlInput
       >
       <FormAppControlInput
@@ -74,12 +74,12 @@ import { reactive } from 'vue'
 
 const form = reactive({
   first_name_en: '',
-  first_middle_name_en: '',
-  second_middle_name_en: '',
+  // first_middle_name_en: '',
+  // second_middle_name_en: '',
   last_name_en: '',
   first_name_ar: '',
-  first_middle_name_ar: '',
-  second_middle_name_ar: '',
+  // first_middle_name_ar: '',
+  // second_middle_name_ar: '',
   last_name_ar: '',
   phone: '',
   email: '',
