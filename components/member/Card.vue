@@ -26,7 +26,15 @@ const props = defineProps({
     type: Object,
     default: {},
   },
-});
+})
+const formatDate = (date) => {
+  const newDate = new Date(date)
+  const [month, year] = [
+    newDate.toLocaleString('default', { month: 'long' }),
+    newDate.getFullYear(),
+  ]
+  return `${month} ${year}`
+}
 </script>
 
 <style lang="postcss" scoped>
