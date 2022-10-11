@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from 'nuxt3';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -23,7 +22,18 @@ export default defineNuxtConfig({
       link: [{ hid: 'icon', rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
   },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-healthcheck', '@nuxtjs/pwa'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-healthcheck', '@kevinmarrec/nuxt-pwa',
+  /**
+   * this package is not the official nuxtjs device but a fork
+   * this package was used due to it supported Nuxt3
+   * More details about this project here:
+   * https://github.com/nuxt-community/device-module/tree/4a57c2df5f9716998f35f7621fdaffa69cdd8287
+   */
+  '@nuxtjs/device'
+],
+  device: {
+    refreshOnResize: true
+  },
   css: [
     '@/assets/css/typography.css',
     '@/assets/css/form.css',
@@ -33,7 +43,6 @@ export default defineNuxtConfig({
     cssPath: '@/assets/css/tailwind.css',
     configPath: 'tailwind.config.js',
     exposeConfig: false,
-    config: {},
     injectPosition: 0,
     viewer: true,
   },

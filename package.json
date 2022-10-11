@@ -7,17 +7,20 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
-    "@nuxtjs/pwa": "^3.3.5",
+    "@kevinmarrec/nuxt-pwa": "^0.7.1",
     "@nuxtjs/tailwindcss": "^5.0.2",
+    "@volar-plugins/vetur": "latest",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-nuxt": "^3.2.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.6.0",
-    "nuxt3": "latest",
+    "nuxt": "^3.0.0-rc.11",
     "prettier": "^2.6.2"
   },
   "dependencies": {
+    "@nuxt/vite-builder": "^3.0.0-rc.11",
+    "@nuxtjs/device": "github:Redemption198/device-module",
     "nuxt-healthcheck": "^1.0.1"
   }
 }
