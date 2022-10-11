@@ -22,11 +22,12 @@
     <div class="input-control form-wrapper" v-if="state.isOpen">
       <div class="w-full h-fit flex flex-col my-8">
         <p>Filter by mission:</p>
-        <form class="flex flex-row items-baseline" @submit.prevent="onSubmit">
+        <form class="flex flex-row" @submit.prevent="onSubmit">
           <FormAppControlInput
             name="mission"
             inputType="text"
             class="w-full input-container"
+            :showSlot="false"
             v-model:value="state.title"
           >
           </FormAppControlInput>

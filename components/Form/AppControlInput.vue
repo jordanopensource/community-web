@@ -13,7 +13,9 @@
       <label class="items-center" for="check-box"> <slot /></label>
     </div>
     <div v-else>
-      <label> <slot /></label>
+      <div v-if="$props.showSlot">
+        <label> <slot /></label>
+      </div>
       <input
         v-if="props.inputType !== 'textarea'"
         @input="$emit('update:value', $event.target.value)"
@@ -41,6 +43,7 @@ const props = defineProps({
   isRequired: { type: Boolean, default: false },
   placeholder: { type: String, default: '' },
   name: { type: String, default: '' },
+  showSlot: { type: Boolean, default: true },
   pattern: '',
   inputType: String,
 })
