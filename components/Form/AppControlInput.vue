@@ -1,6 +1,6 @@
 <template>
   <div class="input-control">
-    <div v-if="props.inputType === 'checkbox'" class="inline-flex">
+    <div v-if="props.inputType === 'checkbox'" class="inline">
       <input
         id="check-box"
         @input="$emit('update:value', $event.target.checked)"
@@ -22,6 +22,7 @@
         :placeholder="props.placeholder"
         :type="props.inputType"
         :pattern="props.pattern"
+        class="interactive-control"
       />
       <textarea
         v-else
@@ -47,5 +48,9 @@ const props = defineProps({
 <style lang="postcss" scoped>
 .input-control input.checkbox {
   @apply w-fit !important;
+}
+
+.interactive-control {
+  @apply inline;
 }
 </style>
