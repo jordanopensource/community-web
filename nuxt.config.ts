@@ -57,6 +57,9 @@ export default defineNuxtConfig({
     },
   },
   pwa: {
+    meta:{
+      name: 'JOSA Community',
+    },
     manifest: {
       lang: 'en',
     },
