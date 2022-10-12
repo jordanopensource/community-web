@@ -84,11 +84,11 @@ const sortItems = [
   },
   {
     value: 'name,ASC',
-    text: 'By Name (A -> Z)',
+    text: 'By Name (A → Z)',
   },
   {
     value: 'name,DESC',
-    text: 'By Name (Z -> A)',
+    text: 'By Name (Z → A)',
   },
 ]
 
