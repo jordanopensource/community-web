@@ -21,7 +21,7 @@
     </div>
     <div class="input-control form-wrapper" v-if="state.isOpen">
       <div class="w-full h-fit flex flex-col my-8">
-        <p>Search members by name:</p>
+        <p class="mb-2">Search members by name:</p>
         <form class="flex flex-row" @submit.prevent="onSubmit">
           <FormAppControlInput
             name="name"
