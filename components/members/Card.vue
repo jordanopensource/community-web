@@ -1,8 +1,8 @@
 <template>
   <div class="card-container">
     <div class="border-b-2 border-josa-warm-grey-light">
-      <div class="flex p-4">
-        <div class="mr-8 w-40 item-min-width">
+      <div class="flex p-8">
+        <div class="mr-8 w-36 item-min-width">
           <img
             width="100"
             height="100"
@@ -12,7 +12,7 @@
                 ? props.member.avatar_url
                 : avatarPlaceholder
             "
-            class="rounded-lg w-full"
+            class="rounded-xl w-full"
             loading="lazy"
           />
         </div>
@@ -91,7 +91,7 @@ const formatDate = (date) => {
   @apply flex flex-row gap-x-4;
   @apply w-full;
   @apply font-semibold;
-  @apply p-4;
+  @apply p-8 pt-5;
   .badge-details {
     @apply flex flex-row;
   }
