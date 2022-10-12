@@ -1,6 +1,6 @@
 <template>
   <div class="card-container">
-    <div class="px-6 py-5">
+    <div class="px-8 pr-10 py-9">
       <div>
         <span class="text-josa-blue text-xl">
           {{ props.mission.category.title }}
@@ -100,7 +100,7 @@ const formatDate = (date) => {
   @apply flex flex-row;
   @apply justify-between items-end;
   @apply w-full;
-  @apply p-4 pt-0;
+  @apply p-8 pt-0 pb-9 pr-10;
 
   p {
     @apply font-medium;
