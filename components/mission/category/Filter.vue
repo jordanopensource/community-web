@@ -148,6 +148,16 @@ const props = defineProps({
   },
 })
 
+onMounted(() => {
+  window.addEventListener('resize', (e) => {
+    if (window.innerWidth > 1030) {
+      state.isOpen = true
+    } else {
+      state.isOpen = false
+    }
+  })
+})
+
 const emit = defineEmits(['filterMissionBy', 'filterByPoints'])
 
 const onClick = (key, value, isSelected = true) => {
