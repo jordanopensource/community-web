@@ -69,6 +69,16 @@ const state = reactive({
   selected: '',
 })
 
+onMounted(() => {
+  window.addEventListener('resize', (e) => {
+    if (window.innerWidth > 1030) {
+      state.isOpen = true
+    } else {
+      state.isOpen = false
+    }
+  })
+})
+
 const sortItems = [
   {
     value: 'points,DESC',

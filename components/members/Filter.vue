@@ -73,6 +73,16 @@ const state = reactive({
   selected: '',
 })
 
+onMounted(() => {
+  window.addEventListener('resize', (e) => {
+    if (window.innerWidth > 1030) {
+      state.isOpen = true
+    } else {
+      state.isOpen = false
+    }
+  })
+})
+
 const sortItems = [
   {
     value: 'member_since,DESC',
@@ -104,6 +114,15 @@ const onSubmit = () => {
 const onSelect = () => {
   emit('sortMembers', state.selected)
 }
+
+watch(
+  () => state.windowResize,
+  (newValue, oldValue) => {
+    console.log(state.windowResize)
+    console.log(newValue)
+    console.log(oldValue)
+  }
+)
 </script>
 <style lang="postcss" scoped>
 .filter-container {
