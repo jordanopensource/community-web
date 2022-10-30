@@ -170,7 +170,7 @@ watch(
 }
 
 .filter-icon {
-  width: 2rem;
+  width: 1rem;
   margin-right: 0.6rem;
 }
 
