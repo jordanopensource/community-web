@@ -24,7 +24,8 @@
               : placeHolderImages.avatar
           "
         />
-        <div class="general-info">
+      </div>
+      <div class="general-info">
           <div class="flex flex-col items-start">
             <h1 class="member-name">
               {{ props.member.first_name_en }} {{ props.member.last_name_en }}
@@ -55,7 +56,6 @@
             </p>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -73,6 +73,10 @@ const placeHolderImages = {
 </script>
 
 <style lang="postcss" scoped>
+
+#member-avatar {
+  @apply p-0;
+}
 .details-container {
   @apply text-base;
 }
@@ -85,16 +89,30 @@ img {
   @apply w-64 mr-8;
 }
 .avatar {
-  @apply w-24 h-24 md:w-52 md:h-52;
+  @apply w-32 h-32;
   @apply ml-4;
+}
+@media (min-width: 1024px) {
+    .avatar {
+        width:  200px;
+        height: 200px;
+    }
+}
+@media (max-width: 480px) {
+    .avatar {
+        width:  96px;
+        height: 96px;
+    }
 }
 
 .cover {
-  @apply w-full h-16 md:h-44;
+  @apply w-full;
+  height: 25%;
 }
 
 .general-info {
   @apply self-center flex mt-9 lg:mt-8;
+  @apply ml-5;
   .member-name {
     @apply text-lg font-semibold;
   }
