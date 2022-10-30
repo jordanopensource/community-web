@@ -1,8 +1,21 @@
 <template>
-  <div class="filter-container">
-    <div class="flex flex-row justify-between border-b-2 border-dotted pb-3">
-      <h3 class="text-xl lg:text-2xl">Filter</h3>
-
+  <div :class="[!state.isOpen ? 'filter-collapsed' : 'filter-container']">
+    <div
+      class="flex flex-row justify-between md:border-b-2 md:border-dotted pb-3"
+    >
+      <div class="filter-button-container" v-if="!state.isOpen">
+        <img
+          class="md:hidden filter-icon"
+          src="icons/filter.png"
+          alt="Fiter icon"
+        />
+        <div>
+          <h3 class="filter-heading">Filter</h3>
+        </div>
+      </div>
+      <div v-else>
+        <h3 class="text-xl lg:text-2xl">Filter</h3>
+      </div>
       <button
         :class="state.isOpen ? 'expand-button' : 'expand-button-collapsed'"
         aria-label="Expand Filter Section"
@@ -21,7 +34,7 @@
     </div>
     <div class="input-control form-wrapper" v-if="state.isOpen">
       <div class="w-full h-fit flex flex-col my-8">
-        <p>Search members by name:</p>
+        <p class="mb-2">Search members by name:</p>
         <form class="flex flex-row" @submit.prevent="onSubmit">
           <FormAppControlInput
             name="name"
@@ -34,7 +47,7 @@
           <FormAppButton btn-style="search-button" type="submit">
             <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
               <path
-                fill="currentColor"
+                fill="white"
                 d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
               />
             </svg>
@@ -94,11 +107,11 @@ const sortItems = [
   },
   {
     value: 'name,ASC',
-    text: 'By Name (A -> Z)',
+    text: 'By Name (A → Z)',
   },
   {
     value: 'name,DESC',
-    text: 'By Name (Z -> A)',
+    text: 'By Name (Z → A)',
   },
 ]
 
@@ -126,8 +139,9 @@ watch(
 </script>
 <style lang="postcss" scoped>
 .filter-container {
-  @apply bg-white  p-4;
-  margin: 72px 0;
+  @apply bg-white p-4;
+  margin: 0 0;
+  margin-bottom: 2rem;
 }
 .form-wrapper {
   @apply h-fit;
@@ -143,5 +157,29 @@ watch(
   transition-duration: 0.5s;
   transform: rotate(0deg);
   @apply cursor-pointer  outline-none lg:hidden;
+}
+
+.filter-collapsed {
+  @apply px-2 pb-0 pt-3;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 2rem;
+  background-color: #e3e7e9;
+  width: fit-content;
+}
+
+.filter-icon {
+  width: 2rem;
+  margin-right: 0.6rem;
+}
+
+.filter-heading {
+ 
+}
+
+.filter-button-container {
+  display: flex;
+  flex-direction: row;
 }
 </style>
