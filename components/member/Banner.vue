@@ -74,9 +74,6 @@ const placeHolderImages = {
 
 <style lang="postcss" scoped>
 .details-container {
-  @apply bg-white;
-  @apply mt-7 lg:mt-20 mb-7;
-  @apply p-10 px-8 lg:px-20;
   @apply text-base;
 }
 

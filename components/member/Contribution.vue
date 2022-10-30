@@ -1,5 +1,5 @@
 <template>
-  <div id="member-contributions" class="container details-container">
+  <div id="member-contributions" class="details-container">
     <h2>Contributions</h2>
     <div class="slash-separator"></div>
 
@@ -39,12 +39,6 @@ const formatDate = (date) => {
 }
 </script>
 <style lang="postcss" scoped>
-.details-container {
-  @apply bg-white;
-  @apply mb-14;
-  @apply p-10 px-8;
-}
-
 .slash-separator {
   @apply relative;
   @apply mt-8;
