@@ -6,7 +6,7 @@
       <div class="filter-button-container" v-if="!state.isOpen">
         <img
           class="md:hidden filter-icon"
-          src="icons/filter.png"
+          src="icons/filter.svg"
           alt="Fiter icon"
         />
         <div>
@@ -172,10 +172,6 @@ watch(
 .filter-icon {
   width: 2rem;
   margin-right: 0.6rem;
-}
-
-.filter-heading {
- 
 }
 
 .filter-button-container {
