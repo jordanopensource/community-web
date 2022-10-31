@@ -10,6 +10,7 @@
   @apply rounded-none !important;
   @apply button-blue-full h-full;
   padding: 0.65rem 1rem;
+  background-color: #0c97ac;
 }
 
 .button-blue {
