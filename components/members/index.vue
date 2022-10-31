@@ -22,7 +22,10 @@ const config = useRuntimeConfig()
 const state = reactive({
   passedName: '',
   noneJosaMembers: false,
-  order_by: '',
+  orderBy: {
+    orderBy: '',
+    criteria: '',
+  },
   members: {},
   metaData: {},
   page: 1,
@@ -43,36 +46,19 @@ const props = defineProps({
   },
 })
 
-const getMembers = async (currentPage = state.page) => {
-  fetch(
-    `${config.COMMUNITY_API_URL}/member/page/${currentPage}?is_none_josa_member=${state.noneJosaMembers}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      state.members = Object.create(data?.items)
-      state.metaData = Object.create(data?.meta)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
+const getMembers = async () => {
+  let url = `${config.COMMUNITY_API_URL}/member/page/${state.page}?`
+  if (state.passedName) {
+    url += `name=${state.passedName}&`
+  }
+  if (state.noneJosaMembers) {
+    url += `is_none_josa_member=${state.noneJosaMembers}&`
+  }
 
-const getOrderedMembers = async (query) => {
-  fetch(
-    `${config.COMMUNITY_API_URL}/member/page/${state.page}?order_by=${query.orderBy}&order_criteria=${query.criteria}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      state.members = Object.create(data?.items)
-      state.metaData = Object.create(data?.meta)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
-
-const searchMember = async (query) => {
-  fetch(`${config.COMMUNITY_API_URL}/member/page/${state.page}?name=${query}`)
+  if (state.orderBy.orderBy) {
+    url += `order_by=${state.orderBy.orderBy}&order_criteria=${state.orderBy.criteria}&`
+  }
+  fetch(url)
     .then((response) => response.json())
     .then((data) => {
       state.members = Object.create(data?.items)
@@ -89,11 +75,8 @@ await getMembers()
 watch(
   () => (state.passedName = props.name),
   async (newValue) => {
-    if (newValue) {
-      await searchMember(newValue)
-    } else {
-      await getMembers()
-    }
+    state.passedName = newValue
+    await getMembers()
   }
 )
 
@@ -107,11 +90,11 @@ watch(
 
 // Order members
 watch(
-  () => (state.order_by = props.sortBy),
-  (sortKey) => {
+  () => (state.orderBy = props.sortBy),
+  async (sortKey) => {
     const sortArr = sortKey.split(',')
-    const query = { orderBy: sortArr[1], criteria: sortArr[0] }
-    getOrderedMembers(query)
+    state.orderBy = { orderBy: sortArr[1], criteria: sortArr[0] }
+    await getMembers()
   }
 )
 </script>
