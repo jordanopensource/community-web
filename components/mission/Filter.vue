@@ -1,8 +1,21 @@
 <template>
-  <div class="filter-container">
-    <div class="flex flex-row justify-between border-b-2 border-dotted pb-3">
-      <h3 class="text-xl lg:text-2xl">Filter</h3>
-
+  <div :class="[!state.isOpen ? 'filter-collapsed' : 'filter-container']">
+    <div
+      class="flex flex-row justify-between md:border-b-2 md:border-dotted pb-3"
+    >
+      <div class="filter-button-container" v-if="!state.isOpen">
+        <img
+          class="lg:hidden filter-icon"
+          src="icons/filter.svg"
+          alt="Fiter icon"
+        />
+        <div>
+          <h3 class="filter-heading">Filter</h3>
+        </div>
+      </div>
+      <div v-else>
+        <h3 class="text-xl lg:text-2xl">Filter</h3>
+      </div>
       <button
         :class="state.isOpen ? 'expand-button' : 'expand-button-collapsed'"
         aria-label="Expand Filter Section"
@@ -21,7 +34,7 @@
     </div>
     <div class="input-control form-wrapper" v-if="state.isOpen">
       <div class="w-full h-fit flex flex-col my-8">
-        <p>Filter by mission:</p>
+        <p class="mb-2">Filter by mission:</p>
         <form class="flex flex-row" @submit.prevent="onSubmit">
           <FormAppControlInput
             name="mission"
@@ -106,7 +119,11 @@ const onSelect = () => {
 <style lang="postcss" scoped>
 .filter-container {
   @apply bg-white p-4;
-  margin: 72px 0;
+  margin: 0 0;
+  margin-bottom: 2rem;
+  @media screen and (min-width: 1032px) {
+    margin: 72px 0;
+  }
 }
 .form-wrapper {
   @apply h-fit;
@@ -122,5 +139,23 @@ const onSelect = () => {
   transition-duration: 0.5s;
   transform: rotate(0deg);
   @apply cursor-pointer  outline-none lg:hidden;
+}
+
+.filter-collapsed {
+  @apply px-2 pb-0 pt-3;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 2rem;
+  background-color: #e3e7e9;
+  width: fit-content;
+}
+.filter-icon {
+  width: 1rem;
+  margin-right: 0.6rem;
+}
+.filter-button-container {
+  display: flex;
+  flex-direction: row;
 }
 </style>
