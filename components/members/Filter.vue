@@ -6,7 +6,7 @@
       <div class="filter-button-container" v-if="!state.isOpen">
         <img
           class="lg:hidden filter-icon"
-          src="icons/filter.svg"
+          src="/icons/filter.svg"
           alt="Fiter icon"
         />
         <div>
