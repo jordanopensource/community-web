@@ -5,7 +5,7 @@
     >
       <div class="filter-button-container" v-if="!state.isOpen">
         <img
-          class="md:hidden filter-icon"
+          class="lg:hidden filter-icon"
           src="icons/filter.svg"
           alt="Fiter icon"
         />
@@ -142,6 +142,10 @@ watch(
   @apply bg-white p-4;
   margin: 0 0;
   margin-bottom: 2rem;
+
+  @media screen and (min-width: 1032px) {
+    margin: 72px 0;
+  }
 }
 .form-wrapper {
   @apply h-fit;
