@@ -1,15 +1,16 @@
 <template>
-  <div v-if="state.members?.length">
+  <div v-if="state.loading">Loading</div>
+  <div v-else-if="!state.loading && state.members.length">
     <h2 class="text-2xl mono">{{ state.metaData.totalItems }} members found</h2>
     <div v-for="(member, index) in state.members" :key="`item-${index}`">
       <MembersCard :member="member" />
     </div>
   </div>
-  <div v-else>
+  <div v-else-if="!state.loading && !state.members.length">
     <p>No Members found</p>
   </div>
   <PaginationBar
-    v-if="state.members?.length"
+    v-if="!state.loading && state.members.length"
     :currentPage="state.page"
     :totalPages="state.metaData.totalPages"
     @switchPage="(newPage) => getMembers((state.page = newPage))"
@@ -21,9 +22,13 @@ import { watch } from 'vue'
 const config = useRuntimeConfig()
 const state = reactive({
   passedName: '',
+  loading: true,
   noneJosaMembers: false,
-  order_by: '',
-  members: {},
+  orderBy: {
+    orderBy: '',
+    criteria: '',
+  },
+  members: [],
   metaData: {},
   page: 1,
 })
@@ -43,43 +48,30 @@ const props = defineProps({
   },
 })
 
-const getMembers = async (currentPage = state.page) => {
-  fetch(
-    `${config.COMMUNITY_API_URL}/member/page/${currentPage}?is_none_josa_member=${state.noneJosaMembers}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      state.members = Object.create(data?.items)
-      state.metaData = Object.create(data?.meta)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
+const getMembers = async () => {
+  state.loading = true
+  let url = `${config.COMMUNITY_API_URL}/member/page/${state.page}?`
+  if (state.passedName) {
+    url += `name=${state.passedName}&`
+  }
+  if (state.noneJosaMembers) {
+    url += `is_none_josa_member=${state.noneJosaMembers}&`
+  }
 
-const getOrderedMembers = async (query) => {
-  fetch(
-    `${config.COMMUNITY_API_URL}/member/page/${state.page}?order_by=${query.orderBy}&order_criteria=${query.criteria}`
-  )
+  if (state.orderBy.orderBy) {
+    url += `order_by=${state.orderBy.orderBy}&order_criteria=${state.orderBy.criteria}&`
+  }
+  fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      state.members = Object.create(data?.items)
-      state.metaData = Object.create(data?.meta)
+      state.members = Object.create(data.items)
+      state.metaData = Object.create(data.meta)
     })
     .catch((error) => {
       console.log(error)
     })
-}
-
-const searchMember = async (query) => {
-  fetch(`${config.COMMUNITY_API_URL}/member/page/${state.page}?name=${query}`)
-    .then((response) => response.json())
-    .then((data) => {
-      state.members = Object.create(data?.items)
-      state.metaData = Object.create(data?.meta)
-    })
-    .catch((error) => {
-      console.log(error)
+    .finally(() => {
+      state.loading = false
     })
 }
 
@@ -89,11 +81,8 @@ await getMembers()
 watch(
   () => (state.passedName = props.name),
   async (newValue) => {
-    if (newValue) {
-      await searchMember(newValue)
-    } else {
-      await getMembers()
-    }
+    state.passedName = newValue
+    await getMembers()
   }
 )
 
@@ -107,11 +96,11 @@ watch(
 
 // Order members
 watch(
-  () => (state.order_by = props.sortBy),
-  (sortKey) => {
+  () => (state.orderBy = props.sortBy),
+  async (sortKey) => {
     const sortArr = sortKey.split(',')
-    const query = { orderBy: sortArr[1], criteria: sortArr[0] }
-    getOrderedMembers(query)
+    state.orderBy = { orderBy: sortArr[1], criteria: sortArr[0] }
+    await getMembers()
   }
 )
 </script>
