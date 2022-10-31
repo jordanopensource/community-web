@@ -1,5 +1,6 @@
 <template>
-  <div v-if="state.missions?.length">
+  <div v-if="state.loading">Loading</div>
+  <div v-else-if="!state.loading && state.missions.length">
     <h2 class="text-2xl mono">
       {{ state.metaData.totalItems }} missions found
     </h2>
@@ -7,14 +8,14 @@
       <MissionCard :mission="mission" />
     </div>
   </div>
-  <div v-else>
+  <div v-else-if="!state.loading && !state.missions.length">
     <p>No Missions found</p>
   </div>
   <PaginationBar
     :currentPage="state.page"
     :totalPages="state.metaData.totalPages"
     @switchPage="(newPage) => getMissions((state.page = newPage))"
-    v-if="state.missions?.length"
+    v-if="!state.loading && state.missions?.length"
   />
 </template>
 <script setup>
@@ -23,6 +24,7 @@ import { watch } from 'vue'
 const config = useRuntimeConfig()
 const state = reactive({
   searchedMission: '',
+  loading: true,
   assignedMission: false,
   orderBy: {
     orderBy: '',
@@ -52,6 +54,7 @@ const props = defineProps({
 const emit = defineEmits(['setCategories'])
 
 const getMissions = async () => {
+  state.loading = true
   let url = `${config.COMMUNITY_API_URL}/mission/page/${state.page}?`
 
   if (props.selectedMissionCriteria) {
@@ -79,6 +82,9 @@ const getMissions = async () => {
     })
     .catch((error) => {
       console.log(error)
+    })
+    .finally(() => {
+      state.loading = false
     })
 }
 
