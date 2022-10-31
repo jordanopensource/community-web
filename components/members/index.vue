@@ -1,16 +1,16 @@
 <template>
   <div v-if="state.loading">Loading</div>
-  <div v-else-if="state.members?.length">
-    <p>No Members found</p>
-  </div>
-  <div v-else>
+  <div v-else-if="!state.loading && state.members.length">
     <h2 class="text-2xl mono">{{ state.metaData.totalItems }} members found</h2>
     <div v-for="(member, index) in state.members" :key="`item-${index}`">
       <MembersCard :member="member" />
     </div>
   </div>
+  <div v-else-if="!state.loading && !state.members.length">
+    <p>No Members found</p>
+  </div>
   <PaginationBar
-    v-if="state.members?.length && !state.loading"
+    v-if="!state.loading && state.members.length"
     :currentPage="state.page"
     :totalPages="state.metaData.totalPages"
     @switchPage="(newPage) => getMembers((state.page = newPage))"
@@ -28,7 +28,7 @@ const state = reactive({
     orderBy: '',
     criteria: '',
   },
-  members: {},
+  members: [],
   metaData: {},
   page: 1,
 })
@@ -64,9 +64,8 @@ const getMembers = async () => {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
-      state.members = Object.create(data?.items)
-      state.metaData = Object.create(data?.meta)
+      state.members = Object.create(data.items)
+      state.metaData = Object.create(data.meta)
     })
     .catch((error) => {
       console.log(error)
