@@ -49,7 +49,7 @@
       </div>
       <div>
         <p>
-          <span>Member Since</span>
+          <span class="member-since">Member Since</span>
           {{
             props.member.member_since
               ? formatDate(props.member.member_since)
@@ -100,6 +100,7 @@ const formatDate = (date) => {
     @apply mr-2;
     @apply rounded-sm;
     @apply bg-josa-blue;
+    @apply shrink-0;
   }
 
   span {
