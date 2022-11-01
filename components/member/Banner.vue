@@ -13,7 +13,7 @@
       <div class="invisible-white-space"></div>
       <div
         id="avatar-info-container"
-        class="flex flex-row relative gap-x-7 -mt-8 lg:-mt-12"
+        class="flex flex-row relative gap-x-7"
       >
         <img
           class="avatar"
@@ -90,23 +90,26 @@ img {
 }
 .avatar {
   @apply w-32 h-32;
-  @apply ml-4;
+  @apply ml-8 -mt-24;
 }
 @media (min-width: 1024px) {
     .avatar {
+        @apply -mt-32;
         width:  200px;
         height: 200px;
     }
 }
-@media (max-width: 480px) {
+@media (max-width: 640px) {
     .avatar {
         width:  96px;
         height: 96px;
+        margin-top: -2.8rem;
     }
 }
 
 .cover {
   @apply w-full;
+  @apply rounded-b-none;
   height: 25%;
 }
 
