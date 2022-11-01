@@ -1,32 +1,32 @@
 <template>
   <div class="card-container">
     <div class="border-b-2 border-josa-warm-grey-light">
-      <div class="flex p-8">
-        <div class="mr-8 w-36 item-min-width">
+      <div class="flex p-4 md:p-6">
+        <div class="mr-4 md:w-36 w-fit h-fit item-min-width shrink-0">
           <img
-            width="100"
-            height="100"
             alt="bot-lightbulb"
             :src="
               props.member.avatar_url
                 ? props.member.avatar_url
                 : avatarPlaceholder
             "
-            class="rounded-xl w-full"
+            class="rounded-xl w-16 md:w-full"
             loading="lazy"
           />
         </div>
         <div>
-          <h3 class="text-xl lg:text-3xl font-semibold mb-2">
+          <h3
+            class="text-base md:text-lg flex-nowrap lg:text-3xl font-semibold mb-1 md:mb-2"
+          >
             <NuxtLink :to="`/members/${props.member.id}`" target="_blank">
               {{ props.member.first_name_en }} {{ props.member.last_name_en }}
             </NuxtLink>
           </h3>
-          <p>
+          <p class="text-sm md:text-base">
             {{
               member.headline
                 ? member.headline
-                : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras viverra eu sapien et tincidunt. Nunc dui risus, tempus vel eros ut, tempor sollicitudin elit. Pellentesque pharetra purus at nunc aliquet auctor'
+                : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras viverra eu sapien et tincidunt. Nunc dui risus, tempus vel eros ut, tempor sollicitudin elit.'
             }}
           </p>
         </div>
@@ -39,7 +39,7 @@
       </div>
       <div
         v-if="props.member.josa_member_id && props.member.type !== 0"
-        class="border-r-2 border-l-2 border-josa-warm-grey-light px-4"
+        class="border-r-2 border-l-2 border-josa-warm-grey-light px-2 md:px-4"
       >
         <p>
           <span>Member ID:</span> #{{ props.member.type }}-{{
@@ -82,22 +82,18 @@ const formatDate = (date) => {
 .card-container {
   @apply bg-white my-10;
 }
-
-.item-min-width {
-  min-width: 150px;
-}
 .member-card {
-  @apply text-sm;
-  @apply flex flex-row gap-x-4;
+  @apply text-xs md:text-sm;
+  @apply flex flex-row gap-x-2 md:gap-x-4;
   @apply w-full;
   @apply font-semibold;
-  @apply p-8 pt-5;
+  @apply p-4 md:p-8 pt-5;
   .badge-details {
     @apply flex flex-row;
   }
   .badge-color {
-    @apply w-5 h-5;
-    @apply mr-2;
+    @apply w-3 h-3 md:w-5 md:h-5;
+    @apply mr-1 md:mr-2;
     @apply rounded-sm;
     @apply bg-josa-blue;
     @apply shrink-0;
