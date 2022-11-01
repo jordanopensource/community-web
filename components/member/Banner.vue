@@ -115,9 +115,10 @@ img {
 
 .general-info {
   @apply self-center flex mt-9 lg:mt-8;
-  @apply ml-5;
+  @apply ml-8;
   .member-name {
     @apply text-lg font-semibold;
+    @apply -mt-2 mb-2;
   }
   .member-headline {
     @apply text-left;
@@ -127,7 +128,7 @@ img {
   .member-location {
     @apply flex flex-row;
     @apply text-gray-600;
-    @apply my-2;
+    @apply mt-2 mb-8;
   }
 }
 .invisible-white-space {
