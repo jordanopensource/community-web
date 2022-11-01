@@ -87,7 +87,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-josa-black text-white" v-if="config.ENV === 'develpoment'">
+    <div class="bg-josa-black text-white" v-if="config.ENV === 'development'">
       <a
         :href="`https://github.com/jordanopensource/community-web/commit/${config.COMMIT_SHA}`"
         target="_blank"
