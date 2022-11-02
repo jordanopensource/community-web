@@ -175,7 +175,8 @@
 }
 
 *,
-.sans {
+.sans,
+.title {
   font-family: 'IBM Sans';
 }
 

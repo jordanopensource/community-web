@@ -77,3 +77,7 @@ ol > li,
 ul > li {
   @apply ml-4;
 }
+
+.title {
+  font-weight: 500;
+}
