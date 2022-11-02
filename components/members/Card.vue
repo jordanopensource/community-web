@@ -115,7 +115,7 @@ const formatDate = (date) => {
   .member-info-heading {
     @apply font-light;
     @apply mr-2;
-    color: rgb(107 114 128);
+    @apply text-gray-500;
   }
 }
 </style>
