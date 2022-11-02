@@ -12,7 +12,7 @@
               height="40"
               loading="eager"
             />
-            <span class="text-xl text-josa-warm-grey-light italic">
+            <span class="community text-xl text-josa-warm-grey-light italic">
               .community
             </span>
           </NuxtLink>
@@ -77,5 +77,15 @@ li a {
 
 #login:hover {
   @apply text-josa-warm-grey-light;
+}
+
+@media screen and (max-width: 400px) {
+  img {
+    @apply h-8 w-auto;
+  }
+
+  .community {
+    @apply text-lg;
+  }
 }
 </style>
