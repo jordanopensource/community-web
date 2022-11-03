@@ -118,17 +118,17 @@ img {
   @apply ml-8;
   .member-name {
     @apply text-lg font-semibold;
-    @apply -mt-2 mb-2;
+    @apply -mt-6 mb-2;
   }
   .member-headline {
     @apply text-left;
-    @apply my-2;
+    @apply my-2 lg:mb-6;
   }
 
   .member-location {
     @apply flex flex-row;
     @apply text-gray-600;
-    @apply mt-2 mb-8;
+    @apply mt-2 mb-4;
   }
 }
 .invisible-white-space {
