@@ -18,7 +18,6 @@
         </div>
         <div class="hidden lg:block">
           <MemberCard v-if="!pendingMember" :member="memberData.member" />
-          <MemberScore v-if="!pendingMember" :member="memberData.member" />
         </div>
       </div>
     </div>
