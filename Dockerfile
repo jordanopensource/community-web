@@ -1,5 +1,5 @@
 # set global args
-ARG COMMUNITY_API_URL=https://community.api.dev.josa.ngo/v2 HOST=0.0.0.0 PORT=3000 USER=node ENV=production
+ARG COMMUNITY_API_URL=https://community.api.dev.josa.ngo/v2 HOST=0.0.0.0 PORT=3000 USER=node ENV=production DRONE_COMMIT_SHA=${DRONE_COMMIT_SHA}
 
 ###########
 # BUILDER #
@@ -34,6 +34,7 @@ ARG HOST
 ARG PORT
 ARG USER
 ARG ENV
+ARG DRONE_COMMIT_SHA
 
 # copy builder output to project workdir
 WORKDIR /app
