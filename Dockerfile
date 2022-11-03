@@ -4,15 +4,16 @@ ARG COMMUNITY_API_URL=https://community.api.dev.josa.ngo/v2 HOST=0.0.0.0 PORT=30
 ###########
 # BUILDER #
 ###########
-FROM node:16-alpine3.14 AS builder
+FROM node:16.14.0 AS builder
 
 # pass the global args
 ARG COMMUNITY_API_URL
 ARG HOST
 ARG PORT
 ARG ENV
+ARG DRONE_COMMIT_SHA
 
-# copy build context and install dependencies
+# copy build context and install dependencinpm res
 WORKDIR /workspace
 COPY . .
 RUN npm install
