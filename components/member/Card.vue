@@ -1,22 +1,29 @@
 <template>
-  <div class="member-card">
-    <div v-if="props.member.type !== 0" class="badge-details">
-      <div class="badge-color"></div>
-      <p class="header">JOSA Member</p>
-    </div>
-    <div v-if="props.member.josa_member_id && props.member.type !== 0">
-      <p class="header">Member ID</p>
-      <p># {{ props.member.type }}-{{ props.member.josa_member_id }}</p>
-    </div>
-    <div>
-      <p class="header">Member Since</p>
-      <p>
-        {{
-          props.member.member_since
-            ? formatDate(props.member.member_since)
-            : 'January 2023'
-        }}
-      </p>
+  <div class="m-2 lg:my-4">
+    <div class="card-color"></div>
+    <div class="member-card">
+      <div v-if="props.member.type !== 0" class="badge-details">
+        <div class="badge-color"></div>
+        <p class="header">JOSA Member</p>
+      </div>
+      <div v-if="props.member.josa_member_id && props.member.type !== 0">
+        <p class="header">
+          Member ID
+          <span># {{ props.member.type }}-{{ props.member.josa_member_id }}</span>
+          </p>
+      </div>
+      <div>
+        <p class="header">
+          Member Since
+          <span>
+            {{
+              props.member.member_since
+                ? formatDate(props.member.member_since)
+                : 'January 2023'
+            }}
+          </span>
+          </p>
+      </div>
     </div>
   </div>
 </template>
@@ -38,19 +45,29 @@ const formatDate = (date) => {
 </script>
 
 <style lang="postcss" scoped>
+.card-color{
+      @apply w-full h-4;
+      @apply rounded-lg rounded-b-none;
+      @apply bg-josa-blue;
+}
 .member-card {
   @apply flex flex-row lg:flex-col;
   @apply gap-y-4;
   @apply justify-between;
   @apply w-full;
-  @apply bg-slate-100;
-  @apply rounded-xl;
-  @apply p-4 mb-4;
   @apply md:mr-24;
   @apply font-semibold;
+  @apply bg-white;
+  @apply p-4 lg:p-8;
+  @apply mt-0;
+  @apply rounded-lg rounded-t-none;
 
   .header {
     @apply font-light;
+    span {
+      @apply font-normal;
+      @apply ml-1;
+    }
   }
 
   .badge-details {
