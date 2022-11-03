@@ -10,7 +10,7 @@
         <p class="header">
           Member ID
           <span># {{ props.member.type }}-{{ props.member.josa_member_id }}</span>
-          </p>
+        </p>
       </div>
       <div>
         <p class="header">
@@ -22,7 +22,22 @@
                 : 'January 2023'
             }}
           </span>
-          </p>
+        </p>
+      </div>
+      <div class="line"></div>
+      <div>
+        <p class="header">
+          Score
+          <span>
+            {{ props.member.points }}
+          </span>
+        </p>
+      </div>
+      <div v-if="props.member.last_online">
+        <p class="header">
+          Last seen Online
+          <span>2 weeks ago</span>
+        </p>
       </div>
     </div>
   </div>
@@ -46,13 +61,13 @@ const formatDate = (date) => {
 
 <style lang="postcss" scoped>
 .card-color{
-      @apply w-full h-4;
-      @apply rounded-lg rounded-b-none;
-      @apply bg-josa-blue;
+  @apply w-full h-4;
+  @apply rounded-lg rounded-b-none;
+  @apply bg-josa-blue;
 }
 .member-card {
   @apply flex flex-row lg:flex-col;
-  @apply gap-y-4;
+  @apply gap-y-2;
   @apply justify-between;
   @apply w-full;
   @apply md:mr-24;
@@ -62,10 +77,17 @@ const formatDate = (date) => {
   @apply mt-0;
   @apply rounded-lg rounded-t-none;
 
+  .line {
+    @apply hidden lg:inline;
+    @apply w-full h-0;
+    @apply border-2 border-dotted border-b-0 border-josa-black;
+    @apply my-6;
+  }
   .header {
     @apply font-light;
+    
     span {
-      @apply font-normal;
+      @apply font-semibold text-josa-black-darker;
       @apply ml-1;
     }
   }
@@ -78,6 +100,9 @@ const formatDate = (date) => {
       @apply mr-2;
       @apply rounded-sm;
       @apply bg-josa-blue;
+    }
+    .header {
+      @apply font-semibold;
     }
   }
 }
