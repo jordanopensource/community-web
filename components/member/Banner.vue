@@ -118,13 +118,14 @@ img {
   @apply self-center flex mt-9 lg:mt-8;
   @apply ml-4 md:ml-8;
   .member-name {
-    @apply text-lg font-sans font-semibold;
-    @apply -mt-6 mb-2;
+    @apply font-medium text-xl md:text-3xl;
+    @apply -mt-2 mb-2;
+    @apply font-IBMPlexSansArabic;
   }
   .member-headline {
     @apply text-left;
     @apply my-2 lg:mb-6;
-    @apply font-sans;
+    @apply font-IBMPlexSansArabic;
   }
 
   .member-location {
