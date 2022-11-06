@@ -5,6 +5,9 @@
       <MemberBanner v-if="!pendingMember" :member="memberData.member" />
       <div class="flex gap-x-4">
         <div class="flex flex-col w-full">
+          <div class="block lg:hidden">
+            <MemberCard v-if="!pendingMember" :member="memberData.member" />
+          </div>
           <MemberDetails v-if="!pendingMember" :member="memberData.member" />
           <MemberExperience
             v-if="memberData.experience.length || memberData.education.length"
@@ -36,7 +39,7 @@ const { data: memberData, pending: pendingMember } = await useFetch(
 <style scoped lang="postcss">
 .details-container {
   @apply bg-white;
-  @apply m-2 lg:my-4;
+  @apply m-4;
   @apply p-4 lg:p-8;
   @apply rounded-lg;
 }

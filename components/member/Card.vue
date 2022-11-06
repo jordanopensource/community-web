@@ -1,5 +1,5 @@
 <template>
-  <div class="m-2 lg:my-4">
+  <div class="m-4">
     <div class="card-color"></div>
     <div class="member-card">
       <div v-if="props.member.type !== 0" class="badge-details">
@@ -66,8 +66,8 @@ const formatDate = (date) => {
   @apply bg-josa-blue;
 }
 .member-card {
-  @apply flex flex-row lg:flex-col;
-  @apply gap-y-2;
+  @apply flex flex-col;
+  @apply gap-y-0 lg:gap-y-2;
   @apply justify-between;
   @apply w-full;
   @apply md:mr-24;
@@ -78,14 +78,14 @@ const formatDate = (date) => {
   @apply rounded-lg rounded-t-none;
 
   .line {
-    @apply hidden lg:inline;
     @apply w-full h-0;
     @apply border-2 border-dotted border-b-0 border-josa-black;
-    @apply my-6;
+    @apply my-1 lg:my-6;
   }
+
   .header {
     @apply font-light;
-    
+
     span {
       @apply font-semibold text-josa-black-darker;
       @apply ml-1;
