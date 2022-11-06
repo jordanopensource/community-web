@@ -90,7 +90,8 @@ img {
 }
 .avatar {
   @apply w-32 h-32;
-  @apply ml-8 -mt-24;
+  @apply ml-4 md:ml-8;
+  @apply -mt-24;
 }
 @media (min-width: 1024px) {
     .avatar {
@@ -115,14 +116,15 @@ img {
 
 .general-info {
   @apply self-center flex mt-9 lg:mt-8;
-  @apply ml-8;
+  @apply ml-4 md:ml-8;
   .member-name {
-    @apply text-lg font-semibold;
+    @apply text-lg font-sans font-semibold;
     @apply -mt-6 mb-2;
   }
   .member-headline {
     @apply text-left;
     @apply my-2 lg:mb-6;
+    @apply font-sans;
   }
 
   .member-location {
