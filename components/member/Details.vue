@@ -1,8 +1,5 @@
 <template>
   <div id="member-detail" class="details-container">
-    <div class="lg:hidden">
-      <MemberCard :member="props.member" />
-    </div>
     <p class="heading">About</p>
     <p class="member-about mb-8">
       {{
