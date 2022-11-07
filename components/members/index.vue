@@ -1,5 +1,5 @@
 <template>
-  <div v-if="state.loading">Loading</div>
+  <div v-if="state.loading" class="loader"></div>
   <div v-else-if="!state.loading && state.members.length">
     <h2 class="text-2xl mono">{{ state.metaData.totalItems }} members found</h2>
     <div v-for="(member, index) in state.members" :key="`item-${index}`">
@@ -104,3 +104,21 @@ watch(
   }
 )
 </script>
+
+<style>
+.loader {
+  @apply h-6 w-6;
+  @apply border-4 border-solid border-gray-200;
+  border-radius: 50%;
+  border-top: 3px solid #0c97ac;
+  animation: spin 0.8s linear infinite;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+</style>
