@@ -12,7 +12,7 @@
           </button></span
         >
       </li>
-      <span v-for="i in totalPages" :key="i" class="hidden lg:inline">
+      <span v-for="i in totalPages" :key="i" class="lg:inline">
         <li v-if="i == totalPages || i == 1 || Math.abs(i - currentPage) < 3">
           <button
             :class="{
