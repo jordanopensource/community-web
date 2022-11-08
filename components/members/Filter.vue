@@ -1,36 +1,37 @@
 <template>
   <div :class="[!state.isOpen ? 'filter-collapsed' : 'filter-container']">
-    <div
-      class="flex flex-row justify-between md:border-b-2 md:border-dotted pb-3"
-    >
-      <div class="filter-button-container" v-if="!state.isOpen">
-        <img
-          class="lg:hidden filter-icon"
-          src="/icons/filter.svg"
-          alt="Fiter icon"
-        />
-        <div>
-          <h3 class="filter-heading">Filter</h3>
-        </div>
-      </div>
-      <div v-else>
-        <h3 class="text-xl lg:text-2xl">Filter</h3>
-      </div>
-      <button
-        :class="state.isOpen ? 'expand-button' : 'expand-button-collapsed'"
-        aria-label="Expand Filter Section"
-        @click="() => (state.isOpen = !state.isOpen)"
+    <div @click="() => (state.isOpen = !state.isOpen)" class="filter-head">
+      <div
+        class="flex flex-row justify-between md:border-b-2 md:border-dotted pb-3"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="24"
-          height="24"
+        <div class="filter-button-container" v-if="!state.isOpen">
+          <img
+            class="lg:hidden filter-icon"
+            src="/icons/filter.svg"
+            alt="Fiter icon"
+          />
+          <div>
+            <h3 class="filter-heading">Filter</h3>
+          </div>
+        </div>
+        <div v-else>
+          <h3 class="text-xl lg:text-2xl">Filter</h3>
+        </div>
+        <button
+          :class="state.isOpen ? 'expand-button' : 'expand-button-collapsed'"
+          aria-label="Expand Filter Section"
         >
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path d="M12 16l-6-6h12z" />
-        </svg>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path d="M12 16l-6-6h12z" />
+          </svg>
+        </button>
+      </div>
     </div>
     <div class="input-control form-wrapper" v-if="state.isOpen">
       <div class="w-full h-fit flex flex-col my-8">
@@ -181,5 +182,9 @@ watch(
 .filter-button-container {
   display: flex;
   flex-direction: row;
+}
+
+.filter-head {
+  cursor: pointer;
 }
 </style>
