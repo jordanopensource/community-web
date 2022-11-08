@@ -49,7 +49,8 @@ export default defineNuxtConfig({
   publicRuntimeConfig: {
     COMMUNITY_API_URL: process.env.COMMUNITY_API_URL,
     ENV: process.env.ENV,
-    COMMIT_SHA: process.env.COMMIT_SHA
+    COMMIT_SHA: process.env.COMMIT_SHA,
+    BETA: process.env.BETA
   },
   healthcheck: {
     path: '/healthcheck',
