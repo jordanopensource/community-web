@@ -6,7 +6,9 @@
     <div class="contribution">
       <h3 class="heading">JOSA Contributions</h3>
       <ul>
-        <li v-for="(contribution, index) in props.contributions" :key="index">
+        <li v-for="(contribution, index) in props.contributions"
+            :key="index"
+            class="divider-dotted">
           <div>
             <h4 class="title">{{ contribution.description }}</h4>
             <h5 class="sub-title">{{ contribution.role }}</h5>
@@ -86,7 +88,6 @@ ul {
 li {
   @apply w-full;
   @apply ml-0 mt-2 py-3;
-  @apply border-dotted border-t-2 border-gray-500;
   @apply flex flex-row justify-between;
 
   .title {

@@ -6,7 +6,9 @@
     <div v-if="props.experience.length" class="experience">
       <h3 class="heading">Work Experience</h3>
       <ul>
-        <li v-for="(experience, index) in props.experience" :key="index">
+        <li v-for="(experience, index) in props.experience"
+            :key="index"
+            class="divider-dotted">
           <div>
             <h4 class="title">{{ experience.company_name }}</h4>
             <h5 class="sub-title">{{ experience.position }}</h5>
@@ -29,7 +31,9 @@
     <div v-if="props.education.length" class="education">
       <h3 class="heading">Education</h3>
       <ul>
-        <li v-for="(education, index) in props.education" :key="index">
+        <li v-for="(education, index) in props.education"
+            :key="index"
+            class="divider-dotted">
           <div>
             <h4 class="title">{{ education.institution_name }}</h4>
             <h5 class="sub-title">{{ education.degree }}</h5>
@@ -114,7 +118,6 @@ ul {
 li {
   @apply w-full;
   @apply ml-0 mt-2 py-3;
-  @apply border-dotted border-t-2 border-gray-500;
   @apply flex flex-row justify-between;
 
   .title {

@@ -63,7 +63,7 @@
           >
         </div>
       </div>
-      <div class="border-b-2 border-dotted"></div>
+      <div class="divider-dotted"></div>
       <div class="my-6">
         <h4 class="font-light mb-4">Sort by:</h4>
         <FormAppDropDown
