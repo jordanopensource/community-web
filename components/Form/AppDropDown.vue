@@ -37,7 +37,7 @@ const props = defineProps({
 }
 
 select {
-  background-image: url("icons/arrow-down.png");
+  background-image: url("icons/arrow.png");
   background-repeat: no-repeat;
   background-size: 0.9rem;
   appearance: none;
