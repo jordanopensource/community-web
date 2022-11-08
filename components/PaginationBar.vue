@@ -5,10 +5,11 @@
         <span class="px-1 lg:px-1"
           ><button
             :class="currentPage == 1 ? 'disabled' : 'previous-page'"
+            class="rotate-90 pagination-arrows"
             aria-label="Previous Page"
             @click="fetchCurrentPage(currentPage - 1)"
           >
-            &lt;
+            <img src="icons/arrow.png" alt="Previous Page">
           </button></span
         >
       </li>
@@ -32,10 +33,11 @@
         <span class="px-1 lg:px-1"
           ><button
             :class="currentPage == totalPages ? 'disabled' : 'next-page'"
+            class="-rotate-90 pagination-arrows"
             aria-label="Next Page"
             @click="fetchCurrentPage(currentPage + 1)"
           >
-            &gt;
+            <img src="icons/arrow.png" alt="Next Page">
           </button></span
         >
       </li>
@@ -112,5 +114,9 @@ watch(() => (currentPage.value = props.currentPage))
 
 .pagination button {
   cursor: pointer;
+}
+
+.pagination-arrows {
+  max-width: 1rem;
 }
 </style>
