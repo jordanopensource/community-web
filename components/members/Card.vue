@@ -10,13 +10,13 @@
                 ? props.member.avatar_url
                 : avatarPlaceholder
             "
-            class="rounded-xl w-16 md:w-full"
+            class="rounded-md w-16 md:w-full"
             loading="lazy"
           />
         </div>
         <div>
           <h3
-            class="text-base md:text-lg flex-nowrap lg:text-3xl font-semibold mb-1 md:mb-2"
+            class="title text-base md:text-lg flex-nowrap lg:text-2xl mb-1 md:mb-2"
           >
             <NuxtLink :to="`/members/${props.member.id}`" target="_blank">
               {{ props.member.first_name_en }} {{ props.member.last_name_en }}
@@ -34,27 +34,32 @@
     </div>
     <div class="member-card">
       <div v-if="props.member.type !== 0" class="badge-details">
-        <div class="badge-color"></div>
-        <p>JOSA Member</p>
+        <span class="badge-color"></span>
+        <span>JOSA Member</span>
       </div>
       <div
         v-if="props.member.josa_member_id && props.member.type !== 0"
         class="border-r-2 border-l-2 border-josa-warm-grey-light px-2 md:px-4"
       >
         <p>
-          <span>Member ID:</span> #{{ props.member.type }}-{{
+          <span class="member-info-heading">Member ID:</span>
+          <span class="member-info-value">
+            #{{ props.member.type }}-{{
             props.member.josa_member_id
           }}
+          </span>
         </p>
       </div>
       <div>
         <p>
-          <span class="member-since">Member Since</span>
-          {{
+          <span class="member-info-heading member-since">Member Since</span>
+          <span class="member-info-value">
+            {{
             props.member.member_since
               ? formatDate(props.member.member_since)
               : 'January 2023'
           }}
+          </span>
         </p>
       </div>
     </div>
@@ -81,26 +86,36 @@ const formatDate = (date) => {
 <style lang="postcss" scoped>
 .card-container {
   @apply bg-white my-10;
+  @apply rounded-md;
 }
 .member-card {
   @apply text-xs md:text-sm;
   @apply flex flex-row gap-x-2 md:gap-x-4;
   @apply w-full;
-  @apply font-semibold;
-  @apply p-4 md:p-8 pt-5;
+  @apply font-medium;
+  @apply p-6;
+  @apply leading-4;
   .badge-details {
     @apply flex flex-row;
   }
   .badge-color {
-    @apply w-3 h-3 md:w-5 md:h-5;
+    @apply w-3 h-3 md:w-4 md:h-4;
     @apply mr-1 md:mr-2;
     @apply rounded-sm;
     @apply bg-josa-blue;
     @apply shrink-0;
+    @apply mt-0.5 md:mt-0;
   }
 
-  span {
+  .member-info-value {
+    @apply font-medium;
+    @apply inline-block;
+  }
+
+  .member-info-heading {
     @apply font-light;
+    @apply mr-2;
+    @apply text-gray-500;
   }
 }
 </style>
