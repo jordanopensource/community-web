@@ -1,7 +1,7 @@
 <template>
   <div class="card-container">
     <div class="border-b-2 border-josa-warm-grey-light">
-      <div class="flex p-4 md:p-6">
+      <div class="flex p-5 md:p-6">
         <div class="mr-4 md:w-36 w-fit h-fit item-min-width shrink-0">
           <img
             alt="bot-lightbulb"
