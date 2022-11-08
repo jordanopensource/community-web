@@ -9,7 +9,7 @@
             aria-label="Previous Page"
             @click="fetchCurrentPage(currentPage - 1)"
           >
-            <img src="icons/arrow.png" alt="Previous Page">
+            <img src="/icons/arrow.png" alt="Previous Page">
           </button></span
         >
       </li>
@@ -37,7 +37,7 @@
             aria-label="Next Page"
             @click="fetchCurrentPage(currentPage + 1)"
           >
-            <img src="icons/arrow.png" alt="Next Page">
+            <img src="/icons/arrow.png" alt="Next Page">
           </button></span
         >
       </li>
