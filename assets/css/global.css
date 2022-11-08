@@ -1,3 +1,40 @@
+/* GLOBAL css */
+/*
+DOC:
+
+The following standard will be apploed to containers and content container
+
+flex gaps between items: mobile: 5,desktop : 10
+
+padding 40 px btween eneties top bottom, between container items 20px
+
+*/
+* {
+  @apply text-base font-normal;
+  @apply text-josa-black-text;
+}
+
+/* Titles are classes used to descirbe titles of entities  */
+.title {
+  @apply font-medium;
+}
+
+h1 {
+  @apply text-5xl;
+  @apply text-white;
+}
+
+h2 {
+  @apply text-4xl;
+}
+
+h3 {
+  @apply text-xl;
+}
+
+.rounded {
+}
+
 /*****/
 
 .button {
