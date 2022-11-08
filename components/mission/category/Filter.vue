@@ -2,7 +2,7 @@
   <div class="category-container">
     <div
       v-if="props.categories.length"
-      class="flex flex-row justify-between border-b-2 border-dotted pb-3"
+      class="flex flex-row justify-between divider-dotted pb-3"
     >
       <h3 class="text-xl lg:text-2xl">Category</h3>
 
@@ -49,7 +49,7 @@
       </div>
     </div>
     <div
-      class="flex flex-row justify-between border-b-2 border-dotted pb-3"
+      class="flex flex-row justify-between divider-dotted pb-3"
       v-if="state.isOpen"
     >
       <h3 class="text-xl lg:text-2xl">Difficulty Level</h3>
@@ -95,7 +95,7 @@
       </div>
     </div>
     <div
-      class="flex flex-row justify-between border-b-2 border-dotted pb-3"
+      class="flex flex-row justify-between divider-dotted pb-3"
       v-if="state.isOpen"
     >
       <h3 class="text-xl lg:text-2xl">Points</h3>
@@ -112,7 +112,7 @@
       </div>
     </div>
     <div
-      class="flex flex-row justify-between border-b-2 border-dotted pb-3"
+      class="flex flex-row justify-between divider-dotted pb-3"
       v-if="state.isOpen"
     >
       <h3 class="text-xl lg:text-2xl">Due date</h3>

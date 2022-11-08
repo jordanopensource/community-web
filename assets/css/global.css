@@ -2,7 +2,7 @@
 /*
 DOC:
 
-The following standard will be apploed to containers and content container
+The following standard will be applied to containers and content container
 
 flex gaps between items: mobile: 5,desktop : 10
 
@@ -17,6 +17,14 @@ padding 40 px btween eneties top bottom, between container items 20px
 /* Titles are classes used to descirbe titles of entities  */
 .title {
   @apply font-medium;
+}
+/* Dividers */
+.divider-slashes {
+  @apply bg-divider-slashes;
+  @apply bg-no-repeat bg-left bg-cover;
+}
+.divider-dotted {
+  @apply border-dotted border-b border-gray-500;
 }
 
 h1 {
