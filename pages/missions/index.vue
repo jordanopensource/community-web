@@ -36,7 +36,10 @@
 
 <script setup>
 import { reactive } from 'vue'
-
+const config = useRuntimeConfig()
+if (config.BETA) {
+  navigateTo('/')
+}
 const state = reactive({
   sortBy: '',
   searchMission: '',
