@@ -42,10 +42,12 @@
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
-
 const config = useRuntimeConfig()
 const step = ref(1)
 let formData = reactive({})
+if (config.BETA) {
+  navigateTo('/')
+}
 const nextStep = (data) => {
   formData = { ...formData, ...data }
   step.value++

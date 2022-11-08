@@ -1,13 +1,13 @@
 <template>
   <div :class="props.isOpen ? 'block lg:hidden' : 'hidden lg:hidden'">
     <ul class="mobile-menu">
-      <li class="py-4 border-gray">
+      <li class="py-4 border-gray" v-if="!config.BETA">
         <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
       </li>
       <li class="py-4 border-gray">
         <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
       </li>
-      <li class="py-4 border-gray">
+      <li class="py-4 border-gray" v-if="!config.BETA">
         <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
       </li>
       <!-- <li class="py-4">

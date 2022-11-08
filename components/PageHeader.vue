@@ -17,13 +17,13 @@
             </span>
           </NuxtLink>
           <ul class="menu">
-            <li class="menu-item">
+            <li class="menu-item" v-if="!config.BETA">
               <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
             </li>
             <li class="menu-item">
               <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
             </li>
-            <li class="menu-item">
+            <li class="menu-item" v-if="!config.BETA">
               <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
             </li>
             <!-- <li class="menu-item">
