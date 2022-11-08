@@ -86,6 +86,7 @@ watch(() => (currentPage.value = props.currentPage))
 .pagination button.disabled {
   @apply cursor-default font-light;
   opacity: 0.25;
+  pointer-events: none;
 }
 .pagination a.disabled:hover {
   @apply cursor-default;
