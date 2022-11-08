@@ -14,7 +14,10 @@ module.exports = {
     },
     container: {
       center: true,
-      padding: '40px',
+      padding: {
+        DEFAULT: '1.25rem',
+        lg: '2.5rem'
+      },
     },
     extend: {
       colors: {
@@ -29,6 +32,10 @@ module.exports = {
           DEFAULT: '#efedec',
           dark: '#aea79f',
         },
+        'josa-grey':{
+          light: "#f5f5f5", // bg
+          DEFAULT: '#e3e7e9' // bg boxes
+        },
         'josa-red': {
           veryLight: '#fee9e2',
           light: '#f8c0ac',
@@ -42,14 +49,11 @@ module.exports = {
           dark: '#5c813d',
         },
         'josa-black': {
-          DEFAULT: '#22292c',
-          darker: '#1a1f21',
+          DEFAULT: '#22292c', // mainly used for banners
+          darker: '#1a1f21', // mainly used for Navigation and footer background
+          text: "#333"
         },
         grey90: '#e5e5e5',
-      },
-      fontFamily: {
-        IBMPlexSansArabic: 'IBM Plex Sans Arabic',
-        IBMPlexMono: 'IBM Plex Mono',
       },
       padding: {
         '15px': '15px',
