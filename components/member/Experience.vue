@@ -1,6 +1,6 @@
 <template>
   <div id="member-experience-and-education" class="container details-container">
-    <h2>Experience and Education</h2>
+    <h2 class="text-2xl font-light">Experience and Education</h2>
     <div class="slash-separator"></div>
 
     <div v-if="props.experience.length" class="experience">
@@ -22,7 +22,6 @@
                   : 'Current'
               }}
             </p>
-            <!-- <p></p> -->
           </div>
         </li>
       </ul>
@@ -68,6 +67,9 @@ const formatDate = (date) => {
 }
 </script>
 <style lang="postcss" scoped>
+.details-container {
+  @apply text-sm md:text-lg;
+}
 .slash-separator {
   @apply relative;
   @apply mt-8;
@@ -93,10 +95,8 @@ const formatDate = (date) => {
 }
 
 .heading {
-  @apply text-lg;
   @apply text-gray-500;
-  @apply mb-2;
-  @apply font-light;
+  font-family: 'IBM Sans';
 }
 
 .experience,
@@ -113,13 +113,19 @@ li {
   @apply w-full;
   @apply ml-0 mt-2 py-3;
   @apply flex flex-row justify-between;
-
+  @apply text-xl;
+  
   .title {
-    @apply font-semibold text-lg;
+    @apply font-semibold;
+    font-family: 'IBM Sans';
+  }
+  .sub-title {
+    @apply font-normal;
+    font-family: 'IBM Sans';
   }
 
   .date-container {
-    @apply text-gray-500;
+    @apply text-lg text-gray-500;
   }
 }
 </style>

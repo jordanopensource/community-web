@@ -1,6 +1,6 @@
 <template>
   <div id="member-detail" class="details-container">
-    <p class="heading">About</p>
+    <h3 class="heading">About</h3>
     <p class="member-about mb-8">
       {{
         props.member.about
@@ -47,7 +47,7 @@ const formatDate = (date) => {
 }
 .heading {
   @apply text-gray-500;
-  @apply mb-2;
+  font-family: 'IBM Sans';
 }
 
 .skills {

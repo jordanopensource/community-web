@@ -1,10 +1,10 @@
 <template>
   <div id="member-contributions" class="details-container">
-    <h2 class="heading">Contributions</h2>
+    <h2 class="text-2xl font-light">Contributions</h2>
     <div class="slash-separator"></div>
 
     <div class="contribution">
-      <h3 class="sub-heading">JOSA Contributions</h3>
+      <h3 class="heading">JOSA Contributions</h3>
       <ul>
         <li v-for="(contribution, index) in props.contributions"
             :key="index"
@@ -39,6 +39,9 @@ const formatDate = (date) => {
 }
 </script>
 <style lang="postcss" scoped>
+.details-container {
+  @apply text-sm md:text-lg;
+}
 .slash-separator {
   @apply relative;
   @apply mt-8;
@@ -68,12 +71,8 @@ const formatDate = (date) => {
 }
 
 .heading {
-  @apply mb-2;
-  @apply font-light;
-  @apply text-lg;
-}
-.sub-heading {
-  @apply text-gray-500 text-sm;
+  @apply text-gray-500;
+  font-family: 'IBM Sans';
 }
 
 ul {
@@ -85,17 +84,18 @@ li {
   @apply w-full;
   @apply ml-0 mt-2 py-3;
   @apply flex flex-row justify-between;
-
+  @apply text-xl;
+  
   .title {
-    @apply font-semibold text-lg font-IBMPlexSansArabic;
+    @apply font-semibold;
+    font-family: 'IBM Sans';
   }
   .sub-title {
-    @apply font-normal font-IBMPlexSansArabic;
+    @apply font-normal;
+    font-family: 'IBM Sans';
   }
-
   .date-container {
-    @apply font-IBMPlexSansArabic;
-    @apply text-sm text-gray-500;
+    @apply text-lg text-gray-500;
   }
 }
 </style>

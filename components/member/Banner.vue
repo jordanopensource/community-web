@@ -118,14 +118,15 @@ img {
   @apply self-center flex mt-9 lg:mt-8;
   @apply ml-4 md:ml-8;
   .member-name {
-    @apply font-medium text-xl md:text-3xl;
+    @apply font-medium text-josa-black-text;
+    @apply text-xl md:text-4xl;
     @apply -mt-2 mb-2;
-    @apply font-IBMPlexSansArabic;
+    font-family: 'IBM Sans';
   }
   .member-headline {
-    @apply text-left;
+    @apply text-left text-2xl; /* TODO: add the text size for mobile */
     @apply my-2 lg:mb-6;
-    @apply font-IBMPlexSansArabic;
+    font-family: 'IBM Sans';
   }
 
   .member-location {
