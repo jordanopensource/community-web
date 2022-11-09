@@ -3,7 +3,7 @@
     <Banner bannerText="JOSA Members" />
     <div class="container p-0">
       <MemberBanner v-if="!pendingMember" :member="memberData.member" />
-      <div class="flex gap-x-4">
+      <div class="flex">
         <div class="flex flex-col w-full">
           <div class="block lg:hidden">
             <MemberCard v-if="!pendingMember" :member="memberData.member" />

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="card">
     <div class="card-color"></div>
     <div class="member-card">
       <div v-if="props.member.type !== 0" class="badge-details">
@@ -60,6 +60,9 @@ const formatDate = (date) => {
 </script>
 
 <style lang="postcss" scoped>
+.card {
+  @apply p-0 m-0 lg:ml-10;
+}
 .card-color{
   @apply w-full h-4;
   @apply rounded-lg rounded-b-none;
@@ -73,8 +76,7 @@ const formatDate = (date) => {
   @apply md:mr-24;
   @apply font-semibold;
   @apply bg-white;
-  @apply p-4 lg:p-8;
-  @apply mt-0;
+  @apply p-5 lg:p-10;
   @apply rounded-lg rounded-t-none;
 
   .line {
