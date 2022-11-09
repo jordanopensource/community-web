@@ -1,5 +1,5 @@
 <template>
-  <div id="member-avatar" class="details-container">
+  <div id="banner" class="details-container">
     <div class="relative">
       <img
         class="cover"
@@ -74,8 +74,8 @@ const placeHolderImages = {
 
 <style lang="postcss" scoped>
 
-#member-avatar {
-  @apply p-0;
+#banner {
+  @apply p-0 pb-5 md:pb-10;
 }
 .details-container {
   @apply text-base;
@@ -89,22 +89,22 @@ img {
   @apply w-64 mr-8;
 }
 .avatar {
-  @apply w-32 h-32;
-  @apply ml-4 md:ml-8;
-  @apply -mt-24;
+  @apply w-36 h-36;
+  @apply ml-5 md:ml-10;
+  margin-top: -6.5rem;
 }
 @media (min-width: 1024px) {
     .avatar {
-        @apply -mt-32;
-        width:  200px;
-        height: 200px;
+      @apply -mt-40;
+      width:  200px;
+      height: 200px;
     }
 }
 @media (max-width: 640px) {
     .avatar {
-        width:  96px;
-        height: 96px;
-        margin-top: -2.8rem;
+      margin-top: -3.2rem;
+      width:  72px;
+      height: 72px;
     }
 }
 
@@ -116,7 +116,7 @@ img {
 
 .general-info {
   @apply self-center flex mt-9 lg:mt-8;
-  @apply ml-4 md:ml-8;
+  @apply ml-5 md:ml-10;
   .member-name {
     @apply font-medium text-josa-black-text;
     @apply text-xl md:text-4xl;
@@ -132,7 +132,7 @@ img {
   .member-location {
     @apply flex flex-row;
     @apply text-gray-600;
-    @apply mt-2 mb-4;
+    @apply mt-2;
   }
 }
 .invisible-white-space {

@@ -39,8 +39,11 @@ const { data: memberData, pending: pendingMember } = await useFetch(
 <style scoped lang="postcss">
 .details-container {
   @apply bg-white;
-  @apply m-4;
-  @apply p-4 lg:p-8;
+  @apply mb-10;
+  @apply p-5 md:p-10;
   @apply rounded-lg;
+}
+.details-container:first-child {
+  @apply mt-10;
 }
 </style>

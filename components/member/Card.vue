@@ -1,5 +1,5 @@
 <template>
-  <div class="m-4">
+  <div>
     <div class="card-color"></div>
     <div class="member-card">
       <div v-if="props.member.type !== 0" class="badge-details">
