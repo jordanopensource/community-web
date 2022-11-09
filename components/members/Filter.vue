@@ -21,15 +21,7 @@
           :class="state.isOpen ? 'expand-button' : 'expand-button-collapsed'"
           aria-label="Expand Filter Section"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-          >
-            <path fill="none" d="M0 0h24v24H0z" />
-            <path d="M12 16l-6-6h12z" />
-          </svg>
+          <img src="/icons/arrow.png" alt="Expand Filter" />
         </button>
       </div>
     </div>
@@ -154,14 +146,14 @@ watch(
 
 .expand-button {
   transition-duration: 0.5s;
-  transform: rotate(-180deg);
+  transform: rotate(0deg);
   @apply cursor-pointer  outline-none lg:hidden;
 }
 
 .expand-button-collapsed {
   transition-duration: 0.5s;
-  transform: rotate(0deg);
-  @apply cursor-pointer  outline-none lg:hidden;
+  transform: rotate(-90deg);
+  @apply cursor-pointer ml-2 outline-none lg:hidden;
 }
 
 .filter-collapsed {
