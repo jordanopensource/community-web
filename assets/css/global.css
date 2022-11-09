@@ -9,7 +9,7 @@ flex gaps between items: mobile: 5,desktop : 10
 padding 40 px btween eneties top bottom, between container items 20px
 
 */
-* {
+body {
   @apply text-base font-normal;
   @apply text-josa-black-text;
 }
