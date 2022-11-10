@@ -37,7 +37,7 @@ h2 {
 }
 
 h3 {
-  @apply text-xl;
+  @apply text-base lg:text-xl;
 }
 
 .rounded {

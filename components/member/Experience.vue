@@ -1,6 +1,6 @@
 <template>
   <div id="member-experience-and-education" class="container details-container">
-    <h2 class="text-2xl font-light">Experience and Education</h2>
+    <h2 class="text-xl lg:text-2xl font-light">Experience and Education</h2>
     <div class="slash-separator"></div>
 
     <div v-if="props.experience.length" class="experience">
@@ -116,16 +116,16 @@ li {
   @apply text-xl;
   
   .title {
-    @apply font-semibold;
+    @apply font-semibold text-base lg:text-xl;
     font-family: 'IBM Sans';
   }
   .sub-title {
-    @apply font-normal;
+    @apply font-normal text-base lg:text-xl;
     font-family: 'IBM Sans';
   }
 
   .date-container {
-    @apply text-lg text-gray-500;
+    @apply text-sm lg:text-lg text-gray-500;
   }
 }
 </style>

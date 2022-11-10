@@ -78,7 +78,7 @@ const placeHolderImages = {
   @apply p-0 pb-5 md:pb-10;
 }
 .details-container {
-  @apply text-base;
+  @apply text-sm md:text-base;
 }
 
 img {
@@ -119,12 +119,12 @@ img {
   @apply ml-5 md:ml-10;
   .member-name {
     @apply font-medium text-josa-black-text;
-    @apply text-xl md:text-4xl;
+    @apply text-2xl md:text-4xl;
     @apply -mt-2 mb-2;
     font-family: 'IBM Sans';
   }
   .member-headline {
-    @apply text-left text-2xl; /* TODO: add the text size for mobile */
+    @apply text-left text-lg md:text-2xl;
     @apply my-2 lg:mb-6;
     font-family: 'IBM Sans';
   }
