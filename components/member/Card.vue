@@ -61,7 +61,7 @@ const formatDate = (date) => {
 
 <style lang="postcss" scoped>
 .card {
-  @apply p-0 m-0 lg:ml-10;
+  @apply p-0 m-0 mb-5 lg:ml-10;
 }
 .card-color{
   @apply w-full h-4;

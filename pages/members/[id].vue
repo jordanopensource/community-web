@@ -1,7 +1,7 @@
 <template>
   <div>
     <Banner bannerText="JOSA Members" />
-    <div class="container p-0">
+    <div class="container">
       <MemberBanner v-if="!pendingMember" :member="memberData.member" />
       <div class="flex">
         <div class="flex flex-col w-full">
@@ -39,11 +39,11 @@ const { data: memberData, pending: pendingMember } = await useFetch(
 <style scoped lang="postcss">
 .details-container {
   @apply bg-white;
-  @apply mb-10;
+  @apply mb-5 md:mb-10;
   @apply p-5 md:p-10;
   @apply rounded-lg;
 }
 .details-container:first-child {
-  @apply mt-10;
+  @apply mt-5 md:mt-10;
 }
 </style>
