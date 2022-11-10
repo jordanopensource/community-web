@@ -178,5 +178,8 @@ watch(
 
 .filter-head {
   cursor: pointer;
+  @media screen and (min-width: 1024px) {
+    pointer-events: none;
+  }
 }
 </style>
