@@ -47,6 +47,7 @@ const formatDate = (date) => {
 }
 .heading {
   @apply text-gray-500;
+  @apply mb-5;
   font-family: 'IBM Sans';
 }
 

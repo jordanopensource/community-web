@@ -24,7 +24,7 @@
           </span>
         </p>
       </div>
-      <div class="line"></div>
+      <div class="divider-dotted"></div>
       <div>
         <p class="header">
           Score
@@ -61,7 +61,7 @@ const formatDate = (date) => {
 
 <style lang="postcss" scoped>
 .card {
-  @apply p-0 m-0 mb-5 lg:ml-10;
+  @apply m-0 mb-5 lg:ml-10;
 }
 .card-color{
   @apply w-full h-4;
@@ -70,20 +70,13 @@ const formatDate = (date) => {
 }
 .member-card {
   @apply flex flex-col;
-  @apply gap-y-0 lg:gap-y-2;
+  @apply gap-y-2 lg:gap-y-4;
   @apply justify-between;
   @apply w-full;
   @apply md:mr-24;
-  @apply font-semibold;
   @apply bg-white;
   @apply p-5 lg:p-10;
   @apply rounded-lg rounded-t-none;
-
-  .line {
-    @apply w-full h-0;
-    @apply border-2 border-dotted border-b-0 border-josa-black;
-    @apply my-1 lg:my-6;
-  }
 
   .header {
     @apply font-light;
@@ -109,7 +102,4 @@ const formatDate = (date) => {
   }
 }
 
-.member-card > div {
-  @apply my-3 lg:my-auto;
-}
 </style>

@@ -8,7 +8,7 @@
       <ul>
         <li v-for="(contribution, index) in props.contributions"
             :key="index"
-            class="divider-dotted">
+            class="divider-dotted pb-2.5">
           <div>
             <h4 class="title">{{ contribution.description }}</h4>
             <h5 class="sub-title">{{ contribution.role }}</h5>
@@ -44,7 +44,7 @@ const formatDate = (date) => {
 }
 .slash-separator {
   @apply relative;
-  @apply mt-8;
+  @apply mt-5 mb-16;
 }
 .slash-separator:before {
   @apply h-3;
@@ -67,11 +67,12 @@ const formatDate = (date) => {
 }
 
 .contribution {
-  @apply mt-16;
+  @apply mt-5;;
 }
 
 .heading {
   @apply text-gray-500;
+  @apply mb-5;
   font-family: 'IBM Sans';
 }
 
@@ -82,7 +83,7 @@ ul {
 
 li {
   @apply w-full;
-  @apply ml-0 mt-2 py-3;
+  @apply ml-0 mb-5;
   @apply flex flex-row justify-between;
   @apply text-xl;
   

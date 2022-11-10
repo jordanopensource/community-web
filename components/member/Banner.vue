@@ -26,7 +26,7 @@
         />
       </div>
       <div class="general-info">
-          <div class="flex flex-col items-start">
+          <div class="flex flex-col items-start gap-y-5">
             <h1 class="member-name">
               {{ props.member.first_name_en }} {{ props.member.last_name_en }}
             </h1>
@@ -115,24 +115,21 @@ img {
 }
 
 .general-info {
-  @apply self-center flex mt-9 lg:mt-8;
+  @apply self-center flex mt-5;
   @apply ml-5 md:ml-10;
   .member-name {
     @apply font-medium text-josa-black-text;
     @apply text-2xl md:text-4xl;
-    @apply -mt-2 mb-2;
     font-family: 'IBM Sans';
   }
   .member-headline {
     @apply text-left text-lg md:text-2xl;
-    @apply my-2 lg:mb-6;
     font-family: 'IBM Sans';
   }
 
   .member-location {
     @apply flex flex-row;
     @apply text-gray-600;
-    @apply mt-2;
   }
 }
 .invisible-white-space {

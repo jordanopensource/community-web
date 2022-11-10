@@ -8,7 +8,7 @@
       <ul>
         <li v-for="(experience, index) in props.experience"
             :key="index"
-            class="divider-dotted">
+            class="divider-dotted pb-2.5">
           <div>
             <h4 class="title">{{ experience.company_name }}</h4>
             <h5 class="sub-title">{{ experience.position }}</h5>
@@ -32,7 +32,7 @@
       <ul>
         <li v-for="(education, index) in props.education"
             :key="index"
-            class="divider-dotted">
+            class="divider-dotted pb-2.5">
           <div>
             <h4 class="title">{{ education.institution_name }}</h4>
             <h5 class="sub-title">{{ education.degree }}</h5>
@@ -72,7 +72,7 @@ const formatDate = (date) => {
 }
 .slash-separator {
   @apply relative;
-  @apply mt-8;
+  @apply mt-5 mb-16;
 }
 .slash-separator:before {
   @apply h-3;
@@ -96,12 +96,13 @@ const formatDate = (date) => {
 
 .heading {
   @apply text-gray-500;
+  @apply mb-5;
   font-family: 'IBM Sans';
 }
 
 .experience,
 .education {
-  @apply mt-16;
+  @apply mt-5;
 }
 
 ul {
@@ -111,7 +112,7 @@ ul {
 
 li {
   @apply w-full;
-  @apply ml-0 mt-2 py-3;
+  @apply ml-0 mb-5;
   @apply flex flex-row justify-between;
   @apply text-xl;
   
