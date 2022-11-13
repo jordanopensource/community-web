@@ -42,9 +42,6 @@ const formatDate = (date) => {
 }
 </script>
 <style lang="postcss" scoped>
-.details-container {
-  @apply text-sm md:text-lg;
-}
 .heading {
   @apply text-gray-500;
   @apply mb-5;

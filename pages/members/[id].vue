@@ -42,6 +42,7 @@ const { data: memberData, pending: pendingMember } = await useFetch(
   @apply mb-5 md:mb-10;
   @apply p-5 md:p-10;
   @apply rounded-lg;
+  @apply md:text-lg;
 }
 .details-container:first-child {
   @apply mt-5 md:mt-10;

@@ -67,9 +67,6 @@ const formatDate = (date) => {
 }
 </script>
 <style lang="postcss" scoped>
-.details-container {
-  @apply text-sm md:text-lg;
-}
 .slash-separator {
   @apply relative;
   @apply mt-5 mb-16;
