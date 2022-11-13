@@ -100,6 +100,8 @@
 </template>
 <script setup>
 const config = useRuntimeConfig()
+console.log(`WORKING ENVIRONMENT`, config.ENV)
+console.log(`DRONE COMMIT SHA `, config.COMMIT_SHA)
 </script>
 
 <style lang="postcss" scoped>
