@@ -1,5 +1,5 @@
 <template>
-  <div id="member-avatar" class="details-container">
+  <div id="banner" class="details-container">
     <div class="relative">
       <img
         class="cover"
@@ -13,7 +13,7 @@
       <div class="invisible-white-space"></div>
       <div
         id="avatar-info-container"
-        class="flex flex-row relative gap-x-7 -mt-8 lg:-mt-12"
+        class="flex flex-row relative gap-x-7"
       >
         <img
           class="avatar"
@@ -24,8 +24,9 @@
               : placeHolderImages.avatar
           "
         />
-        <div class="general-info">
-          <div class="flex flex-col items-start">
+      </div>
+      <div class="general-info">
+          <div class="flex flex-col items-start gap-y-5">
             <h1 class="member-name">
               {{ props.member.first_name_en }} {{ props.member.last_name_en }}
             </h1>
@@ -55,7 +56,6 @@
             </p>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -73,11 +73,12 @@ const placeHolderImages = {
 </script>
 
 <style lang="postcss" scoped>
+
+#banner {
+  @apply p-0 pb-5 md:pb-10;
+}
 .details-container {
-  @apply bg-white;
-  @apply mt-7 lg:mt-20 mb-7;
-  @apply p-10 px-8 lg:px-20;
-  @apply text-base;
+  @apply text-sm md:text-base;
 }
 
 img {
@@ -88,28 +89,47 @@ img {
   @apply w-64 mr-8;
 }
 .avatar {
-  @apply w-24 h-24 md:w-52 md:h-52;
-  @apply ml-4;
+  @apply w-36 h-36;
+  @apply ml-5 md:ml-10;
+  margin-top: -6.5rem;
+}
+@media (min-width: 1024px) {
+    .avatar {
+      @apply -mt-40;
+      width:  200px;
+      height: 200px;
+    }
+}
+@media (max-width: 640px) {
+    .avatar {
+      margin-top: -3.2rem;
+      width:  72px;
+      height: 72px;
+    }
 }
 
 .cover {
-  @apply w-full h-16 md:h-44;
+  @apply w-full;
+  @apply rounded-b-none;
+  height: 25%;
 }
 
 .general-info {
-  @apply self-center flex mt-9 lg:mt-8;
+  @apply self-center flex mt-5;
+  @apply ml-5 md:ml-10;
   .member-name {
-    @apply text-lg font-semibold;
+    @apply font-medium text-josa-black-text;
+    @apply text-2xl md:text-4xl;
+    font-family: 'IBM Sans';
   }
   .member-headline {
-    @apply text-left;
-    @apply my-2;
+    @apply text-left text-lg md:text-2xl;
+    font-family: 'IBM Sans';
   }
 
   .member-location {
     @apply flex flex-row;
     @apply text-gray-600;
-    @apply my-2;
   }
 }
 .invisible-white-space {

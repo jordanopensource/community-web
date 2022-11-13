@@ -1,9 +1,6 @@
 <template>
   <div id="member-detail" class="details-container">
-    <div class="lg:hidden">
-      <MemberCard :member="props.member" />
-    </div>
-    <p class="heading">About</p>
+    <h3 class="heading">About</h3>
     <p class="member-about mb-8">
       {{
         props.member.about
@@ -45,15 +42,10 @@ const formatDate = (date) => {
 }
 </script>
 <style lang="postcss" scoped>
-.details-container {
-  @apply bg-white;
-  @apply mb-14;
-  @apply p-10;
-  @apply text-sm md:text-lg;
-}
 .heading {
   @apply text-gray-500;
-  @apply mb-2;
+  @apply mb-5;
+  font-family: 'IBM Sans';
 }
 
 .skills {
