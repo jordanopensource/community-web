@@ -87,22 +87,8 @@
         </div>
       </div>
     </div>
-    <div class="bg-josa-black text-white" v-if="config.ENV === 'development'">
-      <a
-        :href="`https://github.com/jordanopensource/community-web/commit/${config.COMMIT_SHA}`"
-        target="_blank"
-        class="flex justify-evenly"
-      >
-        {{ config.COMMIT_SHA }}
-      </a>
-    </div>
   </footer>
 </template>
-<script setup>
-const config = useRuntimeConfig()
-console.log(`WORKING ENVIRONMENT`, config.ENV)
-console.log(`DRONE COMMIT SHA `, config.COMMIT_SHA)
-</script>
 
 <style lang="postcss" scoped>
 .footer-section {

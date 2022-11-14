@@ -3,7 +3,7 @@
     <nav>
       <div class="container">
         <div class="nav-bar">
-          <NuxtLink id="brand" to="/" class="flex flex-row items-end z-10">
+          <NuxtLink id="brand" to="/" class="flex flex-row items-end">
             <img
               class="w-36 h-10"
               src=" /logo/logo.svg"
@@ -17,13 +17,19 @@
             </span>
           </NuxtLink>
           <ul class="menu">
-            <li class="menu-item" v-if="!config.BETA">
+            <li
+              class="menu-item"
+              v-if="config.public.TARGET_ENV === 'development'"
+            >
               <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
             </li>
             <li class="menu-item">
               <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
             </li>
-            <li class="menu-item" v-if="!config.BETA">
+            <li
+              class="menu-item"
+              v-if="config.public.TARGET_ENV === 'development'"
+            >
               <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
             </li>
             <!-- <li class="menu-item">
