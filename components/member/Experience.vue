@@ -1,12 +1,14 @@
 <template>
   <div id="member-experience-and-education" class="container details-container">
-    <h2>Experience and Education</h2>
+    <h2 class="text-xl lg:text-2xl font-light">Experience and Education</h2>
     <div class="slash-separator"></div>
 
     <div v-if="props.experience.length" class="experience">
       <h3 class="heading">Work Experience</h3>
       <ul>
-        <li v-for="(experience, index) in props.experience" :key="index">
+        <li v-for="(experience, index) in props.experience"
+            :key="index"
+            class="divider-dotted pb-2.5">
           <div>
             <h4 class="title">{{ experience.company_name }}</h4>
             <h5 class="sub-title">{{ experience.position }}</h5>
@@ -20,7 +22,6 @@
                   : 'Current'
               }}
             </p>
-            <!-- <p></p> -->
           </div>
         </li>
       </ul>
@@ -29,7 +30,9 @@
     <div v-if="props.education.length" class="education">
       <h3 class="heading">Education</h3>
       <ul>
-        <li v-for="(education, index) in props.education" :key="index">
+        <li v-for="(education, index) in props.education"
+            :key="index"
+            class="divider-dotted pb-2.5">
           <div>
             <h4 class="title">{{ education.institution_name }}</h4>
             <h5 class="sub-title">{{ education.degree }}</h5>
@@ -64,15 +67,9 @@ const formatDate = (date) => {
 }
 </script>
 <style lang="postcss" scoped>
-.details-container {
-  @apply bg-white;
-  @apply p-10 px-8;
-  @apply mb-14;
-}
-
 .slash-separator {
   @apply relative;
-  @apply mt-8;
+  @apply mt-5 mb-16;
 }
 .slash-separator:before {
   @apply h-3;
@@ -95,15 +92,14 @@ const formatDate = (date) => {
 }
 
 .heading {
-  @apply text-lg;
   @apply text-gray-500;
-  @apply mb-2;
-  @apply font-light;
+  @apply mb-5;
+  font-family: 'IBM Sans';
 }
 
 .experience,
 .education {
-  @apply mt-16;
+  @apply mt-5;
 }
 
 ul {
@@ -113,16 +109,21 @@ ul {
 
 li {
   @apply w-full;
-  @apply ml-0 mt-2 py-3;
-  @apply border-dotted border-t-2 border-gray-500;
+  @apply ml-0 mb-5;
   @apply flex flex-row justify-between;
-
+  @apply text-xl;
+  
   .title {
-    @apply font-semibold text-lg;
+    @apply font-semibold text-base lg:text-xl;
+    font-family: 'IBM Sans';
+  }
+  .sub-title {
+    @apply font-normal text-base lg:text-xl;
+    font-family: 'IBM Sans';
   }
 
   .date-container {
-    @apply text-gray-500;
+    @apply text-sm lg:text-lg text-gray-500;
   }
 }
 </style>

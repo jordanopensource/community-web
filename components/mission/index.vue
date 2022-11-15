@@ -1,5 +1,6 @@
 <template>
-  <div v-if="state.missions?.length">
+  <div v-if="state.loading">Loading</div>
+  <div v-else-if="!state.loading && state.missions.length">
     <h2 class="text-2xl mono">
       {{ state.metaData.totalItems }} missions found
     </h2>
@@ -7,14 +8,14 @@
       <MissionCard :mission="mission" />
     </div>
   </div>
-  <div v-else>
+  <div v-else-if="!state.loading && !state.missions.length">
     <p>No Missions found</p>
   </div>
   <PaginationBar
     :currentPage="state.page"
     :totalPages="state.metaData.totalPages"
     @switchPage="(newPage) => getMissions((state.page = newPage))"
-    v-if="state.missions?.length"
+    v-if="!state.loading && state.missions?.length"
   />
 </template>
 <script setup>
@@ -23,8 +24,12 @@ import { watch } from 'vue'
 const config = useRuntimeConfig()
 const state = reactive({
   searchedMission: '',
+  loading: true,
   assignedMission: false,
-  order_by: '',
+  orderBy: {
+    orderBy: '',
+    criteria: '',
+  },
   missions: [],
   metaData: {},
   page: 1,
@@ -48,10 +53,27 @@ const props = defineProps({
 
 const emit = defineEmits(['setCategories'])
 
-const getMissions = async (currentPage = state.page) => {
-  fetch(
-    `${config.COMMUNITY_API_URL}/mission/page/${currentPage}?${props.selectedMissionCriteria?.key}=${props.selectedMissionCriteria?.value}`
-  )
+const getMissions = async () => {
+  state.loading = true
+  let url = `${config.public.COMMUNITY_API_URL}/mission/page/${state.page}?`
+
+  if (props.selectedMissionCriteria) {
+    url += `${props.selectedMissionCriteria?.key}=${props.selectedMissionCriteria?.value}&`
+  }
+
+  if (state.assignedMission) {
+    url += `assigned=${state.assignedMission}&`
+  }
+
+  if (state.orderBy.orderBy) {
+    url += `order_by=${query.orderBy}&order_criteria=${query.criteria}&`
+  }
+
+  if (state.searchedMission) {
+    url += `title=${state.searchedMission}&`
+  }
+
+  fetch(url)
     .then((response) => response.json())
     .then((data) => {
       state.missions = Object.create(data.paginate?.items)
@@ -61,31 +83,8 @@ const getMissions = async (currentPage = state.page) => {
     .catch((error) => {
       console.log(error)
     })
-}
-
-const getOrderedMissions = async (query) => {
-  fetch(
-    `${config.COMMUNITY_API_URL}/mission/page/${state.page}?assigned=${state.assignedMission}&order_by=${query.orderBy}&order_criteria=${query.criteria}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      state.missions = Object.create(data.paginate?.items)
-      state.metaData = Object.create(data.paginate?.meta)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
-
-const searchMission = async (query) => {
-  fetch(`${config.COMMUNITY_API_URL}/mission/page/${state.page}?title=${query}`)
-    .then((response) => response.json())
-    .then((data) => {
-      state.missions = Object.create(data.paginate?.items)
-      state.metaData = Object.create(data.paginate?.meta)
-    })
-    .catch((error) => {
-      console.log(error)
+    .finally(() => {
+      state.loading = false
     })
 }
 
@@ -95,11 +94,8 @@ await getMissions()
 watch(
   () => (state.searchedMission = props.mission),
   async (newValue) => {
-    if (newValue) {
-      await searchMission(newValue)
-    } else {
-      await getMissions()
-    }
+    state.searchedMission = newValue
+    await getMissions()
   }
 )
 
@@ -114,10 +110,10 @@ watch(
 // Order missions
 watch(
   () => (state.order_by = props.sortBy),
-  (sortKey) => {
+  async (sortKey) => {
     const sortArr = sortKey.split(',')
-    const query = { orderBy: sortArr[1], criteria: sortArr[0] }
-    getOrderedMissions(query)
+    state.orderBy = { orderBy: sortArr[1], criteria: sortArr[0] }
+    await getMissions(query)
   }
 )
 </script>

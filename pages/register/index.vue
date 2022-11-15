@@ -42,10 +42,12 @@
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
-
 const config = useRuntimeConfig()
 const step = ref(1)
 let formData = reactive({})
+if (!config.public.TARGET_ENV === 'development') {
+  navigateTo('/')
+}
 const nextStep = (data) => {
   formData = { ...formData, ...data }
   step.value++
@@ -53,7 +55,7 @@ const nextStep = (data) => {
 
 const submitForm = (data) => {
   formData = { ...formData, ...data }
-  fetch(`${config.COMMUNITY_API_URL}/submission/`, {
+  fetch(`${config.public.COMMUNITY_API_URL}/submission/`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

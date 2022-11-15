@@ -54,6 +54,6 @@ const props = defineProps({
 }
 
 .interactive-control {
-  @apply inline;
+  @apply inline rounded-r-none;
 }
 </style>

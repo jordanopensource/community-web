@@ -175,10 +175,11 @@
 }
 
 *,
-.sans {
+title {
   font-family: 'IBM Sans';
 }
 
+/* TODO: remove this .heading class */
 .heading,
 .mono,
 h1,

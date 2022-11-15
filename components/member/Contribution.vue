@@ -1,12 +1,14 @@
 <template>
-  <div id="member-contributions" class="container details-container">
-    <h2>Contributions</h2>
+  <div id="member-contributions" class="details-container">
+    <h2 class="text-xl lg:text-2xl font-ligh font-light">Contributions</h2>
     <div class="slash-separator"></div>
 
     <div class="contribution">
       <h3 class="heading">JOSA Contributions</h3>
       <ul>
-        <li v-for="(contribution, index) in props.contributions" :key="index">
+        <li v-for="(contribution, index) in props.contributions"
+            :key="index"
+            class="divider-dotted pb-2.5">
           <div>
             <h4 class="title">{{ contribution.description }}</h4>
             <h5 class="sub-title">{{ contribution.role }}</h5>
@@ -37,15 +39,9 @@ const formatDate = (date) => {
 }
 </script>
 <style lang="postcss" scoped>
-.details-container {
-  @apply bg-white;
-  @apply mb-14;
-  @apply p-10 px-8;
-}
-
 .slash-separator {
   @apply relative;
-  @apply mt-8;
+  @apply mt-5 mb-16;
 }
 .slash-separator:before {
   @apply h-3;
@@ -68,14 +64,13 @@ const formatDate = (date) => {
 }
 
 .contribution {
-  @apply mt-16;
+  @apply mt-5;;
 }
 
 .heading {
   @apply text-gray-500;
-  @apply mb-2;
-  @apply font-light;
-  @apply text-lg;
+  @apply mb-5;
+  font-family: 'IBM Sans';
 }
 
 ul {
@@ -85,16 +80,20 @@ ul {
 
 li {
   @apply w-full;
-  @apply ml-0 mt-2 py-3;
-  @apply border-dotted border-t-2 border-gray-500;
+  @apply ml-0 mb-5;
   @apply flex flex-row justify-between;
-
+  @apply text-xl;
+  
   .title {
-    @apply font-semibold text-lg;
+    @apply font-semibold text-base lg:text-xl;
+    font-family: 'IBM Sans';
   }
-
+  .sub-title {
+    @apply font-normal text-base lg:text-xl;
+    font-family: 'IBM Sans';
+  }
   .date-container {
-    @apply text-gray-500;
+    @apply text-sm lg:text-lg text-gray-500;
   }
 }
 </style>

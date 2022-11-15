@@ -5,7 +5,7 @@
       <select
         :name="selectName"
         :id="selectName"
-        class="w-full px-4 py-4 rounded-lg dd-bg-blue"
+        class="bg-right-top w-full px-4 py-4 rounded-lg dd-bg-blue"
         @change="$emit('update:value', $event.target.value)"
       >
         <option
@@ -34,5 +34,14 @@ const props = defineProps({
 <style lang="postcss" scoped>
 .dd-bg-blue {
   background-color: #e3e7e9;
+}
+
+select {
+  background-image: url("icons/arrow.png");
+  background-repeat: no-repeat;
+  background-size: 0.9rem;
+  appearance: none;
+  background-position-y: center;
+  background-position-x: right 1rem;
 }
 </style>

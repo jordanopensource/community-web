@@ -1,3 +1,48 @@
+/* GLOBAL css */
+/*
+DOC:
+
+The following standard will be applied to containers and content container
+
+flex gaps between items: mobile: 5,desktop : 10
+
+padding 40 px btween eneties top bottom, between container items 20px
+
+*/
+body {
+  @apply text-base font-normal;
+  @apply text-josa-black-text;
+}
+
+/* Titles are classes used to descirbe titles of entities  */
+.title {
+  @apply font-medium;
+}
+/* Dividers */
+.divider-slashes {
+  @apply bg-divider-slashes;
+  @apply bg-no-repeat bg-left bg-cover;
+}
+.divider-dotted {
+  @apply border-dotted border-b border-gray-500;
+}
+
+h1 {
+  @apply text-5xl;
+  @apply text-white;
+}
+
+h2 {
+  @apply text-4xl;
+}
+
+h3 {
+  @apply lg:text-xl;
+}
+
+.rounded {
+}
+
 /*****/
 
 .button {
@@ -10,6 +55,7 @@
   @apply rounded-none !important;
   @apply button-blue-full h-full;
   padding: 0.65rem 1rem;
+  background-color: #0c97ac;
 }
 
 .button-blue {
@@ -75,4 +121,8 @@ ul {
 ol > li,
 ul > li {
   @apply ml-4;
+}
+
+.title {
+  font-weight: 500;
 }

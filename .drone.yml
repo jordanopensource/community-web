@@ -15,6 +15,15 @@ steps:
     image: plugins/docker
     settings:
       repo: josaorg/community-web
+      build_args_from_env:
+        [
+          DRONE_BUILD_NUMBER,
+          DRONE_BUILD_LINK,
+          DRONE_COMMIT_SHA,
+          DRONE_COMMIT_LINK,
+          DRONE_REPO_LINK,
+          DRONE_BUILD_FINISHED,
+        ]
       tags:
         - ${DRONE_COMMIT_SHA}
         - stable
