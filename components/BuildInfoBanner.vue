@@ -14,47 +14,33 @@
           :href="config.public.DRONE_COMMIT_LINK"
           target="_blank"
           rel="noopener noreferrer"
-          @mouseenter="show"
-          @mouseleave="hide"
         >
-          ({{ state.droneCommitSha }})
+          ({{ config.public.DRONE_COMMIT_SHA.slice(0, 6) }})
         </a>
       </p>
-      <p class="font-bold">
-        This is {{ config.public.TARGET_ENV }} environment
-      </p>
-      <!-- <p>Build Timestamp: {{ humanDataFormat() }}</p> -->
-      <button class="bannerBtn" @click="closeBanner">
-        <img class="w-9 h-9" src="/icons/lm-icon-close.png" alt="" srcset="" />
-      </button>
+      <div class="flex items-center gap-x-4">
+        <span>🚧</span>
+        <p class="font-bold">
+          This is {{ config.public.TARGET_ENV }} environment
+        </p>
+        <button class="bannerBtn" @click="closeBanner">
+          <img
+            class="w-9 h-9"
+            src="/icons/lm-icon-close.png"
+            alt=""
+            srcset=""
+          />
+        </button>
+      </div>
     </div>
   </div>
 </template>
 <script setup>
 const config = useRuntimeConfig()
 
-const humanDataFormat = () => {
-  const milliseconds = config.public.DRONE_BUILD_FINISHED * 1000
-  return new Date(milliseconds).toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-  })
-}
-
 const state = reactive({
-  droneCommitSha: config.public.DRONE_COMMIT_SHA.slice(0, 6),
   closeBanner: false,
 })
-const show = () => {
-  state.droneCommitSha = config.public.DRONE_COMMIT_SHA
-}
-const hide = () => {
-  state.droneCommitSha = config.public.DRONE_COMMIT_SHA.slice(0, 6)
-}
-
 const closeBanner = () => {
   state.closeBanner = true
 }

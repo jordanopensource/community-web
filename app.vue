@@ -1,6 +1,6 @@
 <template>
   <div class="bg-josa-warm-grey-light">
-    <DroneInfoBanner v-if="config.public.TARGET_ENV === 'development'" />
+    <BuildInfoBanner v-if="config.public.TARGET_ENV === 'development'" />
     <PageHeader />
     <NuxtPage />
     <PageFooter />
