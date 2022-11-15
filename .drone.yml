@@ -15,7 +15,7 @@ steps:
     image: plugins/docker
     settings:
       repo: josaorg/community-web
-       build_args:
+      build_args:
         [
           COMMUNITY_API_URL=https://community.api.prod.josa.ngo/v2,
           TARGET_ENV=production,
