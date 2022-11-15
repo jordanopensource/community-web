@@ -32,7 +32,7 @@ const route = useRoute()
 const user_id = route.params.id
 
 const { data: memberData, pending: pendingMember } = await useFetch(
-  `${config.COMMUNITY_API_URL}/member/${user_id}`
+  `${config.public.COMMUNITY_API_URL}/member/${user_id}`
 )
 </script>
 

@@ -50,7 +50,7 @@ const props = defineProps({
 
 const getMembers = async () => {
   state.loading = true
-  let url = `${config.COMMUNITY_API_URL}/member/page/${state.page}?`
+  let url = `${config.public.COMMUNITY_API_URL}/member/page/${state.page}?`
   if (state.passedName) {
     url += `name=${state.passedName}&`
   }

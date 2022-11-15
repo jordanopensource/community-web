@@ -46,11 +46,19 @@ export default defineNuxtConfig({
     injectPosition: 0,
     viewer: true,
   },
-  publicRuntimeConfig: {
-    COMMUNITY_API_URL: process.env.COMMUNITY_API_URL,
-    ENV: process.env.ENV,
-    COMMIT_SHA: process.env.COMMIT_SHA,
-    BETA: process.env.BETA
+  // REF: https://v3.nuxtjs.org/guide/going-further/runtime-config/
+  runtimeConfig: {
+    // Keys within public, will be also exposed to the client-side
+    public: {
+      COMMUNITY_API_URL: process.env.COMMUNITY_API_URL,
+      TARGET_ENV: process.env.TARGET_ENV,
+      DRONE_COMMIT_SHA: process.env.DRONE_COMMIT_SHA,
+      DRONE_COMMIT_LINK: process.env.DRONE_COMMIT_LINK,
+      DRONE_BUILD_NUMBER: process.env.DRONE_BUILD_NUMBER,
+      DRONE_BUILD_LINK: process.env.DRONE_BUILD_LINK,
+      DRONE_REPO_LINK: process.env.DRONE_REPO_LINK,
+      DRONE_BUILD_FINISHED: process.env.DRONE_BUILD_FINISHED
+    }
   },
   healthcheck: {
     path: '/healthcheck',
