@@ -57,7 +57,8 @@ export default defineNuxtConfig({
       DRONE_BUILD_NUMBER: process.env.DRONE_BUILD_NUMBER,
       DRONE_BUILD_LINK: process.env.DRONE_BUILD_LINK,
       DRONE_REPO_LINK: process.env.DRONE_REPO_LINK,
-      DRONE_BUILD_FINISHED: process.env.DRONE_BUILD_FINISHED
+      DRONE_BUILD_FINISHED: process.env.DRONE_BUILD_FINISHED,
+      DEBUG: process.env.DEBUG
     }
   },
   healthcheck: {
