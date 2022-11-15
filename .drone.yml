@@ -17,6 +17,8 @@ steps:
       repo: josaorg/community-web
       build_args_from_env:
         [
+          COMMUNITY_API_URL=https://community.api.prod.josa.ngo/v2,
+          TARGET_ENV=production,
           DRONE_BUILD_NUMBER,
           DRONE_BUILD_LINK,
           DRONE_COMMIT_SHA,
