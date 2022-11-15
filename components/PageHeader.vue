@@ -3,7 +3,7 @@
     <nav>
       <div class="container">
         <div class="nav-bar">
-          <NuxtLink id="brand" to="/" class="flex flex-row items-end">
+          <NuxtLink id="brand" to="/" class="flex flex-row items-end z-10">
             <img
               class="w-36 h-10"
               src=" /logo/logo.svg"

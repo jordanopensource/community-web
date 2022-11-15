@@ -1,27 +1,31 @@
 <template>
-  <div class="banner" id="closeBanner" v-if="!state.closeBanner">
+  <div class="banner" id="bannerClosed" v-if="!state.bannerClosed">
     <div class="container">
-      <p>
-        <span class="font-bold">Build</span>:
-        <a
-          :href="config.public.DRONE_BUILD_LINK"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          #{{ config.public.DRONE_BUILD_NUMBER }}
-        </a>
-        <a
-          :href="config.public.DRONE_COMMIT_LINK"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          ({{ config.public.DRONE_COMMIT_SHA.slice(0, 6) }})
-        </a>
-      </p>
+      <div class="flex items-center gap-x-4">
+        <span>🔨</span>
+        <p>
+          <span class="font-bold">Build</span>:
+          <a
+            :href="config.public.DRONE_BUILD_LINK"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            #{{ config.public.DRONE_BUILD_NUMBER }}
+          </a>
+          <a
+            :href="config.public.DRONE_COMMIT_LINK"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ({{ config.public.DRONE_COMMIT_SHA.slice(0, 6) }})
+          </a>
+        </p>
+      </div>
       <div class="flex items-center gap-x-4">
         <span>🚧</span>
-        <p class="font-bold">
-          This is {{ config.public.TARGET_ENV }} environment
+        <p>
+          <span class="font-bold"> Environment: </span>
+          {{ config.public.TARGET_ENV }}
         </p>
         <button class="bannerBtn" @click="closeBanner">
           <img
@@ -37,12 +41,11 @@
 </template>
 <script setup>
 const config = useRuntimeConfig()
-
 const state = reactive({
-  closeBanner: false,
+  bannerClosed: false,
 })
 const closeBanner = () => {
-  state.closeBanner = true
+  state.bannerClosed = true
 }
 </script>
 <style lang="postcss" scoped>
@@ -55,8 +58,7 @@ const closeBanner = () => {
 .banner {
   background-color: #019ec3;
   @apply w-full;
-  @apply fixed top-0;
-  @apply z-10;
+  @apply z-20;
 }
 
 .banner .container {

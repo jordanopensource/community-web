@@ -8,5 +8,7 @@
 </template>
 <script setup>
 const config = useRuntimeConfig()
-console.log(`SETTINGS `, config.public)
+if (config.public.DEBUG === 'true') {
+  console.log(`SETTINGS `, config.public)
+}
 </script>
