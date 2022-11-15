@@ -4,14 +4,14 @@
       <p>
         <span class="font-bold">Build</span>:
         <a
-          :href="config.public.DRONE_BUILD_LINK"
+          :href="$config.DRONE_BUILD_LINK"
           target="_blank"
           rel="noopener noreferrer"
         >
-          #{{ config.public.DRONE_BUILD_NUMBER }}
+          #{{ $config.DRONE_BUILD_NUMBER }}
         </a>
         <a
-          :href="config.public.DRONE_COMMIT_LINK"
+          :href="$config.DRONE_COMMIT_LINK"
           target="_blank"
           rel="noopener noreferrer"
           @mouseenter="show"
@@ -20,9 +20,7 @@
           ({{ state.droneCommitSha }})
         </a>
       </p>
-      <p class="font-bold">
-        This is {{ config.public.TARGET_ENV }} environment
-      </p>
+      <p class="font-bold">This is {{ $config.TARGET_ENV }} environment</p>
       <!-- <p>Build Timestamp: {{ humanDataFormat() }}</p> -->
       <button class="bannerBtn" @click="closeBanner">
         <img class="w-9 h-9" src="/icons/lm-icon-close.png" alt="" srcset="" />
@@ -30,33 +28,38 @@
     </div>
   </div>
 </template>
-<script setup>
-const config = useRuntimeConfig()
+<script>
+export default {
+  data() {
+    return {
+      droneCommitSha: $config.DRONE_COMMIT_SHA.slice(0, 6),
+      closeBanner: false,
+    }
+  },
+  methods: {
+    show() {
+      this.droneCommitSha = $config.DRONE_COMMIT_SHA
+    },
+    hide() {
+      this.droneCommitSha = $config.DRONE_COMMIT_SHA.slice(0, 6)
+    },
 
-const humanDataFormat = () => {
-  const milliseconds = config.public.DRONE_BUILD_FINISHED * 1000
-  return new Date(milliseconds).toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-  })
-}
-
-const state = reactive({
-  droneCommitSha: config.public.DRONE_COMMIT_SHA.slice(0, 6),
-  closeBanner: false,
-})
-const show = () => {
-  state.droneCommitSha = config.public.DRONE_COMMIT_SHA
-}
-const hide = () => {
-  state.droneCommitSha = config.public.DRONE_COMMIT_SHA.slice(0, 6)
-}
-
-const closeBanner = () => {
-  state.closeBanner = true
+    closeBanner() {
+      this.closeBanner = true
+    },
+  },
+  computed: {
+    humanDataFormat() {
+      const milliseconds = $config.DRONE_BUILD_FINISHED * 1000
+      return new Date(milliseconds).toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+      })
+    },
+  },
 }
 </script>
 <style lang="postcss" scoped>

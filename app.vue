@@ -8,7 +8,5 @@
 </template>
 <script setup>
 const config = useRuntimeConfig()
-// if (config.public.TARGET_ENV === 'development') {
 console.log(`SETTINGS `, config.public)
-// }
 </script>
