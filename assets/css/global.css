@@ -27,7 +27,7 @@ body {
   @apply border-dotted border-b border-gray-500;
 }
 
-h1 {
+h1:not(.heading h1) {
   @apply text-5xl;
   @apply text-white;
 }
