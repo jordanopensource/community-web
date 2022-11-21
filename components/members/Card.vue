@@ -18,7 +18,7 @@
           <h3
             class="title text-base md:text-lg flex-nowrap lg:text-2xl mb-1 md:mb-2"
           >
-            <NuxtLink :to="`/members/${props.member.id}`" target="_blank">
+            <NuxtLink :to="`/members/${props.member.id}`">
               {{ props.member.first_name_en }} {{ props.member.last_name_en }}
             </NuxtLink>
           </h3>
