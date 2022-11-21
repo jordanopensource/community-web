@@ -1,68 +1,66 @@
 <template>
   <div class="card-container">
-    <div class="border-b-2 border-josa-warm-grey-light">
-      <div class="flex p-5 md:p-10 md:p-6">
-        <div class="mr-4 md:w-36 w-fit h-fit item-min-width shrink-0">
-          <img
-            alt="bot-lightbulb"
-            :src="
-              props.member.avatar_url
-                ? props.member.avatar_url
-                : avatarPlaceholder
-            "
-            class="rounded-md w-16 md:w-full"
-            loading="lazy"
-          />
+    <NuxtLink :to="`/members/${props.member.id}`" class="clickable-card">
+      <div class="border-b-2 border-josa-warm-grey-light">
+        <div class="flex p-5 md:p-6">
+          <div class="mr-4 md:w-36 w-fit h-fit item-min-width shrink-0">
+            <img
+              alt="bot-lightbulb"
+              :src="
+                props.member.avatar_url
+                  ? props.member.avatar_url
+                  : avatarPlaceholder
+              "
+              class="rounded-md w-16 md:w-full"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <h3
+              class="title text-base md:text-lg flex-nowrap lg:text-2xl mb-1 md:mb-2"
+            >
+              {{ props.member.first_name_en }} {{ props.member.last_name_en }}
+            </h3>
+            <p class="text-sm md:text-base">
+              {{
+                member.headline
+                  ? member.headline
+                  : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras viverra eu sapien et tincidunt. Nunc dui risus, tempus vel eros ut, tempor sollicitudin elit.'
+              }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="member-card">
+        <div v-if="props.member.type !== 0" class="badge-details">
+          <span class="badge-color"></span>
+          <span>JOSA Member</span>
+        </div>
+        <div
+          v-if="props.member.josa_member_id && props.member.type !== 0"
+          class="border-r-2 border-l-2 border-josa-warm-grey-light px-2 md:px-4"
+        >
+          <p>
+            <span class="member-info-heading">Member ID:</span>
+            <span class="member-info-value">
+              #{{ props.member.type }}-{{ props.member.josa_member_id }}
+            </span>
+          </p>
         </div>
         <div>
-          <h3
-            class="title text-base md:text-lg flex-nowrap lg:text-2xl mb-1 md:mb-2"
-          >
-            <NuxtLink :to="`/members/${props.member.id}`" target="_blank">
-              {{ props.member.first_name_en }} {{ props.member.last_name_en }}
-            </NuxtLink>
-          </h3>
-          <p class="text-sm md:text-base">
-            {{
-              member.headline
-                ? member.headline
-                : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras viverra eu sapien et tincidunt. Nunc dui risus, tempus vel eros ut, tempor sollicitudin elit.'
-            }}
+          <p>
+            <span class="member-info-heading member-since">Member Since</span>
+            <span class="member-info-value">
+              {{
+                props.member.member_since
+                  ? formatDate(props.member.member_since)
+                  : 'January 2023'
+              }}
+            </span>
           </p>
         </div>
       </div>
-    </div>
-    <div class="member-card">
-      <div v-if="props.member.type !== 0" class="badge-details">
-        <span class="badge-color"></span>
-        <span>JOSA Member</span>
-      </div>
-      <div
-        v-if="props.member.josa_member_id && props.member.type !== 0"
-        class="border-r-2 border-l-2 border-josa-warm-grey-light px-2 md:px-4"
-      >
-        <p>
-          <span class="member-info-heading">Member ID:</span>
-          <span class="member-info-value">
-            #{{ props.member.type }}-{{
-            props.member.josa_member_id
-          }}
-          </span>
-        </p>
-      </div>
-      <div>
-        <p>
-          <span class="member-info-heading member-since">Member Since</span>
-          <span class="member-info-value">
-            {{
-            props.member.member_since
-              ? formatDate(props.member.member_since)
-              : 'January 2023'
-          }}
-          </span>
-        </p>
-      </div>
-    </div>
+    </NuxtLink>
   </div>
 </template>
 <script setup>
@@ -87,6 +85,15 @@ const formatDate = (date) => {
 .card-container {
   @apply bg-white my-10;
   @apply rounded-md;
+} 
+
+.clickable-card:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.title:hover {
+  color: #2f80a2;
 }
 .member-card {
   @apply text-xs md:text-sm;
