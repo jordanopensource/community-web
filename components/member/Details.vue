@@ -5,7 +5,7 @@
       {{
         props.member.about
           ? props.member.about
-          : 'Lorem Ipsum is what the good animal did, and when they were safely on the other side, and had walked on a little while, the woods grew more and more familiar to them.'
+          : ''
       }}
     </p>
     <div v-if="props.skills.length" class="skills">
