@@ -39,6 +39,7 @@
             </h2>
             <p class="member-location">
               <svg
+                class="mb-1"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 width="18"
@@ -130,6 +131,7 @@ img {
   .member-location {
     @apply flex flex-row;
     @apply text-gray-600;
+    align-items: center;
   }
 }
 .invisible-white-space {
