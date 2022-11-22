@@ -121,7 +121,7 @@ img {
     font-family: 'IBM Sans';
   }
   .member-headline {
-    @apply text-left text-lg md:text-2xl;
+    @apply text-left text-lg leading-6 md:text-2xl;
     font-family: 'IBM Sans';
   }
 
