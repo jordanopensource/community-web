@@ -1,7 +1,7 @@
 <template>
   <div id="member-detail" class="details-container">
     <h3 class="heading">About</h3>
-    <p class="member-about mb-8">
+    <p class="member-about">
       {{
         props.member.about
           ? props.member.about
