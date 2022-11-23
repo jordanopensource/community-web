@@ -26,7 +26,7 @@
             {{
               member.headline
                 ? member.headline
-                : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras viverra eu sapien et tincidunt. Nunc dui risus, tempus vel eros ut, tempor sollicitudin elit.'
+                : ''
             }}
           </p>
         </div>
