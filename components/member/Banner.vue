@@ -116,7 +116,7 @@ img {
 
 .general-info {
   @apply self-center flex mt-5;
-  @apply ml-5 md:ml-10;
+  @apply mx-5 md:mx-10;
   .member-name {
     @apply font-medium text-josa-black-text;
     @apply text-2xl md:text-4xl;
