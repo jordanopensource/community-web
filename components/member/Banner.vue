@@ -41,8 +41,6 @@
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                width="18"
-                height="18"
               >
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path
@@ -130,6 +128,16 @@ img {
   .member-location {
     @apply flex flex-row;
     @apply text-gray-600;
+    align-items: center;
+    svg {
+      @apply w-3.5 h-3.5;
+    }
+    @media (min-width: 768px) {
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+    }
   }
 }
 .invisible-white-space {
