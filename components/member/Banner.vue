@@ -41,8 +41,6 @@
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                width="18"
-                height="18"
               >
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path
@@ -116,7 +114,7 @@ img {
 
 .general-info {
   @apply self-center flex mt-5;
-  @apply ml-5 md:ml-10;
+  @apply mx-5 md:mx-10;
   .member-name {
     @apply font-medium text-josa-black-text;
     @apply text-2xl md:text-4xl;
@@ -130,6 +128,16 @@ img {
   .member-location {
     @apply flex flex-row;
     @apply text-gray-600;
+    align-items: center;
+    svg {
+      @apply w-3.5 h-3.5;
+    }
+    @media (min-width: 768px) {
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+    }
   }
 }
 .invisible-white-space {
