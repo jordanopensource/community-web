@@ -64,7 +64,7 @@ const formatDate = (date) => {
 }
 
 .contribution {
-  @apply mt-5;;
+  @apply mt-5;
 }
 
 .heading {
