@@ -9,12 +9,12 @@
         <li v-for="(experience, index) in props.experience"
             :key="index"
             class="divider-dotted pb-2.5">
-          <div>
-            <h4 class="title">{{ experience.company_name }}</h4>
-            <h5 class="sub-title">{{ experience.position }}</h5>
-          </div>
-          <div class="date-container">
-            <p>
+          <div class="w-full flex flex-col md:flex-row">
+            <div>
+              <h4 class="title">{{ experience.company_name }}</h4>
+              <h5 class="sub-title">{{ experience.position }}</h5>
+            </div>
+            <p class="date-container">
               {{ formatDate(experience.start_date) }} -
               {{
                 experience.end_date
@@ -33,12 +33,12 @@
         <li v-for="(education, index) in props.education"
             :key="index"
             class="divider-dotted pb-2.5">
-          <div>
-            <h4 class="title">{{ education.institution_name }}</h4>
-            <h5 class="sub-title">{{ education.degree }}</h5>
-          </div>
-          <div class="date-container">
-            <p>{{ formatDate(education.graduated) }}</p>
+          <div class="w-full flex flex-col md:flex-row">
+            <div>
+              <h4 class="title">{{ education.institution_name }}</h4>
+              <h5 class="sub-title">{{ education.degree }}</h5>
+            </div>
+            <p class="date-container">{{ formatDate(education.graduated) }}</p>
           </div>
         </li>
       </ul>
@@ -110,7 +110,7 @@ ul {
 li {
   @apply w-full;
   @apply ml-0 mb-5;
-  @apply flex flex-row justify-between;
+  @apply flex flex-col justify-between;
   @apply text-xl;
   
   .title {
@@ -124,6 +124,8 @@ li {
 
   .date-container {
     @apply text-sm lg:text-lg text-gray-500;
+    @apply text-right;
+    @apply md:ml-auto;
   }
 }
 </style>
