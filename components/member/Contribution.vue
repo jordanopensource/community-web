@@ -1,6 +1,6 @@
 <template>
   <div id="member-contributions" class="details-container">
-    <h2 class="text-xl lg:text-2xl font-ligh font-light">Contributions</h2>
+    <h2 class="text-xl lg:text-2xl">Contributions</h2>
     <div class="slash-separator"></div>
 
     <div class="contribution">
