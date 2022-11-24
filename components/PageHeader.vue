@@ -65,7 +65,7 @@ li a {
 
 .nav-bar {
   @apply flex items-center;
-  @apply py-6 md:py-16;
+  @apply py-6 md:py-12;
 }
 
 .menu {

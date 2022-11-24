@@ -64,7 +64,7 @@
   @apply w-full lg:w-2/5;
 
   .heading {
-    @apply text-3xl lg:text-4xl tracking-wide font-normal;
+    @apply text-4xl tracking-wide font-normal;
   }
   .heading > h1 {
     @apply inline-flex items-baseline;
