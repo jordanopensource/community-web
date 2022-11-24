@@ -1,6 +1,6 @@
 <template>
   <div id="member-experience-and-education" class="container details-container">
-    <h2 class="text-xl lg:text-2xl font-light">Experience and Education</h2>
+    <h2 class="text-xl lg:text-2xl">Experience and Education</h2>
     <div class="slash-separator"></div>
 
     <div v-if="props.experience.length" class="experience">
