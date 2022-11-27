@@ -38,5 +38,6 @@
 
 .submit-button {
   background-color: #0c97ac;
+  color: white;
 }
 </style>
