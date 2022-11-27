@@ -16,7 +16,7 @@
           placeholder="E-mail"
         />
         <input
-          class="button-flat button-blue-full grow w-auto"
+          class="button-flat submit-button grow w-auto"
           type="submit"
           value="&rarr;"
         />
@@ -34,5 +34,9 @@
 <style lang="postcss" scoped>
 .early-access-email {
   @apply w-4/5 !important;
+}
+
+.submit-button {
+  background-color: #0c97ac;
 }
 </style>
