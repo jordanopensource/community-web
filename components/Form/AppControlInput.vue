@@ -72,7 +72,7 @@ const props = defineProps({
   @apply flex justify-center items-center;
   @apply text-transparent bg-white w-4 h-4;
   @apply border border-neutral-300 border-solid rounded-sm;
-  @apply mr-1.5 mt-1.5;
+  @apply mr-1.5 mt-1;
   content: '\2714';
 }
 .checkbox-container input[type='checkbox']:checked + label::before {
