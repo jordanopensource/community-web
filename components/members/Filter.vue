@@ -8,7 +8,7 @@
           <img
             class="lg:hidden filter-icon"
             src="/icons/filter.svg"
-            alt="Fiter icon"
+            alt="Filter icon"
           />
           <div>
             <h3 class="filter-heading">Filter</h3>
@@ -79,15 +79,6 @@ const state = reactive({
   selected: '',
 })
 
-onMounted(() => {
-  window.addEventListener('resize', (e) => {
-    if (window.innerWidth > 1030) {
-      state.isOpen = true
-    } else {
-      state.isOpen = false
-    }
-  })
-})
 
 const sortItems = [
   {
