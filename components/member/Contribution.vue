@@ -1,7 +1,7 @@
 <template>
   <div id="member-contributions" class="details-container">
     <h2 class="text-xl lg:text-2xl">Contributions</h2>
-    <div class="slash-separator"></div>
+    <div class="divider-slashes"></div>
 
     <div class="contribution">
       <h3 class="heading">JOSA Contributions</h3>
@@ -39,28 +39,9 @@ const formatDate = (date) => {
 }
 </script>
 <style lang="postcss" scoped>
-.slash-separator {
-  @apply relative;
-  @apply mt-5 mb-16;
-}
-.slash-separator:before {
+.divider-slashes {
+  @apply mt-5 mb-10;
   @apply h-3;
-  --border-width: 6px;
-  --stripe-distance: 10px;
-  position: absolute;
-  content: '';
-  left: calc(var(--border-width) * -1);
-  right: calc(var(--border-width) * -1);
-  top: calc(var(--border-width) * -1);
-  bottom: calc(var(--border-width) * -1);
-  background: repeating-linear-gradient(
-    -45deg,
-    #4b5563,
-    transparent 1px,
-    transparent var(--stripe-distance),
-    #4b5563 calc(var(--stripe-distance) + 1px)
-  );
-  z-index: 1;
 }
 
 .contribution {
