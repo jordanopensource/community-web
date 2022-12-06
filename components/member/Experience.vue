@@ -6,7 +6,7 @@
     <div v-if="props.experience.length" class="experience">
       <h3 class="heading">Work Experience</h3>
       <ul>
-        <li v-for="(experience, index) in props.experience"
+        <li v-for="(experience, index) in experienceSorted"
             :key="index"
             class="divider-dotted pb-2.5">
           <div>
@@ -30,7 +30,7 @@
     <div v-if="props.education.length" class="education">
       <h3 class="heading">Education</h3>
       <ul>
-        <li v-for="(education, index) in props.education"
+        <li v-for="(education, index) in educationSorted"
             :key="index"
             class="divider-dotted pb-2.5">
           <div>
@@ -56,6 +56,13 @@ const props = defineProps({
     default: [],
   },
 })
+
+const experienceSorted = props.experience.sort(
+  (a, b) => new Date(b.end_date) > new Date(a.end_date)
+);
+const educationSorted = props.education.sort(
+  (a, b) => new Date(b.end_date) > new Date(a.end_date)
+);
 
 const formatDate = (date) => {
   const newDate = new Date(date)
