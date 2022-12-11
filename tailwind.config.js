@@ -84,6 +84,7 @@ module.exports = {
       backgroundImage:{
         'homeHero':"url('/images/background.svg')",
         'divider-slashes':"url('/images/divider-slash.svg')",
+        'slashes':"url('/images/slashes.svg')",
       }
     },
   },
