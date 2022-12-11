@@ -6,7 +6,7 @@
     <div class="contribution">
       <h3 class="heading">JOSA Contributions</h3>
       <ul>
-        <li v-for="(contribution, index) in props.contributions"
+        <li v-for="(contribution, index) in contributionsSorted"
             :key="index"
             class="divider-dotted pb-2.5">
           <div>
@@ -28,6 +28,10 @@ const props = defineProps({
     default: [],
   },
 })
+
+const contributionsSorted = props.contributions.sort(
+  (a, b) => new Date(b.end_date) > new Date(a.end_date)
+);
 
 const formatDate = (date) => {
   const newDate = new Date(date)
