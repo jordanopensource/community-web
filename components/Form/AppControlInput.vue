@@ -2,6 +2,18 @@
   <div class="input-control">
     <div v-if="props.inputType === 'checkbox'" class="inline">
       <input
+        v-if="props.isChecked"
+        id="check-box"
+        checked
+        @input="$emit('update:value', $event.target.checked)"
+        :name="props.name"
+        :required="props.isRequired"
+        :placeholder="props.placeholder"
+        :type="props.inputType"
+        class="checkbox form-check-input border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+      />
+      <input
+        v-else
         id="check-box"
         @input="$emit('update:value', $event.target.checked)"
         :name="props.name"
@@ -46,6 +58,7 @@ const props = defineProps({
   showSlot: { type: Boolean, default: true },
   pattern: '',
   inputType: String,
+  isChecked: {type: Boolean, default: false}
 })
 </script>
 <style lang="postcss" scoped>

@@ -51,6 +51,7 @@
             v-model:value="state.noneJosaMembers"
             inputType="checkbox"
             @change="() => onCheck()"
+            :isChecked="state.noneJosaMembers"
           >
             Show contributors who are not members</FormAppControlInput
           >
