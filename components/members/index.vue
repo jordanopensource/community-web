@@ -1,7 +1,7 @@
 <template>
   <div v-if="state.loading" class="loader"></div>
   <div v-else-if="!state.loading && state.members.length">
-    <h2 class="text-2xl mono">{{ state.metaData.totalItems }} members found</h2>
+    <h2 class="text-2xl mono" id="members-found-heading">{{ state.metaData.totalItems }} members found</h2>
     <div v-for="(member, index) in state.members" :key="`item-${index}`">
       <MembersCard :member="member" />
     </div>

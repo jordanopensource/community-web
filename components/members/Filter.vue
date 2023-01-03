@@ -37,7 +37,7 @@
             v-model:value="state.name"
           >
           </FormAppControlInput>
-          <FormAppButton btn-style="search-button" type="submit">
+          <FormAppButton btn-style="search-button" type="submit" @click="scrollToView()">
             <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
               <path
                 fill="white"
@@ -111,7 +111,12 @@ const onSubmit = () => {
 const onSelect = () => {
   emit('sortMembers', state.selected)
 }
-
+const scrollToView = () => {
+  document.getElementById('members-found-heading').scrollIntoView({
+    block: 'start',
+    behavior: 'smooth'
+  })
+}
 watch(
   () => state.windowResize,
   (newValue, oldValue) => {
