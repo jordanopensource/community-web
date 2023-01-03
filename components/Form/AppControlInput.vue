@@ -73,13 +73,17 @@ const props = defineProps({
   @apply text-transparent bg-white w-4 h-4;
   @apply border border-neutral-300 border-solid rounded-sm;
   @apply mr-1.5 mt-1;
-  content: '\2714';
+  content: '';
 }
 .checkbox-container input[type='checkbox']:checked + label::before {
   @apply w-4 h-4 flex justify-center items-center;
   @apply text-white text-base;
   @apply border-solid border;
-  content: '\2714';
+  content: '';
+  background-image: url('icons/icon-checkbox.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0.675rem;
   background-color: #0c97ac;
   border-color: #0c97ac;
 }
