@@ -9,7 +9,9 @@
       <div v-if="props.member.josa_member_id && props.member.type !== 0">
         <p class="header">
           Member ID
-          <span># {{ props.member.type }}-{{ props.member.josa_member_id }}</span>
+          <span
+            ># {{ props.member.type }}-{{ props.member.josa_member_id }}</span
+          >
         </p>
       </div>
       <div>
@@ -61,7 +63,7 @@ const formatDate = (date) => {
 
 <style lang="postcss" scoped>
 .card {
-  @apply m-0 mb-5 lg: ml-10;
+  @apply m-0 mb-5 lg:ml-10;
 }
 
 .card-color {
@@ -72,12 +74,12 @@ const formatDate = (date) => {
 
 .member-card {
   @apply flex flex-col;
-  @apply gap-y-2 lg: gap-y-4;
+  @apply gap-y-2 lg:gap-y-4;
   @apply justify-between;
   @apply w-full;
-  @apply md: mr-24;
+  @apply md:mr-24;
   @apply bg-white;
-  @apply p-5 lg: p-10;
+  @apply p-5 lg:p-10;
   @apply rounded-lg rounded-t-none;
 
   .header {
