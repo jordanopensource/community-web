@@ -4,32 +4,20 @@
       <div class="container">
         <div class="nav-bar">
           <NuxtLink id="brand" to="/" class="flex flex-row items-end z-10">
-            <img
-              class="w-36 h-10"
-              src=" /logo/logo.svg"
-              alt="Jordan Open Source Association Logo"
-              width="128"
-              height="40"
-              loading="eager"
-            />
-            <span class="community text-xl text-josa-warm-grey-light italic">
+            <img class="w-36 h-10" src=" /logo/logo.svg" alt="Jordan Open Source Association Logo" width="128"
+              height="40" loading="eager" />
+            <span class="community text-xl text-community-grey-light italic">
               .community
             </span>
           </NuxtLink>
           <ul class="menu">
-            <li
-              class="menu-item"
-              v-if="config.public.TARGET_ENV === 'development'"
-            >
+            <li class="menu-item" v-if="config.public.TARGET_ENV === 'development'">
               <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
             </li>
             <li class="menu-item">
               <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
             </li>
-            <li
-              class="menu-item"
-              v-if="config.public.TARGET_ENV === 'development'"
-            >
+            <li class="menu-item" v-if="config.public.TARGET_ENV === 'development'">
               <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
             </li>
             <!-- <li class="menu-item">
@@ -55,7 +43,7 @@ const ToggleIsOpen = () => (state.isOpen = !state.isOpen)
 </script>
 <style lang="postcss" scoped>
 * {
-  @apply bg-josa-black-darker;
+  @apply bg-community-black-darker;
 }
 
 li a {
@@ -65,24 +53,25 @@ li a {
 
 .nav-bar {
   @apply flex items-center;
-  @apply py-6 md:py-12;
+  @apply py-6 md: py-12;
 }
 
 .menu {
-  @apply text-white hidden font-medium text-lg lg:text-xl;
-  @apply lg:flex justify-end w-full items-baseline;
+  @apply text-white hidden font-medium text-lg lg: text-xl;
+  @apply lg: flex justify-end w-full items-baseline;
+
   .menu-item {
-    @apply inline-block lg:mx-2;
+    @apply inline-block lg: mx-2;
   }
 }
 
 #login {
-  @apply text-josa-blue border-josa-blue ml-3 p-2 pt-1 pb-1;
+  @apply text-community-blue border-community-blue ml-3 p-2 pt-1 pb-1;
   border-width: thin;
 }
 
 #login:hover {
-  @apply text-josa-warm-grey-light;
+  @apply text-community-grey-light;
 }
 
 @media screen and (max-width: 400px) {

@@ -5,13 +5,7 @@
         <div class="heading">
           <h1>
             We
-            <img
-              src=" /icons/icon-small-love.svg"
-              alt="Love"
-              width="33"
-              height="30"
-              loading="lazy"
-            />
+            <img src=" /icons/icon-small-love.svg" alt="Love" width="33" height="30" loading="lazy" />
             our community
           </h1>
         </div>
@@ -41,7 +35,7 @@
 <script setup></script>
 <style lang="postcss" scoped>
 .banner {
-  @apply bg-josa-black;
+  @apply bg-community-black;
   @apply h-auto;
   @apply bg-homeHero bg-no-repeat;
   @apply bg-contain;
@@ -49,24 +43,25 @@
 }
 
 .banner-container {
-  @apply flex flex-col lg:flex-row justify-between;
-  @apply text-josa-warm-grey;
+  @apply flex flex-col lg: flex-row justify-between;
+  @apply text-community-grey;
   @apply relative;
-  @apply pb-0 pt-28 md:py-28;
+  @apply pb-0 pt-28 md: py-28;
 }
 
 .banner-cover {
-  @apply md:w-3/12;
+  @apply md: w-3/12;
   height: 43vh;
 }
 
 .banner-header {
-  @apply w-full lg:w-2/5;
+  @apply w-full lg: w-2/5;
 
   .heading {
     @apply text-4xl tracking-wide font-normal;
   }
-  .heading > h1 {
+
+  .heading>h1 {
     @apply inline-flex items-baseline;
 
     img {
@@ -75,7 +70,7 @@
   }
 
   .community-description {
-    @apply bg-josa-black;
+    @apply bg-community-black;
     @apply my-16;
     @apply text-xl;
   }
@@ -85,7 +80,7 @@
 
     .link {
       @apply underline;
-      @apply text-josa-blue;
+      @apply text-community-blue;
     }
 
     .link:hover {

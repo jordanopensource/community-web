@@ -1,16 +1,10 @@
 <template>
-  <div
-    class="py-20 lg:py-36"
-    :class="[!props.whiteBackground ? 'black-background' : 'white-background']"
-  >
+  <div class="py-20 lg:py-36" :class="[!props.whiteBackground ? 'black-background' : 'white-background']">
     <div :class="[props.enableContainer && 'container']">
       <div class="banner-background">
-        <h1
-          class="banner-header"
-          :class="
-            !props.whiteBackground ? 'black-background' : 'white-background'
-          "
-        >
+        <h1 class="banner-header" :class="
+          !props.whiteBackground ? 'black-background' : 'white-background'
+        ">
           {{ props.bannerText }}
         </h1>
       </div>
@@ -31,13 +25,15 @@ const props = defineProps({
   @apply bg-right bg-top;
   /* @apply bg-cover; */
 }
+
 .black-background {
-  @apply bg-josa-black;
-  @apply text-josa-warm-grey-light;
+  @apply bg-community-black;
+  @apply text-community-grey-light;
 }
+
 .white-background {
-  @apply bg-josa-warm-grey-light;
-  @apply text-josa-black;
+  @apply bg-community-grey-light;
+  @apply text-community-black;
 }
 
 /* .banner-header {
@@ -50,6 +46,6 @@ const props = defineProps({
 .banner-header {
   @apply text-4xl;
   @apply inline;
-  @apply pr-16 lg:pr-20;
+  @apply pr-16 lg: pr-20;
 }
 </style>

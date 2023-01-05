@@ -21,37 +21,47 @@ module.exports = {
     },
     extend: {
       colors: {
-        'josa-blue': {
-          light: '#c5e1ee',
-          DEFAULT: '#3897c0',
-          dark: '#1a485b',
-          veryDark: '#163e4e',
+        'community-blue': {
+          DEFAULT: '#0B96AB',
         },
-        'josa-warm-grey': {
+        'community-turquoise': {
+          DEFAULT: '#00B199',
+        },
+        'community-magenta': {
+          DEFAULT: '#EE4D7A',
+        },
+        'community-fuchsia': {
+          DEFAULT: '#A066A9',
+        },
+        'community-orange': {
+          DEFAULT: '#F59232',
+        },
+        'community-purple': {
+          DEFAULT: '#4F72B7',
+        },
+        'community-white': {
+          DEFAULT: '#F9F9F9',
+        },
+        'community-grey': {
           light: '#f7f6f5',
           DEFAULT: '#efedec',
           dark: '#aea79f',
+          text: '#808080',
         },
-        'josa-grey':{
+        'josa-grey': {
           light: "#f5f5f5", // bg
           DEFAULT: '#e3e7e9' // bg boxes
         },
-        'josa-red': {
-          veryLight: '#fee9e2',
-          light: '#f8c0ac',
-          DEFAULT: '#dd4814',
-          dark: '#b83b10',
+        'community-red': {
+          DEFAULT: '#F26F54',
         },
-        'josa-green': {
-          veryLight: '#e9f3de',
-          light: '#cde2bb',
-          DEFAULT: '#8dbd63',
-          dark: '#5c813d',
+        'community-green': {
+          DEFAULT: '#6DB981',
         },
-        'josa-black': {
+        'community-black': {
           DEFAULT: '#22292c', // mainly used for banners
           darker: '#1a1f21', // mainly used for Navigation and footer background
-          text: "#333"
+          text: "#333333"
         },
         grey90: '#e5e5e5',
       },
@@ -81,10 +91,10 @@ module.exports = {
       inset: {
         12: '3rem',
       },
-      backgroundImage:{
-        'homeHero':"url('/images/background.svg')",
-        'divider-slashes':"url('/images/divider-slash.svg')",
-        'slashes':"url('/images/slashes.svg')",
+      backgroundImage: {
+        'homeHero': "url('/images/background.svg')",
+        'divider-slashes': "url('/images/divider-slash.svg')",
+        'slashes': "url('/images/slashes.svg')",
       }
     },
   },

@@ -61,28 +61,30 @@ const formatDate = (date) => {
 
 <style lang="postcss" scoped>
 .card {
-  @apply m-0 mb-5 lg:ml-10;
+  @apply m-0 mb-5 lg: ml-10;
 }
-.card-color{
+
+.card-color {
   @apply w-full h-4;
   @apply rounded-lg rounded-b-none;
-  @apply bg-josa-blue;
+  @apply bg-community-blue;
 }
+
 .member-card {
   @apply flex flex-col;
-  @apply gap-y-2 lg:gap-y-4;
+  @apply gap-y-2 lg: gap-y-4;
   @apply justify-between;
   @apply w-full;
-  @apply md:mr-24;
+  @apply md: mr-24;
   @apply bg-white;
-  @apply p-5 lg:p-10;
+  @apply p-5 lg: p-10;
   @apply rounded-lg rounded-t-none;
 
   .header {
     @apply font-light;
 
     span {
-      @apply font-semibold text-josa-black-darker;
+      @apply font-semibold text-community-black-darker;
       @apply ml-1;
     }
   }
@@ -90,16 +92,17 @@ const formatDate = (date) => {
   .badge-details {
     @apply flex flex-row;
     @apply items-center;
+
     .badge-color {
       @apply w-5 h-5;
       @apply mr-2;
       @apply rounded-sm;
-      @apply bg-josa-blue;
+      @apply bg-community-blue;
     }
+
     .header {
       @apply font-semibold;
     }
   }
 }
-
 </style>
