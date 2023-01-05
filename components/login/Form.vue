@@ -13,6 +13,7 @@
       <FormAppControlInput
         inputType="password"
         :isRequired="true"
+        v-model:value="form.password"
       >
         Password
       </FormAppControlInput>
@@ -30,6 +31,7 @@
 <script setup>
 const form = reactive({
   email: '',
+  password: '',
 })
 </script>
 
