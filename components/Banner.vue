@@ -31,13 +31,15 @@ const props = defineProps({
   @apply bg-right bg-top;
   /* @apply bg-cover; */
 }
+
 .black-background {
-  @apply bg-josa-black;
-  @apply text-josa-warm-grey-light;
+  @apply bg-community-black;
+  @apply text-community-grey-light;
 }
+
 .white-background {
-  @apply bg-josa-warm-grey-light;
-  @apply text-josa-black;
+  @apply bg-community-grey-light;
+  @apply text-community-black;
 }
 
 /* .banner-header {

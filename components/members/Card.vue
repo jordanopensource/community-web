@@ -1,7 +1,7 @@
 <template>
   <div class="card-container">
     <NuxtLink :to="`/members/${props.member.id}`" class="clickable-card">
-      <div class="border-b-2 border-josa-warm-grey-light">
+      <div class="border-b-2 border-community-grey-light">
         <div class="flex p-5 md:p-6">
           <div class="mr-4 md:w-36 w-fit h-fit item-min-width shrink-0">
             <img
@@ -25,7 +25,7 @@
               {{
                 member.headline
                   ? member.headline
-                  : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras viverra eu sapien et tincidunt. Nunc dui risus, tempus vel eros ut, tempor sollicitudin elit.'
+                  : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vi.'
               }}
             </p>
           </div>
@@ -38,7 +38,7 @@
         </div>
         <div
           v-if="props.member.josa_member_id && props.member.type !== 0"
-          class="border-r-2 border-l-2 border-josa-warm-grey-light px-2 md:px-4"
+          class="border-r-2 border-l-2 border-community-grey-light px-2 md:px-4"
         >
           <p>
             <span class="member-info-heading">Member ID:</span>
@@ -85,7 +85,7 @@ const formatDate = (date) => {
 .card-container {
   @apply bg-white my-10;
   @apply rounded-md;
-} 
+}
 
 .clickable-card:hover {
   text-decoration: none;
@@ -95,6 +95,7 @@ const formatDate = (date) => {
 .title:hover {
   color: #2f80a2;
 }
+
 .member-card {
   @apply text-xs md:text-sm;
   @apply flex flex-row gap-x-2 md:gap-x-4;
@@ -102,14 +103,16 @@ const formatDate = (date) => {
   @apply font-medium;
   @apply p-6;
   @apply leading-4;
+
   .badge-details {
     @apply flex flex-row;
   }
+
   .badge-color {
     @apply w-3 h-3 md:w-4 md:h-4;
     @apply mr-1 md:mr-2;
     @apply rounded-sm;
-    @apply bg-josa-blue;
+    @apply bg-community-blue;
     @apply shrink-0;
     @apply mt-0.5 md:mt-0;
   }

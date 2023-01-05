@@ -12,7 +12,7 @@
               height="40"
               loading="eager"
             />
-            <span class="community text-xl text-josa-warm-grey-light italic">
+            <span class="community text-xl text-community-grey-light italic">
               .community
             </span>
           </NuxtLink>
@@ -55,7 +55,7 @@ const ToggleIsOpen = () => (state.isOpen = !state.isOpen)
 </script>
 <style lang="postcss" scoped>
 * {
-  @apply bg-josa-black-darker;
+  @apply bg-community-black-darker;
 }
 
 li a {
@@ -71,18 +71,19 @@ li a {
 .menu {
   @apply text-white hidden font-medium text-lg lg:text-xl;
   @apply lg:flex justify-end w-full items-baseline;
+
   .menu-item {
     @apply inline-block lg:mx-2;
   }
 }
 
 #login {
-  @apply text-josa-blue border-josa-blue ml-3 p-2 pt-1 pb-1;
+  @apply text-community-blue border-community-blue ml-3 p-2 pt-1 pb-1;
   border-width: thin;
 }
 
 #login:hover {
-  @apply text-josa-warm-grey-light;
+  @apply text-community-grey-light;
 }
 
 @media screen and (max-width: 400px) {

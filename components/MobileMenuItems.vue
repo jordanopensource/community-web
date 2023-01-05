@@ -1,19 +1,13 @@
 <template>
   <div :class="props.isOpen ? 'block lg:hidden' : 'hidden lg:hidden'">
     <ul class="mobile-menu">
-      <li
-        class="py-4 border-gray"
-        v-if="config.public.TARGET_ENV === 'development'"
-      >
+      <li class="py-4 border-gray" v-if="config.public.TARGET_ENV === 'development'">
         <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
       </li>
       <li class="py-4 border-gray">
         <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
       </li>
-      <li
-        class="py-4 border-gray"
-        v-if="config.public.TARGET_ENV === 'development'"
-      >
+      <li class="py-4 border-gray" v-if="config.public.TARGET_ENV === 'development'">
         <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
       </li>
       <!-- <li class="py-4">
@@ -40,7 +34,7 @@ const props = defineProps({
   border-bottom: solid 2px #22292c;
 }
 
-ul > li {
+ul>li {
   @apply block;
   @apply ml-auto;
 }
@@ -51,11 +45,11 @@ li a {
 }
 
 #login {
-  @apply text-josa-blue border-josa-blue p-2 pt-1 pb-1;
+  @apply text-community-blue border-community-blue p-2 pt-1 pb-1;
   border-width: thin;
 }
 
 #login:hover {
-  @apply text-josa-warm-grey-light;
+  @apply text-community-grey-light;
 }
 </style>
