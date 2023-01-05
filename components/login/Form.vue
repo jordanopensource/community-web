@@ -16,6 +16,14 @@
       >
         Password
       </FormAppControlInput>
+      <NuxtLink class="forgot-pw-link">Forgot Password?</NuxtLink>
+      <FormAppButton
+        class="signin-btn"
+        btn-style="button-flat button-blue-full"
+        type="submit"
+      >
+        Sign in
+      </FormAppButton>
     </form>
   </div>
 </template>
@@ -32,9 +40,20 @@ const form = reactive({
 }
 div.container {
   @apply bg-white;
-  @apply mb-5 md:mb-10;
+  @apply my-5 md:my-10;
   @apply p-5 md:p-10;
   @apply rounded-lg;
   @apply md:text-lg;
+  max-width: 1024px;
+}
+.signin-btn {
+  @apply w-full;
+  @apply rounded-lg;
+}
+.forgot-pw-link {
+  @apply block w-full;
+  @apply text-right;
+  @apply text-community-blue;
+  @apply mb-10;
 }
 </style>
