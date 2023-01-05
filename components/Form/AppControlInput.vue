@@ -1,6 +1,9 @@
 <template>
   <div class="input-control">
-    <div v-if="props.inputType === 'checkbox'" class="inline">
+    <div
+      v-if="props.inputType === 'checkbox'"
+      class="checkbox-container inline"
+    >
       <input
         v-if="props.isChecked"
         id="check-box"
@@ -66,6 +69,37 @@ const props = defineProps({
   @apply w-fit !important;
 }
 
+.checkbox-container {
+  @apply flex items-start;
+}
+
+.checkbox-container label {
+  @apply flex cursor-pointer items-start;
+}
+
+.checkbox-container input[type='checkbox'] {
+  @apply cursor-pointer opacity-0 absolute;
+}
+
+.checkbox-container label::before {
+  @apply flex justify-center items-center;
+  @apply text-transparent bg-white w-4 h-4;
+  @apply border border-neutral-300 border-solid rounded-sm;
+  @apply mr-1.5 mt-1;
+  content: '';
+}
+.checkbox-container input[type='checkbox']:checked + label::before {
+  @apply w-4 h-4 flex justify-center items-center;
+  @apply text-white text-base;
+  @apply border-solid border;
+  content: '';
+  background-image: url('icons/icon-checkbox.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0.675rem;
+  background-color: #0c97ac;
+  border-color: #0c97ac;
+}
 .interactive-control {
   @apply inline rounded-r-none;
 }
