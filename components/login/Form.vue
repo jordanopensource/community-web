@@ -44,7 +44,7 @@ div.container {
   @apply p-5 md:p-10;
   @apply rounded-lg;
   @apply md:text-lg;
-  max-width: 1024px;
+  max-width: 480px;
 }
 .signin-btn {
   @apply w-full;
