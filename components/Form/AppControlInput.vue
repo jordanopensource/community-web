@@ -42,7 +42,10 @@
           :type="state.showPassword ? 'text' : props.inputType"
           :pattern="props.pattern"
           class="interactive-control"
-      />
+          :class="props.showPasswordIcon ? 'hide-right-border' : ''"
+          @focusin="state.pwActive = true"
+          @focusout="state.pwActive = false"
+        />
         <span
           v-if="props.showPasswordIcon && props.inputType === 'password'"
           >
