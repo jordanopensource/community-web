@@ -14,6 +14,7 @@
         v-model:value="form.password"
         input-type="password"
         :is-required="true"
+        :show-password-icon="true"
       >
         Password
       </FormAppControlInput>
