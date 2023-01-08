@@ -4,7 +4,8 @@
     <div class="divider-slashes"></div>
     <form>
       <p>
-        Enter your user account's verified email address and we will send you a password reset link
+        Enter your user account's verified email address and we will send you a
+        password reset link
       </p>
       <FormAppControlInput
         inputType="email"
@@ -20,9 +21,7 @@
       >
         Send password reset email
       </FormAppButton>
-      <NuxtLink
-        @click="$emit('forgotPassword', false)"
-      >
+      <NuxtLink @click="$emit('forgotPassword', false)">
         Back to sign in
       </NuxtLink>
     </form>
@@ -32,7 +31,7 @@
 const emit = defineEmits(['forgotPassword'])
 
 const form = reactive({
-  email: ''
+  email: '',
 })
 </script>
 <style lang="postcss" scoped>

@@ -18,13 +18,11 @@
       >
         Password
       </FormAppControlInput>
-      <NuxtLink
-        @click="$emit('forgotPassword', true)"
-      >
+      <NuxtLink @click="$emit('forgotPassword', true)">
         Forgot Password?
       </NuxtLink>
       <FormAppButton
-        class="signin-btn"
+        class="form-submit"
         btn-style="button-flat button-blue-full"
         type="submit"
       >
@@ -41,7 +39,6 @@ const form = reactive({
   password: '',
 })
 </script>
-
 <style lang="postcss" scoped>
 .divider-slashes {
   @apply mt-5 mb-10;
@@ -55,11 +52,11 @@ div.container {
   @apply md:text-lg;
   max-width: 480px;
 }
-.signin-btn {
+.form-submit {
   @apply w-full;
   @apply rounded-lg;
 }
-.forgot-pw-link {
+form a {
   @apply block w-full;
   @apply text-right;
   @apply text-community-blue;
