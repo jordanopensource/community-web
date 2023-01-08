@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Banner bannerText="Sign in" />
+    <Banner banner-text="Sign in" />
     <div class="container">
       <LoginForm
         v-if="!state.forgotPassword"

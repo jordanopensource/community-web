@@ -4,17 +4,16 @@
     <div class="divider-slashes"></div>
     <form>
       <FormAppControlInput
-        inputType="email"
-        :isRequired="true"
         v-model:value="form.email"
+        input-type="email"
+        :is-required="true"
       >
         Email
       </FormAppControlInput>
       <FormAppControlInput
-        inputType="password"
-        :showPasswordIcon="true"
-        :isRequired="true"
         v-model:value="form.password"
+        input-type="password"
+        :is-required="true"
       >
         Password
       </FormAppControlInput>
