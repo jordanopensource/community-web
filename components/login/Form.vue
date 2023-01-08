@@ -18,7 +18,11 @@
       >
         Password
       </FormAppControlInput>
-      <NuxtLink class="forgot-pw-link">Forgot Password?</NuxtLink>
+      <NuxtLink
+        @click="$emit('forgotPassword', true)"
+      >
+        Forgot Password?
+      </NuxtLink>
       <FormAppButton
         class="signin-btn"
         btn-style="button-flat button-blue-full"
@@ -30,6 +34,8 @@
   </div>
 </template>
 <script setup>
+const emit = defineEmits(['forgotPassword'])
+
 const form = reactive({
   email: '',
   password: '',
