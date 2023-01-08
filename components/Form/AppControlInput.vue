@@ -134,6 +134,11 @@ const state = reactive({
   border: 0.8px solid rgb(224, 221, 219);
   @apply border-l-0;
 }
+@media screen and (min-width: 768px){
+  .eye-icon {
+    height: 49.5px;
+  }
+}
 .eye-icon.show {
   background-image: url('icons/icon-eye-opened.svg');
 }
