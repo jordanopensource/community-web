@@ -12,6 +12,7 @@
       </FormAppControlInput>
       <FormAppControlInput
         inputType="password"
+        :showPasswordIcon="true"
         :isRequired="true"
         v-model:value="form.password"
       >
