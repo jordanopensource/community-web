@@ -41,6 +41,16 @@
         :pattern="props.pattern"
         class="interactive-control"
       />
+        <span
+          v-if="props.showPasswordIcon && props.inputType === 'password'"
+          >
+          <i
+            class="eye-icon"
+            :class="[state.showPassword ? 'hide' : 'show', state.pwActive ? 'focusBg' : '']"
+            @click="state.showPassword = !state.showPassword"
+          ></i>
+        </span>
+      </div>
       <textarea
         v-else
         rows="5"
@@ -61,7 +71,13 @@ const props = defineProps({
   showSlot: { type: Boolean, default: true },
   pattern: '',
   inputType: String,
-  isChecked: {type: Boolean, default: false}
+  isChecked: {type: Boolean, default: false},
+  showPasswordIcon: {type: Boolean, default: false},
+})
+
+const state = reactive({
+  showPassword: false,
+  pwActive: false,
 })
 </script>
 <style lang="postcss" scoped>
