@@ -31,16 +31,31 @@
       <div v-if="$props.showSlot">
         <label> <slot /></label>
       </div>
-      <input
+      <div
         v-if="props.inputType !== 'textarea'"
-        @input="$emit('update:value', $event.target.value)"
-        :name="props.name"
-        :required="props.isRequired"
-        :placeholder="props.placeholder"
-        :type="props.inputType"
-        :pattern="props.pattern"
-        class="interactive-control"
-      />
+        class="flex flex-row">
+        <input
+          @input="$emit('update:value', $event.target.value)"
+          :name="props.name"
+          :required="props.isRequired"
+          :placeholder="props.placeholder"
+          :type="state.showPassword ? 'text' : props.inputType"
+          :pattern="props.pattern"
+          class="interactive-control"
+          :class="props.showPasswordIcon ? 'hide-right-border' : ''"
+          @focusin="state.pwActive = true"
+          @focusout="state.pwActive = false"
+        />
+        <span
+          v-if="props.showPasswordIcon && props.inputType === 'password'"
+          >
+          <i
+            class="eye-icon"
+            :class="[state.showPassword ? 'hide' : 'show', state.pwActive ? 'focusBg' : '']"
+            @click="state.showPassword = !state.showPassword"
+          ></i>
+        </span>
+      </div>
       <textarea
         v-else
         rows="5"
@@ -61,7 +76,13 @@ const props = defineProps({
   showSlot: { type: Boolean, default: true },
   pattern: '',
   inputType: String,
-  isChecked: {type: Boolean, default: false}
+  isChecked: {type: Boolean, default: false},
+  showPasswordIcon: {type: Boolean, default: false},
+})
+
+const state = reactive({
+  showPassword: false,
+  pwActive: false,
 })
 </script>
 <style lang="postcss" scoped>
@@ -102,5 +123,27 @@ const props = defineProps({
 }
 .interactive-control {
   @apply inline rounded-r-none;
+}
+
+.eye-icon {
+  @apply block w-8;
+  @apply bg-no-repeat bg-center;
+  content: '';
+  height: 46.5px;
+  background-size: 18px;
+  border: 0.8px solid rgb(224, 221, 219);
+  @apply border-l-0;
+}
+.eye-icon.show {
+  background-image: url('icons/icon-eye-opened.svg');
+}
+.eye-icon.hide {
+  background-image: url('icons/icon-eye-closed.svg');
+}
+.eye-icon.focusBg {
+  background-color: #F7F6F5;
+}
+input.hide-right-border {
+  @apply border-r-0;
 }
 </style>
