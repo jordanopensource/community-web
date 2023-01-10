@@ -114,7 +114,7 @@ const state = reactive({
   @apply text-white text-base;
   @apply border-solid border;
   content: '';
-  background-image: url('icons/icon-checkbox.svg');
+  background-image: url('~/assets/icons/icon-checkbox.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 0.675rem;
@@ -134,11 +134,16 @@ const state = reactive({
   border: 0.8px solid rgb(224, 221, 219);
   @apply border-l-0;
 }
+@media screen and (min-width: 768px){
+  .eye-icon {
+    height: 49.5px;
+  }
+}
 .eye-icon.show {
-  background-image: url('icons/icon-eye-opened.svg');
+  background-image: url('~/assets/icons/icon-eye-opened.svg');
 }
 .eye-icon.hide {
-  background-image: url('icons/icon-eye-closed.svg');
+  background-image: url('~/assets/icons/icon-eye-closed.svg');
 }
 .eye-icon.focusBg {
   background-color: #F7F6F5;
