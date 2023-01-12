@@ -33,9 +33,10 @@
               <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
             </li>
             <li class="menu-item">
-              <NuxtLink id="login" to="/login" class="nav-link"
+              <NuxtLink id="login" to="/login" class="nav-link" v-if="!state.authorized"
                 >Sign In</NuxtLink
               >
+              <p v-else>Logged In</p>
             </li>
           </ul>
           <MobileMenuButton :is-open="state.isOpen" @toggle="ToggleIsOpen()" />
@@ -50,6 +51,7 @@ import { reactive } from 'vue'
 const config = useRuntimeConfig()
 const state = reactive({
   isOpen: false,
+  authorized: !!useCookie('auth').value,
 })
 const ToggleIsOpen = () => (state.isOpen = !state.isOpen)
 </script>
