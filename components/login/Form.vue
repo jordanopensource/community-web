@@ -25,6 +25,7 @@
         class="form-submit"
         btn-style="button-flat button-blue-full"
         type="submit"
+        @click.prevent="login"
       >
         Sign in
       </FormAppButton>
@@ -32,12 +33,69 @@
   </div>
 </template>
 <script setup>
+const config = useRuntimeConfig()
 const emit = defineEmits(['forgotPassword'])
 
 const form = reactive({
   email: '',
   password: '',
 })
+const state = reactive({
+  token: '',
+  authorized: false
+})
+
+const userAuth = async () => {
+  const url = `${config.public.COMMUNITY_API_URL}/auth`;
+  const options = {
+    method: "GET",
+    headers: {
+      "Accept": "*/*",
+      "Authorization": `Bearer ${state.token}`
+    }
+  }
+  const response = await fetch(url, options);
+  if (response.status !== 401) {
+    state.authorized = true;
+  }
+  else state.authorized = false;
+
+  // create auth cookie
+  const authCookie = useCookie('auth', {
+    maxAge: 60*60*24,
+    httpOnly: config.HTTP_ENABLED === 'true' ? true : false,
+    secure: true,
+    sameSite: true
+  })
+  authCookie.value = state.token;
+  navigateTo('/')
+}
+
+const login = async () => {
+  const url = `${config.public.COMMUNITY_API_URL}/auth/login`;
+  const options = {
+    method: "POST",
+    body: JSON.stringify({
+      "email": form.email,
+      "password": form.password
+    }),
+    headers: {
+      "Accept": "*/*",
+      "Content-Type": "application/json"
+    }
+  }
+  fetch(url, options)
+    .then((response) => response.json())
+    .then((data) => {
+      state.token = data.access_token
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+    .finally(() => {
+      userAuth()
+    })
+}
 </script>
 <style lang="postcss" scoped>
 .divider-slashes {
