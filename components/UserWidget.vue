@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="widget-container">
     <img
       @click="openPopup"
       class="avatar"
@@ -34,6 +34,9 @@ const openPopup = () => {
 </script>
 
 <style lang="postcss" scoped>
+.widget-container {
+  @apply flex flex-col items-end justify-between;
+}
 .avatar {
   @apply w-10 rounded;
 }
@@ -42,8 +45,7 @@ const openPopup = () => {
 }
 .user-menu {
   @apply absolute flex flex-col rounded;
-  @apply mt-4 p-4;
+  @apply mt-12 p-4;
   @apply bg-community-white text-community-black-darker;
-  margin-left: -4.5rem;
 }
 </style>
