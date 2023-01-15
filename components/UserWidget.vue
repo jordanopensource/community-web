@@ -45,6 +45,9 @@ const state = reactive({
 const openPopup = () => {
   state.isOpen = !state.isOpen
 }
+const signOut = () => {
+  useCookie('auth').value = null;
+}
 </script>
 
 <style lang="postcss" scoped>
