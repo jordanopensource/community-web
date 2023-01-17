@@ -68,7 +68,7 @@ const userAuth = async () => {
     sameSite: true
   })
   authCookie.value = state.token;
-  navigateTo('/')
+  location.reload()
 }
 
 const login = async () => {

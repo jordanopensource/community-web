@@ -15,7 +15,7 @@
 </template>
 <script setup>
 definePageMeta({
-  middleware: ['auth'],
+  middleware: ['login-page'],
 })
 
 const state = reactive({
