@@ -1,7 +1,7 @@
 <template>
   <div class="widget-container">
     <img
-      @click="openPopup"
+      @click="togglePopup"
       class="avatar"
       alt="avatar"
       :src="
@@ -24,15 +24,13 @@
         </p>
       </div>
       <div class="divider-dotted"></div>
-      <NuxtLink to="/members" class="nav-link">
-        <i class="menu-icon ic-user"></i> Your Profile
-      </NuxtLink>
-      <NuxtLink to="/" class="nav-link">
-        <i class="menu-icon ic-gear"></i> Settings
-      </NuxtLink>
-      <div class="divider-dotted"></div>
-      <NuxtLink to="/" class="nav-link" @click="signOut">
-        <i class="menu-icon ic-logout"></i> Sign out
+      <NuxtLink
+        v-for="link, index in state.links"
+        :key="index"
+        :to="link.to"
+        @click="link.onClick"
+        class="nav-link">
+        <i class="menu-icon" :class="link.icon"></i> {{link.title}}
       </NuxtLink>
     </div>
   </div>
@@ -45,15 +43,38 @@ const props = defineProps({
     default: {},
   },
 })
-const state = reactive({
-    isOpen: false
-})
-const openPopup = () => {
+const togglePopup = () => {
   state.isOpen = !state.isOpen
 }
 const signOut = () => {
-  useCookie('auth').value = null;
+  togglePopup()
+  useCookie('auth').value = null; // delete the cookie
+  location.reload()
 }
+const state = reactive({
+    isOpen: false,
+    userId: useCookie('auth').value.userId,
+    links: [
+      {
+        title: 'Your Profile',
+        to: '/members/' + useCookie('auth').value.userId,
+        icon: 'ic-user',
+        onClick: togglePopup
+      },
+      {
+        title: 'Settings',
+        to: '/',
+        icon: 'ic-gear',
+        onClick: togglePopup
+      },
+      {
+        title: 'Sign out',
+        to: '/',
+        icon: 'ic-logout',
+        onClick: signOut
+      }
+    ]
+})
 </script>
 
 <style lang="postcss" scoped>
