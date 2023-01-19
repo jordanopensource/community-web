@@ -42,7 +42,8 @@ const form = reactive({
 })
 const state = reactive({
   token: '',
-  authorized: false
+  userId: '',
+  authorized: false,
 })
 
 const userAuth = async () => {
@@ -54,21 +55,32 @@ const userAuth = async () => {
       "Authorization": `Bearer ${state.token}`
     }
   }
-  const response = await fetch(url, options);
-  if (response.status !== 401) {
-    state.authorized = true;
-  }
-  else state.authorized = false;
-
-  // create auth cookie
-  const authCookie = useCookie('auth', {
-    maxAge: 60*60*24,
-    httpOnly: config.HTTP_ENABLED === 'true' ? true : false,
-    secure: true,
-    sameSite: true
-  })
-  authCookie.value = state.token;
-  location.reload()
+  fetch(url, options)
+    .then((response) => {
+      if (response.status !== 401) {
+        state.authorized = true;
+        return response.json()
+      }
+      throw new Error(`Invalid token: ${response.status}`)
+    })
+    .then(json => state.userId = json.userId)
+    .catch((error) => {
+      console.log(error)
+    })
+    .finally(() => {
+      // create auth cookie
+      const authCookie = useCookie('auth', {
+        maxAge: 60*60*24,
+        httpOnly: config.public.HTTPONLY_ENABLED === 'true' ? true : false,
+        secure: true,
+        sameSite: true
+      })
+      authCookie.value = {
+        'userId': state.userId,
+        'token': state.token
+      };
+      location.reload()
+    })
 }
 
 const login = async () => {
