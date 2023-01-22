@@ -5,22 +5,24 @@
       class="avatar"
       alt="avatar"
       :src="
-        props.member.avatar_url
-        ? props.member.avatar_url
+        state.member.avatar_url
+        ? state.member.avatar_url
         : '/images/placeholders/avatar.png'
       "
     />
     <div v-if="state.isOpen" class="user-menu">
       <p class="user-name">
-        {{ props.member.first_name_en }} {{ props.member.last_name_en }}
+        {{ state.member.first_name_en }} {{ state.member.last_name_en }}
       </p>
       <div class="flex flex-row justify-between">
-        <p class="user-info">
+        <p v-if="state.member.type !== 0"
+          class="user-info">
           <div class="badge-color"></div>
           JOSA Member
         </p>
-        <p class="user-info">
-          #{{ props.member.type }}-{{ props.member.josa_member_id }}
+        <p v-if="state.member.josa_member_id && state.member.type !== 0"
+          class="user-info">
+          #{{ state.member.type }}-{{ state.member.josa_member_id }}
         </p>
       </div>
       <div class="divider-dotted"></div>
@@ -37,23 +39,19 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  member: {
-    type: Object,
-    default: {},
-  },
-})
 const togglePopup = () => {
   state.isOpen = !state.isOpen
 }
 const signOut = () => {
   togglePopup()
   useCookie('auth').value = null; // delete the cookie
+  localStorage.clear()
   location.reload()
 }
 const state = reactive({
     isOpen: false,
     userId: useCookie('auth').value.userId,
+    member: {},
     links: [
       {
         title: 'Your Profile',
@@ -74,6 +72,9 @@ const state = reactive({
         onClick: signOut
       }
     ]
+})
+onMounted(() => {
+   state.member = JSON.parse(localStorage.getItem('member'))
 })
 </script>
 
