@@ -64,10 +64,7 @@ const userAuth = async () => {
       throw new Error(`Invalid token: ${response.status}`)
     })
     .then(json => state.userId = json.userId)
-    .catch((error) => {
-      console.log(error)
-    })
-    .finally(() => {
+    .then(() => {
       // create auth cookie
       const authCookie = useCookie('auth', {
         maxAge: 60*60*24,
@@ -78,9 +75,34 @@ const userAuth = async () => {
       authCookie.value = {
         'userId': state.userId,
         'token': state.token
-      };
+      }
+    })
+    .then(async() => await storeMemberData())
+    .catch((error) => {
+      console.log(error)
+    })
+    .then(() => {
       location.reload()
     })
+}
+const storeMemberData = () => {
+  return new Promise((resolve, reject) => {
+    fetch(`${config.public.COMMUNITY_API_URL}/member/${useCookie('auth').value.userId}`)
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {
+      if (data) {
+        localStorage.setItem("member", JSON.stringify(data.member));
+        resolve();
+      } else {
+        reject();
+      }
+    }).catch((error) => {
+      console.log(error);
+      reject();
+    })
+  });
 }
 
 const login = async () => {
