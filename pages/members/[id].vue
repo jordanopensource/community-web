@@ -30,7 +30,9 @@
 const config = useRuntimeConfig()
 const route = useRoute()
 const user_id = route.params.id
-
+onMounted(() => {
+  refreshNuxtData()
+})
 const { data: memberData, pending: pendingMember } = await useFetch(
   `${config.public.COMMUNITY_API_URL}/member/${user_id}`
 )
