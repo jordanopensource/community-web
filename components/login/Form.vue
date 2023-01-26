@@ -46,45 +46,6 @@ const state = reactive({
   authorized: false,
 })
 
-const userAuth = async () => {
-  const url = `${config.public.COMMUNITY_API_URL}/auth`;
-  const options = {
-    method: "GET",
-    headers: {
-      "Accept": "*/*",
-      "Authorization": `Bearer ${state.token}`
-    }
-  }
-  fetch(url, options)
-    .then((response) => {
-      if (response.status !== 401) {
-        state.authorized = true;
-        return response.json()
-      }
-      throw new Error(`Invalid token: ${response.status}`)
-    })
-    .then(json => state.userId = json.userId)
-    .then(() => {
-      // create auth cookie
-      const authCookie = useCookie('auth', {
-        maxAge: 60*60*24,
-        httpOnly: config.public.HTTPONLY_ENABLED === 'true' ? true : false,
-        secure: true,
-        sameSite: true
-      })
-      authCookie.value = {
-        'userId': state.userId,
-        'token': state.token
-      }
-    })
-    .then(async() => await storeMemberData())
-    .catch((error) => {
-      console.log(error)
-    })
-    .then(() => {
-      location.reload()
-    })
-}
 const storeMemberData = () => {
   return new Promise((resolve, reject) => {
     fetch(`${config.public.COMMUNITY_API_URL}/member/${useCookie('auth').value.userId}`)
@@ -105,30 +66,17 @@ const storeMemberData = () => {
   });
 }
 
-const login = async () => {
-  const url = `${config.public.COMMUNITY_API_URL}/auth/login`;
-  const options = {
+// TODO: separate authentication in a composable
+const login = async() => {
+  await useFetch('/api/login', {
     method: "POST",
     body: JSON.stringify({
       "email": form.email,
       "password": form.password
-    }),
-    headers: {
-      "Accept": "*/*",
-      "Content-Type": "application/json"
-    }
-  }
-  fetch(url, options)
-    .then((response) => response.json())
-    .then((data) => {
-      state.token = data.access_token
     })
-    .catch((error) => {
-      console.log(error)
-    })
-    .finally(() => {
-      userAuth()
-    })
+  })
+  // userAuth()
+  const {data: member} = await useFetch(`${config.public.COMMUNITY_API_URL}/auth/`)
 }
 </script>
 <style lang="postcss" scoped>
