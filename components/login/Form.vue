@@ -40,41 +40,22 @@ const form = reactive({
   email: '',
   password: '',
 })
-const state = reactive({
-  token: '',
-  userId: '',
-  authorized: false,
-})
 
-const storeMemberData = () => {
-  return new Promise((resolve, reject) => {
-    // TODO: get user ID from the local storage instead
-    fetch(`${config.public.COMMUNITY_API_URL}/member/${useCookie('auth').value.userId}`)
-    .then(response => {
-      return response.json()
-    })
-    .then(data => {
-      if (data) {
-        localStorage.setItem("member", JSON.stringify(data.member));
-        resolve();
-      } else {
-        reject();
-      }
-    }).catch((error) => {
-      console.log(error);
-      reject();
-    })
-  });
-}
-
-// TODO: separate authentication in a composable
 const login = async() => {
   await useFetch('/api/login', {
     method: "POST",
     body: JSON.stringify({
       "email": form.email,
       "password": form.password
-    })
+    }),
+    onResponse({response}) {
+      if(response.ok) {
+        localStorage.setItem("member", JSON.stringify(response._data))
+      }
+    },
+    onResponseError({response}) {
+      // TODO: handle errors on client side
+    }
   })
 }
 </script>
