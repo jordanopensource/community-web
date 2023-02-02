@@ -1,8 +1,9 @@
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const body = await useBody(event)
-  const url = `${config.public.COMMUNITY_API_URL}/auth/login`
-  const options = {
+
+  const url = `${config.public.COMMUNITY_API_URL}/auth/`
+  const loginOptions = {
     method: "POST",
     body: body,
     headers: {
@@ -10,7 +11,16 @@ export default defineEventHandler(async (event) => {
       "Content-Type": "application/json"
     }
   }
-  const response = await $fetch.raw(url, options);
-  appendHeader(event, 'Set-Cookie', response.headers.get('set-cookie')) // assuming we only set one cookie
-  return response
+
+  const loginResponse = await $fetch.raw(url+'login', loginOptions);
+
+  const authResponse = await $fetch.raw(url, {
+    method: 'GET',
+    headers: {
+      "Accept": "*/*",
+      "Cookie": loginResponse.headers.get('set-cookie')
+    }
+  })
+  appendHeader(event, 'Set-Cookie', loginResponse.headers.get('set-cookie')) // assuming we only set one cookie
+  return authResponse
 });

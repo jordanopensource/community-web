@@ -48,6 +48,7 @@ const state = reactive({
 
 const storeMemberData = () => {
   return new Promise((resolve, reject) => {
+    // TODO: get user ID from the local storage instead
     fetch(`${config.public.COMMUNITY_API_URL}/member/${useCookie('auth').value.userId}`)
     .then(response => {
       return response.json()
@@ -75,8 +76,6 @@ const login = async() => {
       "password": form.password
     })
   })
-  // userAuth()
-  const {data: member} = await useFetch(`${config.public.COMMUNITY_API_URL}/auth/`)
 }
 </script>
 <style lang="postcss" scoped>
