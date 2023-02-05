@@ -11,9 +11,4 @@ const config = useRuntimeConfig()
 if (config.public.DEBUG === 'true') {
   console.log(`SETTINGS `, config.public)
 }
-onMounted(() => {
-  if (!useCookie('auth').value){
-    localStorage.clear()
-  }
-})
 </script>
