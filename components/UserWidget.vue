@@ -27,7 +27,7 @@
       </div>
       <div class="divider-dotted"></div>
       <NuxtLink
-        v-for="link, index in state.links"
+        v-for="link, index in widget.links"
         :key="index"
         :to="link.to"
         @click="link.onClick"
@@ -42,39 +42,47 @@
 const togglePopup = () => {
   state.isOpen = !state.isOpen
 }
-const signOut = () => {
+
+const signOut = async () => {
   togglePopup()
-  useCookie('auth').value = null; // delete the cookie
+  await useFetch('/api/logout')
   localStorage.clear()
   location.reload()
 }
+
 const state = reactive({
-    isOpen: false,
-    userId: useCookie('auth').value.userId,
-    member: {},
-    links: [
-      {
-        title: 'Your Profile',
-        to: '/members/' + useCookie('auth').value.userId,
-        icon: 'ic-user',
-        onClick: togglePopup
-      },
-      {
-        title: 'Settings',
-        to: '/',
-        icon: 'ic-gear',
-        onClick: togglePopup
-      },
-      {
-        title: 'Sign out',
-        to: '/',
-        icon: 'ic-logout',
-        onClick: signOut
-      }
-    ]
+  isOpen: false,
+  member: {}
+})
+const widget = reactive({
+  links: [
+    {
+      title: 'Your Profile',
+      to: '/members/' + userId().value,
+      icon: 'ic-user',
+      onClick: togglePopup
+    },
+    {
+      title: 'Settings',
+      to: '/',
+      icon: 'ic-gear',
+      onClick: togglePopup
+    },
+    {
+      title: 'Sign out',
+      to: '/',
+      icon: 'ic-logout',
+      onClick: signOut
+    }
+  ]
 })
 onMounted(() => {
-   state.member = JSON.parse(localStorage.getItem('member'))
+  if (localStorage.getItem('member')) {
+    state.member = JSON.parse(localStorage.getItem('member'))._data
+  } else {
+    //TODO: handle this case better 
+    console.error('localstorage is empty')
+  }
 })
 </script>
 
