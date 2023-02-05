@@ -18,6 +18,7 @@
         class="form-submit"
         btn-style="button-flat button-blue-full"
         type="submit"
+        @click.prevent="sendEmail"
       >
         Send password reset email
       </FormAppButton>
@@ -33,6 +34,16 @@ const emit = defineEmits(['forgotPassword'])
 const form = reactive({
   email: '',
 })
+
+const sendEmail = async () => {
+  await $fetch.raw('/api/forgot-password/send-email', {
+    method: 'POST',
+    body: JSON.stringify({
+      'email': form.email
+    })
+  });
+}
+
 </script>
 <style lang="postcss" scoped>
 .divider-slashes {
