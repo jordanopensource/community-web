@@ -33,7 +33,6 @@
   </div>
 </template>
 <script setup>
-const config = useRuntimeConfig()
 const emit = defineEmits(['forgotPassword'])
 
 const form = reactive({
@@ -51,6 +50,8 @@ const login = async() => {
     onResponse({response}) {
       if(response.ok) {
         localStorage.setItem("member", JSON.stringify(response._data))
+        useAuth().value = true
+        navigateTo('/')
       }
     },
     onResponseError({response}) {
