@@ -1,7 +1,8 @@
 export default defineNuxtRouteMiddleware(async () => {
+  const config = useRuntimeConfig()
   if (process.server) {
-    if(useCookie('connect.sid').value) {
-      await isAuth('connect.sid', useCookie('connect.sid').value)
+    if(useCookie(`${config.public.SESSION_COOKIE_NAME}`).value) {
+      await isAuth(`${config.public.SESSION_COOKIE_NAME}`, useCookie(`${config.public.SESSION_COOKIE_NAME}`).value)
     } else {
       useAuth().value = false
     }

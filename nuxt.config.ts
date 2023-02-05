@@ -58,7 +58,8 @@ export default defineNuxtConfig({
       DRONE_BUILD_LINK: process.env.DRONE_BUILD_LINK,
       DRONE_REPO_LINK: process.env.DRONE_REPO_LINK,
       DRONE_BUILD_FINISHED: process.env.DRONE_BUILD_FINISHED,
-      DEBUG: process.env.DEBUG
+      DEBUG: process.env.DEBUG,
+      SESSION_COOKIE_NAME: process.env.SESSION_COOKIE_NAME
     }
   },
   healthcheck: {

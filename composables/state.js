@@ -16,7 +16,7 @@ export const isAuth = async (cookieName, cookieValue) => {
     method: 'GET',
     headers: {
       "Accept": "*/*",
-      "Cookie": cookieName + '=' + cookieValue
+      "Cookie": `${cookieName}=${cookieValue}`
     },
     onResponse({response}) {
       authenticated.value = response.ok
