@@ -51,7 +51,7 @@ import { reactive } from 'vue'
 const config = useRuntimeConfig()
 const state = reactive({
   isOpen: false,
-  authenticated: useAuth(),
+  authenticated: useAuth().value,
 })
 const ToggleIsOpen = () => (state.isOpen = !state.isOpen)
 </script>
