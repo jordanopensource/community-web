@@ -47,7 +47,8 @@ const signOut = async () => {
   togglePopup()
   await useFetch('/api/logout')
   localStorage.clear()
-  location.reload()
+  useAuth().value = false
+  navigateTo('/')
 }
 
 const state = reactive({
