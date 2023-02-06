@@ -33,9 +33,10 @@
               <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
             </li>
             <li class="menu-item">
-              <NuxtLink id="login" to="/login" class="nav-link"
+              <NuxtLink id="login" to="/login" class="nav-link" v-if="!useAuth().value"
                 >Sign In</NuxtLink
               >
+              <UserWidget v-else/>
             </li>
           </ul>
           <MobileMenuButton :is-open="state.isOpen" @toggle="ToggleIsOpen()" />
@@ -70,7 +71,7 @@ li a {
 
 .menu {
   @apply text-white hidden font-medium text-lg lg:text-xl;
-  @apply lg:flex justify-end w-full items-baseline;
+  @apply lg:flex justify-end w-full items-center;
 
   .menu-item {
     @apply inline-block lg:mx-2;

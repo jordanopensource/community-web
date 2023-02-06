@@ -25,6 +25,7 @@
         class="form-submit"
         btn-style="button-flat button-blue-full"
         type="submit"
+        @click.prevent="login"
       >
         Sign in
       </FormAppButton>
@@ -38,6 +39,26 @@ const form = reactive({
   email: '',
   password: '',
 })
+
+const login = async() => {
+  await useFetch('/api/login', {
+    method: "POST",
+    body: JSON.stringify({
+      "email": form.email,
+      "password": form.password
+    }),
+    onResponse({response}) {
+      if(response.ok) {
+        localStorage.setItem("member", JSON.stringify(response._data))
+        useAuth().value = true
+        navigateTo('/')
+      }
+    },
+    onResponseError({response}) {
+      // TODO: handle errors on client side
+    }
+  })
+}
 </script>
 <style lang="postcss" scoped>
 .divider-slashes {

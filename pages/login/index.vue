@@ -14,6 +14,10 @@
   </div>
 </template>
 <script setup>
+definePageMeta({
+  middleware: ['login-page'],
+})
+
 const state = reactive({
   forgotPassword: false,
 })

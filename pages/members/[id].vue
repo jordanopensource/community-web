@@ -27,6 +27,9 @@
   </div>
 </template>
 <script setup>
+definePageMeta({
+  middleware: "auth"
+})
 const config = useRuntimeConfig()
 const route = useRoute()
 const user_id = route.params.id

@@ -19,6 +19,7 @@ steps:
         [
           COMMUNITY_API_URL=https://community.api.dev.josa.ngo/v2,
           TARGET_ENV=development,
+          SESSION_COOKIE_NAME=connect.sid
         ]
       build_args_from_env:
         [
