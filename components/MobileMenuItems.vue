@@ -1,18 +1,30 @@
 <template>
   <div :class="props.isOpen ? 'block lg:hidden' : 'hidden lg:hidden'">
     <ul class="mobile-menu">
-      <li class="py-4 border-gray" v-if="config.public.TARGET_ENV === 'development'">
+      <li
+        class="py-4 border-gray"
+        v-if="config.public.TARGET_ENV === 'development'"
+      >
         <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
       </li>
       <li class="py-4 border-gray">
         <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
       </li>
-      <li class="py-4 border-gray" v-if="config.public.TARGET_ENV === 'development'">
+      <li
+        class="py-4 border-gray"
+        v-if="config.public.TARGET_ENV === 'development'"
+      >
         <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
       </li>
-      <!-- <li class="py-4">
-        <NuxtLink id="login" to="/login" class="nav-link">Sign In</NuxtLink>
-      </li> -->
+      <li class="py-4">
+        <NuxtLink
+          id="login"
+          to="/login"
+          class="nav-link"
+          v-if="!useAuth().value"
+          >Sign In</NuxtLink
+        >
+      </li>
     </ul>
   </div>
 </template>
@@ -34,7 +46,7 @@ const props = defineProps({
   border-bottom: solid 2px #22292c;
 }
 
-ul>li {
+ul > li {
   @apply block;
   @apply ml-auto;
 }
