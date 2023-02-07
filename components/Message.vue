@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="state.shown"
-    class="w-full flex flex-col justify-start border m-4 p-4"
+    class="flex flex-col justify-start border p-4"
     :class="props.type">
     <div class="flex flex-row justify-between items-center mb-2">
       <i
@@ -9,6 +9,7 @@
         :style="`background-image: url('/assets/icons/message/${props.type}.svg')`">
       </i>
       <i
+        v-if="props.showCloseBtn"
         class="close-icon w-5 h-5 bg-contain"
         @click="state.shown = false">
       </i>
@@ -21,6 +22,7 @@
 const props = defineProps({
   type: { type: String, default: 'info' },
   title: { type: String, default: '' },
+  showCloseBtn: {type: Boolean, default: true}
 })
 const state = reactive({
   shown: true
