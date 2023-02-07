@@ -6,7 +6,7 @@
         v-if="!state.forgotPassword"
         @forgot-password="(s) => (state.forgotPassword = s)"
       />
-      <LoginResetPassword
+      <LoginForgotPassword
         v-else
         @forgot-password="(s) => (state.forgotPassword = s)"
       />
