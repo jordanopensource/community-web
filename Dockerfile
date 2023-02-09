@@ -4,7 +4,7 @@ ARG COMMUNITY_API_URL HOST=0.0.0.0 PORT=3000 USER=node TARGET_ENV DRONE_COMMIT_S
 ###########
 # BUILDER #
 ###########
-FROM node:16.14.0 AS builder
+FROM node:18.14.0 AS builder
 
 # pass the global args
 ARG COMMUNITY_API_URL
