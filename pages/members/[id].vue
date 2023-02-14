@@ -33,12 +33,13 @@ definePageMeta({
 const config = useRuntimeConfig()
 const route = useRoute()
 const user_id = route.params.id
-onMounted(() => {
-  refreshNuxtData()
-})
-const { data: memberData, pending: pendingMember } = await useFetch(
+
+const { data: memberData, pending: pendingMember, refresh } = await useFetch(
   `${config.public.COMMUNITY_API_URL}/member/${user_id}`
 )
+onMounted(() => {
+  refresh()
+})
 </script>
 
 <style scoped lang="postcss">
