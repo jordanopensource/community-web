@@ -25,9 +25,14 @@
         class="form-submit"
         btn-style="button-flat button-blue-full"
         type="submit"
+        :disabled="state.loggingIn"
         @click.prevent="login"
       >
-        Sign in
+      <!-- FIXME: @click.prevent causes issue in input validation -->
+      <div class="flex flex-row justify-center gap-x-4">
+        <div v-if="state.loggingIn" class="loader"></div>
+        <div>Sign in</div>
+      </div>
       </FormAppButton>
     </form>
   </div>
@@ -39,8 +44,11 @@ const form = reactive({
   email: '',
   password: '',
 })
-
+const state = reactive({
+  loggingIn: false
+})
 const login = async() => {
+  state.loggingIn = true
   await useFetch('/api/login', {
     method: "POST",
     body: JSON.stringify({
@@ -49,12 +57,14 @@ const login = async() => {
     }),
     onResponse({response}) {
       if(response.ok) {
+        state.loggingIn = false
         localStorage.setItem("member", JSON.stringify(response._data))
         useAuth().value = true
         navigateTo('/')
       }
     },
     onResponseError({response}) {
+      state.loggingIn = false
       // TODO: handle errors on client side
     }
   })
