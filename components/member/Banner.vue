@@ -42,28 +42,64 @@
           <h1 class="member-name">
             {{ props.member.first_name_en }} {{ props.member.last_name_en }}
           </h1>
-          <h2 class="member-headline">
-            {{
-              props.member.headline
-                ? props.member.headline
-                : 'This is the headline but it can get longer than you can imagine.'
-            }}
-          </h2>
-          <p class="member-location">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path fill="none" d="M0 0h24v24H0z" />
-              <path
-                d="M12 20.9l4.95-4.95a7 7 0 1 0-9.9 0L12 20.9zm0 2.828l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"
-                fill="rgba(75,85,99,1)"
-              />
-            </svg>
-            {{
-              props.member.location ? props.member.location : 'Amman, Jordan'
-            }}
-          </p>
+          <div v-if="!showUpdateInfoForm">
+            <h2 class="member-headline">
+              {{
+                props.member.headline
+                  ? props.member.headline
+                  : 'This is the headline but it can get longer than you can imagine.'
+              }}
+            </h2>
+            <p class="member-location">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path
+                  d="M12 20.9l4.95-4.95a7 7 0 1 0-9.9 0L12 20.9zm0 2.828l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"
+                  fill="rgba(75,85,99,1)"
+                />
+              </svg>
+              {{
+                props.member.location ? props.member.location : 'Amman, Jordan'
+              }}
+            </p>
+          </div>
+          <div v-else>
+            <form @submit.prevent="updateGeneralInfo">
+              <FormAppControlInput
+                v-model:value="state.form.memberHeadline"
+                inputType="textarea"
+              >
+                Headline
+              </FormAppControlInput>
+              <FormAppControlInput v-model:value="state.form.memberCity">
+                City
+              </FormAppControlInput>
+              <FormAppControlInput v-model:value="state.form.memberCountry">
+                Country
+              </FormAppControlInput>
+              <FormAppControlInput
+                v-model:value="state.form.memberPhone"
+                inputType="tel"
+                :isRequired="true"
+                placeholder="962799888777"
+                pattern="+[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{3}"
+                >Phone Number</FormAppControlInput
+              >
+              <FormAppButton> Save </FormAppButton>
+            </form>
+          </div>
         </div>
-        <div v-if="memberAuth">
-          <img src="/icons/edit.svg" alt="" class="cursor-pointer" />
+        <div
+          v-if="memberAuth"
+          @click="() => (showUpdateInfoForm = !showUpdateInfoForm)"
+        >
+          <img
+            v-if="!showUpdateInfoForm"
+            src="/icons/edit.svg"
+            alt=""
+            class="cursor-pointer"
+          />
+          <img v-else src="/icons/x.svg" alt="" class="cursor-pointer" />
         </div>
       </div>
     </div>
@@ -83,8 +119,17 @@ const props = defineProps({
   },
 })
 
+const showUpdateInfoForm = useState('showUpdateInfoForm', () => false)
+
+// showUpdateInfoForm: false,
 const state = reactive({
   file: '',
+  form: {
+    memberHeadline: props.member.headline,
+    memberPhone: props.member.phone,
+    memberCity: props.member.location?.split(',')[0],
+    memberCountry: props.member.location?.split(',')[1],
+  },
 })
 const placeHolderImages = {
   cover: '/images/placeholders/729x164.png',
@@ -92,6 +137,7 @@ const placeHolderImages = {
   editIcon: '/icons/edit.svg',
 }
 
+// handle uploading of the cover photo request
 const uploadCover = async (event) => {
   const { files } = event.target
   console.log(files)
@@ -127,6 +173,46 @@ const uploadCover = async (event) => {
   // }
   // const response = await $fetch.raw(apiUrl, uploadOptions)
   // console.log(response._data)
+}
+
+// handle updating the users general info
+const updateGeneralInfo = async (event) => {
+  /**
+   *
+   * {
+    "phone": "string",
+    "email": "string",
+    "github_user": "string",
+    "wikimedia_user": "string",
+    "cover_url": "string",
+    "avatar_url": "string",
+    "about": "string",
+    "headline": "string",
+    "location": "string"
+    }
+   */
+
+  const bodyData = {
+    headline: state.form.memberHeadline,
+    location: `${state.form.memberCity}, ${state.form.memberCountry}`,
+    phone: state.form.memberPhone,
+  }
+
+  await useFetch(`/api/member/update/info`, {
+    method: 'POST',
+    body: JSON.stringify(bodyData),
+    onResponse({ response }) {
+      if (response._data.success) {
+        console.log(response._data)
+        console.log('updated!')
+      }
+    },
+    onResponseError({ response }) {
+      // TODO: handle errors on client side
+      console.log('something went wrong', response._data.message)
+    },
+  })
+  showUpdateInfoForm.value = !showUpdateInfoForm
 }
 </script>
 
