@@ -10,6 +10,14 @@
             : placeHolderImages.cover
         "
       />
+      <!-- <div v-if="memberAuth">
+        <FormAppControlInput
+          v-model:value="state.file"
+          inputType="file"
+          :editIcon="true"
+          @change="uploadCover"
+        />
+      </div> -->
       <div class="invisible-white-space"></div>
       <div id="avatar-info-container" class="flex flex-row relative gap-x-7">
         <img
@@ -21,6 +29,13 @@
               : placeHolderImages.avatar
           "
         />
+        <!-- <div v-if="memberAuth" class="relative z-10">
+          <FormAppControlInput
+            v-model:value="state.file"
+            inputType="file"
+            :editIcon="true"
+          />
+        </div> -->
       </div>
       <div class="general-info">
         <div class="flex flex-col items-start gap-y-5">
@@ -47,20 +62,71 @@
             }}
           </p>
         </div>
+        <div v-if="memberAuth">
+          <img src="/icons/edit.svg" alt="" class="cursor-pointer" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script setup>
+const config = useRuntimeConfig()
+
 const props = defineProps({
   member: {
     type: Object,
     default: {},
   },
+  memberAuth: {
+    type: Boolean,
+    default: false,
+  },
+})
+
+const state = reactive({
+  file: '',
 })
 const placeHolderImages = {
   cover: '/images/placeholders/729x164.png',
   avatar: '/images/placeholders/avatar.png',
+  editIcon: '/icons/edit.svg',
+}
+
+const uploadCover = async (event) => {
+  const { files } = event.target
+  console.log(files)
+  const image = new FormData()
+  image.append(0, files[0])
+  await useFetch(`/api/member/upload`, {
+    method: 'POST',
+    body: image,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    onResponse({ response }) {
+      if (response._data.success) {
+        console.log('uploaded!')
+      }
+    },
+    onResponseError({ response }) {
+      // TODO: handle errors on client side
+      console.log('something went wrong', response._data.message)
+    },
+  })
+
+  ////////////////////////////////////////////////////
+  // const apiUrl = `${config.public.COMMUNITY_API_URL}/upload/members/cover/${id}`
+  // const uploadOptions = {
+  //   method: 'POST',
+  //   body: bodyData,
+  //   headers: {
+  //     Accept: '*/*',
+  //     // Cookie: `${config.public.SESSION_COOKIE_NAME}=` + sessionCookie,
+  //     Cookie: `${cookie}`,
+  //   },
+  // }
+  // const response = await $fetch.raw(apiUrl, uploadOptions)
+  // console.log(response._data)
 }
 </script>
 
@@ -110,7 +176,7 @@ img {
 }
 
 .general-info {
-  @apply self-center flex mt-5;
+  @apply self-center justify-between flex mt-5;
   @apply mx-5 md:mx-10;
 
   .member-name {
@@ -146,5 +212,9 @@ img {
   @apply mr-4 w-64;
   @apply xl:w-44;
   @apply 2xl:w-0 2xl:mr-0;
+}
+
+.edit-svg-white svg path {
+  @apply stroke-white;
 }
 </style>

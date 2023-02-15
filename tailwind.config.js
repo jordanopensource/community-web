@@ -95,6 +95,8 @@ module.exports = {
         'homeHero': "url('/images/background.svg')",
         'divider-slashes': "url('/images/divider-slash.svg')",
         'slashes': "url('/images/slashes.svg')",
+        'editIcon': "url('/icons/edit.svg')",
+        'editIconWhite': "url('/icons/edit-white.svg')",
       }
     },
   },

@@ -2,7 +2,11 @@
   <div>
     <Banner bannerText="JOSA Members" />
     <div class="container">
-      <MemberBanner v-if="!pendingMember" :member="memberData.member" />
+      <MemberBanner
+        v-if="!pendingMember"
+        :member="memberData.member"
+        :memberAuth="isUserLogged"
+      />
       <div class="flex">
         <div class="flex flex-col w-full">
           <div class="block lg:hidden">
@@ -28,15 +32,17 @@
 </template>
 <script setup>
 definePageMeta({
-  middleware: "auth"
+  middleware: 'auth',
 })
 const config = useRuntimeConfig()
 const route = useRoute()
 const user_id = route.params.id
-
-const { data: memberData, pending: pendingMember, refresh } = await useFetch(
-  `${config.public.COMMUNITY_API_URL}/member/${user_id}`
-)
+const isUserLogged = route.params.id === userId().value
+const {
+  data: memberData,
+  pending: pendingMember,
+  refresh,
+} = await useFetch(`${config.public.COMMUNITY_API_URL}/member/${user_id}`)
 onMounted(() => {
   refresh()
 })

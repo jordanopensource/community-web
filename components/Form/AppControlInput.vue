@@ -32,8 +32,9 @@
         <label> <slot /></label>
       </div>
       <div
-        v-if="props.inputType !== 'textarea'"
-        class="flex flex-row">
+        v-if="props.inputType !== 'textarea' && props.inputType !== 'file'"
+        class="flex flex-row"
+      >
         <input
           @input="$emit('update:value', $event.target.value)"
           :name="props.name"
@@ -46,15 +47,36 @@
           @focusin="state.pwActive = true"
           @focusout="state.pwActive = false"
         />
-        <span
-          v-if="props.showPasswordIcon && props.inputType === 'password'"
-          >
+        <span v-if="props.showPasswordIcon && props.inputType === 'password'">
           <i
             class="eye-icon"
-            :class="[state.showPassword ? 'hide' : 'show', state.pwActive ? 'focusBg' : '']"
+            :class="[
+              state.showPassword ? 'hide' : 'show',
+              state.pwActive ? 'focusBg' : '',
+            ]"
             @click="state.showPassword = !state.showPassword"
           ></i>
         </span>
+      </div>
+      <div
+        v-else-if="props.inputType === 'file'"
+        :class="
+          props.editIcon &&
+          'absolute top-4 right-8 bg-editIconWhite bg-auto w-6 h-6 bg-no-repeat'
+        "
+      >
+        <input
+          @input="$emit('update:value', $event.target.value)"
+          :name="props.name"
+          :required="props.isRequired"
+          :placeholder="props.placeholder"
+          :type="state.showPassword ? 'text' : props.inputType"
+          :pattern="props.pattern"
+          class="interactive-control"
+          :class="props.editIcon ? 'input-file-edit-icon' : ''"
+          @focusin="state.pwActive = true"
+          @focusout="state.pwActive = false"
+        />
       </div>
       <textarea
         v-else
@@ -76,8 +98,9 @@ const props = defineProps({
   showSlot: { type: Boolean, default: true },
   pattern: '',
   inputType: String,
-  isChecked: {type: Boolean, default: false},
-  showPasswordIcon: {type: Boolean, default: false},
+  isChecked: { type: Boolean, default: false },
+  showPasswordIcon: { type: Boolean, default: false },
+  editIcon: { type: Boolean, default: false },
 })
 
 const state = reactive({
@@ -134,7 +157,7 @@ const state = reactive({
   border: 0.8px solid rgb(224, 221, 219);
   @apply border-l-0;
 }
-@media screen and (min-width: 768px){
+@media screen and (min-width: 768px) {
   .eye-icon {
     height: 49.5px;
   }
@@ -146,9 +169,14 @@ const state = reactive({
   background-image: url('~/assets/icons/icon-eye-closed.svg');
 }
 .eye-icon.focusBg {
-  background-color: #F7F6F5;
+  background-color: #f7f6f5;
 }
 input.hide-right-border {
   @apply border-r-0;
+}
+
+input.input-file-edit-icon {
+  @apply absolute top-0 left-0 opacity-0 cursor-pointer;
+  @apply bg-editIconWhite bg-cover;
 }
 </style>
