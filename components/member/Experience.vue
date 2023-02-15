@@ -40,8 +40,15 @@
                   : 'Current'
               }}
             </p>
-            <div v-if="false">
-              <form action=""></form>
+            <div v-if="memberAuth">
+              <form @submit.prevent="deleteMemberWorkExperience">
+                <input
+                  type="hidden"
+                  name="experienceId"
+                  :value="experience.id"
+                />
+                <FormAppButton btnStyle="delete-btn"></FormAppButton>
+              </form>
             </div>
           </div>
         </li>
@@ -103,6 +110,12 @@
               <h5 class="sub-title">{{ education.degree }}</h5>
             </div>
             <p class="date-container">{{ formatDate(education.graduated) }}</p>
+            <div v-if="memberAuth">
+              <form @submit.prevent="deleteMemberEducation">
+                <input type="hidden" name="educationId" :value="education.id" />
+                <FormAppButton btnStyle="delete-btn"></FormAppButton>
+              </form>
+            </div>
           </div>
         </li>
       </ul>
@@ -171,6 +184,11 @@ const state = reactive({
   },
 })
 
+/**
+ * Member Work Experience
+ *
+ *
+ */
 const addMemberWorkExperience = async () => {
   const bodyData = {
     company_name: state.form.workExperience.company,
@@ -195,6 +213,29 @@ const addMemberWorkExperience = async () => {
   showAddWorkExperienceForm.value = !showAddWorkExperienceForm
 }
 
+const deleteMemberWorkExperience = async (event) => {
+  const { value } = event.target.experienceId
+
+  await useFetch(`/api/member/delete/experience/${value}`, {
+    method: 'DELETE',
+    onResponse({ response }) {
+      if (response._data.success) {
+        console.log(response._data)
+        console.log('updated!')
+      }
+    },
+    onResponseError({ response }) {
+      // TODO: handle errors on client side
+      console.log('something went wrong', response._data.message)
+    },
+  })
+}
+
+/**
+ * Member Education
+ *
+ *
+ */
 const addMemberEducation = async () => {
   const bodyData = {
     institution_name: state.form.education.institution_name,
@@ -217,6 +258,25 @@ const addMemberEducation = async () => {
   })
   showAddEducationForm.value = !showAddEducationForm
 }
+
+const deleteMemberEducation = async (event) => {
+  const { value } = event.target.educationId
+
+  await useFetch(`/api/member/delete/education/${value}`, {
+    method: 'DELETE',
+    onResponse({ response }) {
+      if (response._data.success) {
+        console.log(response._data)
+        console.log('updated!')
+      }
+    },
+    onResponseError({ response }) {
+      // TODO: handle errors on client side
+      console.log('something went wrong', response._data.message)
+    },
+  })
+}
+
 const updateMemberEducation = () => {}
 
 const experienceSorted = props.experience.sort(
