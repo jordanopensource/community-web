@@ -10,14 +10,14 @@
             : placeHolderImages.cover
         "
       />
-      <div v-if="memberAuth">
+      <!-- <div v-if="memberAuth">
         <FormAppControlInput
           v-model:value="state.file"
           inputType="file"
           :editIcon="true"
           @change="uploadCover"
         />
-      </div>
+      </div> -->
       <div class="invisible-white-space"></div>
       <div id="avatar-info-container" class="flex flex-row relative gap-x-7">
         <img
@@ -105,7 +105,6 @@
   </div>
 </template>
 <script setup>
-const config = useRuntimeConfig()
 const emit = defineEmits(['updateMember'])
 const props = defineProps({
   member: {
@@ -120,7 +119,6 @@ const props = defineProps({
 
 const showUpdateInfoForm = useState('showUpdateInfoForm', () => false)
 
-// showUpdateInfoForm: false,
 const state = reactive({
   file: '',
   form: {
@@ -130,6 +128,8 @@ const state = reactive({
     memberCountry: props.member.location?.split(',')[1],
   },
 })
+
+// placeholder images for when there are no images
 const placeHolderImages = {
   cover: '/images/placeholders/729x164.png',
   avatar: '/images/placeholders/avatar.png',
@@ -141,7 +141,9 @@ const uploadCover = async (event) => {
   const { files } = event.target
   console.log(files[0])
   let image = new FormData()
-  image.append('file', files[0], files[0].name)
+  // image.append('file', files[0], files[0].name)
+  image.append('file-name', files[0].name)
+  image.append('file-type', files[0].type)
   await useFetch(`/api/member/upload`, {
     method: 'POST',
     body: image,
