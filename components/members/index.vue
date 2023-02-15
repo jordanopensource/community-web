@@ -104,21 +104,3 @@ watch(
   }
 )
 </script>
-
-<style>
-.loader {
-  @apply h-6 w-6;
-  @apply border-4 border-solid border-gray-200;
-  border-radius: 50%;
-  border-top: 3px solid #0c97ac;
-  animation: spin 0.8s linear infinite;
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-}
-</style>

@@ -29,9 +29,13 @@
         class="form-submit"
         btn-style="button-flat button-blue-full"
         type="submit"
+        :disabled="state.loading"
         @click.prevent="reset"
       >
-        Reset password
+        <div class="flex flex-row justify-center gap-x-4">
+          <div v-if="state.loading" class="loader"></div>
+          <div>Reset password</div>
+        </div>
       </FormAppButton>
     </form>
     <div
@@ -61,12 +65,14 @@ const form = reactive({
 })
 const state = reactive({
   passwordsMatch: true,
-  resetSuccess: false
+  resetSuccess: false,
+  loading: false
 })
 
 const reset = async () => {
   state.passwordsMatch = form.password_1 === form.password_2
   if (state.passwordsMatch) {
+    state.loading = true
     const token = useRoute().query.token
     const url = `${config.public.COMMUNITY_API_URL}/auth/reset-password?token=${token}`
     
@@ -76,6 +82,7 @@ const reset = async () => {
         "password": form.password_1
       }),
       onResponse({response}) {
+        state.loading = false
         state.resetSuccess = response._data.success
       }
     })

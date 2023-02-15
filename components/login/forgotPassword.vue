@@ -18,9 +18,13 @@
         class="form-submit"
         btn-style="button-flat button-blue-full"
         type="submit"
+        :disabled="state.loading"
         @click.prevent="sendEmail"
       >
-        Send password reset email
+        <div class="flex flex-row justify-center gap-x-4">
+          <div v-if="state.loading" class="loader"></div>
+          <div>Send password reset email</div>
+        </div>
       </FormAppButton>
       <NuxtLink @click="$emit('forgotPassword', false)">
         Back to sign in
@@ -31,16 +35,23 @@
 <script setup>
 const emit = defineEmits(['forgotPassword'])
 
+const state = reactive({
+  loading: false
+})
 const form = reactive({
   email: '',
 })
 
 const sendEmail = async () => {
+  state.loading = true
   await $fetch.raw('/api/forgot-password/send-email', {
     method: 'POST',
     body: JSON.stringify({
       'email': form.email
-    })
+    }),
+    onResponse({response}) {
+      state.loading = false
+    }
   });
 }
 
