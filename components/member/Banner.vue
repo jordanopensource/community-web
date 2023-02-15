@@ -80,7 +80,6 @@
               <FormAppControlInput
                 v-model:value="state.form.memberPhone"
                 inputType="tel"
-                :isRequired="true"
                 placeholder="962799888777"
                 pattern="+[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{3}"
                 >Phone Number</FormAppControlInput

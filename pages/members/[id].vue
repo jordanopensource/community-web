@@ -12,7 +12,11 @@
           <div class="block lg:hidden">
             <MemberCard v-if="!pendingMember" :member="memberData.member" />
           </div>
-          <MemberDetails v-if="!pendingMember" :member="memberData.member" />
+          <MemberDetails
+            v-if="!pendingMember"
+            :member="memberData.member"
+            :memberAuth="isUserLogged"
+          />
           <MemberExperience
             v-if="memberData.experience.length || memberData.education.length"
             :experience="memberData.experience"
