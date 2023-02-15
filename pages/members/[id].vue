@@ -21,6 +21,7 @@
             v-if="memberData.experience.length || memberData.education.length"
             :experience="memberData.experience"
             :education="memberData.education"
+            :memberAuth="isUserLogged"
           />
           <MemberContribution
             v-if="!pendingMember && memberData.contributions.length"
