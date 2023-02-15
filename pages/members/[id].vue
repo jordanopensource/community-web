@@ -6,6 +6,7 @@
         v-if="!pendingMember"
         :member="memberData.member"
         :memberAuth="isUserLogged"
+        @updateMember="() => refresh()"
       />
       <div class="flex">
         <div class="flex flex-col w-full">
@@ -16,12 +17,14 @@
             v-if="!pendingMember"
             :member="memberData.member"
             :memberAuth="isUserLogged"
+            @updateMember="() => refresh()"
           />
           <MemberExperience
             v-if="memberData.experience.length || memberData.education.length"
             :experience="memberData.experience"
             :education="memberData.education"
             :memberAuth="isUserLogged"
+            @updateMember="() => refresh()"
           />
           <MemberContribution
             v-if="!pendingMember && memberData.contributions.length"

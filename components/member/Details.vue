@@ -42,6 +42,7 @@
   </div>
 </template>
 <script setup>
+const emit = defineEmits(['updateMember'])
 const memberSkills = ['Linux Operating System', 'File System']
 const showUpdateAboutForm = useState('showUpdateAboutForm', () => false)
 const props = defineProps({
@@ -88,6 +89,7 @@ const updateMemberDetailsInfo = async (event) => {
         console.log(response._data)
         console.log('updated!')
       }
+      emit('updateMember')
     },
     onResponseError({ response }) {
       // TODO: handle errors on client side

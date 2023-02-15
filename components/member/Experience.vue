@@ -3,7 +3,7 @@
     <h2 class="text-xl lg:text-2xl">Experience and Education</h2>
     <div class="divider-slashes"></div>
 
-    <div v-if="props.experience.length" class="experience">
+    <div class="experience">
       <div class="flex justify-between w-full">
         <h3 class="heading">Work Experience</h3>
         <div
@@ -21,7 +21,7 @@
           <img v-else src="/icons/x.svg" alt="" class="cursor-pointer" />
         </div>
       </div>
-      <ul>
+      <ul v-if="props.experience.length">
         <li
           v-for="(experience, index) in experienceSorted"
           :key="index"
@@ -82,7 +82,7 @@
       </div>
     </div>
 
-    <div v-if="props.education.length" class="education">
+    <div class="education">
       <div class="flex justify-between w-full">
         <h3 class="heading">Education</h3>
         <div
@@ -98,7 +98,7 @@
           <img v-else src="/icons/x.svg" alt="" class="cursor-pointer" />
         </div>
       </div>
-      <ul>
+      <ul v-if="props.education.length">
         <li
           v-for="(education, index) in educationSorted"
           :key="index"
@@ -133,7 +133,7 @@
             inputType="date"
             v-model:value="state.form.education.graduated"
           >
-            graduated
+            Date of Graduation
           </FormAppControlInput>
           <FormAppButton> Add </FormAppButton>
         </form>
@@ -142,6 +142,7 @@
   </div>
 </template>
 <script setup>
+const emit = defineEmits(['updateMember'])
 const showAddWorkExperienceForm = useState(
   'showAddWorkExperienceForm',
   () => false
@@ -204,6 +205,7 @@ const addMemberWorkExperience = async () => {
         console.log(response._data)
         console.log('updated!')
       }
+      emit('updateMember')
     },
     onResponseError({ response }) {
       // TODO: handle errors on client side
@@ -223,6 +225,7 @@ const deleteMemberWorkExperience = async (event) => {
         console.log(response._data)
         console.log('updated!')
       }
+      emit('updateMember')
     },
     onResponseError({ response }) {
       // TODO: handle errors on client side
@@ -250,6 +253,7 @@ const addMemberEducation = async () => {
         console.log(response._data)
         console.log('updated!')
       }
+      emit('updateMember')
     },
     onResponseError({ response }) {
       // TODO: handle errors on client side
@@ -269,6 +273,7 @@ const deleteMemberEducation = async (event) => {
         console.log(response._data)
         console.log('updated!')
       }
+      emit('updateMember')
     },
     onResponseError({ response }) {
       // TODO: handle errors on client side

@@ -10,14 +10,14 @@
             : placeHolderImages.cover
         "
       />
-      <!-- <div v-if="memberAuth">
+      <div v-if="memberAuth">
         <FormAppControlInput
           v-model:value="state.file"
           inputType="file"
           :editIcon="true"
           @change="uploadCover"
         />
-      </div> -->
+      </div>
       <div class="invisible-white-space"></div>
       <div id="avatar-info-container" class="flex flex-row relative gap-x-7">
         <img
@@ -106,7 +106,7 @@
 </template>
 <script setup>
 const config = useRuntimeConfig()
-
+const emit = defineEmits(['updateMember'])
 const props = defineProps({
   member: {
     type: Object,
@@ -139,9 +139,9 @@ const placeHolderImages = {
 // handle uploading of the cover photo request
 const uploadCover = async (event) => {
   const { files } = event.target
-  console.log(files)
-  const image = new FormData()
-  image.append(0, files[0])
+  console.log(files[0])
+  let image = new FormData()
+  image.append('file', files[0], files[0].name)
   await useFetch(`/api/member/upload`, {
     method: 'POST',
     body: image,
@@ -152,45 +152,17 @@ const uploadCover = async (event) => {
       if (response._data.success) {
         console.log('uploaded!')
       }
+      emit('updateMember')
     },
     onResponseError({ response }) {
       // TODO: handle errors on client side
       console.log('something went wrong', response._data.message)
     },
   })
-
-  ////////////////////////////////////////////////////
-  // const apiUrl = `${config.public.COMMUNITY_API_URL}/upload/members/cover/${id}`
-  // const uploadOptions = {
-  //   method: 'POST',
-  //   body: bodyData,
-  //   headers: {
-  //     Accept: '*/*',
-  //     // Cookie: `${config.public.SESSION_COOKIE_NAME}=` + sessionCookie,
-  //     Cookie: `${cookie}`,
-  //   },
-  // }
-  // const response = await $fetch.raw(apiUrl, uploadOptions)
-  // console.log(response._data)
 }
 
 // handle updating the users general info
 const updateGeneralInfo = async (event) => {
-  /**
-   *
-   * {
-    "phone": "string",
-    "email": "string",
-    "github_user": "string",
-    "wikimedia_user": "string",
-    "cover_url": "string",
-    "avatar_url": "string",
-    "about": "string",
-    "headline": "string",
-    "location": "string"
-    }
-   */
-
   const bodyData = {
     headline: state.form.memberHeadline,
     location: `${state.form.memberCity}, ${state.form.memberCountry}`,
@@ -201,10 +173,11 @@ const updateGeneralInfo = async (event) => {
     method: 'POST',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
-      if (response._data.success) {
+      if (response._data) {
         console.log(response._data)
         console.log('updated!')
       }
+      emit('updateMember')
     },
     onResponseError({ response }) {
       // TODO: handle errors on client side
