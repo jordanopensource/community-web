@@ -6,6 +6,14 @@
       v-if="!state.success"
       @submit.prevent="sendEmail"
     >
+      <Message
+        v-if="state.error && !state.loading"
+        title="Error"
+        type="error"
+        class="mb-4"
+      >
+        Reset email was not sent. Make sure the email address you used is registered on JOSA.community.
+      </Message>
       <p>
         Enter your user account's verified email address and we will send you a
         password reset link
@@ -32,13 +40,28 @@
         Back to sign in
       </NuxtLink>
     </form>
+    <div v-else class="success-container">
+      <Message title="Success" type="success" :showCloseBtn="false">
+        An email with a link to reset your password was sent to {{ form.email }}
+      </Message>
+      <div class="flex flex-row justify-between mt-4">
+        <NuxtLink @click="$emit('forgotPassword', false)">
+          Login
+        </NuxtLink>
+        <NuxtLink to="/">
+          Return to homepage
+        </NuxtLink>
+      </div>
+    </div>
   </div>
 </template>
 <script setup>
 const emit = defineEmits(['forgotPassword'])
 
 const state = reactive({
-  loading: false
+  loading: false,
+  success: false,
+  error: false,
 })
 const form = reactive({
   email: '',
@@ -53,6 +76,10 @@ const sendEmail = async () => {
     }),
     onResponse({response}) {
       state.loading = false
+      state.success = response._data.success
+      if (!state.success) {
+        state.error = true
+      }
     }
   });
 }
@@ -83,5 +110,9 @@ form a {
 }
 form p {
   @apply font-medium mb-5;
+}
+.success-container a {
+  @apply text-left;
+  @apply text-community-blue;
 }
 </style>

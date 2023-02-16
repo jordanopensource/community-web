@@ -44,7 +44,7 @@
       v-if="state.resetSuccess"
       class="success-container"
     >
-      <Message title="Success" type="success">
+      <Message title="Success" type="success" :showCloseBtn="false">
         Your password has been successfully reset.
       </Message>
       <div class="flex flex-row justify-between mt-4">
