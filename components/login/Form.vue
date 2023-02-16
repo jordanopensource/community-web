@@ -2,7 +2,7 @@
   <div class="container input-control">
     <h2 class="text-xl lg:text-2xl">Sign in to JOSA.community</h2>
     <div class="divider-slashes"></div>
-    <form>
+    <form @submit.prevent="login">
       <FormAppControlInput
         v-model:value="form.email"
         input-type="email"
@@ -26,7 +26,6 @@
         btn-style="button-flat button-blue-full"
         type="submit"
         :disabled="state.loggingIn"
-        @click.prevent="login"
       >
       <!-- FIXME: @click.prevent causes issue in input validation -->
       <div class="flex flex-row justify-center gap-x-4">

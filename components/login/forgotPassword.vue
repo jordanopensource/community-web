@@ -2,7 +2,10 @@
   <div class="container input-control">
     <h2 class="text-xl lg:text-2xl">Reset your Password</h2>
     <div class="divider-slashes"></div>
-    <form>
+    <form
+      v-if="!state.success"
+      @submit.prevent="sendEmail"
+    >
       <p>
         Enter your user account's verified email address and we will send you a
         password reset link
@@ -19,7 +22,6 @@
         btn-style="button-flat button-blue-full"
         type="submit"
         :disabled="state.loading"
-        @click.prevent="sendEmail"
       >
         <div class="flex flex-row justify-center gap-x-4">
           <div v-if="state.loading" class="loader"></div>

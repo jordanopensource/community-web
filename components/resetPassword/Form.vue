@@ -8,7 +8,10 @@
     >
       Please make sure that the password match in both fields.
     </Message>
-    <form v-if="!state.resetSuccess">
+    <form
+      v-if="!state.resetSuccess"
+      @submit.prevent="reset"
+    >
       <FormAppControlInput
         v-model:value="form.password_1"
         input-type="password"
@@ -30,7 +33,6 @@
         btn-style="button-flat button-blue-full"
         type="submit"
         :disabled="state.loading"
-        @click.prevent="reset"
       >
         <div class="flex flex-row justify-center gap-x-4">
           <div v-if="state.loading" class="loader"></div>
