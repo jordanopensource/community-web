@@ -153,7 +153,7 @@ const uploadCover = async (event) => {
   image.append('file-name', files[0].name)
   image.append('file-type', files[0].type)
   await useFetch(`/api/member/upload`, {
-    method: 'POST',
+    method: 'PATCH',
     body: image,
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -180,7 +180,7 @@ const updateGeneralInfo = async (event) => {
   }
 
   await useFetch(`/api/member/update/info`, {
-    method: 'POST',
+    method: 'PATCH',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
       if (response._data) {

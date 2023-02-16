@@ -1,5 +1,5 @@
 <template>
-  <div class="input-control">
+  <div class="input-control" :class="props.width ? props.width : ''">
     <div
       v-if="props.inputType === 'checkbox'"
       class="checkbox-container inline"
@@ -39,6 +39,7 @@
           @input="$emit('update:value', $event.target.value)"
           :name="props.name"
           :required="props.isRequired"
+          :disabled="props.disabled"
           :placeholder="props.placeholder"
           :type="state.showPassword ? 'text' : props.inputType"
           :pattern="props.pattern"
@@ -101,8 +102,10 @@ const props = defineProps({
   inputType: String,
   isChecked: { type: Boolean, default: false },
   showPasswordIcon: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false },
   editIcon: { type: Boolean, default: false },
   value: { type: String, default: '' },
+  width: { type: String, default: '' },
 })
 
 const state = reactive({
