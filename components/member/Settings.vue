@@ -29,16 +29,15 @@
           >
           <FormAppControlInput
             width="w-full"
-            v-model:value="state.member.github_user"
-            :value="state.member.github_user"
+            v-model:value="form.member.github_user"
+            :value="form.member.github_user"
           >
           </FormAppControlInput>
         </div>
         <FormAppControlInput
           inputType="checkbox"
-          v-model:value="state.settings.hideGithubContributions"
-          :isChecked="state.settings.hideGithubContributions"
-          @change="() => onCheck()"
+          v-model:value="form.settings.hideGithubContributions"
+          :isChecked="form.settings.hideGithubContributions"
         >
           <b>Hide contributions from Github on my profile</b>
         </FormAppControlInput>
@@ -47,22 +46,29 @@
         <h3 class="heading divider-dotted pb-2.5">Wikimedia</h3>
         <div class="">
           <FormAppControlInput
-            v-model:value="state.member.wikimedia_user"
-            :value="state.member.wikimedia_user"
+            v-model:value="form.member.wikimedia_user"
+            :value="form.member.wikimedia_user"
           >
             <b>Wikimedia username</b>
           </FormAppControlInput>
           <FormAppControlInput
             inputType="checkbox"
-            v-model:value="state.settings.hideWikimediaContributions"
-            :isChecked="state.settings.hideWikimediaContributions"
-            @change="() => onCheck()"
+            v-model:value="form.settings.hideWikimediaContributions"
+            :isChecked="form.settings.hideWikimediaContributions"
           >
             <b>Hide contributions from Wikimedia on my profile</b>
           </FormAppControlInput>
         </div>
       </div>
-      <FormAppButton btnStyle="button-blue-full w-full">Save</FormAppButton>
+      <FormAppButton
+        btnStyle="button-blue-full w-full mt-4"
+        :disabled="state.loading"
+      >
+        <div class="flex flex-row justify-center gap-x-4">
+          <div v-if="state.loading" class="loader"></div>
+          <div>Save</div>
+        </div>
+      </FormAppButton>
     </form>
   </div>
 </template>
@@ -73,28 +79,30 @@ const state = reactive({
   success: false,
   error: false,
 })
-
-const onCheck = async () => {
-  const bodyData = {
-    hideWikimediaContributions: state.settings.hideWikimediaContributions,
-    hideGithubContributions: state.settings.hideGithubContributions,
-  }
-  await useFetch(`/api/member/update/settings`, {
-    method: 'PATCH',
-    body: JSON.stringify(bodyData),
+const form = reactive({
+  member: {
+    github_user: '',
+    wikimedia_user: '',
+  },
+  settings: {
+    hideWikimediaContributions: false,
+    hideGithubContributions: false,
+  },
+})
+const { refresh } = await useFetch(
+  `${config.public.COMMUNITY_API_URL}/member/${userId().value}`,
+  {
     onResponse({ response }) {
-      if (response._data) {
-        console.log(response._data)
-        console.log('updated!')
+      if (response.ok) {
+        form.member.github_user = response._data.member.github_user
+        form.member.wikimedia_user = response._data.member.wikimedia_user
+        form.settings.hideGithubContributions = response._data.settings.hideGithubContributions
+        form.settings.hideWikimediaContributions = response._data.setting.hideWikimediaContributions
       }
-      emit('updateMember')
-    },
-    onResponseError({ response }) {
-      // TODO: handle errors on client side
-      console.log('something went wrong', response._data.message)
-    },
-  })
-}
+    }
+  } 
+)
+
 const updateSettings = async () => {
   state.error = false
   state.loading = true
@@ -114,6 +122,10 @@ const updateSettings = async () => {
     },
   })
 }
+
+onMounted(() => {
+  refresh()
+})
 </script>
 <style lang="postcss" scoped>
 .divider-slashes {

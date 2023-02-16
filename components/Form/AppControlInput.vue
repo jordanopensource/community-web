@@ -25,6 +25,7 @@
         :type="props.inputType"
         class="checkbox form-check-input border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
       />
+      <!-- FIXME: make the id for checkbox change dynamically -->
       <label class="items-center" for="check-box"> <slot /></label>
     </div>
     <div v-else>
@@ -104,7 +105,7 @@ const props = defineProps({
   showPasswordIcon: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   editIcon: { type: Boolean, default: false },
-  value: { type: String, default: '' },
+  value: { default: '' },
   width: { type: String, default: '' },
 })
 

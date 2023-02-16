@@ -65,7 +65,7 @@ const widget = reactive({
     },
     {
       title: 'Settings',
-      to: '/members/settings/' + userId().value,
+      to: '/members/settings/',
       icon: 'ic-gear',
       onClick: togglePopup
     },
