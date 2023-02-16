@@ -42,6 +42,7 @@
           :placeholder="props.placeholder"
           :type="state.showPassword ? 'text' : props.inputType"
           :pattern="props.pattern"
+          :value="props.value"
           class="interactive-control"
           :class="props.showPasswordIcon ? 'hide-right-border' : ''"
           @focusin="state.pwActive = true"
@@ -83,14 +84,14 @@
         rows="5"
         @input="$emit('update:value', $event.target.value)"
         :required="props.isRequired"
-      ></textarea>
+        >{{ props.value }}</textarea
+      >
     </div>
   </div>
 </template>
 
 <script setup>
 defineEmits(['update:value'])
-const value = ref('')
 const props = defineProps({
   isRequired: { type: Boolean, default: false },
   placeholder: { type: String, default: '' },
@@ -101,6 +102,7 @@ const props = defineProps({
   isChecked: { type: Boolean, default: false },
   showPasswordIcon: { type: Boolean, default: false },
   editIcon: { type: Boolean, default: false },
+  value: { type: String, default: '' },
 })
 
 const state = reactive({

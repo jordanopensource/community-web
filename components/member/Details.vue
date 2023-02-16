@@ -33,6 +33,7 @@
         <FormAppControlInput
           v-model:value="state.form.memberAbout"
           inputType="textarea"
+          :value="props.member.about"
         >
         </FormAppControlInput>
 

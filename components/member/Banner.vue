@@ -68,21 +68,29 @@
               <FormAppControlInput
                 v-model:value="state.form.memberHeadline"
                 inputType="textarea"
+                :value="props.member.headline"
               >
-                Headline
+                <b>Headline</b>
               </FormAppControlInput>
-              <FormAppControlInput v-model:value="state.form.memberCity">
-                City
+              <FormAppControlInput
+                v-model:value="state.form.memberCity"
+                :value="props.member.location.split(',')[0]"
+              >
+                <b>City</b>
               </FormAppControlInput>
-              <FormAppControlInput v-model:value="state.form.memberCountry">
-                Country
+              <FormAppControlInput
+                v-model:value="state.form.memberCountry"
+                :value="props.member.location.split(',')[1]"
+              >
+                <b>Country</b>
               </FormAppControlInput>
               <FormAppControlInput
                 v-model:value="state.form.memberPhone"
+                :value="Number(props.value.phone)"
                 inputType="tel"
                 placeholder="962799888777"
                 pattern="+[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{3}"
-                >Phone Number</FormAppControlInput
+                ><b>Phone Number</b></FormAppControlInput
               >
               <FormAppButton> Save </FormAppButton>
             </form>

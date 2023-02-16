@@ -146,7 +146,12 @@ ul > li {
   font-weight: 500;
 }
 
-.delete-btn {
+.delete-btn,
+.edit-btn {
   @apply bg-xIcon bg-no-repeat w-5 h-5 border-none;
   @apply p-4 border-r-0 ml-2;
+}
+
+.edit-btn {
+  @apply bg-editIcon;
 }
