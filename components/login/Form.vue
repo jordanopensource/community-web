@@ -2,7 +2,15 @@
   <div class="container input-control">
     <h2 class="text-xl lg:text-2xl">Sign in to JOSA.community</h2>
     <div class="divider-slashes"></div>
-    <form>
+    <Message
+      v-if="state.error"
+      title="Error Signing In" 
+      type="error"
+      class="mb-4"
+    >
+      Please make sure that your email and password are correct.
+    </Message>
+    <form @submit.prevent="login">
       <FormAppControlInput
         v-model:value="form.email"
         input-type="email"
@@ -25,12 +33,10 @@
         class="form-submit"
         btn-style="button-flat button-blue-full"
         type="submit"
-        :disabled="state.loggingIn"
-        @click.prevent="login"
+        :disabled="state.loading"
       >
-      <!-- FIXME: @click.prevent causes issue in input validation -->
       <div class="flex flex-row justify-center gap-x-4">
-        <div v-if="state.loggingIn" class="loader"></div>
+        <div v-if="state.loading" class="loader"></div>
         <div>Sign in</div>
       </div>
       </FormAppButton>
@@ -45,10 +51,13 @@ const form = reactive({
   password: '',
 })
 const state = reactive({
-  loggingIn: false
+  loading: false,
+  error: false
 })
 const login = async() => {
-  state.loggingIn = true
+  state.loading = true
+
+  // TODO: refresh data on submitting, or use $fetch.raw()
   await useFetch('/api/login', {
     method: "POST",
     body: JSON.stringify({
@@ -57,15 +66,15 @@ const login = async() => {
     }),
     onResponse({response}) {
       if(response.ok) {
-        state.loggingIn = false
+        state.loading = false
         localStorage.setItem("member", JSON.stringify(response._data))
         useAuth().value = true
         navigateTo('/')
       }
     },
     onResponseError({response}) {
-      state.loggingIn = false
-      // TODO: handle errors on client side
+      state.loading = false
+      state.error = true
     }
   })
 }
