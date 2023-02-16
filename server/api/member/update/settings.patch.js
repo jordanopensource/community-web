@@ -1,19 +1,29 @@
 export default defineEventHandler(async (event) => {
-
   const config = useRuntimeConfig()
   const body = await useBody(event)
   const sessionCookie = getCookie(event, `${config.public.SESSION_COOKIE_NAME}`);
+
   const apiUrl = `${config.public.COMMUNITY_API_URL}/settings`;
-  const uploadOptions = {
+  const settingsOptions = {
     method: "PATCH",
-    body: body,
+    body: body.settings,
+    headers: {
+      "Accept": "*/*",
+      "Cookie": `${config.public.SESSION_COOKIE_NAME}=` + sessionCookie,
+    }
+  }
+  const memberOptions = {
+    method: 'PATCH',
+    body: body.member,
     headers: {
       "Accept": "*/*",
       "Cookie": `${config.public.SESSION_COOKIE_NAME}=` + sessionCookie,
     }
   }
 
-  const response = await $fetch.raw(apiUrl, uploadOptions);
+  // TODO: handle error on member response
+  const memberResponse = await $fetch.raw('/api/member/update/info', memberOptions);
+  const settingsResponse = await $fetch.raw(apiUrl, settingsOptions);
 
-  return response;
+  return settingsResponse._data;
 })
