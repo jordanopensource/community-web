@@ -6,16 +6,14 @@
       <div class="setting">
         <h3 class="heading divider-dotted pb-2.5">Github</h3>
         <div class="flex items-end">
-          <FormAppControlInput
-            :disabled="true"
-            value="github.com/"
-          ></FormAppControlInput>
+          <FormAppControlInput :disabled="true" value="github.com/">
+            <b>Github username</b></FormAppControlInput
+          >
           <FormAppControlInput
             width="w-full"
             v-model:value="state.member.github_user"
             :value="state.member.github_user"
           >
-            <b>Github username</b>
           </FormAppControlInput>
         </div>
         <FormAppControlInput inputType="checkbox">
