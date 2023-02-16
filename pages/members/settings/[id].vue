@@ -5,8 +5,9 @@
       <div class="flex">
         <div class="flex flex-col w-full">
           <MemberSettings
-            v-if="!pendingMember && memberData.contributions.length"
+            v-if="!pendingMember"
             :member="memberData.member"
+            :settings="memberData.settings"
             :memberAuth="isUserLogged"
             @updateMember="() => refresh()"
           />

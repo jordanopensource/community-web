@@ -16,8 +16,13 @@
           >
           </FormAppControlInput>
         </div>
-        <FormAppControlInput inputType="checkbox">
-          <b>Show contributions from Github on my profile</b>
+        <FormAppControlInput
+          inputType="checkbox"
+          v-model:value="state.settings.hideGithubContributions"
+          :isChecked="state.settings.hideGithubContributions"
+          @change="() => onCheck()"
+        >
+          <b>Hide contributions from Github on my profile</b>
         </FormAppControlInput>
       </div>
       <div class="setting">
@@ -29,8 +34,13 @@
           >
             <b>Wikimedia username</b>
           </FormAppControlInput>
-          <FormAppControlInput inputType="checkbox">
-            <b>Show contributions from Wikimedia on my profile</b>
+          <FormAppControlInput
+            inputType="checkbox"
+            v-model:value="state.settings.hideWikimediaContributions"
+            :isChecked="state.settings.hideWikimediaContributions"
+            @change="() => onCheck()"
+          >
+            <b>Hide contributions from Wikimedia on my profile</b>
           </FormAppControlInput>
         </div>
       </div>
@@ -45,6 +55,10 @@ const props = defineProps({
     type: Object,
     default: {},
   },
+  settings: {
+    type: Object,
+    default: {},
+  },
 })
 
 const state = reactive({
@@ -52,8 +66,33 @@ const state = reactive({
     github_user: props.member.github_user,
     wikimedia_user: props.member.wikimedia_user,
   },
+  settings: {
+    hideWikimediaContributions: props.settings.hideWikimediaContributions,
+    hideGithubContributions: props.settings.hideGithubContributions,
+  },
 })
 
+const onCheck = async () => {
+  const bodyData = {
+    hideWikimediaContributions: state.settings.hideWikimediaContributions,
+    hideGithubContributions: state.settings.hideGithubContributions,
+  }
+  await useFetch(`/api/member/update/settings`, {
+    method: 'PATCH',
+    body: JSON.stringify(bodyData),
+    onResponse({ response }) {
+      if (response._data) {
+        console.log(response._data)
+        console.log('updated!')
+      }
+      emit('updateMember')
+    },
+    onResponseError({ response }) {
+      // TODO: handle errors on client side
+      console.log('something went wrong', response._data.message)
+    },
+  })
+}
 const updateSettings = async () => {
   const bodyData = {
     github_user: state.member.github_user,
