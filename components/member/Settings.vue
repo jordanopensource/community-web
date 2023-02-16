@@ -2,6 +2,24 @@
   <div id="linked-accounts" class="xl:max-w-1/2 container details-container">
     <h2 class="text-xl lg:text-2xl">Linked Accounts</h2>
     <div class="divider-slashes"></div>
+    <Message
+      v-if="state.error && !state.loading"
+      title="Error"
+      type="error"
+      class="mb-4"
+      :showCloseBtn="false"
+      >
+        Something went wrong!
+    </Message>
+    <Message
+      v-if="state.success && !state.loading"
+      title="Saved"
+      type="success"
+      class="mb-4"
+      :showCloseBtn="false"
+      >
+        Settings saved successfully.
+    </Message>
     <form @submit.prevent="updateSettings">
       <div class="setting">
         <h3 class="heading divider-dotted pb-2.5">Github</h3>
@@ -49,27 +67,11 @@
   </div>
 </template>
 <script setup>
-const emit = defineEmits(['updateMember'])
-const props = defineProps({
-  member: {
-    type: Object,
-    default: {},
-  },
-  settings: {
-    type: Object,
-    default: {},
-  },
-})
-
+const config = useRuntimeConfig()
 const state = reactive({
-  member: {
-    github_user: props.member.github_user,
-    wikimedia_user: props.member.wikimedia_user,
-  },
-  settings: {
-    hideWikimediaContributions: props.settings.hideWikimediaContributions,
-    hideGithubContributions: props.settings.hideGithubContributions,
-  },
+  loading: false,
+  success: false,
+  error: false,
 })
 
 const onCheck = async () => {
@@ -94,23 +96,21 @@ const onCheck = async () => {
   })
 }
 const updateSettings = async () => {
-  const bodyData = {
-    github_user: state.member.github_user,
-    wikimedia_user: state.member.wikimedia_user,
-  }
-  await useFetch(`/api/member/update/info`, {
+  state.error = false
+  state.loading = true
+  const bodyData = form
+  await useFetch(`/api/member/update/settings`, {
     method: 'PATCH',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
+      state.loading = false
       if (response._data) {
-        console.log(response._data)
-        console.log('updated!')
+        state.success = true
       }
-      emit('updateMember')
     },
     onResponseError({ response }) {
-      // TODO: handle errors on client side
-      console.log('something went wrong', response._data.message)
+      state.error = true
+      state.success = false
     },
   })
 }
