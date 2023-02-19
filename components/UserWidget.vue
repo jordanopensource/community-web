@@ -65,7 +65,7 @@ const widget = reactive({
     },
     {
       title: 'Settings',
-      to: '/',
+      to: '/members/settings/',
       icon: 'ic-gear',
       onClick: togglePopup
     },
@@ -82,7 +82,7 @@ onMounted(() => {
     state.member = JSON.parse(localStorage.getItem('member'))._data
     widget.links[0].to = '/members/' + state.member.id
   } else {
-    //TODO: handle this case better 
+    //TODO: handle this case better
     console.error('localstorage is empty')
   }
 })

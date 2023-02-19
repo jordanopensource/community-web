@@ -64,6 +64,7 @@
         <FormAppControlInput
           v-model:value="state.isAssignedMission"
           inputType="checkbox"
+          labelId="show-assigned-missions"
           @change="() => onCheck()"
         >
           Show assigned missions</FormAppControlInput
