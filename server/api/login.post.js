@@ -22,5 +22,5 @@ export default defineEventHandler(async (event) => {
     }
   })
   appendHeader(event, 'Set-Cookie', loginResponse.headers.get('set-cookie')) // assuming we only set one cookie
-  return authResponse
+  return authResponse._data
 });

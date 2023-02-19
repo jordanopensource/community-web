@@ -79,7 +79,7 @@ const widget = reactive({
 })
 onMounted(() => {
   if (localStorage.getItem('member')) {
-    state.member = JSON.parse(localStorage.getItem('member'))._data
+    state.member = JSON.parse(localStorage.getItem('member'))
     widget.links[0].to = '/members/' + state.member.id
   } else {
     //TODO: handle this case better
