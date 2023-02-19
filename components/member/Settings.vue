@@ -73,7 +73,16 @@
   </div>
 </template>
 <script setup>
-const config = useRuntimeConfig()
+const props = defineProps({
+  member: {
+    type: Object,
+    default: {}
+  },
+  settings: {
+    type: Object,
+    default: {}
+  }
+})
 const state = reactive({
   loading: false,
   success: false,
@@ -81,35 +90,27 @@ const state = reactive({
 })
 const form = reactive({
   member: {
-    github_user: '',
-    wikimedia_user: '',
+    github_user: props.member.github_user,
+    wikimedia_user: props.member.wikimedia_user,
   },
   settings: {
-    hideWikimediaContributions: false,
-    hideGithubContributions: false,
+    hideWikimediaContributions: props.settings.hideWikimediaContributions,
+    hideGithubContributions: props.settings.hideGithubContributions,
   },
 })
-const { refresh } = await useFetch(
-  `${config.public.COMMUNITY_API_URL}/member/${userId().value}`,
-  {
-    onResponse({ response }) {
-      if (response.ok) {
-        form.member.github_user = response._data.member.github_user
-        form.member.wikimedia_user = response._data.member.wikimedia_user
-        form.settings.hideGithubContributions = response._data.settings.hideGithubContributions
-        form.settings.hideWikimediaContributions = response._data.setting.hideWikimediaContributions
-      }
-    }
-  } 
-)
+
+onMounted(() => {
+  form.member = props.member
+  form.settings = props.settings
+})
 
 const updateSettings = async () => {
   state.error = false
   state.loading = true
   const bodyData = form
-  await useFetch(`/api/member/update/settings`, {
+  await $fetch(`/api/member/update/settings`, {
     method: 'PATCH',
-    body: JSON.stringify(bodyData),
+    body: bodyData,
     onResponse({ response }) {
       state.loading = false
       if (response._data) {
@@ -122,10 +123,6 @@ const updateSettings = async () => {
     },
   })
 }
-
-onMounted(() => {
-  refresh()
-})
 </script>
 <style lang="postcss" scoped>
 .divider-slashes {
