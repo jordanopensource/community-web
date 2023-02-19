@@ -1,19 +1,19 @@
 
 export default defineNuxtRouteMiddleware(async(to, from) => {
   const config = useRuntimeConfig()
-  const sessionCookie = useCookie(`${config.public.SESSION_COOKIE_NAME}`).value
-  
-  if (to.fullPath === '/login') {
-    if (sessionCookie) {
-      await isAuth(`${config.public.SESSION_COOKIE_NAME}`, sessionCookie)
+  if (process.server) {
+    const cookieName = `${config.public.SESSION_COOKIE_NAME}`
+    if(useCookie(cookieName).value) {
+      await isAuth(cookieName, useCookie(cookieName).value)
     } else {
+      // if there's no cookie
       useAuth().value = false
     }
-    if (useAuth().value) {
-      if (from.fullPath !== '/login') {
-        return navigateTo(from.fullPath)
-      }
-      return navigateTo('/')
+  }
+  if (to.fullPath === '/login' && useAuth().value) {
+    if (from.fullPath !== '/login') {
+      return navigateTo(from.fullPath)
     }
+    return navigateTo('/')
   }
 })
