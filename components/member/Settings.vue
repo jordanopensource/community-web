@@ -36,6 +36,7 @@
         </div>
         <FormAppControlInput
           inputType="checkbox"
+          labelId="show-github"
           v-model:value="form.settings.hideGithubContributions"
           :isChecked="form.settings.hideGithubContributions"
         >
@@ -53,6 +54,7 @@
           </FormAppControlInput>
           <FormAppControlInput
             inputType="checkbox"
+            labelId="show-wikimedia"
             v-model:value="form.settings.hideWikimediaContributions"
             :isChecked="form.settings.hideWikimediaContributions"
           >

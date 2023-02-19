@@ -6,7 +6,7 @@
     >
       <input
         v-if="props.isChecked"
-        id="check-box"
+        :id="props.labelId"
         checked
         @input="$emit('update:value', $event.target.checked)"
         :name="props.name"
@@ -17,7 +17,7 @@
       />
       <input
         v-else
-        id="check-box"
+        :id="props.labelId"
         @input="$emit('update:value', $event.target.checked)"
         :name="props.name"
         :required="props.isRequired"
@@ -26,7 +26,7 @@
         class="checkbox form-check-input border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
       />
       <!-- FIXME: make the id for checkbox change dynamically -->
-      <label class="items-center" for="check-box"> <slot /></label>
+      <label class="items-center" :for="props.labelId"> <slot /></label>
     </div>
     <div v-else>
       <div v-if="$props.showSlot">
@@ -107,6 +107,7 @@ const props = defineProps({
   editIcon: { type: Boolean, default: false },
   value: { default: '' },
   width: { type: String, default: '' },
+  labelId: {type: String, default: ''}
 })
 
 const state = reactive({
