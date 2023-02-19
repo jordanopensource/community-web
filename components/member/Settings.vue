@@ -8,8 +8,8 @@
       type="error"
       class="mb-4"
       :showCloseBtn="false"
-      >
-        Something went wrong!
+    >
+      Something went wrong!
     </Message>
     <Message
       v-if="state.success && !state.loading"
@@ -17,8 +17,8 @@
       type="success"
       class="mb-4"
       :showCloseBtn="false"
-      >
-        Settings saved successfully.
+    >
+      Settings saved successfully.
     </Message>
     <form @submit.prevent="updateSettings">
       <div class="setting">
@@ -78,12 +78,12 @@
 const props = defineProps({
   member: {
     type: Object,
-    default: {}
+    default: {},
   },
   settings: {
     type: Object,
-    default: {}
-  }
+    default: {},
+  },
 })
 const state = reactive({
   loading: false,
@@ -112,7 +112,21 @@ const updateSettings = async () => {
   const bodyData = form
   await $fetch(`/api/member/update/settings`, {
     method: 'PATCH',
-    body: bodyData,
+    body: bodyData.settings,
+    onResponse({ response }) {
+      state.loading = false
+      if (response._data) {
+        state.success = true
+      }
+    },
+    onResponseError({ response }) {
+      state.error = true
+      state.success = false
+    },
+  })
+  await $fetch(`/api/member/update/info`, {
+    method: 'PATCH',
+    body: bodyData.member,
     onResponse({ response }) {
       state.loading = false
       if (response._data) {
