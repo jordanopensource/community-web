@@ -37,7 +37,11 @@
             v-model:value="state.name"
           >
           </FormAppControlInput>
-          <FormAppButton btn-style="search-button" type="submit" @click="scrollToView()">
+          <FormAppButton
+            btn-style="search-button"
+            type="submit"
+            @click="scrollToView()"
+          >
             <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
               <path
                 fill="white"
@@ -50,6 +54,7 @@
           <FormAppControlInput
             v-model:value="state.noneJosaMembers"
             inputType="checkbox"
+            labelId="show-contributors"
             @change="() => onCheck()"
             :isChecked="state.noneJosaMembers"
           >
@@ -79,7 +84,6 @@ const state = reactive({
   noneJosaMembers: false,
   selected: '',
 })
-
 
 const sortItems = [
   {
@@ -115,7 +119,7 @@ const onSelect = () => {
 const scrollToView = () => {
   document.getElementById('members-found-heading').scrollIntoView({
     block: 'start',
-    behavior: 'smooth'
+    behavior: 'smooth',
   })
 }
 watch(
