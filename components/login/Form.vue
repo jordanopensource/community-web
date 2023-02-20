@@ -69,6 +69,7 @@ const login = async() => {
         state.loading = false
         localStorage.setItem("member", JSON.stringify(response._data))
         useAuth().value = true
+        userId().value = response._data.id
         navigateTo('/')
       }
     },
