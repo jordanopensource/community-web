@@ -4,16 +4,27 @@
       <h3 class="heading">About</h3>
       <div
         v-if="memberAuth"
-        @click="() => (showUpdateAboutForm = !showUpdateAboutForm)"
+        class="flex flex-col gap-y-4 items-end"
       >
+      <div class="flex flex-row gap-x-2">
+        <p class="w-full">{{ state.settings.hideAbout ? 'Only Me' : 'Public' }}</p>
         <img
-          v-if="!showUpdateAboutForm"
-          src="/icons/edit.svg"
-          alt=""
+          :src="'/icons/' + (state.settings.hideAbout ? 'hide' : 'show') + '.svg'"
           class="cursor-pointer"
+          @click="updateVisibility"
         />
-        <img v-else src="/icons/x.svg" alt="" class="cursor-pointer" />
       </div>
+        <div @click="() => (showUpdateAboutForm = !showUpdateAboutForm)">
+          <img
+            v-if="!showUpdateAboutForm"
+            src="/icons/edit.svg"
+            alt=""
+            class="cursor-pointer"
+          />
+          <img v-else src="/icons/x.svg" alt="" class="cursor-pointer" />
+        </div>
+      </div>
+      
     </div>
     <div v-if="!showUpdateAboutForm">
       <p class="member-about">
@@ -51,6 +62,10 @@ const props = defineProps({
     type: Object,
     default: {},
   },
+  settings: {
+    type: Object,
+    default: {},
+  },
   skills: {
     type: Object,
     default: {},
@@ -65,6 +80,7 @@ const state = reactive({
   form: {
     memberAbout: props.member.about,
   },
+  settings: props.settings
 })
 
 const formatDate = (date) => {
@@ -98,6 +114,14 @@ const updateMemberDetailsInfo = async (event) => {
     },
   })
   showUpdateAboutForm.value = !showUpdateAboutForm
+}
+
+const updateVisibility = async () => {
+  state.settings.hideAbout = !state.settings.hideAbout
+  await $fetch('/api/member/update/settings', {
+    method: 'PATCH',
+    body: state.settings
+  })
 }
 </script>
 <style lang="postcss" scoped>

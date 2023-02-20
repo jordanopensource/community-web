@@ -1,6 +1,17 @@
 <template>
   <div id="member-experience-and-education" class="container details-container">
     <h2 class="text-xl lg:text-2xl">Experience and Education</h2>
+    <div
+      v-if="memberAuth"
+      class="flex flex-row gap-x-2 justify-end"
+    >
+      <p>{{ state.settings.hideExperienceAndEducation ? 'Only Me' : 'Public' }}</p>
+      <img
+        :src="'/icons/' + (state.settings.hideExperienceAndEducation ? 'hide' : 'show') + '.svg'"
+        class="cursor-pointer"
+        @click="updateVisibility"
+      />
+    </div>
     <div class="divider-slashes"></div>
     <!-- WORK EXPERIENCE -->
     <div class="experience">
@@ -276,6 +287,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  settings: {
+    type: Object,
+    default: {},
+  },
 })
 
 const state = reactive({
@@ -294,6 +309,7 @@ const state = reactive({
       id: '',
     },
   },
+  settings: props.settings
 })
 
 /**
@@ -470,6 +486,14 @@ const formatDate = (date) => {
     newDate.getFullYear(),
   ]
   return `${month} ${year}`
+}
+
+const updateVisibility = async () => {
+  state.settings.hideExperienceAndEducation = !state.settings.hideExperienceAndEducation
+  await $fetch('/api/member/update/settings', {
+    method: 'PATCH',
+    body: state.settings
+  })
 }
 </script>
 <style lang="postcss" scoped>

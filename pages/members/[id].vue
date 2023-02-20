@@ -14,16 +14,20 @@
             <MemberCard v-if="!pendingMember" :member="memberData.member" />
           </div>
           <MemberDetails
-            v-if="!pendingMember"
+            v-if="!pendingMember
+              && !(memberData.settings.hideAbout && !isUserLogged)"
             :member="memberData.member"
+            :settings="memberData.settings"
             :memberAuth="isUserLogged"
             @updateMember="() => refresh()"
           />
           <MemberExperience
-            v-if="memberData.experience.length || memberData.education.length"
+            v-if="(memberData.experience.length || memberData.education.length)
+             && !(memberData.settings.hideExperienceAndEducation && !isUserLogged)"
             :experience="memberData.experience"
             :education="memberData.education"
             :memberAuth="isUserLogged"
+            :settings="memberData.settings"
             @updateMember="() => refresh()"
           />
           <MemberContribution
