@@ -179,7 +179,7 @@ const updateGeneralInfo = async (event) => {
     phone: state.form.memberPhone,
   }
 
-  await useFetch(`/api/member/update/info`, {
+  await $fetch(`/api/member/update/info`, {
     method: 'PATCH',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
