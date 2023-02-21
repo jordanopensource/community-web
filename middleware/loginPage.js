@@ -10,7 +10,7 @@ export default defineNuxtRouteMiddleware(async(to, from) => {
       useAuth().value = false
     }
   }
-  if (to.fullPath === '/login' && useAuth().value) {
+  if (to.name === 'login' && useAuth().value) {
     if (from.fullPath !== '/login') {
       return navigateTo(from.fullPath)
     }
