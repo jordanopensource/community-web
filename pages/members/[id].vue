@@ -31,8 +31,9 @@
             @updateMember="() => refresh()"
           />
           <MemberContribution
-            v-if="!pendingMember && memberData.contributions.length"
+            v-if="!pendingMember"
             :contributions="memberData.contributions"
+            :opensource-contributions="memberData.open_source_contributions"
           />
         </div>
         <div class="hidden lg:block">
