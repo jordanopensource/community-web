@@ -7,8 +7,9 @@
       title="Error Signing In" 
       type="error"
       class="mb-4"
+      :show-close-btn="false"
     >
-      Please make sure that your email and password are correct.
+    The email and password you entered did not match our records. Please double-check and try again.
     </Message>
     <form @submit.prevent="login">
       <FormAppControlInput
