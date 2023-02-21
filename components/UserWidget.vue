@@ -14,10 +14,11 @@
       <p class="user-name">
         {{ state.member.first_name_en }} {{ state.member.last_name_en }}
       </p>
-      <div class="flex flex-row justify-between">
+      <div class="flex flex-row justify-between mb-4">
         <p v-if="state.member.type !== 0"
           class="user-info">
           <div class="badge-color"></div>
+          <!-- TODO: this should be dynamic from the api -->
           JOSA Member
         </p>
         <p v-if="state.member.josa_member_id && state.member.type !== 0"
@@ -31,8 +32,10 @@
         :key="index"
         :to="link.to"
         @click="link.onClick"
-        class="nav-link">
-        <i class="menu-icon" :class="link.icon"></i> {{link.title}}
+        class="nav-link"
+      >
+        <div class="menu-icon" :class="link.icon"></div>
+        <div class="inline">{{link.title}}</div>
       </NuxtLink>
     </div>
   </div>
@@ -104,11 +107,11 @@ onMounted(() => {
   @apply bg-community-white text-community-black-darker;
 }
 .user-name {
-  @apply text-xl;
+  @apply text-lg;
 }
 .user-info {
   @apply font-light text-sm;
-  @apply mt-2;
+  @apply mt-1;
 }
 .badge-color {
   @apply w-3 h-3 inline-block mr-0.5;
@@ -117,6 +120,7 @@ onMounted(() => {
 }
 .nav-link {
   @apply text-community-black-darker capitalize text-lg px-0;
+  @apply flex flex-row gap-x-2 items-center;
 }
 .nav-link:hover {
   @apply text-community-blue;
