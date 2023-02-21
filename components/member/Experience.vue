@@ -99,6 +99,14 @@
             <b>Start Date</b>
           </FormAppControlInput>
           <FormAppControlInput
+            inputType="checkbox"
+            v-model:value="state.form.workExperience.currently_working"
+            labelId="currently-working-add"
+          >
+            Currently working here
+          </FormAppControlInput>
+          <FormAppControlInput
+            v-if="!state.form.workExperience.currently_working"
             inputType="date"
             v-model:value="state.form.workExperience.end_date"
           >
@@ -138,6 +146,14 @@
             <b>Start Date</b>
           </FormAppControlInput>
           <FormAppControlInput
+            inputType="checkbox"
+            v-model:value="state.form.workExperience.currently_working"
+            labelId="currently-working-edit"
+          >
+            Currently working here
+          </FormAppControlInput>
+          <FormAppControlInput
+            v-if="!state.form.workExperience.currently_working"
             inputType="date"
             v-model:value="state.form.workExperience.end_date"
             :value="state.form.workExperience.end_date"
@@ -176,7 +192,11 @@
               <h4 class="title">{{ education.institution_name }}</h4>
               <h5 class="sub-title">{{ education.degree }}</h5>
             </div>
-            <p class="date-container">{{ formatDate(education.graduated) }}</p>
+            <p class="date-container">
+              {{  education.graduated
+                  ? formatDate(education.graduated)
+                  : 'Current'}}
+            </p>
             <div class="flex justify-end mt-4 md:mt-0">
               <!-- Delete Education Form Button -->
               <div v-if="memberAuth">
@@ -217,6 +237,14 @@
             <b>Degree</b>
           </FormAppControlInput>
           <FormAppControlInput
+            inputType="checkbox"
+            v-model:value="state.form.education.still_studying"
+            labelId="currently-studying-add"
+          >
+            I'm still studying
+          </FormAppControlInput>
+          <FormAppControlInput
+            v-if="!state.form.education.still_studying"
             inputType="date"
             v-model:value="state.form.education.graduated"
           >
@@ -249,6 +277,14 @@
             <b>Degree</b>
           </FormAppControlInput>
           <FormAppControlInput
+            inputType="checkbox"
+            v-model:value="state.form.education.still_studying"
+            labelId="currently-studying-edit"
+          >
+            I'm still studying
+          </FormAppControlInput>
+          <FormAppControlInput
+            v-if="!state.form.education.still_studying"
             inputType="date"
             v-model:value="state.form.education.graduated"
             :value="state.form.education.graduated"
@@ -299,12 +335,14 @@ const state = reactive({
       company_name: '',
       position: '',
       start_date: '',
-      end_date: '',
+      currently_working: false,
+      end_date: null,
       id: '',
     },
     education: {
       institution_name: '',
       degree: '',
+      still_studying: false,
       graduated: '',
       id: '',
     },
@@ -322,7 +360,7 @@ const addMemberWorkExperience = async () => {
     company_name: state.form.workExperience.company_name,
     position: state.form.workExperience.position,
     start_date: state.form.workExperience.start_date,
-    end_date: state.form.workExperience.end_date,
+    end_date: state.form.workExperience.currently_working ? null : state.form.workExperience.end_date,
   }
   await useFetch(`/api/member/create/experience`, {
     method: 'POST',
@@ -369,7 +407,7 @@ const updateMemberWorkExperience = async () => {
     company_name: state.form.workExperience.company_name,
     position: state.form.workExperience.position,
     start_date: state.form.workExperience.start_date,
-    end_date: state.form.workExperience.end_date,
+    end_date: state.form.workExperience.currently_working ? null : state.form.workExperience.end_date,
   }
   try {
     await useFetch(
@@ -406,7 +444,7 @@ const addMemberEducation = async () => {
   const bodyData = {
     institution_name: state.form.education.institution_name,
     degree: state.form.education.degree,
-    graduated: state.form.education.graduated,
+    graduated: state.form.education.still_studying ? null : state.form.education.graduated,
   }
   await useFetch(`/api/member/create/education`, {
     method: 'POST',
@@ -452,7 +490,7 @@ const updateMemberEducation = async () => {
   const bodyData = {
     institution_name: state.form.education.institution_name,
     degree: state.form.education.degree,
-    graduated: state.form.education.graduated,
+    graduated: state.form.education.still_studying ? null : state.form.education.graduated,
   }
   await useFetch(`/api/member/update/education/${state.form.education.id}`, {
     method: 'PATCH',
