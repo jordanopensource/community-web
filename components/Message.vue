@@ -4,10 +4,10 @@
     class="flex flex-col justify-start border p-4"
     :class="props.type">
     <div class="flex flex-row justify-between items-center mb-2">
-      <i
+      <img
         class="msg-icon w-5 h-5 bg-contain"
-        :style="`background-image: url('/assets/icons/message/${props.type}.svg')`">
-      </i>
+        :src="`/icons/message/${props.type}.svg`"
+      />
       <i
         v-if="props.showCloseBtn"
         class="close-icon w-5 h-5 bg-contain"
