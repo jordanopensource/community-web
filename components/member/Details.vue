@@ -99,7 +99,7 @@ const updateMemberDetailsInfo = async (event) => {
   }
 
   await useFetch(`/api/member/update/info`, {
-    method: 'POST',
+    method: 'PATCH',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
       if (response._data.success) {
