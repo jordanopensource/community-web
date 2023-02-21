@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       useAuth().value = false
     }
   }
-  if (to.fullPath === '/members/settings/' && !useAuth().value) {
+  if (to.name === 'members-settings' && !useAuth().value) {
     return navigateTo(`/`)
   }
 })
