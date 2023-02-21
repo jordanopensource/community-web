@@ -58,7 +58,7 @@ const login = async() => {
   state.loading = true
 
   // TODO: refresh data on submitting, or use $fetch.raw()
-  await useFetch('/api/login', {
+  await $fetch('/api/login', {
     method: "POST",
     body: JSON.stringify({
       "email": form.email,
