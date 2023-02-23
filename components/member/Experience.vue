@@ -254,6 +254,7 @@
           <FormAppControlInput v-model:value="state.form.education.degree">
             <b>Degree</b>
           </FormAppControlInput>
+          <label class="block"><b>Graduation Date</b></label>
           <FormAppControlInput
             inputType="checkbox"
             v-model:value="state.form.education.still_studying"
@@ -261,14 +262,14 @@
           >
             I'm still studying
           </FormAppControlInput>
-          <FormAppControlInput
+          <VueDatePicker
             v-if="!state.form.education.still_studying"
-            inputType="date"
-            v-model:value="state.form.education.graduated"
-          >
-            <b>Date of Graduation</b>
-          </FormAppControlInput>
-          <FormAppButton> Add </FormAppButton>
+            month-picker
+            v-model="state.form.education.graduated"
+            placeholder="Select graduation date"
+          />
+          
+          <FormAppButton class="mt-4"> Add </FormAppButton>
         </form>
       </div>
       <!-- Update Education Form -->
@@ -294,6 +295,7 @@
           >
             <b>Degree</b>
           </FormAppControlInput>
+          <label class="block"><b>Graduation Date</b></label>
           <FormAppControlInput
             inputType="checkbox"
             v-model:value="state.form.education.still_studying"
@@ -301,15 +303,14 @@
           >
             I'm still studying
           </FormAppControlInput>
-          <FormAppControlInput
+          <VueDatePicker
             v-if="!state.form.education.still_studying"
-            inputType="date"
-            v-model:value="state.form.education.graduated"
-            :value="state.form.education.graduated"
-          >
-            <b>Date of Graduation</b>
-          </FormAppControlInput>
-          <FormAppButton> update </FormAppButton>
+            month-picker
+            v-model="state.form.education.graduated"
+            placeholder="Select graduation date"
+          />
+          
+          <FormAppButton class="mt-4"> update </FormAppButton>
         </form>
       </div>
     </div>
@@ -481,7 +482,12 @@ const addMemberEducation = async () => {
   const bodyData = {
     institution_name: state.form.education.institution_name,
     degree: state.form.education.degree,
-    graduated: state.form.education.still_studying ? null : state.form.education.graduated,
+    graduated: state.form.education.still_studying
+      ? null
+      : new Date (
+      state.form.education.graduated.year,
+      state.form.education.graduated.month
+    ),
   }
   await useFetch(`/api/member/create/education`, {
     method: 'POST',
@@ -527,7 +533,12 @@ const updateMemberEducation = async () => {
   const bodyData = {
     institution_name: state.form.education.institution_name,
     degree: state.form.education.degree,
-    graduated: state.form.education.still_studying ? null : state.form.education.graduated,
+    graduated: state.form.education.still_studying
+      ? null
+      : new Date (
+      state.form.education.graduated.year,
+      state.form.education.graduated.month
+    ),
   }
   await useFetch(`/api/member/update/education/${state.form.education.id}`, {
     method: 'PATCH',
