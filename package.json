@@ -21,6 +21,7 @@
   "dependencies": {
     "@nuxt/vite-builder": "^3.0.0-rc.11",
     "@nuxtjs/device": "github:Redemption198/device-module",
+    "@vuepic/vue-datepicker": "^4.0.1",
     "nuxt-healthcheck": "^1.0.1",
     "parse-multipart-data": "^1.5.0"
   }

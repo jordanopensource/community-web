@@ -92,27 +92,37 @@
           >
             <b>Position</b>
           </FormAppControlInput>
-          <FormAppControlInput
-            inputType="date"
-            v-model:value="state.form.workExperience.start_date"
-          >
-            <b>Start Date</b>
-          </FormAppControlInput>
+          <label><b>Start Date</b></label>
+          <VueDatePicker
+            month-picker
+            v-model="state.form.workExperience.start_date"
+            placeholder="Select start date"
+            :max-date="new Date()"
+          />
+          <label class="block mt-4">
+            <b>End Date</b>
+          </label>
           <FormAppControlInput
             inputType="checkbox"
             v-model:value="state.form.workExperience.currently_working"
             labelId="currently-working-add"
+            class="mt-2"
           >
             Currently working here
           </FormAppControlInput>
-          <FormAppControlInput
+          <VueDatePicker
             v-if="!state.form.workExperience.currently_working"
-            inputType="date"
-            v-model:value="state.form.workExperience.end_date"
-          >
-            <b>End Date</b>
-          </FormAppControlInput>
-          <FormAppButton> Add </FormAppButton>
+            month-picker
+            v-model="state.form.workExperience.end_date"
+            placeholder="Select end date"
+            :min-date="
+              new Date(
+                state.form.workExperience.start_date.year,
+                state.form.workExperience.start_date.month
+              )
+            "
+            />
+          <FormAppButton class="mt-4"> Add </FormAppButton>
         </form>
       </div>
       <!-- Update Work Experience Form -->
@@ -138,29 +148,37 @@
           >
             <b>Position</b>
           </FormAppControlInput>
-          <FormAppControlInput
-            inputType="date"
-            v-model:value="state.form.workExperience.start_date"
-            :value="state.form.workExperience.start_date"
-          >
-            <b>Start Date</b>
-          </FormAppControlInput>
+          <label><b>Start Date</b></label>
+          <VueDatePicker
+            month-picker
+            v-model="state.form.workExperience.start_date"
+            placeholder="Select start date"
+            :max-date="new Date()"
+          />
+          <label class="block mt-4">
+            <b>End Date</b>
+          </label>
           <FormAppControlInput
             inputType="checkbox"
             v-model:value="state.form.workExperience.currently_working"
             labelId="currently-working-edit"
+            class="mt-2"
           >
             Currently working here
           </FormAppControlInput>
-          <FormAppControlInput
+          <VueDatePicker
             v-if="!state.form.workExperience.currently_working"
-            inputType="date"
-            v-model:value="state.form.workExperience.end_date"
-            :value="state.form.workExperience.end_date"
-          >
-            <b>End Date</b>
-          </FormAppControlInput>
-          <FormAppButton> Update </FormAppButton>
+            month-picker
+            v-model="state.form.workExperience.end_date"
+            placeholder="Select end date"
+            :min-date="
+              new Date(
+                state.form.workExperience.start_date.year,
+                state.form.workExperience.start_date.month
+              )
+            "
+            />
+          <FormAppButton class="mt-4"> Update </FormAppButton>
         </form>
       </div>
     </div>
@@ -298,6 +316,9 @@
   </div>
 </template>
 <script setup>
+import VueDatePicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
+
 const emit = defineEmits(['updateMember'])
 const showAddWorkExperienceForm = useState(
   'showAddWorkExperienceForm',
@@ -359,8 +380,16 @@ const addMemberWorkExperience = async () => {
   const bodyData = {
     company_name: state.form.workExperience.company_name,
     position: state.form.workExperience.position,
-    start_date: state.form.workExperience.start_date,
-    end_date: state.form.workExperience.currently_working ? null : state.form.workExperience.end_date,
+    start_date: new Date (
+      state.form.workExperience.start_date.year,
+      state.form.workExperience.start_date.month
+    ),
+    end_date: state.form.workExperience.currently_working
+      ? null
+      : new Date (
+      state.form.workExperience.end_date.year,
+      state.form.workExperience.end_date.month
+    ),
   }
   await useFetch(`/api/member/create/experience`, {
     method: 'POST',
@@ -406,8 +435,16 @@ const updateMemberWorkExperience = async () => {
   const bodyData = {
     company_name: state.form.workExperience.company_name,
     position: state.form.workExperience.position,
-    start_date: state.form.workExperience.start_date,
-    end_date: state.form.workExperience.currently_working ? null : state.form.workExperience.end_date,
+    start_date: new Date (
+      state.form.workExperience.start_date.year,
+      state.form.workExperience.start_date.month
+    ),
+    end_date: state.form.workExperience.currently_working
+      ? null
+      : new Date (
+      state.form.workExperience.end_date.year,
+      state.form.workExperience.end_date.month
+    ),
   }
   try {
     await useFetch(
