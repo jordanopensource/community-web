@@ -559,10 +559,18 @@ const updateMemberEducation = async () => {
 }
 
 const experienceSorted = props.experience.sort(
-  (a, b) => new Date(b.end_date) > new Date(a.end_date)
+  (a, b) => {
+    if (!a.end_date) return -1 // if a is null, a comes first
+    if (!b.end_date) return  1 // b comes first
+    return new Date(b.end_date) - new Date(a.end_date)
+  }
 )
 const educationSorted = props.education.sort(
-  (a, b) => new Date(b.end_date) > new Date(a.end_date)
+  (a, b) => {
+    if (!a.graduated) return -1
+    if (!b.graduated) return  1
+    return new Date(b.graduated) - new Date(a.graduated)
+  }
 )
 
 const formatDate = (date) => {
