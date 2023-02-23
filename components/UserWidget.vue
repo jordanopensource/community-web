@@ -51,6 +51,7 @@ const signOut = async () => {
   await useFetch('/api/logout')
   localStorage.clear()
   useAuth().value = false
+  userId().value = null
   navigateTo('/')
 }
 
