@@ -3,25 +3,24 @@
     <Banner bannerText="JOSA Members" />
     <div class="container" v-if="state.memberData">
       <MemberBanner
-        v-if="!pendingMember"
-        :member="memberData.member"
+        :member="state.memberData.member"
         :memberAuth="isUserLogged"
         @updateMember="() => refresh()"
       />
       <div class="flex">
         <div class="flex flex-col w-full">
           <div class="block lg:hidden">
-            <MemberCard v-if="!pendingMember" :member="state.memberData.member" />
+            <MemberCard :member="state.memberData.member" />
           </div>
           <MemberDetails
-            v-if="!pendingMember && !(state.memberData.settings.hideAbout && !isUserLogged)"
+            v-if="!(state.memberData.settings.hideAbout && !isUserLogged)"
             :member="state.memberData.member"
             :settings="state.memberData.settings"
             :memberAuth="isUserLogged"
             @updateMember="() => refresh()"
           />
           <MemberExperience
-            v-if="!pendingMember && (state.memberData.experience.length || state.memberData.education.length)
+            v-if="(state.memberData.experience.length || state.memberData.education.length)
              && !(state.memberData.settings.hideExperienceAndEducation && !isUserLogged)"
             :experience="state.memberData.experience"
             :education="state.memberData.education"
@@ -30,14 +29,13 @@
             @updateMember="() => refresh()"
           />
           <MemberContribution
-            v-if="!pendingMember"
             :contributions="state.memberData.contributions"
             :opensource-contributions="state.memberData.open_source_contributions"
             :settings="state.memberData.settings"
           />
         </div>
         <div class="hidden lg:block">
-          <MemberCard v-if="!pendingMember" :member="state.memberData.member" />
+          <MemberCard :member="state.memberData.member" />
         </div>
       </div>
     </div>
