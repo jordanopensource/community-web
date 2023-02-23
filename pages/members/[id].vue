@@ -33,6 +33,7 @@
             v-if="!pendingMember"
             :contributions="state.memberData.contributions"
             :opensource-contributions="state.memberData.open_source_contributions"
+            :settings="state.memberData.settings"
           />
         </div>
         <div class="hidden lg:block">

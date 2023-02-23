@@ -31,7 +31,7 @@
         <ul class="opensource-contributions">
           <!-- Wikimedia Contributions -->
           <li
-            v-if="opensourceContributions.wikimedia_contributions"
+            v-if="state.showWikimediaContributions&& opensourceContributions.wikimedia_contributions"
             v-for="item in state.wikimedia_contributions.filter(item => item.edits !== 0).sort((a, b)  => a.edits < b.edits)"
             class="divider-dotted pb-2.5"
           >
@@ -49,7 +49,7 @@
 
           <!-- GitHub Contributions -->
           <li
-            v-if="opensourceContributions.github_contributions"
+            v-if="state.showGitHubContributions && opensourceContributions.github_contributions"
             v-for="item in (opensourceContributions.github_contributions).slice(0, state.github_max_shown)"
             class="divider-dotted pb-2.5"
           >
@@ -84,6 +84,10 @@ const props = defineProps({
   opensourceContributions: {
     type: Object,
     default: {},
+  },
+  settings: {
+    type: Object,
+    default: {},
   }
 })
 
@@ -94,7 +98,13 @@ const contributionsSorted = props.contributions.sort(
 const state = reactive({
   wikimedia_contributions: [],
   github_max_shown: 3,
-  show_more_btn: true
+  show_more_btn: true,
+  showGitHubContributions: (useAuth().value
+    && useRoute().params.id === userId().value)
+    || !props.settings.hideGithubContributions,
+  showWikimediaContributions: (useAuth().value
+    && useRoute().params.id === userId().value)
+    || !props.settings.hideWikimediaContributions
 })
 
 const wikimedia_edits = props.opensourceContributions.wikimedia_contributions
