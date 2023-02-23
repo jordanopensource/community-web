@@ -34,7 +34,7 @@
       </div>
       <ul v-if="props.experience.length">
         <li
-          v-for="(experience, index) in experienceSorted"
+          v-for="(experience, index) in experienceSorted.list"
           :key="index"
           class="divider-dotted pb-2.5"
         >
@@ -209,7 +209,7 @@
       </div>
       <ul v-if="props.education.length">
         <li
-          v-for="(education, index) in educationSorted"
+          v-for="(education, index) in educationSorted.list"
           :key="index"
           class="divider-dotted pb-2.5"
         >
@@ -429,13 +429,9 @@ const deleteMemberWorkExperience = async (event) => {
   const deleteItem = confirm('Are you sure you want to delete this?')
 
   deleteItem &&
-    (await useFetch(`/api/member/delete/experience/${value}`, {
+    (await $fetch(`/api/member/delete/experience/${value}`, {
       method: 'DELETE',
       onResponse({ response }) {
-        if (response._data.success) {
-          console.log(response._data)
-          console.log('updated!')
-        }
         emit('updateMember')
       },
       onResponseError({ response }) {
@@ -461,7 +457,7 @@ const updateMemberWorkExperience = async () => {
     ),
   }
   try {
-    await useFetch(
+    await $fetch(
       `/api/member/update/experience/${state.form.workExperience.id}`,
       {
         method: 'PATCH',
@@ -502,7 +498,7 @@ const addMemberEducation = async () => {
       state.form.education.graduated.month
     ),
   }
-  await useFetch(`/api/member/create/education`, {
+  await $fetch(`/api/member/create/education`, {
     method: 'POST',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
@@ -526,13 +522,9 @@ const deleteMemberEducation = async (event) => {
   const deleteItem = confirm('Are you sure you want to delete this?')
 
   deleteItem &&
-    (await useFetch(`/api/member/delete/education/${value}`, {
+    (await $fetch(`/api/member/delete/education/${value}`, {
       method: 'DELETE',
       onResponse({ response }) {
-        if (response._data.success) {
-          console.log(response._data)
-          console.log('updated!')
-        }
         emit('updateMember')
       },
       onResponseError({ response }) {
@@ -553,7 +545,7 @@ const updateMemberEducation = async () => {
       state.form.education.graduated.month
     ),
   }
-  await useFetch(`/api/member/update/education/${state.form.education.id}`, {
+  await $fetch(`/api/member/update/education/${state.form.education.id}`, {
     method: 'PATCH',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
@@ -570,22 +562,28 @@ const updateMemberEducation = async () => {
   })
   showUpdateEducationForm.value = !showUpdateEducationForm
 }
-
-const experienceSorted = props.experience.sort(
-  (a, b) => {
-    if (!a.end_date) return -1 // if a is null, a comes first
-    if (!b.end_date) return  1 // b comes first
+const sortRules = reactive({
+  experience: (a, b) => {
+    if (!a.end_date) return -1  // if a is null, a comes first
+    if (!b.end_date) return  1  // b comes first
     return new Date(b.end_date) - new Date(a.end_date)
-  }
-)
-const educationSorted = props.education.sort(
-  (a, b) => {
+  },
+  education: (a, b) => {
     if (!a.graduated) return -1
     if (!b.graduated) return  1
     return new Date(b.graduated) - new Date(a.graduated)
   }
-)
-
+})
+const experienceSorted = reactive ({
+  list: props.experience.sort((a, b) => sortRules.experience(a, b))
+})
+const educationSorted = reactive ({
+  list: props.education.sort((a, b) => sortRules.education(a, b))
+})
+watchEffect(() => {
+  if (props.experience) experienceSorted.list = props.experience.sort((a, b) => sortRules.experience(a, b))
+  if (props.education) educationSorted.list = props.education.sort((a, b) => sortRules.education(a, b))
+})
 const formatDate = (date) => {
   const newDate = new Date(date)
   const [month, year] = [
