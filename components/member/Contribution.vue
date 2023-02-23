@@ -32,7 +32,7 @@
           <!-- Wikimedia Contributions -->
           <li
             v-if="opensourceContributions.wikimedia_contributions"
-            v-for="item in state.wikimedia_contributions.filter(item => item.edits !== 0)"
+            v-for="item in state.wikimedia_contributions.filter(item => item.edits !== 0).sort((a, b)  => a.edits < b.edits)"
             class="divider-dotted pb-2.5"
           >
             <img
