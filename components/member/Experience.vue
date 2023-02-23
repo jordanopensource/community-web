@@ -84,11 +84,13 @@
         <form @submit.prevent="addMemberWorkExperience">
           <FormAppControlInput
             v-model:value="state.form.workExperience.company_name"
+            isRequired
           >
             <b>Company Name</b>
           </FormAppControlInput>
           <FormAppControlInput
             v-model:value="state.form.workExperience.position"
+            isRequired
           >
             <b>Position</b>
           </FormAppControlInput>
@@ -98,6 +100,7 @@
             v-model="state.form.workExperience.start_date"
             placeholder="Select start date"
             :max-date="new Date()"
+            required
           />
           <label class="block mt-4">
             <b>End Date</b>
@@ -113,6 +116,7 @@
           <VueDatePicker
             v-if="!state.form.workExperience.currently_working"
             month-picker
+            required
             v-model="state.form.workExperience.end_date"
             placeholder="Select end date"
             :min-date="
@@ -121,7 +125,7 @@
                 state.form.workExperience.start_date.month
               )
             "
-            />
+          />
           <FormAppButton class="mt-4"> Add </FormAppButton>
         </form>
       </div>
@@ -139,12 +143,14 @@
           <FormAppControlInput
             v-model:value="state.form.workExperience.company_name"
             :value="state.form.workExperience.company_name"
+            isRequired
           >
             <b>Company Name</b>
           </FormAppControlInput>
           <FormAppControlInput
             v-model:value="state.form.workExperience.position"
             :value="state.form.workExperience.position"
+            isRequired
           >
             <b>Position</b>
           </FormAppControlInput>
@@ -154,6 +160,7 @@
             v-model="state.form.workExperience.start_date"
             placeholder="Select start date"
             :max-date="new Date()"
+            required
           />
           <label class="block mt-4">
             <b>End Date</b>
@@ -169,6 +176,7 @@
           <VueDatePicker
             v-if="!state.form.workExperience.currently_working"
             month-picker
+            required
             v-model="state.form.workExperience.end_date"
             placeholder="Select end date"
             :min-date="
@@ -248,10 +256,11 @@
         <form @submit.prevent="addMemberEducation">
           <FormAppControlInput
             v-model:value="state.form.education.institution_name"
+            isRequired
           >
             <b>Institution Name</b>
           </FormAppControlInput>
-          <FormAppControlInput v-model:value="state.form.education.degree">
+          <FormAppControlInput v-model:value="state.form.education.degree" isRequired>
             <b>Degree</b>
           </FormAppControlInput>
           <label class="block"><b>Graduation Date</b></label>
@@ -267,6 +276,7 @@
             month-picker
             v-model="state.form.education.graduated"
             placeholder="Select graduation date"
+            required
           />
           
           <FormAppButton class="mt-4"> Add </FormAppButton>
@@ -286,12 +296,14 @@
           <FormAppControlInput
             v-model:value="state.form.education.institution_name"
             :value="state.form.education.institution_name"
+            isRequired
           >
             <b>Institution Name</b>
           </FormAppControlInput>
           <FormAppControlInput
             v-model:value="state.form.education.degree"
             :value="state.form.education.degree"
+            isRequired
           >
             <b>Degree</b>
           </FormAppControlInput>
@@ -308,6 +320,7 @@
             month-picker
             v-model="state.form.education.graduated"
             placeholder="Select graduation date"
+            required
           />
           
           <FormAppButton class="mt-4"> update </FormAppButton>
