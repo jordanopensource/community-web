@@ -60,7 +60,7 @@
             <div class="w-full flex flex-col md:flex-row">
               <div>
                 <h4 class="title">
-                  <a :href="item.url">{{ item.url.replace('https://github.com/', '') }}</a>
+                  <a :href="item.url" target="_blank">{{ item.url.replace('https://github.com/', '') }}</a>
                 </h4>
                 <h5 class="sub-title">{{ item.totalCommits }} contributions</h5>
               </div>
