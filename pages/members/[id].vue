@@ -1,7 +1,7 @@
 <template>
   <div>
     <Banner bannerText="JOSA Members" />
-    <div class="container">
+    <div class="container" v-if="state.memberData">
       <MemberBanner
         v-if="!pendingMember"
         :member="memberData.member"
@@ -11,35 +11,37 @@
       <div class="flex">
         <div class="flex flex-col w-full">
           <div class="block lg:hidden">
-            <MemberCard v-if="!pendingMember" :member="memberData.member" />
+            <MemberCard v-if="!pendingMember" :member="state.memberData.member" />
           </div>
           <MemberDetails
-            v-if="!pendingMember
-              && !(memberData.settings.hideAbout && !isUserLogged)"
-            :member="memberData.member"
-            :settings="memberData.settings"
+            v-if="!pendingMember && !(state.memberData.settings.hideAbout && !isUserLogged)"
+            :member="state.memberData.member"
+            :settings="state.memberData.settings"
             :memberAuth="isUserLogged"
             @updateMember="() => refresh()"
           />
           <MemberExperience
-            v-if="(memberData.experience.length || memberData.education.length)
-             && !(memberData.settings.hideExperienceAndEducation && !isUserLogged)"
-            :experience="memberData.experience"
-            :education="memberData.education"
+            v-if="!pendingMember && (state.memberData.experience.length || state.memberData.education.length)
+             && !(state.memberData.settings.hideExperienceAndEducation && !isUserLogged)"
+            :experience="state.memberData.experience"
+            :education="state.memberData.education"
             :memberAuth="isUserLogged"
-            :settings="memberData.settings"
+            :settings="state.memberData.settings"
             @updateMember="() => refresh()"
           />
           <MemberContribution
             v-if="!pendingMember"
-            :contributions="memberData.contributions"
-            :opensource-contributions="memberData.open_source_contributions"
+            :contributions="state.memberData.contributions"
+            :opensource-contributions="state.memberData.open_source_contributions"
           />
         </div>
         <div class="hidden lg:block">
-          <MemberCard v-if="!pendingMember" :member="memberData.member" />
+          <MemberCard v-if="!pendingMember" :member="state.memberData.member" />
         </div>
       </div>
+    </div>
+    <div v-else class="container flex flex-row justify-center h-40">
+      <div class="loader self-center"></div>
     </div>
   </div>
 </template>
@@ -55,7 +57,15 @@ const {
   data: memberData,
   pending: pendingMember,
   refresh,
-} = await useFetch(`${config.public.COMMUNITY_API_URL}/member/${user_id}`)
+} = await useLazyFetch(`${config.public.COMMUNITY_API_URL}/member/${user_id}`)
+
+const state = reactive({
+  memberData: memberData 
+})
+
+watch(memberData, (newMemberData) => { 
+  state.memberData = newMemberData
+})
 onMounted(() => {
   refresh()
 })
