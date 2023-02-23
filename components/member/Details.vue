@@ -120,7 +120,12 @@ const updateVisibility = async () => {
   state.settings.hideAbout = !state.settings.hideAbout
   await $fetch('/api/member/update/settings', {
     method: 'PATCH',
-    body: state.settings
+    body: state.settings,
+    onResponse({ response }) {
+      if (response.ok) {
+        emit('updateMember')
+      }
+    }
   })
 }
 </script>

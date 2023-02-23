@@ -578,7 +578,12 @@ const updateVisibility = async () => {
   state.settings.hideExperienceAndEducation = !state.settings.hideExperienceAndEducation
   await $fetch('/api/member/update/settings', {
     method: 'PATCH',
-    body: state.settings
+    body: state.settings,
+    onResponse({ response }) {
+      if (response.ok) {
+        emit('updateMember')
+      }
+    }
   })
 }
 </script>
