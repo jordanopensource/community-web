@@ -34,7 +34,7 @@
       </div>
       <ul v-if="props.experience.length">
         <li
-          v-for="(experience, index) in experienceSorted"
+          v-for="(experience, index) in experienceSorted.list"
           :key="index"
           class="divider-dotted pb-2.5"
         >
@@ -84,27 +84,49 @@
         <form @submit.prevent="addMemberWorkExperience">
           <FormAppControlInput
             v-model:value="state.form.workExperience.company_name"
+            isRequired
           >
             <b>Company Name</b>
           </FormAppControlInput>
           <FormAppControlInput
             v-model:value="state.form.workExperience.position"
+            isRequired
           >
             <b>Position</b>
           </FormAppControlInput>
-          <FormAppControlInput
-            inputType="date"
-            v-model:value="state.form.workExperience.start_date"
-          >
-            <b>Start Date</b>
-          </FormAppControlInput>
-          <FormAppControlInput
-            inputType="date"
-            v-model:value="state.form.workExperience.end_date"
-          >
+          <label><b>Start Date</b></label>
+          <VueDatePicker
+            month-picker
+            v-model="state.form.workExperience.start_date"
+            placeholder="Select start date"
+            :max-date="new Date()"
+            required
+          />
+          <label class="block mt-4">
             <b>End Date</b>
+          </label>
+          <FormAppControlInput
+            inputType="checkbox"
+            v-model:value="state.form.workExperience.currently_working"
+            labelId="currently-working-add"
+            class="mt-2"
+          >
+            Currently working here
           </FormAppControlInput>
-          <FormAppButton> Add </FormAppButton>
+          <VueDatePicker
+            v-if="!state.form.workExperience.currently_working"
+            month-picker
+            required
+            v-model="state.form.workExperience.end_date"
+            placeholder="Select end date"
+            :min-date="
+              new Date(
+                state.form.workExperience.start_date.year,
+                state.form.workExperience.start_date.month
+              )
+            "
+          />
+          <FormAppButton class="mt-4"> Add </FormAppButton>
         </form>
       </div>
       <!-- Update Work Experience Form -->
@@ -121,30 +143,50 @@
           <FormAppControlInput
             v-model:value="state.form.workExperience.company_name"
             :value="state.form.workExperience.company_name"
+            isRequired
           >
             <b>Company Name</b>
           </FormAppControlInput>
           <FormAppControlInput
             v-model:value="state.form.workExperience.position"
             :value="state.form.workExperience.position"
+            isRequired
           >
             <b>Position</b>
           </FormAppControlInput>
-          <FormAppControlInput
-            inputType="date"
-            v-model:value="state.form.workExperience.start_date"
-            :value="state.form.workExperience.start_date"
-          >
-            <b>Start Date</b>
-          </FormAppControlInput>
-          <FormAppControlInput
-            inputType="date"
-            v-model:value="state.form.workExperience.end_date"
-            :value="state.form.workExperience.end_date"
-          >
+          <label><b>Start Date</b></label>
+          <VueDatePicker
+            month-picker
+            v-model="state.form.workExperience.start_date"
+            placeholder="Select start date"
+            :max-date="new Date()"
+            required
+          />
+          <label class="block mt-4">
             <b>End Date</b>
+          </label>
+          <FormAppControlInput
+            inputType="checkbox"
+            v-model:value="state.form.workExperience.currently_working"
+            labelId="currently-working-edit"
+            class="mt-2"
+          >
+            Currently working here
           </FormAppControlInput>
-          <FormAppButton> Update </FormAppButton>
+          <VueDatePicker
+            v-if="!state.form.workExperience.currently_working"
+            month-picker
+            required
+            v-model="state.form.workExperience.end_date"
+            placeholder="Select end date"
+            :min-date="
+              new Date(
+                state.form.workExperience.start_date.year,
+                state.form.workExperience.start_date.month
+              )
+            "
+            />
+          <FormAppButton class="mt-4"> Update </FormAppButton>
         </form>
       </div>
     </div>
@@ -167,7 +209,7 @@
       </div>
       <ul v-if="props.education.length">
         <li
-          v-for="(education, index) in educationSorted"
+          v-for="(education, index) in educationSorted.list"
           :key="index"
           class="divider-dotted pb-2.5"
         >
@@ -176,7 +218,11 @@
               <h4 class="title">{{ education.institution_name }}</h4>
               <h5 class="sub-title">{{ education.degree }}</h5>
             </div>
-            <p class="date-container">{{ formatDate(education.graduated) }}</p>
+            <p class="date-container">
+              {{  education.graduated
+                  ? formatDate(education.graduated)
+                  : 'Current'}}
+            </p>
             <div class="flex justify-end mt-4 md:mt-0">
               <!-- Delete Education Form Button -->
               <div v-if="memberAuth">
@@ -210,19 +256,30 @@
         <form @submit.prevent="addMemberEducation">
           <FormAppControlInput
             v-model:value="state.form.education.institution_name"
+            isRequired
           >
             <b>Institution Name</b>
           </FormAppControlInput>
-          <FormAppControlInput v-model:value="state.form.education.degree">
+          <FormAppControlInput v-model:value="state.form.education.degree" isRequired>
             <b>Degree</b>
           </FormAppControlInput>
+          <label class="block"><b>Graduation Date</b></label>
           <FormAppControlInput
-            inputType="date"
-            v-model:value="state.form.education.graduated"
+            inputType="checkbox"
+            v-model:value="state.form.education.still_studying"
+            labelId="currently-studying-add"
           >
-            <b>Date of Graduation</b>
+            I'm still studying
           </FormAppControlInput>
-          <FormAppButton> Add </FormAppButton>
+          <VueDatePicker
+            v-if="!state.form.education.still_studying"
+            month-picker
+            v-model="state.form.education.graduated"
+            placeholder="Select graduation date"
+            required
+          />
+          
+          <FormAppButton class="mt-4"> Add </FormAppButton>
         </form>
       </div>
       <!-- Update Education Form -->
@@ -239,29 +296,43 @@
           <FormAppControlInput
             v-model:value="state.form.education.institution_name"
             :value="state.form.education.institution_name"
+            isRequired
           >
             <b>Institution Name</b>
           </FormAppControlInput>
           <FormAppControlInput
             v-model:value="state.form.education.degree"
             :value="state.form.education.degree"
+            isRequired
           >
             <b>Degree</b>
           </FormAppControlInput>
+          <label class="block"><b>Graduation Date</b></label>
           <FormAppControlInput
-            inputType="date"
-            v-model:value="state.form.education.graduated"
-            :value="state.form.education.graduated"
+            inputType="checkbox"
+            v-model:value="state.form.education.still_studying"
+            labelId="currently-studying-edit"
           >
-            <b>Date of Graduation</b>
+            I'm still studying
           </FormAppControlInput>
-          <FormAppButton> update </FormAppButton>
+          <VueDatePicker
+            v-if="!state.form.education.still_studying"
+            month-picker
+            v-model="state.form.education.graduated"
+            placeholder="Select graduation date"
+            required
+          />
+          
+          <FormAppButton class="mt-4"> update </FormAppButton>
         </form>
       </div>
     </div>
   </div>
 </template>
 <script setup>
+import VueDatePicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
+
 const emit = defineEmits(['updateMember'])
 const showAddWorkExperienceForm = useState(
   'showAddWorkExperienceForm',
@@ -299,12 +370,14 @@ const state = reactive({
       company_name: '',
       position: '',
       start_date: '',
-      end_date: '',
+      currently_working: false,
+      end_date: null,
       id: '',
     },
     education: {
       institution_name: '',
       degree: '',
+      still_studying: false,
       graduated: '',
       id: '',
     },
@@ -321,8 +394,16 @@ const addMemberWorkExperience = async () => {
   const bodyData = {
     company_name: state.form.workExperience.company_name,
     position: state.form.workExperience.position,
-    start_date: state.form.workExperience.start_date,
-    end_date: state.form.workExperience.end_date,
+    start_date: new Date (
+      state.form.workExperience.start_date.year,
+      state.form.workExperience.start_date.month
+    ),
+    end_date: state.form.workExperience.currently_working
+      ? null
+      : new Date (
+      state.form.workExperience.end_date.year,
+      state.form.workExperience.end_date.month
+    ),
   }
   await useFetch(`/api/member/create/experience`, {
     method: 'POST',
@@ -348,13 +429,9 @@ const deleteMemberWorkExperience = async (event) => {
   const deleteItem = confirm('Are you sure you want to delete this?')
 
   deleteItem &&
-    (await useFetch(`/api/member/delete/experience/${value}`, {
+    (await $fetch(`/api/member/delete/experience/${value}`, {
       method: 'DELETE',
       onResponse({ response }) {
-        if (response._data.success) {
-          console.log(response._data)
-          console.log('updated!')
-        }
         emit('updateMember')
       },
       onResponseError({ response }) {
@@ -368,11 +445,19 @@ const updateMemberWorkExperience = async () => {
   const bodyData = {
     company_name: state.form.workExperience.company_name,
     position: state.form.workExperience.position,
-    start_date: state.form.workExperience.start_date,
-    end_date: state.form.workExperience.end_date,
+    start_date: new Date (
+      state.form.workExperience.start_date.year,
+      state.form.workExperience.start_date.month
+    ),
+    end_date: state.form.workExperience.currently_working
+      ? null
+      : new Date (
+      state.form.workExperience.end_date.year,
+      state.form.workExperience.end_date.month
+    ),
   }
   try {
-    await useFetch(
+    await $fetch(
       `/api/member/update/experience/${state.form.workExperience.id}`,
       {
         method: 'PATCH',
@@ -406,9 +491,14 @@ const addMemberEducation = async () => {
   const bodyData = {
     institution_name: state.form.education.institution_name,
     degree: state.form.education.degree,
-    graduated: state.form.education.graduated,
+    graduated: state.form.education.still_studying
+      ? null
+      : new Date (
+      state.form.education.graduated.year,
+      state.form.education.graduated.month
+    ),
   }
-  await useFetch(`/api/member/create/education`, {
+  await $fetch(`/api/member/create/education`, {
     method: 'POST',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
@@ -432,13 +522,9 @@ const deleteMemberEducation = async (event) => {
   const deleteItem = confirm('Are you sure you want to delete this?')
 
   deleteItem &&
-    (await useFetch(`/api/member/delete/education/${value}`, {
+    (await $fetch(`/api/member/delete/education/${value}`, {
       method: 'DELETE',
       onResponse({ response }) {
-        if (response._data.success) {
-          console.log(response._data)
-          console.log('updated!')
-        }
         emit('updateMember')
       },
       onResponseError({ response }) {
@@ -452,9 +538,14 @@ const updateMemberEducation = async () => {
   const bodyData = {
     institution_name: state.form.education.institution_name,
     degree: state.form.education.degree,
-    graduated: state.form.education.graduated,
+    graduated: state.form.education.still_studying
+      ? null
+      : new Date (
+      state.form.education.graduated.year,
+      state.form.education.graduated.month
+    ),
   }
-  await useFetch(`/api/member/update/education/${state.form.education.id}`, {
+  await $fetch(`/api/member/update/education/${state.form.education.id}`, {
     method: 'PATCH',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
@@ -471,14 +562,28 @@ const updateMemberEducation = async () => {
   })
   showUpdateEducationForm.value = !showUpdateEducationForm
 }
-
-const experienceSorted = props.experience.sort(
-  (a, b) => new Date(b.end_date) > new Date(a.end_date)
-)
-const educationSorted = props.education.sort(
-  (a, b) => new Date(b.end_date) > new Date(a.end_date)
-)
-
+const sortRules = reactive({
+  experience: (a, b) => {
+    if (!a.end_date) return -1  // if a is null, a comes first
+    if (!b.end_date) return  1  // b comes first
+    return new Date(b.end_date) - new Date(a.end_date)
+  },
+  education: (a, b) => {
+    if (!a.graduated) return -1
+    if (!b.graduated) return  1
+    return new Date(b.graduated) - new Date(a.graduated)
+  }
+})
+const experienceSorted = reactive ({
+  list: props.experience.sort((a, b) => sortRules.experience(a, b))
+})
+const educationSorted = reactive ({
+  list: props.education.sort((a, b) => sortRules.education(a, b))
+})
+watchEffect(() => {
+  if (props.experience) experienceSorted.list = props.experience.sort((a, b) => sortRules.experience(a, b))
+  if (props.education) educationSorted.list = props.education.sort((a, b) => sortRules.education(a, b))
+})
 const formatDate = (date) => {
   const newDate = new Date(date)
   const [month, year] = [
@@ -492,7 +597,12 @@ const updateVisibility = async () => {
   state.settings.hideExperienceAndEducation = !state.settings.hideExperienceAndEducation
   await $fetch('/api/member/update/settings', {
     method: 'PATCH',
-    body: state.settings
+    body: state.settings,
+    onResponse({ response }) {
+      if (response.ok) {
+        emit('updateMember')
+      }
+    }
   })
 }
 </script>

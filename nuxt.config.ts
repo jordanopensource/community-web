@@ -77,4 +77,7 @@ export default defineNuxtConfig({
       lang: 'en',
     },
   },
+  build: {
+    transpile: ['@vuepic/vue-datepicker']
+  }
 });
