@@ -1,10 +1,9 @@
-
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: {
-        lang: 'en'
+        lang: 'en',
       },
       title: 'JOSA Community',
       meta: [
@@ -19,25 +18,21 @@ export default defineNuxtConfig({
         { name: 'format-detection', content: 'telephone=no' },
         { name: 'theme-color', content: '#1a1f21' },
       ],
-      link: [{ hid: 'icon', rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+      link: [
+        {
+          hid: 'icon',
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: '/favicon.ico',
+        },
+      ],
     },
   },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-healthcheck', '@kevinmarrec/nuxt-pwa',
-  /**
-   * this package is not the official nuxtjs device but a fork
-   * this package was used due to it supported Nuxt3
-   * More details about this project here:
-   * https://github.com/nuxt-community/device-module/tree/4a57c2df5f9716998f35f7621fdaffa69cdd8287
-   */
-  '@nuxtjs/device'
-],
-  device: {
-    refreshOnResize: true
-  },
+  modules: ['@nuxtjs/tailwindcss', '@kevinmarrec/nuxt-pwa'],
   css: [
     '@/assets/css/typography.css',
     '@/assets/css/form.css',
-    '@/assets/css/global.css'
+    '@/assets/css/global.css',
   ],
   tailwindcss: {
     cssPath: '@/assets/css/tailwind.css',
@@ -59,22 +54,15 @@ export default defineNuxtConfig({
       DRONE_REPO_LINK: process.env.DRONE_REPO_LINK,
       DRONE_BUILD_FINISHED: process.env.DRONE_BUILD_FINISHED,
       DEBUG: process.env.DEBUG,
-      SESSION_COOKIE_NAME: process.env.SESSION_COOKIE_NAME
-    }
-  },
-  healthcheck: {
-    path: '/healthcheck',
-    contentType: 'application/json',
-    healthy: () => {
-      return JSON.stringify({ result: `All is well in Wayne's town!!!` })
+      SESSION_COOKIE_NAME: process.env.SESSION_COOKIE_NAME,
     },
   },
   pwa: {
-    meta:{
+    meta: {
       name: 'JOSA Community',
     },
     manifest: {
       lang: 'en',
     },
   },
-});
+})
