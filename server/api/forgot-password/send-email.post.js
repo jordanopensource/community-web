@@ -1,6 +1,6 @@
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
-  const body = await useBody(event)
+  const body = await readBody(event)
   const options = {
     method: 'POST',
     headers: {

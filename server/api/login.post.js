@@ -1,6 +1,6 @@
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
-  const body = await useBody(event)
+  const body = await readBody(event)
 
   const url = `${config.public.COMMUNITY_API_URL}/auth/`
   const loginOptions = {
@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  const loginResponse = await $fetch.raw(url+'login', loginOptions);
+  const loginResponse = await $fetch.raw(url + 'login', loginOptions);
 
   const authResponse = await $fetch.raw(url, {
     method: 'GET',
