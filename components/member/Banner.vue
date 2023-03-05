@@ -10,14 +10,14 @@
             : placeHolderImages.cover
         "
       />
-      <!-- <div v-if="memberAuth">
+      <div v-if="memberAuth">
         <FormAppControlInput
           v-model:value="state.file"
           inputType="file"
           :editIcon="true"
-          @change="uploadCover"
+          @change="uploadImage($event, 'cover')"
         />
-      </div> -->
+      </div>
       <div class="invisible-white-space"></div>
       <div id="avatar-info-container" class="flex flex-row relative gap-x-7">
         <img
@@ -29,13 +29,14 @@
               : placeHolderImages.avatar
           "
         />
-        <!-- <div v-if="memberAuth" class="relative z-10">
+        <div v-if="memberAuth" class="relative z-10">
           <FormAppControlInput
             v-model:value="state.file"
             inputType="file"
             :editIcon="true"
+            @change="uploadImage($event, 'avatar')"
           />
-        </div> -->
+        </div>
       </div>
       <div class="general-info">
         <div class="flex flex-col items-start gap-y-5">
@@ -114,6 +115,7 @@
 </template>
 <script setup>
 const emit = defineEmits(['updateMember'])
+const config = useRuntimeConfig()
 const props = defineProps({
   member: {
     type: Object,
@@ -135,6 +137,8 @@ const state = reactive({
     memberCity: props.member.location?.split(',')[0],
     memberCountry: props.member.location?.split(',')[1],
   },
+  cover_url: props.member.cover_url,
+  avatar_url: props.member.avatar_url,
 })
 
 // placeholder images for when there are no images
@@ -144,30 +148,28 @@ const placeHolderImages = {
   editIcon: '/icons/edit.svg',
 }
 
-// handle uploading of the cover photo request
-const uploadCover = async (event) => {
-  const { files } = event.target
-  console.log(files[0])
-  let image = new FormData()
-  // image.append('file', files[0], files[0].name)
-  image.append('file-name', files[0].name)
-  image.append('file-type', files[0].type)
-  await useFetch(`/api/member/upload`, {
-    method: 'PATCH',
-    body: image,
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-    onResponse({ response }) {
-      if (response._data.success) {
-        console.log('uploaded!')
-      }
-      emit('updateMember')
-    },
-    onResponseError({ response }) {
-      // TODO: handle errors on client side
-      console.log('something went wrong', response._data.message)
-    },
+// handle uploading of the cover/avatar photo request
+const uploadImage = async (event, imageType) => {
+  console.log("type: ", imageType)
+  const { files } = await event.target
+  console.log(`List of Files: `, files)
+  const image = new FormData()
+  image.append('file', files[0], files[0].name)
+  await fetch(`${config.public.COMMUNITY_API_URL}/upload/members/${imageType}/${userId().value}`, {
+    method: 'POST',
+    body: image
+  })
+  .then((response) => response.json())
+  .then((parsedData) => {
+    if (parsedData.success) { 
+      const {cover_url, avatar_url} = parsedData.data
+      // update the state with the values
+      state.cover_url = cover_url ? cover_url : props.member.cover_url
+      state.avatar_url = avatar_url ? avatar_url : props.member.avatar_url
+    }
+  })
+  .finally(() => {
+    updateGeneralInfo()
   })
 }
 
@@ -177,6 +179,8 @@ const updateGeneralInfo = async (event) => {
     headline: state.form.memberHeadline,
     location: `${state.form.memberCity}, ${state.form.memberCountry}`,
     phone: state.form.memberPhone,
+    cover_url: state.cover_url,
+    avatar_url: state.avatar_url
   }
 
   await $fetch(`/api/member/update/info`, {
