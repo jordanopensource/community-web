@@ -10,13 +10,15 @@
             : placeHolderImages.cover
         "
       />
-      <div v-if="memberAuth">
-        <FormAppControlInput
-          v-model:value="state.file"
-          inputType="file"
-          :editIcon="true"
-          @change="uploadImage($event, 'cover')"
-        />
+      <div class="absolute top-4 right-5">
+        <div v-if="memberAuth">
+          <FormAppControlInput
+            v-model:value="state.file"
+            inputType="file"
+            :editIcon="true"
+            @change="uploadImage($event, 'cover')"
+          />
+        </div>
       </div>
       <div class="invisible-white-space"></div>
       <div id="avatar-info-container" class="flex flex-row relative gap-x-7">
@@ -29,13 +31,15 @@
               : placeHolderImages.avatar
           "
         />
-        <div v-if="memberAuth" class="relative z-10">
-          <FormAppControlInput
-            v-model:value="state.file"
-            inputType="file"
-            :editIcon="true"
-            @change="uploadImage($event, 'avatar')"
-          />
+        <div v-if="memberAuth" class="relative">
+          <div class="absolute -top-36 -left-12">
+            <FormAppControlInput
+              v-model:value="state.file"
+              inputType="file"
+              :editIcon="true"
+              @change="uploadImage($event, 'avatar')"
+            />
+          </div>
         </div>
       </div>
       <div class="general-info">
@@ -150,27 +154,32 @@ const placeHolderImages = {
 
 // handle uploading of the cover/avatar photo request
 const uploadImage = async (event, imageType) => {
-  console.log("type: ", imageType)
+  console.log('type: ', imageType)
   const { files } = await event.target
   console.log(`List of Files: `, files)
   const image = new FormData()
   image.append('file', files[0], files[0].name)
-  await fetch(`${config.public.COMMUNITY_API_URL}/upload/members/${imageType}/${userId().value}`, {
-    method: 'POST',
-    body: image
-  })
-  .then((response) => response.json())
-  .then((parsedData) => {
-    if (parsedData.success) { 
-      const {cover_url, avatar_url} = parsedData.data
-      // update the state with the values
-      state.cover_url = cover_url ? cover_url : props.member.cover_url
-      state.avatar_url = avatar_url ? avatar_url : props.member.avatar_url
+  await fetch(
+    `${config.public.COMMUNITY_API_URL}/upload/members/${imageType}/${
+      userId().value
+    }`,
+    {
+      method: 'POST',
+      body: image,
     }
-  })
-  .finally(() => {
-    updateGeneralInfo()
-  })
+  )
+    .then((response) => response.json())
+    .then((parsedData) => {
+      if (parsedData.success) {
+        const { cover_url, avatar_url } = parsedData.data
+        // update the state with the values
+        state.cover_url = cover_url ? cover_url : props.member.cover_url
+        state.avatar_url = avatar_url ? avatar_url : props.member.avatar_url
+      }
+    })
+    .finally(() => {
+      updateGeneralInfo()
+    })
 }
 
 // handle updating the users general info
@@ -180,7 +189,7 @@ const updateGeneralInfo = async (event) => {
     location: `${state.form.memberCity}, ${state.form.memberCountry}`,
     phone: state.form.memberPhone,
     cover_url: state.cover_url,
-    avatar_url: state.avatar_url
+    avatar_url: state.avatar_url,
   }
 
   await $fetch(`/api/member/update/info`, {

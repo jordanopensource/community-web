@@ -63,8 +63,7 @@
       <div
         v-else-if="props.inputType === 'file'"
         :class="
-          props.editIcon &&
-          'absolute top-4 right-8 bg-editIconWhite bg-auto w-6 h-6 bg-no-repeat'
+          props.editIcon && 'bg-editIconWhite bg-auto w-6 h-6 bg-no-repeat'
         "
       >
         <input
@@ -106,7 +105,7 @@ const props = defineProps({
   editIcon: { type: Boolean, default: false },
   value: { default: '' },
   width: { type: String, default: '' },
-  labelId: {type: String, default: ''}
+  labelId: { type: String, default: '' },
 })
 
 const state = reactive({
