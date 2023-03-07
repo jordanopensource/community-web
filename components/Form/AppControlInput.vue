@@ -5,20 +5,9 @@
       class="checkbox-container inline"
     >
       <input
-        v-if="props.isChecked"
         :id="props.labelId"
-        checked
-        @input="$emit('update:value', $event.target.checked)"
-        :name="props.name"
-        :required="props.isRequired"
-        :placeholder="props.placeholder"
-        :type="props.inputType"
-        class="checkbox form-check-input border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-      />
-      <input
-        v-else
-        :id="props.labelId"
-        @input="$emit('update:value', $event.target.checked)"
+        :checked="props.isChecked"
+        @change="$emit('checkbox-changed', $event.target.checked)"
         :name="props.name"
         :required="props.isRequired"
         :placeholder="props.placeholder"
@@ -91,7 +80,7 @@
 </template>
 
 <script setup>
-defineEmits(['update:value'])
+defineEmits(['update:value', 'checkbox-changed'])
 const props = defineProps({
   isRequired: { type: Boolean, default: false },
   placeholder: { type: String, default: '' },
