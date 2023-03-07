@@ -39,7 +39,7 @@
             state.showWikimediaContributions &&
             opensourceContributions.wikimedia_contributions
           "
-          v-for="item in state.wikimedia_contributions
+          v-for="item in state.wikimediaContributions
             .filter((item) => item.edits !== 0)
             .sort((a, b) => a.edits < b.edits)"
           class="divider-dotted pb-2.5"
@@ -64,7 +64,7 @@
           "
           v-for="item in opensourceContributions.github_contributions.slice(
             0,
-            state.github_max_shown
+            state.githubMaximumShown
           )"
           class="divider-dotted pb-2.5"
         >
@@ -81,7 +81,7 @@
           </div>
         </li>
         <FormAppButton @click="showMore">
-          Show {{ state.show_more_btn ? 'more' : 'less' }}
+          Show {{ state.isShowMore ? 'more' : 'less' }}
         </FormAppButton>
       </ul>
     </div>
@@ -108,9 +108,9 @@ const contributionsSorted = props.contributions.sort(
 )
 
 const state = reactive({
-  wikimedia_contributions: [],
-  github_max_shown: 3,
-  show_more_btn: true,
+  wikimediaContributions: [],
+  githubMaximumShown: 3,
+  isShowMore: true,
   showGitHubContributions:
     (useAuth().value && useRoute().params.id === userId().value) ||
     !props.settings.hideGithubContributions,
@@ -119,37 +119,37 @@ const state = reactive({
     !props.settings.hideWikimediaContributions,
 })
 
-const wikimedia_edits = props.opensourceContributions.wikimedia_contributions
-console.log(wikimedia_edits)
-if (Object.keys(wikimedia_edits).length) {
-  state.wikimedia_contributions = [
+const wikimediaEdits = props.opensourceContributions.wikimedia_contributions
+console.log(wikimediaEdits)
+if (Object.keys(wikimediaEdits).length) {
+  state.wikimediaContributions = [
     {
       name: 'ar.wikipedia.org',
-      edits: wikimedia_edits.editcount['ar.wikipedia.org'],
+      edits: wikimediaEdits.editcount['ar.wikipedia.org'],
     },
     {
       name: 'en.wikipedia.org',
-      edits: wikimedia_edits.editcount['en.wikipedia.org'],
+      edits: wikimediaEdits.editcount['en.wikipedia.org'],
     },
     {
       name: 'wikidata.org',
-      edits: wikimedia_edits.editcount['wikidata.org'],
+      edits: wikimediaEdits.editcount['wikidata.org'],
     },
     {
       name: 'commons.wikimedia.org',
-      edits: wikimedia_edits.editcount['commons.wikimedia.org'],
+      edits: wikimediaEdits.editcount['commons.wikimedia.org'],
     },
   ]
 }
 const showMore = () => {
-  state.show_more_btn = !state.show_more_btn
+  state.isShowMore = !state.isShowMore
   if (
-    state.github_max_shown ===
+    state.githubMaximumShown ===
     props.opensourceContributions.github_contributions.length
   ) {
-    state.github_max_shown = 3
+    state.githubMaximumShown = 3
   } else
-    state.github_max_shown =
+    state.githubMaximumShown =
       props.opensourceContributions.github_contributions.length
 }
 const formatDate = (date) => {
