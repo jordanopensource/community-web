@@ -120,7 +120,6 @@ const state = reactive({
 })
 
 const wikimediaEdits = props.opensourceContributions.wikimedia_contributions
-console.log(wikimediaEdits)
 if (Object.keys(wikimediaEdits).length) {
   state.wikimediaContributions = [
     {
