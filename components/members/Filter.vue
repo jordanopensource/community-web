@@ -55,7 +55,7 @@
             v-model:value="state.noneJosaMembers"
             inputType="checkbox"
             labelId="show-contributors"
-            @click="onCheck"
+            @checkbox-changed="onCheck($event)"
             :isChecked="state.noneJosaMembers"
           >
             Show contributors who are not members</FormAppControlInput
@@ -106,8 +106,9 @@ const sortItems = [
 
 const emit = defineEmits(['sortMembers', 'searchMember', 'filterMembers'])
 
-const onCheck = () => {
-  emit('filterMembers', state.noneJosaMembers)
+const onCheck = (event) => {
+  state.noneJosaMembers = event
+  emit('filterMembers', event)
 }
 
 const onSubmit = () => {
@@ -122,14 +123,6 @@ const scrollToView = () => {
     behavior: 'smooth',
   })
 }
-watch(
-  () => state.windowResize,
-  (newValue, oldValue) => {
-    console.log(state.windowResize)
-    console.log(newValue)
-    console.log(oldValue)
-  }
-)
 </script>
 <style lang="postcss" scoped>
 .filter-container {
