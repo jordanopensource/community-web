@@ -284,16 +284,18 @@ img {
 .cover {
   @apply w-full;
   @apply rounded-b-none;
-  height: 25%;
+  height: 20vw;
+  max-height: 364px;
 }
 .cover:before {
     @apply w-full;
     @apply rounded-b-none rounded-lg;
-    height: 25vw;
+    height: 20vw;
+    max-height: 364px;
     content: ' ';
     display: block;
     background-image: url(/images/placeholders/729x164.png);
-    background-size: contain;
+    background-size: contain;    
     text-indent: -9999px;
 }
 
