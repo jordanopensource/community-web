@@ -233,10 +233,23 @@ img {
   @apply ml-5 md:ml-10;
   margin-top: -6.5rem;
 }
+.avatar:before {
+  @apply w-36 h-36;
+  @apply rounded-lg;
+  content: ' ';
+  display: block;
+  background-image: url(/images/placeholders/avatar.png);
+  background-size: contain;
+  text-indent: -9999px;
+}
 
 @media (min-width: 1024px) {
   .avatar {
     @apply -mt-40;
+    width: 200px;
+    height: 200px;
+  }
+  .avatar:before {
     width: 200px;
     height: 200px;
   }
@@ -248,12 +261,26 @@ img {
     width: 72px;
     height: 72px;
   }
+  .avatar:before {
+    width: 72px;
+    height: 72px;
+  }
 }
 
 .cover {
   @apply w-full;
   @apply rounded-b-none;
   height: 25%;
+}
+.cover:before {
+    @apply w-full;
+    @apply rounded-b-none rounded-lg;
+    height: 25vw;
+    content: ' ';
+    display: block;
+    background-image: url(/images/placeholders/729x164.png);
+    background-size: contain;
+    text-indent: -9999px;
 }
 
 .general-info {
