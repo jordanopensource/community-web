@@ -107,7 +107,7 @@
           </label>
           <FormAppControlInput
             inputType="checkbox"
-            v-model:value="state.form.workExperience.currently_working"
+            @checkbox-changed="state.form.workExperience.currently_working = $event"
             labelId="currently-working-add"
             class="mt-2"
           >
@@ -167,7 +167,7 @@
           </label>
           <FormAppControlInput
             inputType="checkbox"
-            v-model:value="state.form.workExperience.currently_working"
+            @checkbox-changed="state.form.workExperience.currently_working = $event"
             labelId="currently-working-edit"
             class="mt-2"
           >
@@ -266,7 +266,7 @@
           <label class="block"><b>Graduation Date</b></label>
           <FormAppControlInput
             inputType="checkbox"
-            v-model:value="state.form.education.still_studying"
+            @checkbox-changed="state.form.education.still_studying = $event"
             labelId="currently-studying-add"
           >
             I'm still studying
@@ -310,7 +310,7 @@
           <label class="block"><b>Graduation Date</b></label>
           <FormAppControlInput
             inputType="checkbox"
-            v-model:value="state.form.education.still_studying"
+            @checkbox-changed="state.form.education.still_studying = $event"
             labelId="currently-studying-edit"
           >
             I'm still studying
