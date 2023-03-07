@@ -42,6 +42,9 @@
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
+definePageMeta({
+  middleware: ['register'],
+})
 const config = useRuntimeConfig()
 const step = ref(1)
 let formData = reactive({})

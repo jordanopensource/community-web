@@ -26,7 +26,11 @@
           </p>
         </div>
 
-        <NuxtLink class="button-flat button-blue-full" to="/register">
+        <NuxtLink
+          v-if="!useAuth().value"
+          class="button-flat button-blue-full"
+          to="/register"
+        >
           Become a JOSA member &rarr;
         </NuxtLink>
         <!-- <p class="sub-heading">
