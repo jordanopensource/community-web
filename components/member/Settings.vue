@@ -37,7 +37,7 @@
         <FormAppControlInput
           inputType="checkbox"
           labelId="show-github"
-          v-model:value="form.settings.hideGithubContributions"
+          @checkbox-changed="form.settings.hideGithubContributions = $event"
           :isChecked="form.settings.hideGithubContributions"
         >
           <b>Hide contributions from Github on my profile</b>
@@ -55,7 +55,7 @@
           <FormAppControlInput
             inputType="checkbox"
             labelId="show-wikimedia"
-            v-model:value="form.settings.hideWikimediaContributions"
+            @checkbox-changed="form.settings.hideWikimediaContributions = $event"
             :isChecked="form.settings.hideWikimediaContributions"
           >
             <b>Hide contributions from Wikimedia on my profile</b>

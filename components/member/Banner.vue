@@ -12,7 +12,9 @@
       />
       <div class="absolute top-4 right-5">
         <div v-if="memberAuth">
+          <div v-if="state.images.cover.uploading" class="loader"></div>
           <FormAppControlInput
+            v-else
             v-model:value="state.file"
             inputType="file"
             :editIcon="true"
@@ -33,7 +35,9 @@
         />
         <div v-if="memberAuth" class="relative">
           <div class="absolute -top-36 -left-12">
+            <div v-if="state.images.avatar.uploading" class="loader"></div>
             <FormAppControlInput
+              v-else
               v-model:value="state.file"
               inputType="file"
               :editIcon="true"
@@ -141,8 +145,16 @@ const state = reactive({
     memberCity: props.member.location?.split(',')[0],
     memberCountry: props.member.location?.split(',')[1],
   },
-  cover_url: props.member.cover_url,
-  avatar_url: props.member.avatar_url,
+  images: {
+    cover: {
+      url: props.member.cover_url,
+      uploading: false
+    },
+    avatar: {
+      url: props.member.avatar_url,
+      uploading: false
+    },
+  }
 })
 
 // placeholder images for when there are no images
@@ -154,9 +166,8 @@ const placeHolderImages = {
 
 // handle uploading of the cover/avatar photo request
 const uploadImage = async (event, imageType) => {
-  console.log('type: ', imageType)
+  state.images[imageType].uploading = true
   const { files } = await event.target
-  console.log(`List of Files: `, files)
   const image = new FormData()
   image.append('file', files[0], files[0].name)
   await fetch(
@@ -173,8 +184,8 @@ const uploadImage = async (event, imageType) => {
       if (parsedData.success) {
         const { cover_url, avatar_url } = parsedData.data
         // update the state with the values
-        state.cover_url = cover_url ? cover_url : props.member.cover_url
-        state.avatar_url = avatar_url ? avatar_url : props.member.avatar_url
+        state.images.cover.url = cover_url ? cover_url : props.member.cover_url
+        state.images.avatar.url = avatar_url ? avatar_url : props.member.avatar_url
       }
     })
     .finally(() => {
@@ -188,8 +199,8 @@ const updateGeneralInfo = async (event) => {
     headline: state.form.memberHeadline,
     location: `${state.form.memberCity}, ${state.form.memberCountry}`,
     phone: state.form.memberPhone,
-    cover_url: state.cover_url,
-    avatar_url: state.avatar_url,
+    cover_url: state.images.cover.url,
+    avatar_url: state.images.avatar.url,
   }
 
   await $fetch(`/api/member/update/info`, {
@@ -208,6 +219,9 @@ const updateGeneralInfo = async (event) => {
     },
   })
   showUpdateInfoForm.value = !showUpdateInfoForm
+  state.file = null
+  state.images.cover.uploading = false
+  state.images.avatar.uploading = false
 }
 </script>
 
@@ -233,10 +247,23 @@ img {
   @apply ml-5 md:ml-10;
   margin-top: -6.5rem;
 }
+.avatar:before {
+  @apply w-36 h-36;
+  @apply rounded-lg;
+  content: ' ';
+  display: block;
+  background-image: url(/images/placeholders/avatar.png);
+  background-size: contain;
+  text-indent: -9999px;
+}
 
 @media (min-width: 1024px) {
   .avatar {
     @apply -mt-40;
+    width: 200px;
+    height: 200px;
+  }
+  .avatar:before {
     width: 200px;
     height: 200px;
   }
@@ -248,12 +275,28 @@ img {
     width: 72px;
     height: 72px;
   }
+  .avatar:before {
+    width: 72px;
+    height: 72px;
+  }
 }
 
 .cover {
   @apply w-full;
   @apply rounded-b-none;
-  height: 25%;
+  height: 20vw;
+  max-height: 364px;
+}
+.cover:before {
+    @apply w-full;
+    @apply rounded-b-none rounded-lg;
+    height: 20vw;
+    max-height: 364px;
+    content: ' ';
+    display: block;
+    background-image: url(/images/placeholders/729x164.png);
+    background-size: contain;    
+    text-indent: -9999px;
 }
 
 .general-info {
