@@ -13,15 +13,17 @@
             <MemberCard :member="state.memberData.member" />
           </div>
           <MemberDetails
-            v-if="!(state.memberData.settings.hideAbout && !isUserLogged)"
+            v-if="state.memberData.member.about || isUserLogged"
             :member="state.memberData.member"
             :settings="state.memberData.settings"
             :memberAuth="isUserLogged"
             @updateMember="() => refresh()"
           />
           <MemberExperience
-            v-if="(state.memberData.experience.length || state.memberData.education.length)
-             && !(state.memberData.settings.hideExperienceAndEducation && !isUserLogged)"
+            v-if="
+              (state.memberData.experience.length || state.memberData.education.length) ||
+              isUserLogged
+            "
             :experience="state.memberData.experience"
             :education="state.memberData.education"
             :memberAuth="isUserLogged"
@@ -29,6 +31,12 @@
             @updateMember="() => refresh()"
           />
           <MemberContribution
+            v-if="
+              state.memberData.contributions.length ||
+              state.memberData.open_source_contributions.github_contributions.length ||
+              Object.keys(state.memberData.open_source_contributions.wikimedia_contributions).length ||
+              isUserLogged
+            "
             :contributions="state.memberData.contributions"
             :opensource-contributions="state.memberData.open_source_contributions"
             :settings="state.memberData.settings"
@@ -48,7 +56,6 @@
 definePageMeta({
   middleware: 'auth',
 })
-const config = useRuntimeConfig()
 const route = useRoute()
 const user_id = route.params.id
 const isUserLogged = route.params.id === userId().value
@@ -56,7 +63,7 @@ const {
   data: memberData,
   pending: pendingMember,
   refresh,
-} = await useLazyFetch(`${config.public.COMMUNITY_API_URL}/member/${user_id}`)
+} = await useLazyFetch(`/api/member/?id=${user_id}`)
 
 const state = reactive({
   memberData: memberData 
