@@ -48,7 +48,6 @@
 definePageMeta({
   middleware: 'auth',
 })
-const config = useRuntimeConfig()
 const route = useRoute()
 const user_id = route.params.id
 const isUserLogged = route.params.id === userId().value
@@ -56,7 +55,7 @@ const {
   data: memberData,
   pending: pendingMember,
   refresh,
-} = await useLazyFetch(`${config.public.COMMUNITY_API_URL}/member/${user_id}`)
+} = await useLazyFetch(`/api/member/?id=${user_id}`)
 
 const state = reactive({
   memberData: memberData 

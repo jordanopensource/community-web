@@ -15,7 +15,7 @@ definePageMeta({
   middleware: 'auth',
 })
 const config = useRuntimeConfig()
-const url = `${config.public.COMMUNITY_API_URL}/member/${userId().value}`
+const url = `/api/member/?id=${userId().value}`
 const { data:memberData, pending, refresh:refreshMember } = await useFetch(url)
 onMounted(() => {
   refreshMember()
