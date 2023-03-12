@@ -187,8 +187,8 @@ const uploadImage = async (event, imageType) => {
         // the 'last-updated' query is to prevent the browser from
         // using the cached image whenever a new one is available.
         // This is because the name of the images is based on the userId.
-        state.images.cover.url = cover_url ? cover_url + '?last-updated=' + new Date() : props.member.cover_url
-        state.images.avatar.url = avatar_url ? avatar_url + '?last-updated=' + new Date() : props.member.avatar_url
+        state.images.cover.url = cover_url ? cover_url + '?last-updated=' + Date.now() : props.member.cover_url
+        state.images.avatar.url = avatar_url ? avatar_url + '?last-updated=' + Date.now() : props.member.avatar_url
       }
     })
     .finally(() => {
