@@ -183,9 +183,12 @@ const uploadImage = async (event, imageType) => {
     .then((parsedData) => {
       if (parsedData.success) {
         const { cover_url, avatar_url } = parsedData.data
-        // update the state with the values
-        state.images.cover.url = cover_url ? `${cover_url}?t=${new Date()}` : props.member.cover_url
-        state.images.avatar.url = avatar_url ? `${avatar_url}?t=${+ new Date()}` : props.member.avatar_url
+        // update the state with the avatar and cover images values (if exist)
+        // the 'last-updated' query is to prevent the browser from
+        // using the cached image whenever a new one is available.
+        // This is because the name of the images is based on the userId.
+        state.images.cover.url = cover_url ? `${cover_url}?last-updated=${new Date()}` : props.member.cover_url
+        state.images.avatar.url = avatar_url ? `${avatar_url}?last-updated=${new Date()}` : props.member.avatar_url
       }
     })
     .finally(() => {
