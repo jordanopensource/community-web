@@ -33,7 +33,7 @@ RUN npm run build
 ###########
 # PROJECT #
 ###########
-FROM node:16-slim
+FROM node:18-slim
 
 # pass the global args
 ARG COMMUNITY_API_URL
