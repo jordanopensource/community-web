@@ -57,6 +57,7 @@
 </template>
 <script setup>
 const emit = defineEmits(['forgotPassword'])
+const route = useRoute()
 
 const state = reactive({
   loading: false,
@@ -66,7 +67,9 @@ const state = reactive({
 const form = reactive({
   email: '',
 })
-
+if (route.query.email) {
+  form.email = route.query.email
+}
 const sendEmail = async () => {
   state.loading = true
   await $fetch.raw('/api/forgot-password/send-email', {
