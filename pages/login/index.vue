@@ -17,8 +17,12 @@
 definePageMeta({
   middleware: ['login-page'],
 })
+const route = useRoute()
 
 const state = reactive({
   forgotPassword: false,
 })
+if (route.query.forgot) {
+  state.forgotPassword = true
+}
 </script>
