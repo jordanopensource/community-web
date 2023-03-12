@@ -184,8 +184,8 @@ const uploadImage = async (event, imageType) => {
       if (parsedData.success) {
         const { cover_url, avatar_url } = parsedData.data
         // update the state with the values
-        state.images.cover.url = cover_url ? cover_url : props.member.cover_url
-        state.images.avatar.url = avatar_url ? avatar_url : props.member.avatar_url
+        state.images.cover.url = cover_url ? `${cover_url}?t=${new Date()}` : props.member.cover_url
+        state.images.avatar.url = avatar_url ? `${avatar_url}?t=${+ new Date()}` : props.member.avatar_url
       }
     })
     .finally(() => {
