@@ -17,7 +17,7 @@ steps:
       repo: josaorg/community-web
       build_args:
         [
-          COMMUNITY_API_URL=https://community.api.dev.josa.ngo/v2,
+          COMMUNITY_API_URL=https://community.api.josa.dev/v2,
           TARGET_ENV=development,
           SESSION_COOKIE_NAME=connect.sid
         ]
