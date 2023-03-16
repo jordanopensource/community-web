@@ -239,7 +239,7 @@ const updateGeneralInfo = async (event) => {
 }
 
 img {
-  @apply rounded-lg;
+  @apply rounded-lg object-cover;
 }
 
 .placeholder {
