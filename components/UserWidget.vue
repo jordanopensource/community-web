@@ -11,6 +11,7 @@
       "
     />
     <div v-if="state.isOpen" class="user-menu">
+      <div class="widget-arrow"></div>
       <p class="user-name">
         {{ state.member.first_name_en }} {{ state.member.last_name_en }}
       </p>
@@ -27,16 +28,21 @@
         </p>
       </div>
       <div class="divider-dotted"></div>
-      <NuxtLink
+      <div
         v-for="link, index in widget.links"
         :key="index"
-        :to="link.to"
-        @click="link.onClick"
-        class="nav-link"
       >
-        <div class="menu-icon" :class="link.icon"></div>
-        <div class="inline">{{link.title}}</div>
-      </NuxtLink>
+        <!-- A dotted line before Sign Out button -->
+        <div v-if="index === 2" class="divider-dotted"></div>
+        <NuxtLink
+          :to="link.to"
+          @click="link.onClick"
+          class="nav-link"
+        >
+          <div class="menu-icon" :class="link.icon"></div>
+          <div class="inline">{{link.title}}</div>
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -106,6 +112,10 @@ onMounted(() => {
   @apply absolute w-52 flex flex-col rounded z-10;
   @apply mt-12 p-4;
   @apply bg-community-white text-community-black-darker;
+  .widget-arrow {
+    @apply w-4 h-4 bg-community-white rotate-45 -mt-5;
+    margin-left: 10.2rem;
+  }
 }
 .user-name {
   @apply text-lg;
