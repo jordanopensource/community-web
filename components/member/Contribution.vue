@@ -145,27 +145,30 @@ const state = reactive({
     !props.settings.hideWikimediaContributions,
 })
 
-const wikimediaEdits = props.opensourceContributions.wikimedia_contributions
-if (Object.keys(wikimediaEdits).length) {
-  state.wikimediaContributions = [
-    {
-      name: 'ar.wikipedia.org',
-      edits: wikimediaEdits.editcount['ar.wikipedia.org'],
-    },
-    {
-      name: 'en.wikipedia.org',
-      edits: wikimediaEdits.editcount['en.wikipedia.org'],
-    },
-    {
-      name: 'wikidata.org',
-      edits: wikimediaEdits.editcount['wikidata.org'],
-    },
-    {
-      name: 'commons.wikimedia.org',
-      edits: wikimediaEdits.editcount['commons.wikimedia.org'],
-    },
-  ]
-}
+watchEffect(() => {
+  const wikimediaEdits = props.opensourceContributions.wikimedia_contributions
+  if (Object.keys(wikimediaEdits).length) {
+    state.wikimediaContributions = [
+      {
+        name: 'ar.wikipedia.org',
+        edits: wikimediaEdits.editcount['ar.wikipedia.org'],
+      },
+      {
+        name: 'en.wikipedia.org',
+        edits: wikimediaEdits.editcount['en.wikipedia.org'],
+      },
+      {
+        name: 'wikidata.org',
+        edits: wikimediaEdits.editcount['wikidata.org'],
+      },
+      {
+        name: 'commons.wikimedia.org',
+        edits: wikimediaEdits.editcount['commons.wikimedia.org'],
+      },
+    ]
+  }
+})
+
 const showMore = () => {
   state.isShowMore = !state.isShowMore
   if (
