@@ -68,7 +68,8 @@ const login = async() => {
     onResponse({response}) {
       if(response.ok) {
         state.loading = false
-        localStorage.setItem("member", JSON.stringify(response._data))
+        const {first_name_en, last_name_en, id, avatar_url, type, josa_member_id} = response._data
+        useMember().value = {first_name_en, last_name_en, id, avatar_url, type, josa_member_id}
         useAuth().value = true
         userId().value = response._data.id
         navigateTo('/')

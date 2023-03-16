@@ -189,6 +189,7 @@ const uploadImage = async (event, imageType) => {
         // This is because the name of the images is based on the userId.
         state.images.cover.url = cover_url ? cover_url + '?last-updated=' + Date.now() : props.member.cover_url
         state.images.avatar.url = avatar_url ? avatar_url + '?last-updated=' + Date.now() : props.member.avatar_url
+        useMember().value[`${imageType}_url`] = state.images[imageType].url
       }
     })
     .finally(() => {
