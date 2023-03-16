@@ -1,17 +1,17 @@
 <template>
   <div id="banner" class="details-container">
     <div class="relative">
-      <img
-        class="cover"
-        alt="cover"
-        :src="
-          props.member.cover_url
-            ? props.member.cover_url
-            : placeHolderImages.cover
-        "
-      />
-      <div class="absolute top-4 right-5">
-        <div v-if="memberAuth">
+      <div class="relative">
+        <img
+          class="cover"
+          alt="cover"
+          :src="
+            props.member.cover_url
+              ? props.member.cover_url
+              : placeHolderImages.cover
+          "
+        />
+        <div v-if="memberAuth" class="file-upload-cover">
           <div v-if="state.images.cover.uploading" class="loader"></div>
           <FormAppControlInput
             v-else
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="invisible-white-space"></div>
-      <div id="avatar-info-container" class="flex flex-row relative gap-x-7">
+      <div id="avatar-info-container" class="relative">
         <img
           class="avatar"
           alt="avatar"
@@ -34,18 +34,16 @@
               : placeHolderImages.avatar
           "
         />
-        <div v-if="memberAuth" class="relative">
-          <div class="absolute -top-36 -left-12">
-            <div v-if="state.images.avatar.uploading" class="loader"></div>
-            <FormAppControlInput
-              v-else
-              v-model:value="state.file"
-              inputType="file"
-              acceptedFiles="image/*"
-              :editIcon="true"
-              @change="uploadImage($event, 'avatar')"
-            />
-          </div>
+        <div v-if="memberAuth" class="file-upload-avatar">
+          <div v-if="state.images.avatar.uploading" class="loader"></div>
+          <FormAppControlInput
+            v-else
+            v-model:value="state.file"
+            inputType="file"
+            acceptedFiles="image/*"
+            :editIcon="true"
+            @change="uploadImage($event, 'avatar')"
+          />
         </div>
       </div>
       <div class="general-info">
@@ -110,15 +108,9 @@
         <div
           v-if="memberAuth"
           @click="() => (showUpdateInfoForm = !showUpdateInfoForm)"
-        >
-          <img
-            v-if="!showUpdateInfoForm"
-            src="/icons/edit.svg"
-            alt=""
-            class="cursor-pointer"
-          />
-          <img v-else src="/icons/x.svg" alt="" class="cursor-pointer" />
-        </div>
+          class="cursor-pointer bg-contain w-4 h-4 bg-no-repeat"
+          :class="showUpdateInfoForm ? 'bg-xIcon' : 'bg-editIcon'"
+        ></div>
       </div>
     </div>
   </div>
@@ -262,8 +254,18 @@ img {
   background-size: contain;
   text-indent: -9999px;
 }
-
+.file-upload-cover {
+  @apply absolute top-1 right-2;
+}
+.file-upload-avatar {
+  @apply absolute top-0;
+  left: 9rem;
+}
 @media (min-width: 1024px) {
+  .file-upload-avatar {
+    @apply absolute top-0;
+    left: 13rem;
+  }
   .avatar {
     @apply -mt-40;
     width: 200px;
@@ -276,6 +278,15 @@ img {
 }
 
 @media (max-width: 640px) {
+  .file-upload-avatar {
+    @apply absolute -top-1;
+    left: 4.4rem;
+  }
+  .file-upload-cover {
+    @apply absolute;
+    top: 0;
+    right: 0.3rem;
+  }
   .avatar {
     margin-top: -3.2rem;
     width: 72px;
