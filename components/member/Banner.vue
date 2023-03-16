@@ -17,6 +17,7 @@
             v-else
             v-model:value="state.file"
             inputType="file"
+            acceptedFiles="image/*"
             :editIcon="true"
             @change="uploadImage($event, 'cover')"
           />
@@ -40,6 +41,7 @@
               v-else
               v-model:value="state.file"
               inputType="file"
+              acceptedFiles="image/*"
               :editIcon="true"
               @change="uploadImage($event, 'avatar')"
             />

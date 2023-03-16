@@ -66,6 +66,7 @@
           :class="props.editIcon ? 'input-file-edit-icon' : ''"
           @focusin="state.pwActive = true"
           @focusout="state.pwActive = false"
+          :accept="props.acceptedFiles"
         />
       </div>
       <textarea
@@ -95,6 +96,7 @@ const props = defineProps({
   value: { default: '' },
   width: { type: String, default: '' },
   labelId: { type: String, default: '' },
+  acceptedFiles: {type: String, default: ''}
 })
 
 const state = reactive({
