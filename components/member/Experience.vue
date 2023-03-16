@@ -15,7 +15,11 @@
         <div
           v-if="memberAuth"
           @click="
-            () => (showAddWorkExperienceForm = !showAddWorkExperienceForm)
+            () => {
+              showAddWorkExperienceForm = true
+              showUpdateWorkExperienceForm = false
+              state.form.workExperience = { ...defaultWorkExperience }
+            }
           "
         >
           <img
@@ -64,6 +68,7 @@
                 @click="
                   () => {
                     showUpdateWorkExperienceForm = true
+                    showAddWorkExperienceForm = false
                     state.form.workExperience = { ...experience }
                   }
                 "
@@ -173,6 +178,7 @@
             @checkbox-changed="
               state.form.workExperience.currently_working = $event
             "
+            :isChecked="state.form.workExperience.end_date ? false : true"
             labelId="currently-working-edit"
             class="mt-2"
           >
@@ -201,7 +207,13 @@
         <h3 class="heading">Education</h3>
         <div
           v-if="memberAuth"
-          @click="() => (showAddEducationForm = !showAddEducationForm)"
+          @click="
+            () => {
+              showAddEducationForm = true
+              showUpdateEducationForm = false
+              state.form.education = { ...defaultEducation }
+            }
+          "
         >
           <img
             v-if="!showAddEducationForm"
@@ -248,6 +260,7 @@
                 @click="
                   () => {
                     showUpdateEducationForm = true
+                    showAddEducationForm = false
                     state.form.education = { ...education }
                   }
                 "
@@ -321,6 +334,7 @@
           <FormAppControlInput
             inputType="checkbox"
             @checkbox-changed="state.form.education.still_studying = $event"
+            :isChecked="state.form.education.graduated ? false : true"
             labelId="currently-studying-edit"
           >
             I'm still studying
@@ -373,6 +387,23 @@ const props = defineProps({
     default: {},
   },
 })
+
+const defaultWorkExperience = {
+  company_name: '',
+  position: '',
+  start_date: '',
+  currently_working: false,
+  end_date: null,
+  id: '',
+}
+
+const defaultEducation = {
+  institution_name: '',
+  degree: '',
+  still_studying: false,
+  graduated: '',
+  id: '',
+}
 
 const state = reactive({
   form: {
