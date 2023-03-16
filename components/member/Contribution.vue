@@ -50,7 +50,18 @@
           />
           <div class="w-full flex flex-col md:flex-row">
             <div>
-              <h4 class="title">{{ item.name }}</h4>
+              <a
+                :href="
+                  'https://' +
+                  item.name +
+                  '/wiki/user:' +
+                  props.wikiMediaUserName
+                "
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h4 class="title">{{ item.name }}</h4>
+              </a>
               <h5 class="sub-title">{{ item.edits }} contributions</h5>
             </div>
           </div>
@@ -80,7 +91,7 @@
             </div>
           </div>
         </li>
-        <FormAppButton @click="showMore">
+        <FormAppButton v-if="showMoreButton" @click="showMore">
           Show {{ state.isShowMore ? 'more' : 'less' }}
         </FormAppButton>
       </ul>
@@ -101,11 +112,26 @@ const props = defineProps({
     type: Object,
     default: {},
   },
+  githubUserName: {
+    type: String,
+    default: '',
+  },
+  wikiMediaUserName: {
+    type: String,
+    default: '',
+  },
 })
 
 const contributionsSorted = props.contributions.sort(
   (a, b) => new Date(b.end_date) > new Date(a.end_date)
 )
+
+const showMoreButton = computed(() => {
+  const total =
+    state.wikimediaContributions?.length +
+    props.opensourceContributions.github_contributions.length
+  return total > 7 ? true : false
+})
 
 const state = reactive({
   wikimediaContributions: [],
@@ -119,27 +145,30 @@ const state = reactive({
     !props.settings.hideWikimediaContributions,
 })
 
-const wikimediaEdits = props.opensourceContributions.wikimedia_contributions
-if (Object.keys(wikimediaEdits).length) {
-  state.wikimediaContributions = [
-    {
-      name: 'ar.wikipedia.org',
-      edits: wikimediaEdits.editcount['ar.wikipedia.org'],
-    },
-    {
-      name: 'en.wikipedia.org',
-      edits: wikimediaEdits.editcount['en.wikipedia.org'],
-    },
-    {
-      name: 'wikidata.org',
-      edits: wikimediaEdits.editcount['wikidata.org'],
-    },
-    {
-      name: 'commons.wikimedia.org',
-      edits: wikimediaEdits.editcount['commons.wikimedia.org'],
-    },
-  ]
-}
+watchEffect(() => {
+  const wikimediaEdits = props.opensourceContributions.wikimedia_contributions
+  if (Object.keys(wikimediaEdits).length) {
+    state.wikimediaContributions = [
+      {
+        name: 'ar.wikipedia.org',
+        edits: wikimediaEdits.editcount['ar.wikipedia.org'],
+      },
+      {
+        name: 'en.wikipedia.org',
+        edits: wikimediaEdits.editcount['en.wikipedia.org'],
+      },
+      {
+        name: 'wikidata.org',
+        edits: wikimediaEdits.editcount['wikidata.org'],
+      },
+      {
+        name: 'commons.wikimedia.org',
+        edits: wikimediaEdits.editcount['commons.wikimedia.org'],
+      },
+    ]
+  }
+})
+
 const showMore = () => {
   state.isShowMore = !state.isShowMore
   if (

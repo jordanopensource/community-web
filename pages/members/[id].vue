@@ -21,7 +21,8 @@
           />
           <MemberExperience
             v-if="
-              (state.memberData.experience.length || state.memberData.education.length) ||
+              state.memberData.experience.length ||
+              state.memberData.education.length ||
               isUserLogged
             "
             :experience="state.memberData.experience"
@@ -33,13 +34,21 @@
           <MemberContribution
             v-if="
               state.memberData.contributions.length ||
-              state.memberData.open_source_contributions.github_contributions.length ||
-              Object.keys(state.memberData.open_source_contributions.wikimedia_contributions).length ||
+              state.memberData.open_source_contributions.github_contributions
+                .length ||
+              Object.keys(
+                state.memberData.open_source_contributions
+                  .wikimedia_contributions
+              ).length ||
               isUserLogged
             "
             :contributions="state.memberData.contributions"
-            :opensource-contributions="state.memberData.open_source_contributions"
+            :opensource-contributions="
+              state.memberData.open_source_contributions
+            "
             :settings="state.memberData.settings"
+            :githubUserName="state.memberData.member.github_user"
+            :wikiMediaUserName="state.memberData.member.wikimedia_user"
           />
         </div>
         <div class="hidden lg:block">
@@ -66,10 +75,10 @@ const {
 } = await useLazyFetch(`/api/member/?id=${user_id}`)
 
 const state = reactive({
-  memberData: memberData 
+  memberData: memberData,
 })
 
-watch(memberData, (newMemberData) => { 
+watch(memberData, (newMemberData) => {
   state.memberData = newMemberData
 })
 onMounted(() => {
