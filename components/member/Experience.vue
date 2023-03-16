@@ -76,7 +76,10 @@
       </ul>
       <!-- Add Work Experience Form -->
       <div v-if="showAddWorkExperienceForm">
-        <form @submit.prevent="addMemberWorkExperience">
+        <form
+          @submit.prevent="addMemberWorkExperience"
+          class="border px-16 py-8"
+        >
           <FormAppControlInput
             v-model:value="state.form.workExperience.company_name"
             isRequired
@@ -128,15 +131,18 @@
       </div>
       <!-- Update Work Experience Form -->
       <div v-if="showUpdateWorkExperienceForm">
-        <div class="flex justify-end w-full">
-          <img
-            src="/icons/x.svg"
-            alt=""
-            class="cursor-pointer"
-            @click="() => (showUpdateWorkExperienceForm = false)"
-          />
-        </div>
-        <form @submit.prevent="updateMemberWorkExperience">
+        <form
+          @submit.prevent="updateMemberWorkExperience"
+          class="border px-16 py-8"
+        >
+          <div class="flex justify-end w-full">
+            <img
+              src="/icons/x.svg"
+              alt=""
+              class="cursor-pointer"
+              @click="() => (showUpdateWorkExperienceForm = false)"
+            />
+          </div>
           <FormAppControlInput
             v-model:value="state.form.workExperience.company_name"
             :value="state.form.workExperience.company_name"
@@ -254,7 +260,7 @@
       </ul>
       <!-- Add Education Form -->
       <div v-if="showAddEducationForm">
-        <form @submit.prevent="addMemberEducation">
+        <form @submit.prevent="addMemberEducation" class="border px-16 py-8">
           <FormAppControlInput
             v-model:value="state.form.education.institution_name"
             isRequired
@@ -288,15 +294,15 @@
       </div>
       <!-- Update Education Form -->
       <div v-if="showUpdateEducationForm">
-        <div class="flex justify-end w-full">
-          <img
-            src="/icons/x.svg"
-            alt=""
-            class="cursor-pointer flex"
-            @click="() => (showUpdateEducationForm = false)"
-          />
-        </div>
-        <form @submit.prevent="updateMemberEducation">
+        <form @submit.prevent="updateMemberEducation" class="border px-16 py-8">
+          <div class="flex justify-end w-full">
+            <img
+              src="/icons/x.svg"
+              alt=""
+              class="cursor-pointer flex"
+              @click="() => (showUpdateEducationForm = false)"
+            />
+          </div>
           <FormAppControlInput
             v-model:value="state.form.education.institution_name"
             :value="state.form.education.institution_name"
