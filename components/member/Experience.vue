@@ -15,7 +15,11 @@
         <div
           v-if="memberAuth"
           @click="
-            () => (showAddWorkExperienceForm = !showAddWorkExperienceForm)
+            () => {
+              showAddWorkExperienceForm = true
+              showUpdateWorkExperienceForm = false
+              state.form.workExperience = { ...defaultWorkExperience }
+            }
           "
         >
           <img
@@ -39,7 +43,7 @@
               <h5 class="sub-title">{{ experience.position }}</h5>
             </div>
             <p class="date-container">
-              {{ formatDate(experience.start_date) }} -
+              {{ formatDate(experience.start_date) }} &ndash;
               {{
                 experience.end_date
                   ? formatDate(experience.end_date)
@@ -64,6 +68,7 @@
                 @click="
                   () => {
                     showUpdateWorkExperienceForm = true
+                    showAddWorkExperienceForm = false
                     state.form.workExperience = { ...experience }
                   }
                 "
@@ -76,7 +81,10 @@
       </ul>
       <!-- Add Work Experience Form -->
       <div v-if="showAddWorkExperienceForm">
-        <form @submit.prevent="addMemberWorkExperience">
+        <form
+          @submit.prevent="addMemberWorkExperience"
+          class="border px-16 py-8"
+        >
           <FormAppControlInput
             v-model:value="state.form.workExperience.company_name"
             isRequired
@@ -128,15 +136,18 @@
       </div>
       <!-- Update Work Experience Form -->
       <div v-if="showUpdateWorkExperienceForm">
-        <div class="flex justify-end w-full">
-          <img
-            src="/icons/x.svg"
-            alt=""
-            class="cursor-pointer"
-            @click="() => (showUpdateWorkExperienceForm = false)"
-          />
-        </div>
-        <form @submit.prevent="updateMemberWorkExperience">
+        <form
+          @submit.prevent="updateMemberWorkExperience"
+          class="border px-16 py-8"
+        >
+          <div class="flex justify-end w-full">
+            <img
+              src="/icons/x.svg"
+              alt=""
+              class="cursor-pointer"
+              @click="() => (showUpdateWorkExperienceForm = false)"
+            />
+          </div>
           <FormAppControlInput
             v-model:value="state.form.workExperience.company_name"
             :value="state.form.workExperience.company_name"
@@ -167,6 +178,7 @@
             @checkbox-changed="
               state.form.workExperience.currently_working = $event
             "
+            :isChecked="state.form.workExperience.end_date ? false : true"
             labelId="currently-working-edit"
             class="mt-2"
           >
@@ -195,7 +207,13 @@
         <h3 class="heading">Education</h3>
         <div
           v-if="memberAuth"
-          @click="() => (showAddEducationForm = !showAddEducationForm)"
+          @click="
+            () => {
+              showAddEducationForm = true
+              showUpdateEducationForm = false
+              state.form.education = { ...defaultEducation }
+            }
+          "
         >
           <img
             v-if="!showAddEducationForm"
@@ -242,6 +260,7 @@
                 @click="
                   () => {
                     showUpdateEducationForm = true
+                    showAddEducationForm = false
                     state.form.education = { ...education }
                   }
                 "
@@ -254,7 +273,7 @@
       </ul>
       <!-- Add Education Form -->
       <div v-if="showAddEducationForm">
-        <form @submit.prevent="addMemberEducation">
+        <form @submit.prevent="addMemberEducation" class="border px-16 py-8">
           <FormAppControlInput
             v-model:value="state.form.education.institution_name"
             isRequired
@@ -288,15 +307,15 @@
       </div>
       <!-- Update Education Form -->
       <div v-if="showUpdateEducationForm">
-        <div class="flex justify-end w-full">
-          <img
-            src="/icons/x.svg"
-            alt=""
-            class="cursor-pointer flex"
-            @click="() => (showUpdateEducationForm = false)"
-          />
-        </div>
-        <form @submit.prevent="updateMemberEducation">
+        <form @submit.prevent="updateMemberEducation" class="border px-16 py-8">
+          <div class="flex justify-end w-full">
+            <img
+              src="/icons/x.svg"
+              alt=""
+              class="cursor-pointer flex"
+              @click="() => (showUpdateEducationForm = false)"
+            />
+          </div>
           <FormAppControlInput
             v-model:value="state.form.education.institution_name"
             :value="state.form.education.institution_name"
@@ -315,6 +334,7 @@
           <FormAppControlInput
             inputType="checkbox"
             @checkbox-changed="state.form.education.still_studying = $event"
+            :isChecked="state.form.education.graduated ? false : true"
             labelId="currently-studying-edit"
           >
             I'm still studying
@@ -367,6 +387,23 @@ const props = defineProps({
     default: {},
   },
 })
+
+const defaultWorkExperience = {
+  company_name: '',
+  position: '',
+  start_date: '',
+  currently_working: false,
+  end_date: null,
+  id: '',
+}
+
+const defaultEducation = {
+  institution_name: '',
+  degree: '',
+  still_studying: false,
+  graduated: '',
+  id: '',
+}
 
 const state = reactive({
   form: {
