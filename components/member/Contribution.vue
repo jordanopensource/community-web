@@ -80,7 +80,7 @@
             </div>
           </div>
         </li>
-        <FormAppButton @click="showMore">
+        <FormAppButton v-if="showMoreButton" @click="showMore">
           Show {{ state.isShowMore ? 'more' : 'less' }}
         </FormAppButton>
       </ul>
@@ -106,6 +106,13 @@ const props = defineProps({
 const contributionsSorted = props.contributions.sort(
   (a, b) => new Date(b.end_date) > new Date(a.end_date)
 )
+
+const showMoreButton = computed(() => {
+  const total =
+    state.wikimediaContributions?.length +
+    props.opensourceContributions.github_contributions.length
+  return total > 7 ? true : false
+})
 
 const state = reactive({
   wikimediaContributions: [],
