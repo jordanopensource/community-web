@@ -2,18 +2,11 @@
   <div id="member-detail" class="details-container">
     <div class="flex justify-between w-full">
       <h3 class="heading">About</h3>
-      <div
-        v-if="memberAuth"
-        class="flex flex-col gap-y-4 items-end"
-      >
-      <div class="flex flex-row gap-x-2">
-        <p class="w-full">{{ state.settings.hideAbout ? 'Only Me' : 'Public' }}</p>
-        <img
-          :src="'/icons/' + (state.settings.hideAbout ? 'hide' : 'show') + '.svg'"
-          class="cursor-pointer"
-          @click="updateVisibility"
+      <div v-if="memberAuth" class="flex gap-x-4 items-center">
+        <MemberPermissionDropDown
+          :permissionStatus="state.settings.about"
+          targetSettings="about"
         />
-      </div>
         <div @click="() => (showUpdateAboutForm = !showUpdateAboutForm)">
           <img
             v-if="!showUpdateAboutForm"
@@ -24,7 +17,6 @@
           <img v-else src="/icons/x.svg" alt="" class="cursor-pointer" />
         </div>
       </div>
-      
     </div>
     <div v-if="!showUpdateAboutForm">
       <p class="member-about">
@@ -80,7 +72,7 @@ const state = reactive({
   form: {
     memberAbout: props.member.about,
   },
-  settings: props.settings
+  settings: props.settings,
 })
 
 const formatDate = (date) => {
@@ -114,19 +106,6 @@ const updateMemberDetailsInfo = async (event) => {
     },
   })
   showUpdateAboutForm.value = !showUpdateAboutForm
-}
-
-const updateVisibility = async () => {
-  state.settings.hideAbout = !state.settings.hideAbout
-  await $fetch('/api/member/update/settings', {
-    method: 'PATCH',
-    body: state.settings,
-    onResponse({ response }) {
-      if (response.ok) {
-        emit('updateMember')
-      }
-    }
-  })
 }
 </script>
 <style lang="postcss" scoped>

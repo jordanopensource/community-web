@@ -3,15 +3,16 @@
     <label><slot /></label>
     <div class="dropdown-wrapper">
       <select
-        :name="selectName"
-        :id="selectName"
+        :name="props.selectName"
+        :id="props.selectName"
         class="bg-right-top w-full px-4 py-4 rounded-lg dd-bg-blue"
         @change="$emit('update:value', $event.target.value)"
       >
         <option
-          v-for="(item, index) in listOfItems"
+          v-for="(item, index) in props.listOfItems"
           :key="`item-${index}`"
           :value="item.value"
+          :selected="item.text === props.selectName ? true : false"
         >
           {{ item.text }}
         </option>
@@ -37,11 +38,10 @@ const props = defineProps({
 }
 
 select {
-  background-image: url("icons/arrow.png");
+  background-image: url('/icons/arrow.png');
   background-repeat: no-repeat;
   background-size: 0.9rem;
   appearance: none;
-  background-position-y: center;
-  background-position-x: right 1rem;
+  background-position: 7.75rem center;
 }
 </style>

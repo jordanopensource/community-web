@@ -1,15 +1,10 @@
 <template>
   <div id="member-experience-and-education" class="container details-container">
     <h2 class="text-xl lg:text-2xl">Experience and Education</h2>
-    <div
-      v-if="memberAuth"
-      class="flex flex-row gap-x-2 justify-end"
-    >
-      <p>{{ state.settings.hideExperienceAndEducation ? 'Only Me' : 'Public' }}</p>
-      <img
-        :src="'/icons/' + (state.settings.hideExperienceAndEducation ? 'hide' : 'show') + '.svg'"
-        class="cursor-pointer"
-        @click="updateVisibility"
+    <div v-if="memberAuth" class="flex flex-row gap-x-2 justify-end">
+      <MemberPermissionDropDown
+        :permissionStatus="state.settings.experienceAndEducation"
+        targetSettings="experienceAndEducation"
       />
     </div>
     <div class="divider-slashes"></div>
@@ -107,7 +102,9 @@
           </label>
           <FormAppControlInput
             inputType="checkbox"
-            @checkbox-changed="state.form.workExperience.currently_working = $event"
+            @checkbox-changed="
+              state.form.workExperience.currently_working = $event
+            "
             labelId="currently-working-add"
             class="mt-2"
           >
@@ -167,7 +164,9 @@
           </label>
           <FormAppControlInput
             inputType="checkbox"
-            @checkbox-changed="state.form.workExperience.currently_working = $event"
+            @checkbox-changed="
+              state.form.workExperience.currently_working = $event
+            "
             labelId="currently-working-edit"
             class="mt-2"
           >
@@ -185,7 +184,7 @@
                 state.form.workExperience.start_date.month
               )
             "
-            />
+          />
           <FormAppButton class="mt-4"> Update </FormAppButton>
         </form>
       </div>
@@ -219,9 +218,11 @@
               <h5 class="sub-title">{{ education.degree }}</h5>
             </div>
             <p class="date-container">
-              {{  education.graduated
+              {{
+                education.graduated
                   ? formatDate(education.graduated)
-                  : 'Current'}}
+                  : 'Current'
+              }}
             </p>
             <div class="flex justify-end mt-4 md:mt-0">
               <!-- Delete Education Form Button -->
@@ -260,7 +261,10 @@
           >
             <b>Institution Name</b>
           </FormAppControlInput>
-          <FormAppControlInput v-model:value="state.form.education.degree" isRequired>
+          <FormAppControlInput
+            v-model:value="state.form.education.degree"
+            isRequired
+          >
             <b>Degree</b>
           </FormAppControlInput>
           <label class="block"><b>Graduation Date</b></label>
@@ -278,7 +282,7 @@
             placeholder="Select graduation date"
             required
           />
-          
+
           <FormAppButton class="mt-4"> Add </FormAppButton>
         </form>
       </div>
@@ -322,7 +326,7 @@
             placeholder="Select graduation date"
             required
           />
-          
+
           <FormAppButton class="mt-4"> update </FormAppButton>
         </form>
       </div>
@@ -382,7 +386,7 @@ const state = reactive({
       id: '',
     },
   },
-  settings: props.settings
+  settings: props.settings,
 })
 
 /**
@@ -394,16 +398,16 @@ const addMemberWorkExperience = async () => {
   const bodyData = {
     company_name: state.form.workExperience.company_name,
     position: state.form.workExperience.position,
-    start_date: new Date (
+    start_date: new Date(
       state.form.workExperience.start_date.year,
       state.form.workExperience.start_date.month
     ),
     end_date: state.form.workExperience.currently_working
       ? null
-      : new Date (
-      state.form.workExperience.end_date.year,
-      state.form.workExperience.end_date.month
-    ),
+      : new Date(
+          state.form.workExperience.end_date.year,
+          state.form.workExperience.end_date.month
+        ),
   }
   await useFetch(`/api/member/create/experience`, {
     method: 'POST',
@@ -445,16 +449,16 @@ const updateMemberWorkExperience = async () => {
   const bodyData = {
     company_name: state.form.workExperience.company_name,
     position: state.form.workExperience.position,
-    start_date: new Date (
+    start_date: new Date(
       state.form.workExperience.start_date.year,
       state.form.workExperience.start_date.month
     ),
     end_date: state.form.workExperience.currently_working
       ? null
-      : new Date (
-      state.form.workExperience.end_date.year,
-      state.form.workExperience.end_date.month
-    ),
+      : new Date(
+          state.form.workExperience.end_date.year,
+          state.form.workExperience.end_date.month
+        ),
   }
   try {
     await $fetch(
@@ -493,10 +497,10 @@ const addMemberEducation = async () => {
     degree: state.form.education.degree,
     graduated: state.form.education.still_studying
       ? null
-      : new Date (
-      state.form.education.graduated.year,
-      state.form.education.graduated.month
-    ),
+      : new Date(
+          state.form.education.graduated.year,
+          state.form.education.graduated.month
+        ),
   }
   await $fetch(`/api/member/create/education`, {
     method: 'POST',
@@ -540,10 +544,10 @@ const updateMemberEducation = async () => {
     degree: state.form.education.degree,
     graduated: state.form.education.still_studying
       ? null
-      : new Date (
-      state.form.education.graduated.year,
-      state.form.education.graduated.month
-    ),
+      : new Date(
+          state.form.education.graduated.year,
+          state.form.education.graduated.month
+        ),
   }
   await $fetch(`/api/member/update/education/${state.form.education.id}`, {
     method: 'PATCH',
@@ -564,25 +568,31 @@ const updateMemberEducation = async () => {
 }
 const sortRules = reactive({
   experience: (a, b) => {
-    if (!a.end_date) return -1  // if a is null, a comes first
-    if (!b.end_date) return  1  // b comes first
+    if (!a.end_date) return -1 // if a is null, a comes first
+    if (!b.end_date) return 1 // b comes first
     return new Date(b.end_date) - new Date(a.end_date)
   },
   education: (a, b) => {
     if (!a.graduated) return -1
-    if (!b.graduated) return  1
+    if (!b.graduated) return 1
     return new Date(b.graduated) - new Date(a.graduated)
-  }
+  },
 })
-const experienceSorted = reactive ({
-  list: props.experience.sort((a, b) => sortRules.experience(a, b))
+const experienceSorted = reactive({
+  list: props.experience.sort((a, b) => sortRules.experience(a, b)),
 })
-const educationSorted = reactive ({
-  list: props.education.sort((a, b) => sortRules.education(a, b))
+const educationSorted = reactive({
+  list: props.education.sort((a, b) => sortRules.education(a, b)),
 })
 watchEffect(() => {
-  if (props.experience) experienceSorted.list = props.experience.sort((a, b) => sortRules.experience(a, b))
-  if (props.education) educationSorted.list = props.education.sort((a, b) => sortRules.education(a, b))
+  if (props.experience)
+    experienceSorted.list = props.experience.sort((a, b) =>
+      sortRules.experience(a, b)
+    )
+  if (props.education)
+    educationSorted.list = props.education.sort((a, b) =>
+      sortRules.education(a, b)
+    )
 })
 const formatDate = (date) => {
   const newDate = new Date(date)
@@ -591,19 +601,6 @@ const formatDate = (date) => {
     newDate.getFullYear(),
   ]
   return `${month} ${year}`
-}
-
-const updateVisibility = async () => {
-  state.settings.hideExperienceAndEducation = !state.settings.hideExperienceAndEducation
-  await $fetch('/api/member/update/settings', {
-    method: 'PATCH',
-    body: state.settings,
-    onResponse({ response }) {
-      if (response.ok) {
-        emit('updateMember')
-      }
-    }
-  })
 }
 </script>
 <style lang="postcss" scoped>
