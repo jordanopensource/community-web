@@ -52,7 +52,7 @@
       <div
         v-else-if="props.inputType === 'file'"
         :class="
-          props.editIcon && 'bg-editIconWhite bg-auto w-6 h-6 bg-no-repeat'
+          props.editIcon && 'file-edit-container'
         "
       >
         <input
@@ -66,6 +66,7 @@
           :class="props.editIcon ? 'input-file-edit-icon' : ''"
           @focusin="state.pwActive = true"
           @focusout="state.pwActive = false"
+          :accept="props.acceptedFiles"
         />
       </div>
       <textarea
@@ -95,6 +96,7 @@ const props = defineProps({
   value: { default: '' },
   width: { type: String, default: '' },
   labelId: { type: String, default: '' },
+  acceptedFiles: {type: String, default: ''}
 })
 
 const state = reactive({
@@ -172,5 +174,21 @@ input.hide-right-border {
 input.input-file-edit-icon {
   @apply absolute top-0 left-0 opacity-0 cursor-pointer;
   @apply bg-editIconWhite bg-cover;
+}
+.file-edit-container {
+  @apply bg-editIconWhite bg-center bg-no-repeat;
+  @apply p-4 w-2 h-2;
+  @apply border rounded-full;
+  background-size: 1rem;
+  background-color: rgb(11 150 171 / 0.2);
+}
+@media (max-width: 640px) {
+  .file-edit-container {
+    @apply p-2 w-1 h-1;
+    background-size: 0.5rem;
+}
+}
+.file-edit-container:hover {
+  background-color: rgb(11 150 171 / 0.8);
 }
 </style>
