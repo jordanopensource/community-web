@@ -1,42 +1,47 @@
 <template>
-  <div class="widget-container">
+  <div v-if="useMember().value" class="widget-container">
     <img
       @click="togglePopup"
       class="avatar"
       alt="avatar"
       :src="
-        state.member.avatar_url
-        ? state.member.avatar_url
+        useMember().value.avatar_url
+        ? useMember().value.avatar_url
         : '/images/placeholders/avatar.png'
       "
     />
     <div v-if="state.isOpen" class="user-menu">
+      <div class="widget-arrow"></div>
       <p class="user-name">
-        {{ state.member.first_name_en }} {{ state.member.last_name_en }}
+        {{ useMember().value.first_name_en }} {{ useMember().value.last_name_en }}
       </p>
       <div class="flex flex-row justify-between mb-4">
-        <p v-if="state.member.type !== 0"
+        <p v-if="useMember().value.type !== 0"
           class="user-info">
           <div class="badge-color"></div>
-          <!-- TODO: this should be dynamic from the api -->
           JOSA Member
         </p>
-        <p v-if="state.member.josa_member_id && state.member.type !== 0"
+        <p v-if="useMember().value.josa_member_id && useMember().value.type !== 0"
           class="user-info">
-          #{{ state.member.type }}-{{ state.member.josa_member_id }}
+          #{{ useMember().value.type }}-{{ useMember().value.josa_member_id }}
         </p>
       </div>
       <div class="divider-dotted"></div>
-      <NuxtLink
+      <div
         v-for="link, index in widget.links"
         :key="index"
-        :to="link.to"
-        @click="link.onClick"
-        class="nav-link"
       >
-        <div class="menu-icon" :class="link.icon"></div>
-        <div class="inline">{{link.title}}</div>
-      </NuxtLink>
+        <!-- A dotted line before Sign Out button -->
+        <div v-if="index === 2" class="divider-dotted"></div>
+        <NuxtLink
+          :to="link.to"
+          @click="link.onClick"
+          class="nav-link"
+        >
+          <div class="menu-icon" :class="link.icon"></div>
+          <div class="inline">{{link.title}}</div>
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -49,7 +54,6 @@ const togglePopup = () => {
 const signOut = async () => {
   togglePopup()
   await useFetch('/api/logout')
-  localStorage.clear()
   useAuth().value = false
   userId().value = null
   navigateTo('/')
@@ -81,15 +85,6 @@ const widget = reactive({
     }
   ]
 })
-onMounted(() => {
-  if (localStorage.getItem('member')) {
-    state.member = JSON.parse(localStorage.getItem('member'))
-    widget.links[0].to = '/members/' + state.member.id
-  } else {
-    //TODO: handle this case better
-    console.error('localstorage is empty')
-  }
-})
 </script>
 
 <style lang="postcss" scoped>
@@ -106,6 +101,10 @@ onMounted(() => {
   @apply absolute w-52 flex flex-col rounded z-10;
   @apply mt-12 p-4;
   @apply bg-community-white text-community-black-darker;
+  .widget-arrow {
+    @apply w-4 h-4 bg-community-white rotate-45 -mt-5;
+    margin-left: 10.2rem;
+  }
 }
 .user-name {
   @apply text-lg;
