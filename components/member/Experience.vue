@@ -39,7 +39,7 @@
               <h5 class="sub-title">{{ experience.position }}</h5>
             </div>
             <p class="date-container">
-              {{ formatDate(experience.start_date) }} -
+              {{ formatDate(experience.start_date) }} &ndash;
               {{
                 experience.end_date
                   ? formatDate(experience.end_date)
