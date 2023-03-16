@@ -50,7 +50,18 @@
           />
           <div class="w-full flex flex-col md:flex-row">
             <div>
-              <h4 class="title">{{ item.name }}</h4>
+              <a
+                :href="
+                  'https://' +
+                  item.name +
+                  '/wiki/user:' +
+                  props.wikiMediaUserName
+                "
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h4 class="title">{{ item.name }}</h4>
+              </a>
               <h5 class="sub-title">{{ item.edits }} contributions</h5>
             </div>
           </div>
@@ -100,6 +111,14 @@ const props = defineProps({
   settings: {
     type: Object,
     default: {},
+  },
+  githubUserName: {
+    type: String,
+    default: '',
+  },
+  wikiMediaUserName: {
+    type: String,
+    default: '',
   },
 })
 
