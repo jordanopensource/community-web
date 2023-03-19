@@ -98,6 +98,7 @@ module.exports = {
         'editIcon': "url('/icons/edit.svg')",
         'editIconWhite': "url('/icons/edit-white.svg')",
         'trashIcon': "url('/icons/delete.svg')",
+        'xIcon': "url('/icons/x.svg')",
       }
     },
   },

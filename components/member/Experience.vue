@@ -1,5 +1,21 @@
 <template>
   <div id="member-experience-and-education" class="container details-container">
+    <Message
+      v-if="state.error && !state.loading"
+      title="Error"
+      type="error"
+      class="mb-4"
+    >
+      Something went wrong!
+    </Message>
+    <Message
+      v-if="state.success && !state.loading"
+      title="Saved"
+      type="success"
+      class="mb-4"
+    >
+      Settings saved successfully.
+    </Message>
     <h2 class="text-xl lg:text-2xl">Experience and Education</h2>
     <div v-if="memberAuth" class="flex flex-row gap-x-2 justify-end">
       <MemberPermissionDropDown
@@ -424,6 +440,9 @@ const state = reactive({
     },
   },
   settings: props.settings,
+  loading: false,
+  success: false,
+  error: false,
 })
 
 /**
@@ -432,6 +451,7 @@ const state = reactive({
  *
  */
 const addMemberWorkExperience = async () => {
+  state.loading = true
   const bodyData = {
     company_name: state.form.workExperience.company_name,
     position: state.form.workExperience.position,
@@ -450,14 +470,17 @@ const addMemberWorkExperience = async () => {
     method: 'POST',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
-      if (response._data.success) {
-        console.log(response._data)
-        console.log('updated!')
+      if (response.ok) {
+        state.error = false
+        state.success = true
+        state.loading = false
       }
       emit('updateMember')
     },
     onResponseError({ response }) {
-      // TODO: handle errors on client side
+      state.error = true
+      state.success = false
+      state.loading = false
       console.log('something went wrong', response._data.message)
     },
   })
@@ -466,23 +489,29 @@ const addMemberWorkExperience = async () => {
 
 const deleteMemberWorkExperience = async (event) => {
   const { value } = event.target.experienceId
-
+  state.loading = true
   const deleteItem = confirm('Are you sure you want to delete this?')
 
   deleteItem &&
     (await $fetch(`/api/member/delete/experience/${value}`, {
       method: 'DELETE',
       onResponse({ response }) {
+        state.error = false
+        state.success = true
+        state.loading = false
         emit('updateMember')
       },
       onResponseError({ response }) {
-        // TODO: handle errors on client side
+        state.error = true
+        state.success = false
+        state.loading = false
         console.log('something went wrong', response._data.message)
       },
     }))
 }
 
 const updateMemberWorkExperience = async () => {
+  state.loading = true
   const bodyData = {
     company_name: state.form.workExperience.company_name,
     position: state.form.workExperience.position,
@@ -504,14 +533,17 @@ const updateMemberWorkExperience = async () => {
         method: 'PATCH',
         body: JSON.stringify(bodyData),
         onResponse({ response }) {
-          if (response._data.success) {
-            console.log(response._data)
-            console.log('updated!')
+          if (response.ok) {
+            state.error = false
+            state.success = true
+            state.loading = false
           }
           emit('updateMember')
         },
         onResponseError({ response }) {
-          // TODO: handle errors on client side
+          state.error = true
+          state.success = false
+          state.loading = false
           console.log('something went wrong', response._data.message)
         },
       }
@@ -519,6 +551,9 @@ const updateMemberWorkExperience = async () => {
   } catch (error) {
     console.log('ERROR')
     console.log(error)
+    state.error = true
+    state.success = false
+    state.loading = false
   }
   showUpdateWorkExperienceForm.value = !showUpdateWorkExperienceForm
 }
@@ -529,6 +564,7 @@ const updateMemberWorkExperience = async () => {
  *
  */
 const addMemberEducation = async () => {
+  state.loading = true
   const bodyData = {
     institution_name: state.form.education.institution_name,
     degree: state.form.education.degree,
@@ -544,13 +580,16 @@ const addMemberEducation = async () => {
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
       if (response._data.success) {
-        console.log(response._data)
-        console.log('updated!')
+        state.error = false
+        state.success = true
+        state.loading = false
       }
       emit('updateMember')
     },
     onResponseError({ response }) {
-      // TODO: handle errors on client side
+      state.error = true
+      state.success = false
+      state.loading = false
       console.log('something went wrong', response._data.message)
     },
   })
@@ -559,23 +598,29 @@ const addMemberEducation = async () => {
 
 const deleteMemberEducation = async (event) => {
   const { value } = event.target.educationId
-
+  state.loading = true
   const deleteItem = confirm('Are you sure you want to delete this?')
 
   deleteItem &&
     (await $fetch(`/api/member/delete/education/${value}`, {
       method: 'DELETE',
       onResponse({ response }) {
+        state.error = false
+        state.success = true
+        state.loading = false
         emit('updateMember')
       },
       onResponseError({ response }) {
-        // TODO: handle errors on client side
+        state.error = true
+        state.success = false
+        state.loading = false
         console.log('something went wrong', response._data.message)
       },
     }))
 }
 
 const updateMemberEducation = async () => {
+  state.loading = true
   const bodyData = {
     institution_name: state.form.education.institution_name,
     degree: state.form.education.degree,
@@ -590,14 +635,17 @@ const updateMemberEducation = async () => {
     method: 'PATCH',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
-      if (response._data.success) {
-        console.log(response._data)
-        console.log('updated!')
+      if (response.ok) {
+        state.error = false
+        state.success = true
+        state.loading = false
       }
       emit('updateMember')
     },
     onResponseError({ response }) {
-      // TODO: handle errors on client side
+      state.error = true
+      state.success = false
+      state.loading = false
       console.log('something went wrong', response._data.message)
     },
   })

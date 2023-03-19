@@ -1,5 +1,21 @@
 <template>
   <div id="banner" class="details-container">
+    <Message
+      v-if="state.error && !state.loading"
+      title="Error"
+      type="error"
+      class="mb-4"
+    >
+      Something went wrong!
+    </Message>
+    <Message
+      v-if="state.success && !state.loading"
+      title="Saved"
+      type="success"
+      class="mb-4"
+    >
+      Settings saved successfully.
+    </Message>
     <div class="relative">
       <div class="relative">
         <img
@@ -142,13 +158,16 @@ const state = reactive({
   images: {
     cover: {
       url: props.member.cover_url,
-      uploading: false
+      uploading: false,
     },
     avatar: {
       url: props.member.avatar_url,
-      uploading: false
+      uploading: false,
     },
-  }
+  },
+  loading: false,
+  success: false,
+  error: false,
 })
 
 // placeholder images for when there are no images
@@ -160,6 +179,8 @@ const placeHolderImages = {
 
 // handle uploading of the cover/avatar photo request
 const uploadImage = async (event, imageType) => {
+  state.error = false
+  state.loading = true
   state.images[imageType].uploading = true
   const { files } = await event.target
   const image = new FormData()
@@ -181,10 +202,19 @@ const uploadImage = async (event, imageType) => {
         // the 'last-updated' query is to prevent the browser from
         // using the cached image whenever a new one is available.
         // This is because the name of the images is based on the userId.
-        state.images.cover.url = cover_url ? cover_url + '?last-updated=' + Date.now() : props.member.cover_url
-        state.images.avatar.url = avatar_url ? avatar_url + '?last-updated=' + Date.now() : props.member.avatar_url
+        state.images.cover.url = cover_url
+          ? cover_url + '?last-updated=' + Date.now()
+          : props.member.cover_url
+        state.images.avatar.url = avatar_url
+          ? avatar_url + '?last-updated=' + Date.now()
+          : props.member.avatar_url
         useMember().value[`${imageType}_url`] = state.images[imageType].url
       }
+    })
+    .catch((error) => {
+      state.loading = false
+      state.error = true
+      state.success = false
     })
     .finally(() => {
       updateGeneralInfo()
@@ -205,14 +235,16 @@ const updateGeneralInfo = async (event) => {
     method: 'PATCH',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
+      state.loading = false
       if (response._data) {
-        console.log(response._data)
-        console.log('updated!')
+        state.error = false
+        state.success = true
       }
       emit('updateMember')
     },
     onResponseError({ response }) {
-      // TODO: handle errors on client side
+      state.error = true
+      state.success = false
       console.log('something went wrong', response._data.message)
     },
   })
@@ -305,15 +337,15 @@ img {
   max-height: 364px;
 }
 .cover:before {
-    @apply w-full;
-    @apply rounded-b-none rounded-lg;
-    height: 20vw;
-    max-height: 364px;
-    content: ' ';
-    display: block;
-    background-image: url(/images/placeholders/729x164.png);
-    background-size: contain;    
-    text-indent: -9999px;
+  @apply w-full;
+  @apply rounded-b-none rounded-lg;
+  height: 20vw;
+  max-height: 364px;
+  content: ' ';
+  display: block;
+  background-image: url(/images/placeholders/729x164.png);
+  background-size: contain;
+  text-indent: -9999px;
 }
 
 .general-info {
