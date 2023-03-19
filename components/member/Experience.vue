@@ -30,21 +30,16 @@
         <h3 class="heading">Work Experience</h3>
         <div
           v-if="memberAuth"
+          class="cursor-pointer bg-contain w-5 h-5 bg-no-repeat"
+          :class="showAddWorkExperienceForm ? 'bg-xIcon' : 'bg-addIcon'"
           @click="
             () => {
-              showAddWorkExperienceForm = true
+              showAddWorkExperienceForm = !showAddWorkExperienceForm
               showUpdateWorkExperienceForm = false
               state.form.workExperience = { ...defaultWorkExperience }
             }
           "
         >
-          <img
-            v-if="!showAddWorkExperienceForm"
-            src="/icons/add.svg"
-            alt=""
-            class="cursor-pointer"
-          />
-          <img v-else src="/icons/x.svg" alt="" class="cursor-pointer" />
         </div>
       </div>
       <ul v-if="props.experience.length">
@@ -58,18 +53,23 @@
               <h4 class="title">{{ experience.company_name }}</h4>
               <h5 class="sub-title">{{ experience.position }}</h5>
             </div>
-            <p class="date-container">
-              {{ formatDate(experience.start_date) }} &ndash;
-              {{
-                experience.end_date
-                  ? formatDate(experience.end_date)
-                  : 'Current'
-              }}
-            </p>
-            <div class="flex justify-end mt-4 md:mt-0">
-              <!-- Delete Work Experience Form -->
-              <div v-if="memberAuth">
-                <form @submit.prevent="deleteMemberWorkExperience">
+            <div class="w-full flex flex-row justify-between">
+              <p class="date-container">
+                {{ formatDate(experience.start_date) }} &ndash;
+                {{
+                  experience.end_date
+                    ? formatDate(experience.end_date)
+                    : 'Current'
+                }}
+              </p>
+              <div
+                v-if="memberAuth"
+                class="flex flex-row justify-around gap-x-2 m-2"
+              >
+                <!-- Delete Work Experience Form -->
+                <form
+                  class="inline-flex w-4 h-4"
+                  @submit.prevent="deleteMemberWorkExperience">
                   <input
                     type="hidden"
                     name="experienceId"
@@ -77,19 +77,17 @@
                   />
                   <FormAppButton btnStyle="delete-btn"></FormAppButton>
                 </form>
-              </div>
-              <!-- Update Work Experience Form Trigger -->
-              <div
-                v-if="memberAuth"
-                @click="
-                  () => {
-                    showUpdateWorkExperienceForm = true
-                    showAddWorkExperienceForm = false
-                    state.form.workExperience = { ...experience }
-                  }
-                "
-              >
-                <img src="/icons/edit.svg" alt="" class="cursor-pointer" />
+                <!-- Update Work Experience Form Trigger -->
+                <div
+                  class="edit-btn bg-editIcon"
+                  @click="
+                    () => {
+                      showUpdateWorkExperienceForm = true
+                      showAddWorkExperienceForm = false
+                      state.form.workExperience = { ...experience }
+                    }
+                  "
+                ></div>
               </div>
             </div>
           </div>
@@ -223,21 +221,16 @@
         <h3 class="heading">Education</h3>
         <div
           v-if="memberAuth"
+          class="cursor-pointer bg-contain w-5 h-5 bg-no-repeat"
+          :class="showAddEducationForm ? 'bg-xIcon' : 'bg-addIcon'"
           @click="
             () => {
-              showAddEducationForm = true
+              showAddEducationForm = !showAddEducationForm
               showUpdateEducationForm = false
               state.form.education = { ...defaultEducation }
             }
           "
         >
-          <img
-            v-if="!showAddEducationForm"
-            src="/icons/add.svg"
-            alt=""
-            class="cursor-pointer"
-          />
-          <img v-else src="/icons/x.svg" alt="" class="cursor-pointer" />
         </div>
       </div>
       <ul v-if="props.education.length">
@@ -251,17 +244,23 @@
               <h4 class="title">{{ education.institution_name }}</h4>
               <h5 class="sub-title">{{ education.degree }}</h5>
             </div>
-            <p class="date-container">
-              {{
-                education.graduated
-                  ? formatDate(education.graduated)
-                  : 'Current'
-              }}
-            </p>
-            <div class="flex justify-end mt-4 md:mt-0">
-              <!-- Delete Education Form Button -->
-              <div v-if="memberAuth">
-                <form @submit.prevent="deleteMemberEducation">
+            <div class="w-full flex flex-row justify-between">
+              <p class="date-container">
+                {{
+                  education.graduated
+                    ? formatDate(education.graduated)
+                    : 'Current'
+                }}
+              </p>
+              <div
+                v-if="memberAuth"
+                class="flex flex-row justify-around gap-x-2 m-2"
+              >
+                <!-- Delete Education Form Button -->
+                <form
+                  class="inline-flex w-4 h-4"
+                  @submit.prevent="deleteMemberEducation"
+                >
                   <input
                     type="hidden"
                     name="educationId"
@@ -269,19 +268,17 @@
                   />
                   <FormAppButton btnStyle="delete-btn"></FormAppButton>
                 </form>
-              </div>
-              <!-- Update Education trigger  -->
-              <div
-                v-if="memberAuth"
-                @click="
-                  () => {
-                    showUpdateEducationForm = true
-                    showAddEducationForm = false
-                    state.form.education = { ...education }
-                  }
-                "
-              >
-                <img src="/icons/edit.svg" alt="" class="cursor-pointer" />
+                <!-- Update Education trigger  -->
+                <div
+                  @click="
+                    () => {
+                      showUpdateEducationForm = true
+                      showAddEducationForm = false
+                      state.form.education = { ...education }
+                    }
+                  " 
+                  class="edit-btn bg-editIcon"
+                ></div>
               </div>
             </div>
           </div>
