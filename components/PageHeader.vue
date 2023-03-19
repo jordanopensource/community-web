@@ -33,15 +33,23 @@
               <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
             </li>
             <li class="menu-item">
-              <NuxtLink id="login" to="/login" class="nav-link" v-if="!useAuth().value"
+              <NuxtLink
+                id="login"
+                to="/login"
+                class="nav-link"
+                v-if="!useAuth().value"
                 >Sign In</NuxtLink
               >
-              <UserWidget v-else/>
+              <UserWidget v-else />
             </li>
           </ul>
           <MobileMenuButton :is-open="state.isOpen" @toggle="ToggleIsOpen()" />
         </div>
-        <MobileMenuItems :is-open="state.isOpen" />
+        <MobileMenuItems
+          @toggleNav="ToggleIsOpen()"
+          :is-open="state.isOpen"
+          ()
+        />
       </div>
     </nav>
   </header>
@@ -53,6 +61,9 @@ const state = reactive({
   isOpen: false,
 })
 const ToggleIsOpen = () => (state.isOpen = !state.isOpen)
+onMounted(() => {
+  state.isOpen = false
+})
 </script>
 <style lang="postcss" scoped>
 * {
