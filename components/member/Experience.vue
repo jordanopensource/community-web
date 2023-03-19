@@ -58,18 +58,23 @@
               <h4 class="title">{{ experience.company_name }}</h4>
               <h5 class="sub-title">{{ experience.position }}</h5>
             </div>
-            <p class="date-container">
-              {{ formatDate(experience.start_date) }} &ndash;
-              {{
-                experience.end_date
-                  ? formatDate(experience.end_date)
-                  : 'Current'
-              }}
-            </p>
-            <div class="flex justify-end mt-4 md:mt-0">
-              <!-- Delete Work Experience Form -->
-              <div v-if="memberAuth">
-                <form @submit.prevent="deleteMemberWorkExperience">
+            <div class="w-full flex flex-row justify-between">
+              <p class="date-container">
+                {{ formatDate(experience.start_date) }} &ndash;
+                {{
+                  experience.end_date
+                    ? formatDate(experience.end_date)
+                    : 'Current'
+                }}
+              </p>
+              <div
+                v-if="memberAuth"
+                class="flex flex-row justify-around gap-x-2 m-2"
+              >
+                <!-- Delete Work Experience Form -->
+                <form
+                  class="inline-flex w-4 h-4"
+                  @submit.prevent="deleteMemberWorkExperience">
                   <input
                     type="hidden"
                     name="experienceId"
@@ -77,19 +82,17 @@
                   />
                   <FormAppButton btnStyle="delete-btn"></FormAppButton>
                 </form>
-              </div>
-              <!-- Update Work Experience Form Trigger -->
-              <div
-                v-if="memberAuth"
-                @click="
-                  () => {
-                    showUpdateWorkExperienceForm = true
-                    showAddWorkExperienceForm = false
-                    state.form.workExperience = { ...experience }
-                  }
-                "
-              >
-                <div class="edit-btn bg-editIcon"></div>
+                <!-- Update Work Experience Form Trigger -->
+                <div
+                  class="edit-btn bg-editIcon"
+                  @click="
+                    () => {
+                      showUpdateWorkExperienceForm = true
+                      showAddWorkExperienceForm = false
+                      state.form.workExperience = { ...experience }
+                    }
+                  "
+                ></div>
               </div>
             </div>
           </div>
@@ -251,17 +254,23 @@
               <h4 class="title">{{ education.institution_name }}</h4>
               <h5 class="sub-title">{{ education.degree }}</h5>
             </div>
-            <p class="date-container">
-              {{
-                education.graduated
-                  ? formatDate(education.graduated)
-                  : 'Current'
-              }}
-            </p>
-            <div class="flex justify-end mt-4 md:mt-0">
-              <!-- Delete Education Form Button -->
-              <div v-if="memberAuth">
-                <form @submit.prevent="deleteMemberEducation">
+            <div class="w-full flex flex-row justify-between">
+              <p class="date-container">
+                {{
+                  education.graduated
+                    ? formatDate(education.graduated)
+                    : 'Current'
+                }}
+              </p>
+              <div
+                v-if="memberAuth"
+                class="flex flex-row justify-around gap-x-2 m-2"
+              >
+                <!-- Delete Education Form Button -->
+                <form
+                  class="inline-flex w-4 h-4"
+                  @submit.prevent="deleteMemberEducation"
+                >
                   <input
                     type="hidden"
                     name="educationId"
@@ -269,19 +278,17 @@
                   />
                   <FormAppButton btnStyle="delete-btn"></FormAppButton>
                 </form>
-              </div>
-              <!-- Update Education trigger  -->
-              <div
-                v-if="memberAuth"
-                @click="
-                  () => {
-                    showUpdateEducationForm = true
-                    showAddEducationForm = false
-                    state.form.education = { ...education }
-                  }
-                "
-              >
-                <div class="edit-btn bg-editIcon"></div>
+                <!-- Update Education trigger  -->
+                <div
+                  @click="
+                    () => {
+                      showUpdateEducationForm = true
+                      showAddEducationForm = false
+                      state.form.education = { ...education }
+                    }
+                  " 
+                  class="edit-btn bg-editIcon"
+                ></div>
               </div>
             </div>
           </div>

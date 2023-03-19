@@ -147,7 +147,7 @@ ul > li {
 }
 
 .delete-btn {
-  @apply bg-trashIcon bg-no-repeat bg-contain w-4 h-4 border-none;
+  @apply cursor-pointer bg-trashIcon bg-no-repeat bg-contain w-4 h-4 border-none;
 }
 
 .edit-btn {
