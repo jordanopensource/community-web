@@ -235,16 +235,15 @@ const updateGeneralInfo = async (event) => {
     method: 'PATCH',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
+      state.loading = false
       if (response._data) {
-        state.loading = false
+        state.error = false
         state.success = true
       }
       emit('updateMember')
     },
     onResponseError({ response }) {
-      // TODO: handle errors on client side
       state.error = true
-      state.loading = false
       state.success = false
       console.log('something went wrong', response._data.message)
     },
@@ -254,7 +253,6 @@ const updateGeneralInfo = async (event) => {
   state.images.cover.uploading = false
   state.images.avatar.uploading = false
 }
-watch()
 </script>
 
 <style lang="postcss" scoped>
