@@ -5,7 +5,7 @@
       <select
         :name="props.selectName"
         :id="props.selectName"
-        class="bg-right-top w-full px-4 py-4 rounded-lg dd-bg-blue"
+        :class="useProfileBoxStyle ? 'profile-box-style' : 'default-style'"
         @change="$emit('update:value', $event.target.value)"
       >
         <option
@@ -30,6 +30,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  useProfileBoxStyle: {
+    type: Boolean,
+    default: false
+  }
 })
 </script>
 <style lang="postcss" scoped>
@@ -38,10 +42,21 @@ const props = defineProps({
 }
 
 select {
+  @apply w-full p-4 rounded-lg dd-bg-blue bg-no-repeat appearance-none bg-origin-content;
+}
+.default-style {
   background-image: url('/icons/arrow.png');
-  background-repeat: no-repeat;
   background-size: 0.9rem;
-  appearance: none;
-  background-position: 7.75rem center;
+  background-position: right center;
+}
+.profile-box-style {
+  @apply h-10 w-40 border-2;
+  padding: 6px;
+  text-align: left;
+  background: url('~/assets/icons/icon-eye-opened.svg');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-origin: content-box;
+  background-size: 1.2rem;
 }
 </style>
