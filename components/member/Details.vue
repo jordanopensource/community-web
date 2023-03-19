@@ -1,5 +1,21 @@
 <template>
   <div id="member-detail" class="details-container">
+    <Message
+      v-if="state.error && !state.loading"
+      title="Error"
+      type="error"
+      class="mb-4"
+    >
+      Something went wrong!
+    </Message>
+    <Message
+      v-if="state.success && !state.loading"
+      title="Saved"
+      type="success"
+      class="mb-4"
+    >
+      Settings saved successfully.
+    </Message>
     <div class="flex justify-between w-full">
       <h3 class="heading">About</h3>
       <div v-if="memberAuth" class="flex gap-x-4 items-center">
@@ -73,6 +89,9 @@ const state = reactive({
     memberAbout: props.member.about,
   },
   settings: props.settings,
+  loading: false,
+  success: false,
+  error: false,
 })
 
 const formatDate = (date) => {
@@ -86,6 +105,10 @@ const formatDate = (date) => {
 
 // handle updating the users general info
 const updateMemberDetailsInfo = async (event) => {
+  state.loading = true
+  state.error = false
+  state.success = false
+
   const bodyData = {
     about: state.form.memberAbout,
   }
@@ -94,14 +117,19 @@ const updateMemberDetailsInfo = async (event) => {
     method: 'PATCH',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
-      if (response._data.success) {
+      state.loading = false
+      if (response.ok) {
         console.log(response._data)
-        console.log('updated!')
+        state.success = true
+        state.error = false
+
+        console.log(state.success)
       }
       emit('updateMember')
     },
     onResponseError({ response }) {
-      // TODO: handle errors on client side
+      state.error = true
+      state.success = false
       console.log('something went wrong', response._data.message)
     },
   })
