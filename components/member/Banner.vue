@@ -235,16 +235,17 @@ const updateGeneralInfo = async (event) => {
     method: 'PATCH',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
-      state.loading = false
       if (response._data) {
         state.error = false
         state.success = true
+        state.loading = false
       }
       emit('updateMember')
     },
     onResponseError({ response }) {
-      state.error = true
-      state.success = false
+      state.error = false
+      state.success = true
+      state.loading = false
       console.log('something went wrong', response._data.message)
     },
   })

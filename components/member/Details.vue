@@ -117,19 +117,17 @@ const updateMemberDetailsInfo = async (event) => {
     method: 'PATCH',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
-      state.loading = false
       if (response.ok) {
-        console.log(response._data)
-        state.success = true
         state.error = false
-
-        console.log(state.success)
+        state.success = true
+        state.loading = false
       }
       emit('updateMember')
     },
     onResponseError({ response }) {
       state.error = true
       state.success = false
+      state.loading = false
       console.log('something went wrong', response._data.message)
     },
   })
