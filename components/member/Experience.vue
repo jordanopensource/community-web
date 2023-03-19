@@ -30,21 +30,16 @@
         <h3 class="heading">Work Experience</h3>
         <div
           v-if="memberAuth"
+          class="cursor-pointer bg-contain w-5 h-5 bg-no-repeat"
+          :class="showAddWorkExperienceForm ? 'bg-xIcon' : 'bg-addIcon'"
           @click="
             () => {
-              showAddWorkExperienceForm = true
+              showAddWorkExperienceForm = !showAddWorkExperienceForm
               showUpdateWorkExperienceForm = false
               state.form.workExperience = { ...defaultWorkExperience }
             }
           "
         >
-          <img
-            v-if="!showAddWorkExperienceForm"
-            src="/icons/add.svg"
-            alt=""
-            class="cursor-pointer"
-          />
-          <img v-else src="/icons/x.svg" alt="" class="cursor-pointer" />
         </div>
       </div>
       <ul v-if="props.experience.length">
@@ -226,21 +221,16 @@
         <h3 class="heading">Education</h3>
         <div
           v-if="memberAuth"
+          class="cursor-pointer bg-contain w-5 h-5 bg-no-repeat"
+          :class="showAddEducationForm ? 'bg-xIcon' : 'bg-addIcon'"
           @click="
             () => {
-              showAddEducationForm = true
+              showAddEducationForm = !showAddEducationForm
               showUpdateEducationForm = false
               state.form.education = { ...defaultEducation }
             }
           "
         >
-          <img
-            v-if="!showAddEducationForm"
-            src="/icons/add.svg"
-            alt=""
-            class="cursor-pointer"
-          />
-          <img v-else src="/icons/x.svg" alt="" class="cursor-pointer" />
         </div>
       </div>
       <ul v-if="props.education.length">
