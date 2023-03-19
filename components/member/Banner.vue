@@ -124,7 +124,7 @@
         <div
           v-if="memberAuth"
           @click="() => (showUpdateInfoForm = !showUpdateInfoForm)"
-          class="cursor-pointer bg-contain w-4 h-4 bg-no-repeat"
+          class="edit-btn"
           :class="showUpdateInfoForm ? 'bg-xIcon' : 'bg-editIcon'"
         ></div>
       </div>

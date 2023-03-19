@@ -146,12 +146,10 @@ ul > li {
   font-weight: 500;
 }
 
-.delete-btn,
-.edit-btn {
-  @apply bg-trashIcon bg-no-repeat w-5 h-5 border-none;
-  @apply p-4 border-r-0 ml-2;
+.delete-btn {
+  @apply bg-trashIcon bg-no-repeat bg-contain w-4 h-4 border-none;
 }
 
 .edit-btn {
-  @apply bg-editIcon;
+  @apply cursor-pointer bg-contain w-4 h-4 bg-no-repeat;
 }

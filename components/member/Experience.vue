@@ -89,7 +89,7 @@
                   }
                 "
               >
-                <img src="/icons/edit.svg" alt="" class="cursor-pointer" />
+                <div class="edit-btn bg-editIcon"></div>
               </div>
             </div>
           </div>
@@ -281,7 +281,7 @@
                   }
                 "
               >
-                <img src="/icons/edit.svg" alt="" class="cursor-pointer" />
+                <div class="edit-btn bg-editIcon"></div>
               </div>
             </div>
           </div>

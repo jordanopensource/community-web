@@ -23,15 +23,11 @@
           :permissionStatus="state.settings.about"
           targetSettings="about"
         />
-        <div @click="() => (showUpdateAboutForm = !showUpdateAboutForm)">
-          <img
-            v-if="!showUpdateAboutForm"
-            src="/icons/edit.svg"
-            alt=""
-            class="cursor-pointer"
-          />
-          <img v-else src="/icons/x.svg" alt="" class="cursor-pointer" />
-        </div>
+        <div
+          class="edit-btn"
+          :class="showUpdateAboutForm ? 'bg-xIcon' : 'bg-editIcon'"
+          @click="() => (showUpdateAboutForm = !showUpdateAboutForm)"
+        ></div>
       </div>
     </div>
     <div v-if="!showUpdateAboutForm">
