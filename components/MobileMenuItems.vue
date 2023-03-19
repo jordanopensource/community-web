@@ -5,19 +5,51 @@
         class="py-4 border-gray"
         v-if="config.public.TARGET_ENV === 'development'"
       >
-        <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
+        <NuxtLink
+          @click="
+            () => {
+              emit('toggleNav')
+            }
+          "
+          to="/register"
+          class="nav-link"
+          >Join JOSA</NuxtLink
+        >
       </li>
       <li class="py-4 border-gray">
-        <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
+        <NuxtLink
+          @click="
+            () => {
+              emit('toggleNav')
+            }
+          "
+          to="/members"
+          class="nav-link"
+          >JOSA Members</NuxtLink
+        >
       </li>
       <li
         class="py-4 border-gray"
         v-if="config.public.TARGET_ENV === 'development'"
       >
-        <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
+        <NuxtLink
+          @click="
+            () => {
+              emit('toggleNav')
+            }
+          "
+          to="/missions"
+          class="nav-link"
+          >Contribute</NuxtLink
+        >
       </li>
       <li class="py-4">
         <NuxtLink
+          @click="
+            () => {
+              emit('toggleNav')
+            }
+          "
           id="login"
           to="/login"
           class="nav-link"
@@ -29,6 +61,7 @@
   </div>
 </template>
 <script setup>
+const emit = defineEmits(['toggleNav'])
 const config = useRuntimeConfig()
 const props = defineProps({
   isOpen: Boolean,
