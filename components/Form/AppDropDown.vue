@@ -5,7 +5,7 @@
       <select
         :name="props.selectName"
         :id="props.selectName"
-        :class="profileStyle ? 'profile-style' : 'default-style'"
+        :class="useProfileBoxStyle ? 'profile-box-style' : 'default-style'"
         @change="$emit('update:value', $event.target.value)"
       >
         <option
@@ -30,7 +30,7 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  profileStyle: {
+  useProfileBoxStyle: {
     type: Boolean,
     default: false
   }
@@ -49,7 +49,7 @@ select {
   background-size: 0.9rem;
   background-position: right center;
 }
-.profile-style {
+.profile-box-style {
   @apply h-10 w-40 border-2;
   padding: 6px;
   text-align: left;

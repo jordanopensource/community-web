@@ -1,6 +1,6 @@
 <template>
   <FormAppDropDown
-    profileStyle
+    use-profile-box-style
     :listOfItems="permissions"
     :selectName="permissions[state.permissionStatus].text"
     v-model:value="state.permissionStatus"
