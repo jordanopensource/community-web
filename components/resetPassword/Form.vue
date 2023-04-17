@@ -2,16 +2,13 @@
   <div class="container input-control">
     <Message
       v-if="!state.passwordsMatch"
-      title="Passwords do not match" 
+      title="Passwords do not match"
       type="error"
       class="mb-4"
     >
       Please make sure that the password match in both fields.
     </Message>
-    <form
-      v-if="!state.resetSuccess"
-      @submit.prevent="reset"
-    >
+    <form v-if="!state.resetSuccess" @submit.prevent="reset">
       <FormAppControlInput
         v-model:value="form.password_1"
         input-type="password"
@@ -26,7 +23,7 @@
         :is-required="true"
         :show-password-icon="true"
       >
-      Confirm new password
+        Confirm new password
       </FormAppControlInput>
       <FormAppButton
         class="form-submit"
@@ -40,20 +37,13 @@
         </div>
       </FormAppButton>
     </form>
-    <div
-      v-if="state.resetSuccess"
-      class="success-container"
-    >
+    <div v-if="state.resetSuccess" class="success-container">
       <Message title="Success" type="success" :showCloseBtn="false">
         Your password has been successfully reset.
       </Message>
       <div class="flex flex-row justify-between mt-4">
-        <NuxtLink to="/login">
-          Login
-        </NuxtLink>
-        <NuxtLink to="/">
-          Return to homepage
-        </NuxtLink>
+        <NuxtLink to="/login"> Login </NuxtLink>
+        <NuxtLink to="/"> Return to homepage </NuxtLink>
       </div>
     </div>
   </div>
@@ -63,12 +53,12 @@ const config = useRuntimeConfig()
 
 const form = reactive({
   password_1: '',
-  password_2: ''
+  password_2: '',
 })
 const state = reactive({
   passwordsMatch: true,
   resetSuccess: false,
-  loading: false
+  loading: false,
 })
 
 const reset = async () => {
@@ -76,17 +66,17 @@ const reset = async () => {
   if (state.passwordsMatch) {
     state.loading = true
     const token = useRoute().query.token
-    const url = `${config.public.COMMUNITY_API_URL}/auth/reset-password?token=${token}`
-    
+    const url = `${config.public.communityApiUrl}/auth/reset-password?token=${token}`
+
     await $fetch.raw(url, {
-      method: "PATCH",
+      method: 'PATCH',
       body: JSON.stringify({
-        "password": form.password_1
+        password: form.password_1,
       }),
-      onResponse({response}) {
+      onResponse({ response }) {
         state.loading = false
         state.resetSuccess = response._data.success
-      }
+      },
     })
   }
 }

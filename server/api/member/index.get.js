@@ -3,7 +3,7 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const sessionCookie = getCookie(event, `${config.public.SESSION_COOKIE_NAME}`);
 
-  const url = `${config.public.COMMUNITY_API_URL}/member/${query.id}`
+  const url = `${config.public.communityApiUrl}/member/${query.id}`
   const options = {
     method: "GET",
     headers: {

@@ -3,7 +3,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event)
   const sessionCookie = getCookie(event, `${config.public.SESSION_COOKIE_NAME}`);
 
-  const apiUrl = `${config.public.COMMUNITY_API_URL}/settings`;
+  const apiUrl = `${config.public.communityApiUrl}/settings`;
   const settingsOptions = {
     method: "PATCH",
     body: body,

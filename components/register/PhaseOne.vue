@@ -58,7 +58,7 @@
       >
         E-mail
       </FormAppControlInput>
-      <FormAppControlInput v-model:value="form.github"
+      <FormAppControlInput v-model:value="form.github_user"
         >Github Account</FormAppControlInput
       >
       <div class="text-right">
@@ -83,7 +83,7 @@ const form = reactive({
   last_name_ar: '',
   phone: '',
   email: '',
-  github: '',
+  github_user: '',
 })
 
 const emit = defineEmits(['toggleNext'])

@@ -2,7 +2,7 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const body = await readBody(event)
 
-  const url = `${config.public.COMMUNITY_API_URL}/auth/`
+  const url = `${config.public.communityApiUrl}/auth/`
   const loginOptions = {
     method: "POST",
     body: body,

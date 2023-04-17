@@ -45,7 +45,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Keys within public, will be also exposed to the client-side
     public: {
-      COMMUNITY_API_URL: process.env.COMMUNITY_API_URL,
+      communityApiUrl: process.env.NUXT_COMMUNITY_API_URL,
       TARGET_ENV: process.env.TARGET_ENV,
       DRONE_COMMIT_SHA: process.env.DRONE_COMMIT_SHA,
       DRONE_COMMIT_LINK: process.env.DRONE_COMMIT_LINK,
