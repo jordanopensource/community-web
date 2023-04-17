@@ -34,6 +34,7 @@ ARG USER
 
 # copy builder output to project workdir
 WORKDIR /app
+COPY --from=builder --chown=${USER}:${USER} /workspace/package.json /app/
 COPY --from=builder --chown=${USER}:${USER} /workspace/.output /app/.output
 
 # set user context
