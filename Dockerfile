@@ -34,7 +34,7 @@ ARG USER
 
 # copy builder output to project workdir
 WORKDIR /app
-COPY --from=builder --chown=${USER}:${USER} /workspace/.output /app/
+COPY --from=builder --chown=${USER}:${USER} /workspace/.output /app/.output
 
 # set user context
 USER ${USER}
@@ -43,4 +43,4 @@ USER ${USER}
 EXPOSE ${PORT}
 
 # run for production
-CMD [ "node", "/app/server/index.mjs"]
+CMD [ "node", "/app/.output/server/index.mjs"]
