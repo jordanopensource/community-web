@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     },
     body: body
   }
-  const url = `${config.public.COMMUNITY_API_URL}/auth/forgot-password/`
+  const url = `${config.public.communityApiUrl}/auth/forgot-password/`
   const response = await $fetch.raw(url, options);
   return response._data
 });

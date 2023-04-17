@@ -1,7 +1,7 @@
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const sessionCookie = getCookie(event, `${config.public.SESSION_COOKIE_NAME}`)
-  const url = `${config.public.COMMUNITY_API_URL}/auth/logout`
+  const url = `${config.public.communityApiUrl}/auth/logout`
   const options = {
     method: "GET",
     headers: {

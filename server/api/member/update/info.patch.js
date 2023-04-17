@@ -3,7 +3,7 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const body = await readBody(event)
   const sessionCookie = getCookie(event, `${config.public.SESSION_COOKIE_NAME}`);
-  const apiUrl = `${config.public.COMMUNITY_API_URL}/member`;
+  const apiUrl = `${config.public.communityApiUrl}/member`;
   const uploadOptions = {
     method: "PATCH",
     body: body,

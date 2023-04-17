@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event)
   console.log(body);
   const sessionCookie = getCookie(event, `${config.public.SESSION_COOKIE_NAME}`);
-  const apiUrl = `${config.public.COMMUNITY_API_URL}/education`;
+  const apiUrl = `${config.public.communityApiUrl}/education`;
   const uploadOptions = {
     method: "POST",
     body: body,
