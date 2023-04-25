@@ -15,12 +15,6 @@ steps:
     image: plugins/docker
     settings:
       repo: josaorg/community-web
-      build_args:
-        [
-          NUXT_COMMUNITY_API_URL=https://community.api.josa.dev/v2,
-          TARGET_ENV=development,
-          SESSION_COOKIE_NAME=connect.sid,
-        ]
       build_args_from_env:
         [
           DRONE_BUILD_NUMBER,
