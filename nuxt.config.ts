@@ -45,16 +45,16 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Keys within public, will be also exposed to the client-side
     public: {
-      communityApiUrl: process.env.NUXT_COMMUNITY_API_URL,
-      TARGET_ENV: process.env.TARGET_ENV,
-      DRONE_COMMIT_SHA: process.env.DRONE_COMMIT_SHA,
-      DRONE_COMMIT_LINK: process.env.DRONE_COMMIT_LINK,
-      DRONE_BUILD_NUMBER: process.env.DRONE_BUILD_NUMBER,
-      DRONE_BUILD_LINK: process.env.DRONE_BUILD_LINK,
-      DRONE_REPO_LINK: process.env.DRONE_REPO_LINK,
-      DRONE_BUILD_FINISHED: process.env.DRONE_BUILD_FINISHED,
-      DEBUG: process.env.DEBUG,
-      SESSION_COOKIE_NAME: process.env.SESSION_COOKIE_NAME,
+      communityApiUrl: "https://community.api.josa.dev/v2",
+      targetEnv: "",
+      buildCommitSha: "",
+      buildCommitLink: "",
+      buildNumber: "",
+      buildLink: "",
+      buildRepoLink: "",
+      buildTimestamp: "",
+      debug: "",
+      sessionCookieName: "connect.sid",
     },
   },
   pwa: {

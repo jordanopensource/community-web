@@ -19,7 +19,7 @@
           <ul class="menu">
             <li
               class="menu-item"
-              v-if="config.public.TARGET_ENV === 'development'"
+              v-if="config.public.targetEnv === 'development'"
             >
               <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
             </li>
@@ -28,7 +28,7 @@
             </li>
             <li
               class="menu-item"
-              v-if="config.public.TARGET_ENV === 'development'"
+              v-if="config.public.targetEnv === 'development'"
             >
               <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
             </li>

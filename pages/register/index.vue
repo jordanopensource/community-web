@@ -48,7 +48,7 @@ definePageMeta({
 const config = useRuntimeConfig()
 const step = ref(1)
 let formData = reactive({})
-if (!config.public.TARGET_ENV === 'development') {
+if (!config.public.targetEnv === 'development') {
   navigateTo('/')
 }
 const nextStep = (data) => {
