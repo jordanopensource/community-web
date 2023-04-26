@@ -2,7 +2,7 @@
 export default defineNuxtRouteMiddleware(async(to, from) => {
   const config = useRuntimeConfig()
   if (process.server) {
-    const cookieName = `${config.public.SESSION_COOKIE_NAME}`
+    const cookieName = `${config.public.sessionCookieName}`
     if(useCookie(cookieName).value) {
       await isAuth(cookieName, useCookie(cookieName).value)
     } else {

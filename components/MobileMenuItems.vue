@@ -3,7 +3,7 @@
     <ul class="mobile-menu">
       <li
         class="py-4 border-gray"
-        v-if="config.public.TARGET_ENV === 'development'"
+        v-if="config.public.targetEnv === 'development'"
       >
         <NuxtLink
           @click="
@@ -30,7 +30,7 @@
       </li>
       <li
         class="py-4 border-gray"
-        v-if="config.public.TARGET_ENV === 'development'"
+        v-if="config.public.targetEnv === 'development'"
       >
         <NuxtLink
           @click="

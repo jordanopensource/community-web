@@ -1,7 +1,7 @@
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const config = useRuntimeConfig()
-  const sessionCookie = getCookie(event, `${config.public.SESSION_COOKIE_NAME}`);
+  const sessionCookie = getCookie(event, `${config.public.sessionCookieName}`);
 
   const url = `${config.public.communityApiUrl}/member/${query.id}`
   const options = {
@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     headers: {
       "Accept": "*/*",
       "Content-Type": "application/json",
-      "Cookie": `${config.public.SESSION_COOKIE_NAME}=` + sessionCookie,
+      "Cookie": `${config.public.sessionCookieName}=` + sessionCookie,
     }
   }
 
