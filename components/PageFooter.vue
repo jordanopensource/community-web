@@ -82,7 +82,7 @@
             loading="lazy"
           />
           <span class="copyright-text"
-            >2022, JOSA - Jordan Open Source Association</span
+            >2023, JOSA - Jordan Open Source Association</span
           >
         </div>
       </div>
