@@ -41,20 +41,28 @@ export default defineNuxtConfig({
     injectPosition: 0,
     viewer: true,
   },
+  plugins: [
+    {
+      src: '~/plugins/matomo-plugin.client.js',
+      ssr: false,
+    },
+  ],
   // REF: https://v3.nuxtjs.org/guide/going-further/runtime-config/
   runtimeConfig: {
     // Keys within public, will be also exposed to the client-side
     public: {
-      communityApiUrl: "https://community.api.josa.dev/v2",
-      targetEnv: "",
-      buildCommitSha: "",
-      buildCommitLink: "",
-      buildNumber: "",
-      buildLink: "",
-      buildRepoLink: "",
-      buildTimestamp: "",
-      debug: "",
-      sessionCookieName: "connect.sid",
+      communityApiUrl: 'https://community.api.josa.dev/v2',
+      targetEnv: '',
+      buildCommitSha: '',
+      buildCommitLink: '',
+      buildNumber: '',
+      buildLink: '',
+      buildRepoLink: '',
+      buildTimestamp: '',
+      debug: '',
+      sessionCookieName: 'connect.sid',
+      matomoSiteId: 13,
+      matomoHost: 'https://analytics.josa.ngo',
     },
   },
   pwa: {
