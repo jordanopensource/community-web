@@ -6,18 +6,18 @@
         <p>
           <span class="font-bold">Build</span>:
           <a
-            :href="config.public.DRONE_BUILD_LINK"
+            :href="config.public.buildLink"
             target="_blank"
             rel="noopener noreferrer"
           >
-            #{{ config.public.DRONE_BUILD_NUMBER }}
+            #{{ config.public.buildNumber }}
           </a>
           <a
-            :href="config.public.DRONE_COMMIT_LINK"
+            :href="config.public.buildCommitLink"
             target="_blank"
             rel="noopener noreferrer"
           >
-            ({{ config.public.DRONE_COMMIT_SHA.slice(0, 6) }})
+            ({{ config.public.buildCommitSha.slice(0, 6) }})
           </a>
         </p>
       </div>
@@ -25,7 +25,7 @@
         <span>🚧</span>
         <p>
           <span class="font-bold"> Environment: </span>
-          {{ config.public.TARGET_ENV }}
+          {{ config.public.targetEnv }}
         </p>
         <button class="bannerBtn" @click="closeBanner">
           <img

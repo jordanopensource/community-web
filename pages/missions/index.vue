@@ -37,7 +37,7 @@
 <script setup>
 import { reactive } from 'vue'
 const config = useRuntimeConfig()
-if (!config.public.TARGET_ENV === 'development') {
+if (!config.public.targetEnv === 'development') {
   navigateTo('/')
 }
 const state = reactive({

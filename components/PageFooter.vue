@@ -82,7 +82,7 @@
             loading="lazy"
           />
           <span class="copyright-text"
-            >2022, JOSA - Jordan Open Source Association</span
+            >{{ new Date().getFullYear() }}, JOSA - Jordan Open Source Association</span
           >
         </div>
       </div>
@@ -92,12 +92,13 @@
 
 <style lang="postcss" scoped>
 .footer-section {
-  @apply bg-josa-black;
+  @apply bg-community-black;
   @apply lg:h-64 w-full;
 }
+
 .footer-container {
   @apply container;
-  @apply bg-josa-black text-white;
+  @apply bg-community-black text-white;
   @apply lg:flex h-full items-center lg:justify-between;
 }
 

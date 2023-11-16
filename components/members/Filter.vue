@@ -8,7 +8,7 @@
           <img
             class="lg:hidden filter-icon"
             src="/icons/filter.svg"
-            alt="Fiter icon"
+            alt="Filter icon"
           />
           <div>
             <h3 class="filter-heading">Filter</h3>
@@ -37,7 +37,11 @@
             v-model:value="state.name"
           >
           </FormAppControlInput>
-          <FormAppButton btn-style="search-button" type="submit">
+          <FormAppButton
+            btn-style="search-button"
+            type="submit"
+            @click="scrollToView()"
+          >
             <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
               <path
                 fill="white"
@@ -50,7 +54,9 @@
           <FormAppControlInput
             v-model:value="state.noneJosaMembers"
             inputType="checkbox"
-            @change="() => onCheck()"
+            labelId="show-contributors"
+            @checkbox-changed="onCheck($event)"
+            :isChecked="state.noneJosaMembers"
           >
             Show contributors who are not members</FormAppControlInput
           >
@@ -79,16 +85,6 @@ const state = reactive({
   selected: '',
 })
 
-onMounted(() => {
-  window.addEventListener('resize', (e) => {
-    if (window.innerWidth > 1030) {
-      state.isOpen = true
-    } else {
-      state.isOpen = false
-    }
-  })
-})
-
 const sortItems = [
   {
     value: 'member_since,DESC',
@@ -110,8 +106,9 @@ const sortItems = [
 
 const emit = defineEmits(['sortMembers', 'searchMember', 'filterMembers'])
 
-const onCheck = () => {
-  emit('filterMembers', state.noneJosaMembers)
+const onCheck = (event) => {
+  state.noneJosaMembers = event
+  emit('filterMembers', event)
 }
 
 const onSubmit = () => {
@@ -120,15 +117,12 @@ const onSubmit = () => {
 const onSelect = () => {
   emit('sortMembers', state.selected)
 }
-
-watch(
-  () => state.windowResize,
-  (newValue, oldValue) => {
-    console.log(state.windowResize)
-    console.log(newValue)
-    console.log(oldValue)
-  }
-)
+const scrollToView = () => {
+  document.getElementById('members-found-heading').scrollIntoView({
+    block: 'start',
+    behavior: 'smooth',
+  })
+}
 </script>
 <style lang="postcss" scoped>
 .filter-container {

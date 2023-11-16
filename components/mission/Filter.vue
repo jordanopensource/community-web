@@ -62,9 +62,9 @@
       <div class="divider-dotted"></div>
       <div class="pt-4">
         <FormAppControlInput
-          v-model:value="state.isAssignedMission"
           inputType="checkbox"
-          @change="() => onCheck()"
+          labelId="show-assigned-missions"
+          @checkbox-changed="onCheck($event)"
         >
           Show assigned missions</FormAppControlInput
         >
@@ -105,7 +105,8 @@ const sortItems = [
 
 const emit = defineEmits(['sortMissions', 'searchMission', 'filterMissions'])
 
-const onCheck = () => {
+const onCheck = (event) => {
+  state.isAssignedMission = event
   emit('filterMissions', { key: 'assigned', value: state.isAssignedMission })
 }
 

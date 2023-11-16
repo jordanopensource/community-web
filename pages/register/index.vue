@@ -42,10 +42,13 @@
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
+definePageMeta({
+  middleware: ['register'],
+})
 const config = useRuntimeConfig()
 const step = ref(1)
 let formData = reactive({})
-if (!config.public.TARGET_ENV === 'development') {
+if (!config.public.targetEnv === 'development') {
   navigateTo('/')
 }
 const nextStep = (data) => {
@@ -55,7 +58,7 @@ const nextStep = (data) => {
 
 const submitForm = (data) => {
   formData = { ...formData, ...data }
-  fetch(`${config.public.COMMUNITY_API_URL}/submission/`, {
+  fetch(`${config.public.communityApiUrl}/submission/`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

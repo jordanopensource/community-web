@@ -17,6 +17,6 @@ const route = useRoute()
 const MISSION_ID = route.params.id
 
 const { data: missionData, pending: pendingMission } = await useFetch(
-  `${config.public.COMMUNITY_API_URL}/mission/${MISSION_ID}`
+  `${config.public.communityApiUrl}/mission/${MISSION_ID}`
 )
 </script>

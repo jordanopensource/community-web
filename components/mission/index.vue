@@ -55,7 +55,7 @@ const emit = defineEmits(['setCategories'])
 
 const getMissions = async () => {
   state.loading = true
-  let url = `${config.public.COMMUNITY_API_URL}/mission/page/${state.page}?`
+  let url = `${config.public.communityApiUrl}/mission/page/${state.page}?`
 
   if (props.selectedMissionCriteria) {
     url += `${props.selectedMissionCriteria?.key}=${props.selectedMissionCriteria?.value}&`

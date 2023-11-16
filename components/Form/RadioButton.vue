@@ -45,7 +45,7 @@ input[type='radio'] {
 }
 
 span {
-  @apply text-josa-black block relative h-auto;
+  @apply text-community-black block relative h-auto;
 }
 
 span {
@@ -68,11 +68,11 @@ label {
 }
 
 span:hover label {
-  @apply text-josa-blue;
+  @apply text-community-blue;
 }
 
 .check {
-  @apply border border-josa-blue border-solid rounded;
+  @apply border border-community-blue border-solid rounded;
   display: block;
   position: absolute;
   height: 30px;
@@ -93,10 +93,10 @@ span:hover label {
 }
 
 span:hover .check::before {
-  @apply bg-josa-blue;
+  @apply bg-community-blue;
 }
 
 .checked::before {
-  @apply bg-josa-blue;
+  @apply bg-community-blue;
 }
 </style>

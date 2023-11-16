@@ -11,7 +11,7 @@ padding 40 px btween eneties top bottom, between container items 20px
 */
 body {
   @apply text-base font-normal;
-  @apply text-josa-black-text;
+  @apply text-community-black-text;
 }
 
 /* Titles are classes used to descirbe titles of entities  */
@@ -27,17 +27,36 @@ body {
   @apply border-dotted border-b border-gray-500;
 }
 
-h1 {
-  @apply text-5xl;
+.secondary-text {
+  @apply text-community-grey-text;
+}
+
+h1:not(.heading h1) {
+  @apply text-4xl;
   @apply text-white;
 }
 
 h2 {
-  @apply text-4xl;
+  @apply text-2xl;
 }
 
 h3 {
   @apply lg:text-xl;
+}
+.loader {
+  @apply h-6 w-6;
+  @apply border-4 border-solid border-gray-200;
+  border-radius: 50%;
+  border-top: 3px solid #0c97ac;
+  animation: spin 0.8s linear infinite;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }
 
 .rounded {
@@ -59,15 +78,15 @@ h3 {
 }
 
 .button-blue {
-  @apply border-josa-blue text-josa-blue;
+  @apply border-community-blue text-community-blue;
 }
 
 .button-blue:hover {
-  @apply bg-josa-blue text-white !important;
+  @apply bg-community-blue text-white !important;
 }
 
 .button-blue-full {
-  @apply border-josa-blue bg-josa-blue;
+  @apply border-community-blue bg-community-blue;
   color: #fff !important;
 }
 
@@ -77,7 +96,7 @@ h3 {
 }
 
 .button-flat {
-  @apply rounded-none border-none normal-case py-3 px-6 text-josa-black font-semibold;
+  @apply rounded-none border-none normal-case py-3 px-6 text-community-black font-semibold;
 }
 
 .button-flat:hover {
@@ -92,11 +111,11 @@ a {
 
 a:hover,
 a.active {
-  @apply text-josa-blue;
+  @apply text-community-blue;
 }
 
 .nav-link {
-  @apply p-2 uppercase block text-josa-warm-grey-light;
+  @apply p-2 uppercase block text-community-grey-light;
 }
 
 @screen lg {
@@ -125,4 +144,12 @@ ul > li {
 
 .title {
   font-weight: 500;
+}
+
+.delete-btn {
+  @apply cursor-pointer bg-trashIcon bg-no-repeat bg-contain w-4 h-4 border-none;
+}
+
+.edit-btn {
+  @apply cursor-pointer bg-contain w-4 h-4 bg-no-repeat;
 }

@@ -3,14 +3,8 @@
     <span>{{ state.range }}</span>
   </p>
   <div class="slide-container">
-    <input
-      @input="($event) => onChange($event.target.value)"
-      class="slider"
-      type="range"
-      :min="props.min"
-      :max="props.max"
-      :value="state.range"
-    />
+    <input @input="($event) => onChange($event.target.value)" class="slider" type="range" :min="props.min"
+      :max="props.max" :value="state.range" />
   </div>
 </template>
 <script setup>
@@ -40,7 +34,7 @@ const onChange = (value) => {
 </script>
 <style lang="postcss" scoped>
 .slider {
-  @apply bg-josa-blue;
+  @apply bg-community-blue;
 }
 
 .slider::-webkit-slider-thumb {
@@ -48,13 +42,14 @@ const onChange = (value) => {
   appearance: none;
   width: 25px;
   height: 25px;
-  @apply bg-josa-blue;
+  @apply bg-community-blue;
   cursor: pointer;
 }
+
 .slider::-moz-range-thumb {
   width: 25px;
   height: 25px;
-  @apply bg-josa-blue;
+  @apply bg-community-blue;
   cursor: pointer;
 }
 </style>

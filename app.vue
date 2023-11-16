@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-josa-warm-grey-light">
-    <BuildInfoBanner v-if="config.public.TARGET_ENV === 'development'" />
+  <div class="bg-community-grey-light">
+    <BuildInfoBanner v-if="config.public.targetEnv === 'development'" />
     <PageHeader />
     <NuxtPage />
     <PageFooter />

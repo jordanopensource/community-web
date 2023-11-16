@@ -13,4 +13,8 @@ const props = defineProps({
 })
 </script>
 
-<style scoped></style>
+<style scoped lang="postcss">
+.button:disabled {
+  @apply bg-josa-grey;
+}
+</style>

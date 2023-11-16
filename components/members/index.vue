@@ -1,7 +1,9 @@
 <template>
   <div v-if="state.loading" class="loader"></div>
   <div v-else-if="!state.loading && state.members.length">
-    <h2 class="text-2xl mono">{{ state.metaData.totalItems }} members found</h2>
+    <h2 class="text-2xl mono" id="members-found-heading">
+      {{ state.metaData.totalItems }} members found
+    </h2>
     <div v-for="(member, index) in state.members" :key="`item-${index}`">
       <MembersCard :member="member" />
     </div>
@@ -50,7 +52,7 @@ const props = defineProps({
 
 const getMembers = async () => {
   state.loading = true
-  let url = `${config.public.COMMUNITY_API_URL}/member/page/${state.page}?`
+  let url = `${config.public.communityApiUrl}/member/page/${state.page}?`
   if (state.passedName) {
     url += `name=${state.passedName}&`
   }
@@ -104,21 +106,3 @@ watch(
   }
 )
 </script>
-
-<style>
-.loader {
-  @apply h-6 w-6;
-  @apply border-4 border-solid border-gray-200;
-  border-radius: 50%;
-  border-top: 3px solid #0c97ac;
-  animation: spin 0.8s linear infinite;
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-}
-</style>
