@@ -32,7 +32,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@kevinmarrec/nuxt-pwa',
     '@nuxtjs/robots',
-    "@nuxtjs/sitemap"
+    "@nuxtjs/sitemap",
+    "@sidebase/nuxt-auth"
   ],
   css: [
     '@/assets/css/typography.css',
