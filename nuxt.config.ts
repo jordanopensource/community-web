@@ -28,7 +28,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ['@nuxtjs/tailwindcss', '@kevinmarrec/nuxt-pwa'],
+  modules: ['@nuxtjs/tailwindcss', '@kevinmarrec/nuxt-pwa', '@nuxtjs/robots'],
   css: [
     '@/assets/css/typography.css',
     '@/assets/css/form.css',
