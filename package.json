@@ -8,6 +8,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.10",
     "@kevinmarrec/nuxt-pwa": "^0.17.0",
+    "@nuxtjs/sitemap": "^5.1.4",
     "@nuxtjs/tailwindcss": "^6.11.4",
     "@volar-plugins/vetur": "latest",
     "eslint": "^8.56.0",

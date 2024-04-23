@@ -28,7 +28,12 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ['@nuxtjs/tailwindcss', '@kevinmarrec/nuxt-pwa', '@nuxtjs/robots'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@kevinmarrec/nuxt-pwa',
+    '@nuxtjs/robots',
+    "@nuxtjs/sitemap"
+  ],
   css: [
     '@/assets/css/typography.css',
     '@/assets/css/form.css',
