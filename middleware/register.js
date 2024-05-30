@@ -6,10 +6,10 @@ export default defineNuxtRouteMiddleware(async(to, from) => {
       await isAuth(cookieName, useCookie(cookieName).value)
     } else {
       // if there's no cookie
-      useAuth().value = false
+      useAuthenticated().value = false
     }
   }
-  if (to.name === 'register' && useAuth().value) {
+  if (to.name === 'register' && useAuthenticated().value) {
     return navigateTo('/')
   }
 })

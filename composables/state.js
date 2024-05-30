@@ -1,6 +1,6 @@
 
 // store authorization status
-export const useAuth = () => useState('auth', () => false)
+export const useAuthenticated = () => useState('auth', () => false)
 
 // store the user id
 export const userId = () => useState('userId', () => '')
@@ -10,7 +10,7 @@ export const useMember = () => useState('member', () => { })
 
 // check if user is authenticated and update the store accordingly
 export const isAuth = async (cookieName, cookieValue) => {
-  const authenticated = useAuth()
+  const authenticated = useAuthenticated()
   const userID = userId();
   const member = useMember();
   const config = useRuntimeConfig()

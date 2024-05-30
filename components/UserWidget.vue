@@ -54,7 +54,7 @@ const togglePopup = () => {
 const signOut = async () => {
   togglePopup()
   await useFetch('/api/logout')
-  useAuth().value = false
+  useAuthenticated().value = false
   userId().value = null
   navigateTo('/')
 }
