@@ -79,6 +79,21 @@ export default defineNuxtConfig({
       lang: 'en',
     },
   },
+  auth: {
+    provider: {
+      type: 'local',
+      endpoints: {
+        signIn: { path: '/login', method: 'post' },
+        signOut: { path: '/logout', method: 'get'},
+        getSession: { path: '/', method: 'get' }
+      },
+      token: {
+        signInResponseTokenPointer: '/access_token',
+        cookieName: 'connect.sid',
+        type: 'Bearer',
+      },
+    }
+  },
   build: {
     transpile: ['@vuepic/vue-datepicker'],
   },
