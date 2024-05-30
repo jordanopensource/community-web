@@ -46,6 +46,7 @@
 </template>
 <script setup>
 const emit = defineEmits(['forgotPassword'])
+const { status, data, signIn, getSession } = useAuth()
 
 const form = reactive({
   email: '',
@@ -56,30 +57,43 @@ const state = reactive({
   error: false
 })
 const login = async() => {
+  state.error = false
   state.loading = true
 
-  // TODO: refresh data on submitting, or use $fetch.raw()
-  await $fetch('/api/login', {
-    method: "POST",
-    body: JSON.stringify({
-      "email": form.email,
-      "password": form.password
-    }),
-    onResponse({response}) {
-      if(response.ok) {
-        state.loading = false
-        const {first_name_en, last_name_en, id, avatar_url, type, josa_member_id} = response._data
-        useMember().value = {first_name_en, last_name_en, id, avatar_url, type, josa_member_id}
-        useAuth().value = true
-        userId().value = response._data.id
-        navigateTo('/')
-      }
-    },
-    onResponseError({response}) {
-      state.loading = false
-      state.error = true
-    }
+  await signIn({
+    email: form.email,
+    password: form.password
+  }, {
+    callbackUrl: "/"
   })
+  .catch((error) => {
+    console.error("Error while signing in: ", error)
+    state.error = true
+  })
+  .finally(() => {
+    const user = data.value
+    if (user?.id && user.username === form.email) {
+      console.info(`${user.username} is logged in!`)
+      userId().value = user.id
+      useAuthenticated().value = true
+      localStorage.setItem('userId', userId().value)
+    }
+    state.loading = false
+  })
+  // onResponse({response}) {
+    //   if(response.ok) {
+    //     state.loading = false
+    //     const {first_name_en, last_name_en, id, avatar_url, type, josa_member_id} = response._data
+    //     useMember().value = {first_name_en, last_name_en, id, avatar_url, type, josa_member_id}
+    //     useAuthenticated().value = true
+    //     userId().value = response._data.id
+    //     navigateTo('/')
+    //   }
+    // },
+    // onResponseError({response}) {
+    //   state.loading = false
+    //   state.error = true
+    // }
 }
 </script>
 <style lang="postcss" scoped>

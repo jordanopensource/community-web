@@ -80,6 +80,7 @@ export default defineNuxtConfig({
     },
   },
   auth: {
+    baseURL: 'http://localhost:5000/auth',
     provider: {
       type: 'local',
       endpoints: {
@@ -92,6 +93,7 @@ export default defineNuxtConfig({
         cookieName: 'connect.sid',
         type: 'Bearer',
       },
+      sessionDataType: { id: 'string', username: 'string', iat: 'number', exp: 'number' }
     }
   },
   build: {
