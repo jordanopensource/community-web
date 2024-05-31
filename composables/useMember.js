@@ -35,8 +35,16 @@
  * @property {string} open_source_contributions.github_contributions
  * @property {Object.<string, any>} open_source_contributions.wikimedia_contributions
  */
+
 /**
  * Returns current (authenticated) member data
+ * @returns { Ref<MemberData> }
+ */
+export const useMemberData = () => useState('member', () => { })
+
+
+/**
+ * Fetches and returns current (authenticated) member data
  * and stores them in LocalStorage
  * @returns { Promise<MemberData> }
  */
@@ -60,6 +68,7 @@ export const useFetchMember = async () => {
     })
     // TODO: remove this from here and move it to its own composable
     localStorage.setItem('member', JSON.stringify(data))
+    useMemberData().value = data
     return data
   } catch (error) {
     console.error('Error fetching member profile:', error)
