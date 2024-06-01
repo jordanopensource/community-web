@@ -49,17 +49,17 @@
 <script setup>
 
 const memberData = useMemberData()
+const { signOut } = useAuth()
 
 const togglePopup = () => {
   state.isOpen = !state.isOpen
 }
 
-const signOut = async () => {
+const logout = async () => {
   togglePopup()
-  await useFetch('/api/logout')
+  signOut({callbackUrl: '/'})
   useAuthenticated().value = false
   userId().value = null
-  navigateTo('/')
 }
 
 const state = reactive({
@@ -84,7 +84,7 @@ const widget = reactive({
       title: 'Sign out',
       to: '/',
       icon: 'ic-logout',
-      onClick: signOut
+      onClick: logout
     }
   ]
 })
