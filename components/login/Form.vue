@@ -46,7 +46,7 @@
 </template>
 <script setup>
 const emit = defineEmits(['forgotPassword'])
-const { status, data, signIn, getSession } = useAuth()
+const { data, signIn } = useAuth()
 
 const form = reactive({
   email: '',
@@ -70,30 +70,17 @@ const login = async() => {
     console.error("Error while signing in: ", error)
     state.error = true
   })
-  .finally(() => {
-    const user = data.value
-    if (user?.id && user.username === form.email) {
-      console.info(`${user.username} is logged in!`)
-      userId().value = user.id
+  .finally(async () => {
+    const member = data.value
+    if (member?.id && member.username === form.email) {
+      console.info(`${member.username} is logged in!`)
+      userId().value = member.id
       useAuthenticated().value = true
       localStorage.setItem('userId', userId().value)
+      await useFetchMember()
     }
     state.loading = false
   })
-  // onResponse({response}) {
-    //   if(response.ok) {
-    //     state.loading = false
-    //     const {first_name_en, last_name_en, id, avatar_url, type, josa_member_id} = response._data
-    //     useMember().value = {first_name_en, last_name_en, id, avatar_url, type, josa_member_id}
-    //     useAuthenticated().value = true
-    //     userId().value = response._data.id
-    //     navigateTo('/')
-    //   }
-    // },
-    // onResponseError({response}) {
-    //   state.loading = false
-    //   state.error = true
-    // }
 }
 </script>
 <style lang="postcss" scoped>
