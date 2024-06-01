@@ -39,14 +39,14 @@
           @focusout="state.pwActive = false"
         />
         <span v-if="props.showPasswordIcon && props.inputType === 'password'">
-          <i
+          <button
             class="eye-icon"
             :class="[
               state.showPassword ? 'hide' : 'show',
               state.pwActive ? 'focusBg' : '',
             ]"
-            @click="state.showPassword = !state.showPassword"
-          ></i>
+            @click.prevent="state.showPassword = !state.showPassword"
+          ></button>
         </span>
       </div>
       <div

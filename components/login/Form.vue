@@ -27,7 +27,7 @@
       >
         Password
       </FormAppControlInput>
-      <NuxtLink @click="$emit('forgotPassword', true)">
+      <NuxtLink @click="$emit('forgotPassword', true)" href="#">
         Forgot Password?
       </NuxtLink>
       <FormAppButton
