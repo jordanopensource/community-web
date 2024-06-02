@@ -90,7 +90,7 @@ export default defineNuxtConfig({
       },
       token: {
         signInResponseTokenPointer: '/access_token',
-        cookieName: 'connect.sid',
+        cookieName: 'access_token',
         type: 'Bearer',
       },
       sessionDataType: { id: 'string', username: 'string', iat: 'number', exp: 'number' }
