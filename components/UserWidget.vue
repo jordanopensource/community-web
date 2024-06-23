@@ -58,7 +58,7 @@ const togglePopup = () => {
 const logout = async () => {
   togglePopup()
   signOut({callbackUrl: '/'})
-  useAuthenticated().value = false
+  isAuth().value = false
   userId().value = null
 }
 

@@ -75,7 +75,7 @@ const login = async() => {
     if (member?.id && member.username === form.email) {
       console.info(`${member.username} is logged in!`)
       userId().value = member.id
-      useAuthenticated().value = true
+      isAuth().value = true
       localStorage.setItem('userId', userId().value)
       await useFetchMember()
     }

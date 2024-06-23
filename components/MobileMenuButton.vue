@@ -9,7 +9,7 @@
       />
       <img v-else class="w-9 h-9" src=" /icons/bars-solid.svg" alt="" />
     </button>
-    <UserWidget v-if="useAuthenticated().value" />
+    <UserWidget v-if="isAuth().value" />
   </div>
 </template>
 

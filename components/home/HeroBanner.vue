@@ -27,7 +27,7 @@
         </div>
 
         <NuxtLink
-          v-if="!useAuthenticated().value"
+          v-if="!isAuth().value"
           class="button-flat button-blue-full"
           to="/register"
         >

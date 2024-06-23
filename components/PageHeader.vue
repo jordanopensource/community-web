@@ -37,7 +37,7 @@
                 id="login"
                 to="/login"
                 class="nav-link"
-                v-if="!useAuthenticated().value"
+                v-if="!isAuth().value"
                 >Sign In</NuxtLink
               >
               <UserWidget v-else />

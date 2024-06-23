@@ -42,6 +42,17 @@
  */
 export const useMemberData = () => useState('member', () => { })
 
+/**
+ * returns the user id
+ * @returns {Ref<string>}
+ */
+export const userId = () => useState('userId', () => '')
+
+/**
+ * returns authorization status
+ * @returns {Ref<boolean>}
+ */
+export const isAuth = () => useState('auth', () => false)
 
 /**
  * Fetches and returns current (authenticated) member data
