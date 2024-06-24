@@ -44,6 +44,7 @@
       </div>
     </div>
   </div>
+  <div v-else class="loader"></div>
 </template>
 
 <script setup>
@@ -96,7 +97,7 @@ const widget = reactive({
   @apply flex flex-col items-end justify-between;
 }
 .avatar {
-  @apply w-10 rounded;
+  @apply w-10 h-10 object-cover rounded;
 }
 .avatar:hover {
   @apply cursor-pointer
