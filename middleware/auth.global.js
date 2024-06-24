@@ -9,12 +9,17 @@ export default defineNuxtRouteMiddleware(async (to) => {
         updateUserId(data.value?.id)
       })
     }
-    if (!(useMemberData().value || await useFetchMember())) {
+    try {
+      if (!(useMemberData().value || await useFetchMember())) {
+        isAuth().value = false
+        updateUserId(null)
+        updateMember(null)
+      } else {
+        isAuth().value = status.value === 'authenticated'
+      }
+    } catch (error) {
+      console.error(error)
       isAuth().value = false
-      updateUserId(null)
-      updateMember(null)
-    } else {
-      isAuth().value = status.value === 'authenticated'
     }
   }
   if (to.name === 'members-settings' && !isAuth().value) {

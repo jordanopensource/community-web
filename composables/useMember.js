@@ -84,7 +84,7 @@ export const useFetchMember = async (memberId = userId().value) => {
   const apiUrl = useRuntimeConfig().public.communityApiUrl
   const { token } = useAuth()
 
-  if (!memberId) return null
+  if (!memberId) throw new Error("userId is required")
   
   // TODO: maybe this could be refactored to be used for both authenticated and unauthenticated users?
   if (!token.value) return null
