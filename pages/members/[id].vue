@@ -62,9 +62,6 @@
   </div>
 </template>
 <script setup>
-definePageMeta({
-  middleware: 'auth',
-})
 const route = useRoute()
 const user_id = route.params.id
 const isUserLogged = route.params.id === userId().value
