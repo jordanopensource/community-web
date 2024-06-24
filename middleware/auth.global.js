@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware(async () => {
+export default defineNuxtRouteMiddleware(async (to) => {
   const { status, getSession, token, data } = useAuth()
   if (process.client) {
     const memberId = localStorage.getItem('userId')

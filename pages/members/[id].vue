@@ -72,10 +72,12 @@ const {
   data: memberData,
   pending: pendingMember,
   refresh,
-} = await useLazyFetch(`/api/member/?id=${user_id}`)
+} = useLazyAsyncData(async () => {
+  return await useFetchMember(user_id)
+})
 
 const state = reactive({
-  memberData: memberData,
+  memberData: memberData.value,
 })
 
 watch(memberData, (newMemberData) => {

@@ -66,7 +66,7 @@ export const updateUserId = (id) => {
 
 /**
  * updates member and sets its value in localStorage
- * @param {MemberData | null} member 
+ * @param { MemberData | null } member 
  */
 export const updateMember = (member) => {
   useMemberData().value = member
@@ -77,24 +77,22 @@ export const updateMember = (member) => {
 
 /**
  * Fetches and returns current (authenticated) member data
+ * @param { string } memberId
  * @returns { Promise<MemberData> }
  */
-export const useFetchMember = async () => {
+export const useFetchMember = async (memberId = userId().value) => {
   const apiUrl = useRuntimeConfig().public.communityApiUrl
-  console.info("API URL: ", apiUrl)
-
   const { token } = useAuth()
-  console.info("MEMBER TOKEN: ", token.value)
 
-  const memberId = userId().value
-  console.log("MEMBER ID: ", memberId)
-
+  if (!memberId) return null
+  
   // TODO: maybe this could be refactored to be used for both authenticated and unauthenticated users?
   if (!token.value) return null
   try {
     const data = await $fetch(`${apiUrl}/member/${memberId}`, {
       headers: {
-        Authorization: token.value
+        Authorization: token.value && memberId === userId().value ?
+          token.value : null
       }
     })
     updateMember(data)
@@ -107,6 +105,6 @@ export const useFetchMember = async () => {
 
 /**
  * returns authorization status
- * @returns {Ref<boolean>}
+ * @returns {Ref<boolean | null>}
  */
-export const isAuth = () => useState('auth', () => false)
+export const isAuth = () => useState('auth', () => null)
