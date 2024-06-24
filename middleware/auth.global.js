@@ -9,7 +9,12 @@ export default defineNuxtRouteMiddleware(async () => {
         updateUserId(data.value?.id)
       })
     }
-    useFetchMember()
-    isAuth().value = status.value === 'authenticated'
+    if (!await useFetchMember()) {
+      isAuth().value = false
+      updateUserId(null)
+      updateMember(null)
+    } else {
+      isAuth().value = status.value === 'authenticated'
+    }
   }
 })
