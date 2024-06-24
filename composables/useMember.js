@@ -36,6 +36,11 @@
  * @property {Object.<string, any>} open_source_contributions.wikimedia_contributions
  */
 
+const STORAGE_KEYS = {
+  userId: 'userId',
+  member: 'member'
+}
+
 /**
  * Returns current (authenticated) member data
  * @returns { Ref<MemberData> }
@@ -44,19 +49,34 @@ export const useMemberData = () => useState('member', () => { })
 
 /**
  * returns the user id
- * @returns {Ref<string>}
+ * @returns {Ref<string | null>}
  */
-export const userId = () => useState('userId', () => '')
+export const userId = () => useState('userId', () => null)
 
 /**
- * returns authorization status
- * @returns {Ref<boolean>}
+ * updates userId and sets its value in localStorage
+ * @param {string | null} id 
  */
-export const isAuth = () => useState('auth', () => false)
+export const updateUserId = (id) => {
+  userId().value = id
+  id ?
+    localStorage.setItem(STORAGE_KEYS.userId, id) :
+    localStorage.removeItem(STORAGE_KEYS.userId)
+}
+
+/**
+ * updates member and sets its value in localStorage
+ * @param {MemberData | null} member 
+ */
+export const updateMember = (member) => {
+  useMemberData().value = member
+  member ?
+    localStorage.setItem(STORAGE_KEYS.member, JSON.stringify(member)) :
+    localStorage.removeItem(STORAGE_KEYS.member)
+}
 
 /**
  * Fetches and returns current (authenticated) member data
- * and stores them in LocalStorage
  * @returns { Promise<MemberData> }
  */
 export const useFetchMember = async () => {
@@ -77,12 +97,16 @@ export const useFetchMember = async () => {
         Authorization: token.value
       }
     })
-    // TODO: remove this from here and move it to its own composable
-    localStorage.setItem('member', JSON.stringify(data))
-    useMemberData().value = data
+    updateMember(data)
     return data
   } catch (error) {
     console.error('Error fetching member profile:', error)
     return null
   }
 }
+
+/**
+ * returns authorization status
+ * @returns {Ref<boolean>}
+ */
+export const isAuth = () => useState('auth', () => false)

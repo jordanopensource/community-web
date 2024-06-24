@@ -6,14 +6,10 @@ export default defineNuxtRouteMiddleware(async () => {
       userId().value = memberId
     } else if (token.value) {
       await getSession().then(() => {
-        // TODO: this will be turned into its own composable
-        userId().value = data.value?.id
-        localStorage.setItem('userId', userId().value)
+        updateUserId(data.value?.id)
       })
     }
     useFetchMember()
-    // NOTE: if we already have `status` from useAuth then
-    // useAuthenticated is now redundant
-    useAuthenticated().value = status.value === 'authenticated'
+    isAuth().value = status.value === 'authenticated'
   }
 })

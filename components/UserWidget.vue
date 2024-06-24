@@ -59,7 +59,8 @@ const logout = async () => {
   togglePopup()
   signOut({callbackUrl: '/'})
   isAuth().value = false
-  userId().value = null
+  updateMember(null)
+  updateUserId(null)
 }
 
 const state = reactive({
