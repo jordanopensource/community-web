@@ -66,7 +66,7 @@ export default defineNuxtConfig({
       buildRepoLink: '',
       buildTimestamp: '',
       debug: '',
-      sessionCookieName: 'connect.sid',
+      sessionCookieName: 'access_token',
       matomoSiteId: 13,
       matomoHost: 'https://analytics.josa.ngo',
     },
