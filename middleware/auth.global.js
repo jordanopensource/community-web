@@ -17,4 +17,7 @@ export default defineNuxtRouteMiddleware(async () => {
       isAuth().value = status.value === 'authenticated'
     }
   }
+  if (to.name === 'members-settings' && !isAuth().value) {
+    return navigateTo(`/`)
+  }
 })
