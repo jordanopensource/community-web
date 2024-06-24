@@ -208,7 +208,8 @@ const uploadImage = async (event, imageType) => {
         state.images.avatar.url = avatar_url
           ? avatar_url + '?last-updated=' + Date.now()
           : props.member.avatar_url
-        useMember().value[`${imageType}_url`] = state.images[imageType].url
+        useMemberData().value[`${imageType}_url`] = state.images[imageType].url
+        state.success = true
       }
     })
     .catch((error) => {
