@@ -212,12 +212,12 @@ const uploadImage = async (event, imageType) => {
       }
     })
     .catch((error) => {
-      state.loading = false
       state.error = true
       state.success = false
     })
     .finally(() => {
       updateGeneralInfo()
+      state.loading = false
     })
 }
 
@@ -236,17 +236,14 @@ const updateGeneralInfo = async (event) => {
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
       if (response._data) {
-        state.error = false
-        state.success = true
         state.loading = false
       }
       emit('updateMember')
     },
     onResponseError({ response }) {
-      state.error = false
-      state.success = true
-      state.loading = false
-      console.log('something went wrong', response._data.message)
+      state.error = true
+      state.success = false
+      console.error('something went wrong', response._data.message)
     },
   })
   showUpdateInfoForm.value = !showUpdateInfoForm
