@@ -5,11 +5,11 @@ export default defineNuxtRouteMiddleware(async () => {
     if (memberId) {
       userId().value = memberId
     } else if (token.value) {
-      await getSession().then(() => {
+      getSession().then(() => {
         updateUserId(data.value?.id)
       })
     }
-    if (!await useFetchMember()) {
+    if (!(useMemberData().value || await useFetchMember())) {
       isAuth().value = false
       updateUserId(null)
       updateMember(null)
