@@ -102,6 +102,19 @@ export const useFetchMember = async (memberId = userId().value) => {
 }
 
 /**
+ * Logs user out and clears userId and memberData
+ */
+export const logoutMember = () => {
+  const { signOut } = useAuth()
+  signOut({
+    callbackUrl: '/'
+  })
+  isAuth().value = false
+  updateUserId(null)
+  updateMember(null)
+}
+
+/**
  * returns authorization status
  * @returns {Ref<boolean | null>}
  */

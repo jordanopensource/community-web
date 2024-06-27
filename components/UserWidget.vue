@@ -50,18 +50,13 @@
 <script setup>
 
 const memberData = useMemberData()
-const { signOut } = useAuth()
-
 const togglePopup = () => {
   state.isOpen = !state.isOpen
 }
 
 const logout = async () => {
   togglePopup()
-  signOut({callbackUrl: '/'})
-  isAuth().value = false
-  updateMember(null)
-  updateUserId(null)
+  logoutMember()
 }
 
 const state = reactive({
