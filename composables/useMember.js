@@ -93,7 +93,7 @@ export const useFetchMember = async (memberId = userId().value) => {
           token.value : null
       }
     })
-    updateMember(data)
+    if (memberId === userId()) updateMember(data)
     return data
   } catch (error) {
     console.error('Error fetching member profile:', error)
