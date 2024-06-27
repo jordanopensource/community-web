@@ -64,7 +64,7 @@
 <script setup>
 const route = useRoute()
 const user_id = route.params.id
-const isUserLogged = route.params.id === userId().value
+const isUserLogged = computed(() => route.params.id === userId().value && isAuth().value)
 const {
   data: memberData,
   pending: pendingMember,
