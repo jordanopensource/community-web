@@ -54,25 +54,19 @@ export const useMemberData = () => useState('member', () => { })
 export const userId = () => useState('userId', () => null)
 
 /**
- * updates userId and sets its value in localStorage
+ * updates userId
  * @param {string | null} id 
  */
 export const updateUserId = (id) => {
   userId().value = id
-  id ?
-    localStorage.setItem(STORAGE_KEYS.userId, id) :
-    localStorage.removeItem(STORAGE_KEYS.userId)
 }
 
 /**
- * updates member and sets its value in localStorage
+ * updates memberData
  * @param { MemberData | null } member 
  */
 export const updateMember = (member) => {
   useMemberData().value = member
-  member ?
-    localStorage.setItem(STORAGE_KEYS.member, JSON.stringify(member)) :
-    localStorage.removeItem(STORAGE_KEYS.member)
 }
 
 /**
