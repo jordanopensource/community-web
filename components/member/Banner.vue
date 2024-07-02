@@ -208,16 +208,17 @@ const uploadImage = async (event, imageType) => {
         state.images.avatar.url = avatar_url
           ? avatar_url + '?last-updated=' + Date.now()
           : props.member.avatar_url
-        useMember().value[`${imageType}_url`] = state.images[imageType].url
+        useMemberData().value[`${imageType}_url`] = state.images[imageType].url
+        state.success = true
       }
     })
     .catch((error) => {
-      state.loading = false
       state.error = true
       state.success = false
     })
     .finally(() => {
       updateGeneralInfo()
+      state.loading = false
     })
 }
 
@@ -236,17 +237,14 @@ const updateGeneralInfo = async (event) => {
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
       if (response._data) {
-        state.error = false
-        state.success = true
         state.loading = false
       }
       emit('updateMember')
     },
     onResponseError({ response }) {
-      state.error = false
-      state.success = true
-      state.loading = false
-      console.log('something went wrong', response._data.message)
+      state.error = true
+      state.success = false
+      console.error('something went wrong', response._data.message)
     },
   })
   showUpdateInfoForm.value = !showUpdateInfoForm

@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     body: body,
     headers: {
       "Accept": "*/*",
-      "Cookie": `${config.public.sessionCookieName}=` + sessionCookie,
+      "Authorization": `Bearer ${sessionCookie}`
     }
   }
   const settingsResponse = await $fetch.raw(apiUrl, settingsOptions);

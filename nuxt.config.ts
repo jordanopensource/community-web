@@ -32,7 +32,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@kevinmarrec/nuxt-pwa',
     '@nuxtjs/robots',
-    "@nuxtjs/sitemap"
+    "@nuxtjs/sitemap",
+    "@sidebase/nuxt-auth"
   ],
   css: [
     '@/assets/css/typography.css',
@@ -65,7 +66,7 @@ export default defineNuxtConfig({
       buildRepoLink: '',
       buildTimestamp: '',
       debug: '',
-      sessionCookieName: 'connect.sid',
+      sessionCookieName: 'access_token',
       matomoSiteId: 13,
       matomoHost: 'https://analytics.josa.ngo',
     },
@@ -77,6 +78,24 @@ export default defineNuxtConfig({
     manifest: {
       lang: 'en',
     },
+  },
+  auth: {
+    baseURL: 'http://localhost:5000/auth',
+    provider: {
+      type: 'local',
+      endpoints: {
+        signIn: { path: '/login', method: 'post' },
+        signOut: { path: '/logout', method: 'get'},
+        getSession: { path: '/', method: 'get' }
+      },
+      token: {
+        signInResponseTokenPointer: '/access_token',
+        cookieName: 'access_token',
+        type: 'Bearer',
+        maxAgeInSeconds: 60 * 60 * 24
+      },
+      sessionDataType: { id: 'string', username: 'string', iat: 'number', exp: 'number' }
+    }
   },
   build: {
     transpile: ['@vuepic/vue-datepicker'],

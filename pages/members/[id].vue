@@ -1,58 +1,58 @@
 <template>
   <div>
     <Banner bannerText="JOSA Members" />
-    <div class="container" v-if="state.memberData">
+    <div class="container" v-if="!pendingMember && memberDataRef">
       <MemberBanner
-        :member="state.memberData.member"
+        :member="memberDataRef.member"
         :memberAuth="isUserLogged"
         @updateMember="() => refresh()"
       />
       <div class="flex">
         <div class="flex flex-col w-full">
           <div class="block lg:hidden">
-            <MemberCard :member="state.memberData.member" />
+            <MemberCard :member="memberDataRef.member" />
           </div>
           <MemberDetails
-            v-if="state.memberData.member.about || isUserLogged"
-            :member="state.memberData.member"
-            :settings="state.memberData.settings"
+            v-if="memberDataRef.member.about || isUserLogged"
+            :member="memberDataRef.member"
+            :settings="memberDataRef.settings"
             :memberAuth="isUserLogged"
             @updateMember="() => refresh()"
           />
           <MemberExperience
             v-if="
-              state.memberData.experience.length ||
-              state.memberData.education.length ||
+              memberDataRef.experience.length ||
+              memberDataRef.education.length ||
               isUserLogged
             "
-            :experience="state.memberData.experience"
-            :education="state.memberData.education"
+            :experience="memberDataRef.experience"
+            :education="memberDataRef.education"
             :memberAuth="isUserLogged"
-            :settings="state.memberData.settings"
+            :settings="memberDataRef.settings"
             @updateMember="() => refresh()"
           />
           <MemberContribution
             v-if="
-              state.memberData.contributions.length ||
-              state.memberData.open_source_contributions.github_contributions
+              memberDataRef.contributions.length ||
+              memberDataRef.open_source_contributions.github_contributions
                 .length ||
               Object.keys(
-                state.memberData.open_source_contributions
+                memberDataRef.open_source_contributions
                   .wikimedia_contributions
               ).length ||
               isUserLogged
             "
-            :contributions="state.memberData.contributions"
+            :contributions="memberDataRef.contributions"
             :opensource-contributions="
-              state.memberData.open_source_contributions
+              memberDataRef.open_source_contributions
             "
-            :settings="state.memberData.settings"
-            :githubUserName="state.memberData.member.github_user"
-            :wikiMediaUserName="state.memberData.member.wikimedia_user"
+            :settings="memberDataRef.settings"
+            :githubUserName="memberDataRef.member.github_user"
+            :wikiMediaUserName="memberDataRef.member.wikimedia_user"
           />
         </div>
         <div class="hidden lg:block">
-          <MemberCard :member="state.memberData.member" />
+          <MemberCard :member="memberDataRef.member" />
         </div>
       </div>
     </div>
@@ -62,25 +62,19 @@
   </div>
 </template>
 <script setup>
-definePageMeta({
-  middleware: 'auth',
-})
 const route = useRoute()
 const user_id = route.params.id
-const isUserLogged = route.params.id === userId().value
+const isUserLogged = computed(() => route.params.id === userId().value && isAuth().value)
 const {
   data: memberData,
   pending: pendingMember,
   refresh,
-} = await useLazyFetch(`/api/member/?id=${user_id}`)
-
-const state = reactive({
-  memberData: memberData,
+} = useLazyAsyncData(async () => {
+  return await useFetchMember(user_id)
 })
 
-watch(memberData, (newMemberData) => {
-  state.memberData = newMemberData
-})
+const memberDataRef = computed(() => memberData.value)
+
 onMounted(() => {
   refresh()
 })

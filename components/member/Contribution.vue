@@ -138,10 +138,10 @@ const state = reactive({
   githubMaximumShown: 3,
   isShowMore: true,
   showGitHubContributions:
-    (useAuth().value && useRoute().params.id === userId().value) ||
+    (isAuth().value && useRoute().params.id === userId().value) ||
     !props.settings.hideGithubContributions,
   showWikimediaContributions:
-    (useAuth().value && useRoute().params.id === userId().value) ||
+    (isAuth().value && useRoute().params.id === userId().value) ||
     !props.settings.hideWikimediaContributions,
 })
 

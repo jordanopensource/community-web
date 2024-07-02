@@ -8,11 +8,11 @@ export default defineEventHandler(async (event) => {
     method: "DELETE",
     headers: {
       "Accept": "*/*",
-      "Cookie": `${config.public.sessionCookieName}=` + sessionCookie,
+      "Authorization": `Bearer ${sessionCookie}`
     }
   }
 
   const response = await $fetch.raw(apiUrl, uploadOptions);
 
-  return response;
+  return response?._data;
 })
