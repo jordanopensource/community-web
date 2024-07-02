@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     headers: {
       "Accept": "*/*",
       "Content-Type": "application/json",
-      "Cookie": `${config.public.sessionCookieName}=` + sessionCookie,
+      "Authorization": `Bearer ${sessionCookie}`
     }
   }
 

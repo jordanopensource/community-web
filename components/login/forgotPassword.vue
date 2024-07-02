@@ -36,7 +36,7 @@
           <div>Send password reset email</div>
         </div>
       </FormAppButton>
-      <NuxtLink @click="$emit('forgotPassword', false)">
+      <NuxtLink @click="$emit('forgotPassword', false)" href="#">
         Back to sign in
       </NuxtLink>
     </form>
@@ -45,7 +45,7 @@
         An email with a link to reset your password was sent to {{ form.email }}
       </Message>
       <div class="flex flex-row justify-between mt-4">
-        <NuxtLink @click="$emit('forgotPassword', false)">
+        <NuxtLink @click="$emit('forgotPassword', false)" href="#">
           Login
         </NuxtLink>
         <NuxtLink to="/">

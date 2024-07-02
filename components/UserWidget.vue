@@ -1,29 +1,29 @@
 <template>
-  <div v-if="useMember().value" class="widget-container">
+  <div v-if="memberData?.member" class="widget-container">
     <img
       @click="togglePopup"
       class="avatar"
       alt="avatar"
       :src="
-        useMember().value.avatar_url
-        ? useMember().value.avatar_url
+        memberData?.member.avatar_url
+        ? memberData?.member.avatar_url
         : '/images/placeholders/avatar.png'
       "
     />
     <div v-if="state.isOpen" class="user-menu">
       <div class="widget-arrow"></div>
       <p class="user-name">
-        {{ useMember().value.first_name_en }} {{ useMember().value.last_name_en }}
+        {{ memberData?.member.first_name_en }} {{ memberData?.member.last_name_en }}
       </p>
       <div class="flex flex-row justify-between mb-4">
-        <p v-if="useMember().value.type !== 0"
+        <p v-if="memberData?.member.type !== 0"
           class="user-info">
           <div class="badge-color"></div>
           JOSA Member
         </p>
-        <p v-if="useMember().value.josa_member_id && useMember().value.type !== 0"
+        <p v-if="memberData?.member.josa_member_id && memberData?.member.type !== 0"
           class="user-info">
-          #{{ useMember().value.type }}-{{ useMember().value.josa_member_id }}
+          #{{ memberData?.member.type }}-{{ memberData?.member.josa_member_id }}
         </p>
       </div>
       <div class="divider-dotted"></div>
@@ -44,19 +44,19 @@
       </div>
     </div>
   </div>
+  <div v-else class="loader"></div>
 </template>
 
 <script setup>
+
+const memberData = useMemberData()
 const togglePopup = () => {
   state.isOpen = !state.isOpen
 }
 
-const signOut = async () => {
+const logout = async () => {
   togglePopup()
-  await useFetch('/api/logout')
-  useAuth().value = false
-  userId().value = null
-  navigateTo('/')
+  logoutMember()
 }
 
 const state = reactive({
@@ -81,7 +81,7 @@ const widget = reactive({
       title: 'Sign out',
       to: '/',
       icon: 'ic-logout',
-      onClick: signOut
+      onClick: logout
     }
   ]
 })
@@ -92,7 +92,7 @@ const widget = reactive({
   @apply flex flex-col items-end justify-between;
 }
 .avatar {
-  @apply w-10 rounded;
+  @apply w-10 h-10 object-cover rounded;
 }
 .avatar:hover {
   @apply cursor-pointer

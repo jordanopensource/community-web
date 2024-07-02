@@ -53,7 +53,7 @@
           id="login"
           to="/login"
           class="nav-link"
-          v-if="!useAuth().value"
+          v-if="!isAuth().value"
           >Sign In</NuxtLink
         >
       </li>

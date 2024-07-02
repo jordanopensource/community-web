@@ -27,7 +27,7 @@
       >
         Password
       </FormAppControlInput>
-      <NuxtLink @click="$emit('forgotPassword', true)">
+      <NuxtLink @click="$emit('forgotPassword', true)" href="#">
         Forgot Password?
       </NuxtLink>
       <FormAppButton
@@ -46,6 +46,7 @@
 </template>
 <script setup>
 const emit = defineEmits(['forgotPassword'])
+const { data, signIn } = useAuth()
 
 const form = reactive({
   email: '',
@@ -56,29 +57,28 @@ const state = reactive({
   error: false
 })
 const login = async() => {
+  state.error = false
   state.loading = true
 
-  // TODO: refresh data on submitting, or use $fetch.raw()
-  await $fetch('/api/login', {
-    method: "POST",
-    body: JSON.stringify({
-      "email": form.email,
-      "password": form.password
-    }),
-    onResponse({response}) {
-      if(response.ok) {
-        state.loading = false
-        const {first_name_en, last_name_en, id, avatar_url, type, josa_member_id} = response._data
-        useMember().value = {first_name_en, last_name_en, id, avatar_url, type, josa_member_id}
-        useAuth().value = true
-        userId().value = response._data.id
-        navigateTo('/')
-      }
-    },
-    onResponseError({response}) {
-      state.loading = false
-      state.error = true
+  await signIn({
+    email: form.email,
+    password: form.password
+  }, {
+    callbackUrl: "/"
+  })
+  .catch((error) => {
+    console.error("Error while signing in: ", error)
+    state.error = true
+  })
+  .finally(async () => {
+    const member = data.value
+    if (member?.id && member.username === form.email) {
+      console.info(`${member.username} is logged in!`)
+      updateUserId(member.id)
+      isAuth().value = true
+      await useFetchMember()
     }
+    state.loading = false
   })
 }
 </script>
