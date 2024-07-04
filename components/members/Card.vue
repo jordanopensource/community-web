@@ -11,7 +11,7 @@
                   ? props.member.avatar_url
                   : avatarPlaceholder
               "
-              class="rounded-md w-16 md:w-full"
+              class="rounded-md w-16 h-16 md:w-36 md:h-36 object-cover"
               loading="lazy"
             />
           </div>
