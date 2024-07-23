@@ -1,5 +1,4 @@
-
-export default defineNuxtRouteMiddleware(async(to, from) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
   const { status } = useAuth()
   // if went to login page while already authenticated
   if (to.name === 'login' && status.value === 'authenticated') {

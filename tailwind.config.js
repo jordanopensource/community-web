@@ -16,7 +16,7 @@ module.exports = {
       center: true,
       padding: {
         DEFAULT: '1.25rem',
-        lg: '2.5rem'
+        lg: '2.5rem',
       },
     },
     extend: {
@@ -49,8 +49,8 @@ module.exports = {
           text: '#808080',
         },
         'josa-grey': {
-          light: "#f5f5f5", // bg
-          DEFAULT: '#e3e7e9' // bg boxes
+          light: '#f5f5f5', // bg
+          DEFAULT: '#e3e7e9', // bg boxes
         },
         'community-red': {
           DEFAULT: '#F26F54',
@@ -61,7 +61,7 @@ module.exports = {
         'community-black': {
           DEFAULT: '#22292c', // mainly used for banners
           darker: '#1a1f21', // mainly used for Navigation and footer background
-          text: "#333333"
+          text: '#333333',
         },
         grey90: '#e5e5e5',
       },
@@ -92,15 +92,15 @@ module.exports = {
         12: '3rem',
       },
       backgroundImage: {
-        'homeHero': "url('/images/background.svg')",
+        homeHero: "url('/images/background.svg')",
         'divider-slashes': "url('/images/divider-slash.svg')",
-        'slashes': "url('/images/slashes.svg')",
-        'editIcon': "url('/icons/edit.svg')",
-        'editIconWhite': "url('/icons/edit-white.svg')",
-        'trashIcon': "url('/icons/delete.svg')",
-        'xIcon': "url('/icons/x.svg')",
-        'addIcon': "url('/icons/add.svg')",
-      }
+        slashes: "url('/images/slashes.svg')",
+        editIcon: "url('/icons/edit.svg')",
+        editIconWhite: "url('/icons/edit-white.svg')",
+        trashIcon: "url('/icons/delete.svg')",
+        xIcon: "url('/icons/x.svg')",
+        addIcon: "url('/icons/add.svg')",
+      },
     },
   },
   variants: {

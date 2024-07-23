@@ -92,10 +92,15 @@ export default defineNuxtConfig({
         signInResponseTokenPointer: '/access_token',
         cookieName: 'access_token',
         type: 'Bearer',
-        maxAgeInSeconds: 60 * 60 * 24
+        maxAgeInSeconds: 60 * 60 * 24,
       },
-      sessionDataType: { id: 'string', username: 'string', iat: 'number', exp: 'number' }
-    }
+      sessionDataType: {
+        id: 'string',
+        username: 'string',
+        iat: 'number',
+        exp: 'number',
+      },
+    },
   },
   build: {
     transpile: ['@vuepic/vue-datepicker'],
