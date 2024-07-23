@@ -32,8 +32,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@kevinmarrec/nuxt-pwa',
     '@nuxtjs/robots',
-    "@nuxtjs/sitemap",
-    "@sidebase/nuxt-auth"
+    '@nuxtjs/sitemap',
+    '@sidebase/nuxt-auth',
   ],
   css: [
     '@/assets/css/typography.css',
@@ -85,8 +85,8 @@ export default defineNuxtConfig({
       type: 'local',
       endpoints: {
         signIn: { path: '/login', method: 'post' },
-        signOut: { path: '/logout', method: 'get'},
-        getSession: { path: '/', method: 'get' }
+        signOut: { path: '/logout', method: 'get' },
+        getSession: { path: '/', method: 'get' },
       },
       token: {
         signInResponseTokenPointer: '/access_token',
