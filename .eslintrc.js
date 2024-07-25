@@ -5,7 +5,6 @@ module.exports = {
     node: true,
   },
   extends: [
-    '@nuxtjs',
     'plugin:vue/vue3-recommended',
     'plugin:nuxt/recommended',
     'plugin:prettier/recommended',

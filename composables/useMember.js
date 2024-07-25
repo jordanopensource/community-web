@@ -38,14 +38,14 @@
 
 const STORAGE_KEYS = {
   userId: 'userId',
-  member: 'member'
+  member: 'member',
 }
 
 /**
  * Returns current (authenticated) member data
  * @returns { Ref<MemberData> }
  */
-export const useMemberData = () => useState('member', () => { })
+export const useMemberData = () => useState('member', () => {})
 
 /**
  * returns the user id
@@ -55,7 +55,7 @@ export const userId = () => useState('userId', () => null)
 
 /**
  * updates userId
- * @param {string | null} id 
+ * @param {string | null} id
  */
 export const updateUserId = (id) => {
   userId().value = id
@@ -63,7 +63,7 @@ export const updateUserId = (id) => {
 
 /**
  * updates memberData
- * @param { MemberData | null } member 
+ * @param { MemberData | null } member
  */
 export const updateMember = (member) => {
   useMemberData().value = member
@@ -78,14 +78,14 @@ export const useFetchMember = async (memberId = userId().value) => {
   const apiUrl = useRuntimeConfig().public.communityApiUrl
   const { token } = useAuth()
 
-  if (!memberId) throw new Error("userId is required")
+  if (!memberId) throw new Error('userId is required')
 
   try {
     const data = await $fetch(`${apiUrl}/member/${memberId}`, {
       headers: {
-        Authorization: token.value && memberId === userId().value ?
-          token.value : null
-      }
+        Authorization:
+          token.value && memberId === userId().value ? token.value : null,
+      },
     })
     if (memberId === userId()) updateMember(data)
     return data
@@ -101,7 +101,7 @@ export const useFetchMember = async (memberId = userId().value) => {
 export const logoutMember = () => {
   const { signOut } = useAuth()
   signOut({
-    callbackUrl: '/'
+    callbackUrl: '/',
   })
   isAuth().value = false
   updateUserId(null)

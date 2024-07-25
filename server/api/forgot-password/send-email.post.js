@@ -4,12 +4,12 @@ export default defineEventHandler(async (event) => {
   const options = {
     method: 'POST',
     headers: {
-      "Accept": "*/*",
-      "Content-Type": "application/json"
+      Accept: '*/*',
+      'Content-Type': 'application/json',
     },
-    body: body
+    body: body,
   }
   const url = `${config.public.communityApiUrl}/auth/forgot-password/`
-  const response = await $fetch.raw(url, options);
+  const response = await $fetch.raw(url, options)
   return response._data
-});
+})
