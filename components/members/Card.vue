@@ -21,12 +21,8 @@
             >
               {{ props.member.first_name_en }} {{ props.member.last_name_en }}
             </h3>
-            <p class="text-sm md:text-base">
-              {{
-                member.headline
-                  ? member.headline
-                  : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vi.'
-              }}
+            <p v-if="member.headline"class="text-sm md:text-base">
+              {{ member.headline }}
             </p>
           </div>
         </div>
