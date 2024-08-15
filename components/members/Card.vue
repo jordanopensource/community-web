@@ -5,13 +5,13 @@
         <div class="flex p-5 md:p-6">
           <div class="mr-4 md:w-36 w-fit h-fit item-min-width shrink-0">
             <img
-              alt="bot-lightbulb"
+              alt="member profile picture"
               :src="
                 props.member.avatar_url
                   ? props.member.avatar_url
                   : avatarPlaceholder
               "
-              class="rounded-md w-16 md:w-full"
+              class="rounded-md w-16 h-16 md:w-36 md:h-36 object-cover"
               loading="lazy"
             />
           </div>
@@ -21,12 +21,8 @@
             >
               {{ props.member.first_name_en }} {{ props.member.last_name_en }}
             </h3>
-            <p class="text-sm md:text-base">
-              {{
-                member.headline
-                  ? member.headline
-                  : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vi.'
-              }}
+            <p v-if="member.headline"class="text-sm md:text-base">
+              {{ member.headline }}
             </p>
           </div>
         </div>
@@ -48,13 +44,11 @@
           </p>
         </div>
         <div>
-          <p>
+          <p v-if="props.member.member_since">
             <span class="member-info-heading member-since">Member Since</span>
             <span class="member-info-value">
               {{
-                props.member.member_since
-                  ? formatDate(props.member.member_since)
-                  : 'January 2023'
+                formatDate(props.member.member_since)
               }}
             </span>
           </p>

@@ -15,14 +15,10 @@
         </p>
       </div>
       <div>
-        <p class="header">
+        <p v-if="props.member.member_since" class="header">
           Member Since
           <span>
-            {{
-              props.member.member_since
-                ? formatDate(props.member.member_since)
-                : 'January 2023'
-            }}
+            {{ formatDate(props.member.member_since) }}
           </span>
         </p>
       </div>
