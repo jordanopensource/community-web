@@ -18,8 +18,8 @@
           </NuxtLink>
           <ul class="menu">
             <li
-              class="menu-item"
               v-if="config.public.targetEnv === 'development'"
+              class="menu-item"
             >
               <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
             </li>
@@ -27,17 +27,17 @@
               <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
             </li>
             <li
-              class="menu-item"
               v-if="config.public.targetEnv === 'development'"
+              class="menu-item"
             >
               <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
             </li>
             <li class="menu-item">
               <NuxtLink
+                v-if="!token && !isAuth().value"
                 id="login"
                 to="/login"
                 class="nav-link"
-                v-if="!isAuth().value"
                 >Sign In</NuxtLink
               >
               <UserWidget v-else />
@@ -46,9 +46,9 @@
           <MobileMenuButton :is-open="state.isOpen" @toggle="ToggleIsOpen()" />
         </div>
         <MobileMenuItems
-          @toggleNav="ToggleIsOpen()"
           :is-open="state.isOpen"
           ()
+          @toggle-nav="ToggleIsOpen()"
         />
       </div>
     </nav>
@@ -57,6 +57,8 @@
 <script setup>
 import { reactive } from 'vue'
 const config = useRuntimeConfig()
+const { token } = useAuth()
+
 const state = reactive({
   isOpen: false,
 })
