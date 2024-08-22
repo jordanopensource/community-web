@@ -1,7 +1,7 @@
 <template>
   <div>
     <Banner banner-text="JOSA Members" />
-    <div v-if="!pendingMember && memberDataRef" class="container">
+    <div v-if="memberDataRef" class="container">
       <MemberBanner
         :member="memberDataRef.member"
         :member-auth="isUserLogged"
