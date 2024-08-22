@@ -20,8 +20,8 @@
       <h3 class="heading">About</h3>
       <div v-if="memberAuth" class="flex gap-x-4 items-center">
         <MemberPermissionDropDown
-          :permissionStatus="state.settings.about"
-          targetSettings="about"
+          :permission-status="state.settings.about"
+          target-settings="about"
         />
         <div
           class="edit-btn"
@@ -47,7 +47,7 @@
       <form @submit.prevent="updateMemberDetailsInfo">
         <FormAppControlInput
           v-model:value="state.form.memberAbout"
-          inputType="textarea"
+          input-type="textarea"
           :value="props.member.about"
         >
         </FormAppControlInput>
@@ -59,20 +59,19 @@
 </template>
 <script setup>
 const emit = defineEmits(['updateMember'])
-const memberSkills = ['Linux Operating System', 'File System']
 const showUpdateAboutForm = useState('showUpdateAboutForm', () => false)
 const props = defineProps({
   member: {
     type: Object,
-    default: {},
+    default: () => {},
   },
   settings: {
     type: Object,
-    default: {},
+    default: () => {},
   },
   skills: {
     type: Object,
-    default: {},
+    default: () => {},
   },
   memberAuth: {
     type: Boolean,

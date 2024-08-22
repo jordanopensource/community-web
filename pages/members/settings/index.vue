@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Banner bannerText="Settings" />
+    <Banner banner-text="Settings" />
     <div class="container flex flex-col w-full">
       <MemberSettings
         v-if="!pending"
@@ -14,9 +14,12 @@
 definePageMeta({
   middleware: 'auth',
 })
-const config = useRuntimeConfig()
 const url = `/api/member/?id=${userId().value}`
-const { data:memberData, pending, refresh:refreshMember } = await useFetch(url)
+const {
+  data: memberData,
+  pending,
+  refresh: refreshMember,
+} = await useFetch(url)
 onMounted(() => {
   refreshMember()
 })
