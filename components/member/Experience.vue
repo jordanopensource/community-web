@@ -49,7 +49,7 @@
           class="divider-dotted pb-2.5"
         >
           <div class="w-full flex flex-col md:flex-row">
-            <div>
+            <div class="min-w-max">
               <h4 class="title">{{ experience.company_name }}</h4>
               <h5 class="sub-title">{{ experience.position }}</h5>
             </div>
@@ -240,7 +240,7 @@
           class="divider-dotted pb-2.5"
         >
           <div class="w-full flex flex-col md:flex-row">
-            <div>
+            <div class="min-w-max">
               <h4 class="title">{{ education.institution_name }}</h4>
               <h5 class="sub-title">{{ education.degree }}</h5>
             </div>
