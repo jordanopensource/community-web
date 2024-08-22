@@ -22,6 +22,7 @@
         <MemberPermissionDropDown
           :permission-status="state.settings.about"
           target-settings="about"
+          @update-member="emit('updateMember')"
         />
         <div
           class="edit-btn"

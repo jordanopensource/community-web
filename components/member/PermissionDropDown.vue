@@ -1,9 +1,9 @@
 <template>
   <FormAppDropDown
-    use-profile-box-style
-    :listOfItems="permissions"
-    :selectName="permissions[state.permissionStatus].text"
     v-model:value="state.permissionStatus"
+    use-profile-box-style
+    :list-of-items="permissions"
+    :select-name="permissions[state.permissionStatus].text"
     @change="() => updateVisibility()"
   />
 </template>
