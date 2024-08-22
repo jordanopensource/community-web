@@ -31,8 +31,8 @@
       </div>
     </div>
     <div v-if="!showUpdateAboutForm">
-      <p class="member-about">
-        {{ props.member.about ? props.member.about : '' }}
+      <p v-if="props.member.about" class="member-about">
+        {{ props.member.about }}
       </p>
       <div v-if="props.skills?.length" class="skills">
         <p class="heading">Skills</p>

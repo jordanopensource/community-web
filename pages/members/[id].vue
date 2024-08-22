@@ -77,6 +77,9 @@ const memberDataRef = computed(() => memberData.value)
 onMounted(() => {
   refresh()
 })
+watch(isUserLogged, () => {
+  refresh()
+})
 </script>
 
 <style scoped lang="postcss">
