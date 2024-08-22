@@ -1,22 +1,20 @@
 <template>
   <div>
-    <Banner bannerText="Contribute" />
+    <Banner banner-text="Contribute" />
     <div class="container">
       <MissionInfo
-        v-if="!pendingMission && missionData?.id"
+        v-if="status === 'success' && missionData?.id"
         :mission="missionData"
       />
     </div>
   </div>
 </template>
-<script setup></script>
-
 <script setup>
 const config = useRuntimeConfig()
 const route = useRoute()
 const MISSION_ID = route.params.id
 
-const { data: missionData, pending: pendingMission } = await useFetch(
-  `${config.public.communityApiUrl}/mission/${MISSION_ID}`
+const { data: missionData, status } = await useFetch(
+  `${config.public.communityApiUrl}/mission/${MISSION_ID}`,
 )
 </script>

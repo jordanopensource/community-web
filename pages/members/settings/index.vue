@@ -3,10 +3,13 @@
     <Banner banner-text="Settings" />
     <div class="container flex flex-col w-full">
       <MemberSettings
-        v-if="!pending"
-        :member="memberData.member"
-        :settings="memberData.settings"
+        v-if="status === 'success'"
+        :member="data.member"
+        :settings="data.settings"
       />
+      <div v-else class="container flex flex-row justify-center h-40">
+        <div class="loader self-center"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -15,14 +18,7 @@ definePageMeta({
   middleware: 'auth',
 })
 const url = `/api/member/?id=${userId().value}`
-const {
-  data: memberData,
-  pending,
-  refresh: refreshMember,
-} = await useFetch(url)
-onMounted(() => {
-  refreshMember()
-})
+const { data, status } = await useLazyFetch(url)
 </script>
 
 <style scoped lang="postcss">

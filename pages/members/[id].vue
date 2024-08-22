@@ -64,11 +64,7 @@ const user_id = route.params.id
 const isUserLogged = computed(
   () => route.params.id === userId().value && isAuth().value,
 )
-const {
-  data: memberData,
-  pending: pendingMember,
-  refresh,
-} = useLazyAsyncData(async () => {
+const { data: memberData, refresh } = useLazyAsyncData(async () => {
   return await useFetchMember(user_id)
 })
 
