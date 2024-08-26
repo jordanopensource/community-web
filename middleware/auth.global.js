@@ -1,6 +1,9 @@
-export default defineNuxtRouteMiddleware(async (to) => {
-  const { status, getSession, token, data } = useAuth()
+export default defineNuxtRouteMiddleware(async (to, from) => {
+  if (to.name === 'members-settings' && !from.name) {
+    return navigateTo(`/`)
+  }
 
+  const { status, getSession, token, data } = useAuth()
   if (!token.value) return
 
   const memberData = useMemberData().value

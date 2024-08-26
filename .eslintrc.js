@@ -15,5 +15,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [],
-  rules: {},
+  rules: {
+    'vue/multi-word-component-names': 'off',
+  },
 }

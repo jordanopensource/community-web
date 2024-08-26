@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Banner bannerText="JOSA Members" />
-    <div class="container" v-if="!pendingMember && memberDataRef">
+    <Banner banner-text="JOSA Members" />
+    <div v-if="memberDataRef" class="container">
       <MemberBanner
         :member="memberDataRef.member"
-        :memberAuth="isUserLogged"
-        @updateMember="() => refresh()"
+        :member-auth="isUserLogged"
+        @update-member="() => refresh()"
       />
       <div class="flex">
         <div class="flex flex-col w-full">
@@ -16,8 +16,8 @@
             v-if="memberDataRef.member.about || isUserLogged"
             :member="memberDataRef.member"
             :settings="memberDataRef.settings"
-            :memberAuth="isUserLogged"
-            @updateMember="() => refresh()"
+            :member-auth="isUserLogged"
+            @update-member="() => refresh()"
           />
           <MemberExperience
             v-if="
@@ -27,9 +27,9 @@
             "
             :experience="memberDataRef.experience"
             :education="memberDataRef.education"
-            :memberAuth="isUserLogged"
+            :member-auth="isUserLogged"
             :settings="memberDataRef.settings"
-            @updateMember="() => refresh()"
+            @update-member="() => refresh()"
           />
           <MemberContribution
             v-if="
@@ -37,18 +37,15 @@
               memberDataRef.open_source_contributions.github_contributions
                 .length ||
               Object.keys(
-                memberDataRef.open_source_contributions
-                  .wikimedia_contributions
+                memberDataRef.open_source_contributions.wikimedia_contributions,
               ).length ||
               isUserLogged
             "
             :contributions="memberDataRef.contributions"
-            :opensource-contributions="
-              memberDataRef.open_source_contributions
-            "
+            :opensource-contributions="memberDataRef.open_source_contributions"
             :settings="memberDataRef.settings"
-            :githubUserName="memberDataRef.member.github_user"
-            :wikiMediaUserName="memberDataRef.member.wikimedia_user"
+            :github-user-name="memberDataRef.member.github_user"
+            :wiki-media-user-name="memberDataRef.member.wikimedia_user"
           />
         </div>
         <div class="hidden lg:block">
@@ -64,18 +61,19 @@
 <script setup>
 const route = useRoute()
 const user_id = route.params.id
-const isUserLogged = computed(() => route.params.id === userId().value && isAuth().value)
-const {
-  data: memberData,
-  pending: pendingMember,
-  refresh,
-} = useLazyAsyncData(async () => {
+const isUserLogged = computed(
+  () => route.params.id === userId().value && isAuth().value,
+)
+const { data: memberData, refresh } = useLazyAsyncData(async () => {
   return await useFetchMember(user_id)
 })
 
 const memberDataRef = computed(() => memberData.value)
 
 onMounted(() => {
+  refresh()
+})
+watch(isUserLogged, () => {
   refresh()
 })
 </script>

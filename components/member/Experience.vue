@@ -19,8 +19,9 @@
     <h2 class="text-xl lg:text-2xl">Experience and Education</h2>
     <div v-if="memberAuth" class="flex flex-row gap-x-2 justify-end">
       <MemberPermissionDropDown
-        :permissionStatus="state.settings.experienceAndEducation"
-        targetSettings="experienceAndEducation"
+        :permission-status="state.settings.experienceAndEducation"
+        target-settings="experienceAndEducation"
+        @update-member="emit('updateMember')"
       />
     </div>
     <div class="divider-slashes"></div>
@@ -39,8 +40,7 @@
               state.form.workExperience = { ...defaultWorkExperience }
             }
           "
-        >
-        </div>
+        ></div>
       </div>
       <ul v-if="props.experience.length">
         <li
@@ -69,13 +69,14 @@
                 <!-- Delete Work Experience Form -->
                 <form
                   class="inline-flex w-4 h-4"
-                  @submit.prevent="deleteMemberWorkExperience">
+                  @submit.prevent="deleteMemberWorkExperience"
+                >
                   <input
                     type="hidden"
                     name="experienceId"
                     :value="experience.id"
                   />
-                  <FormAppButton btnStyle="delete-btn"></FormAppButton>
+                  <FormAppButton btn-style="delete-btn"></FormAppButton>
                 </form>
                 <!-- Update Work Experience Form Trigger -->
                 <div
@@ -96,25 +97,25 @@
       <!-- Add Work Experience Form -->
       <div v-if="showAddWorkExperienceForm">
         <form
-          @submit.prevent="addMemberWorkExperience"
           class="border px-16 py-8"
+          @submit.prevent="addMemberWorkExperience"
         >
           <FormAppControlInput
             v-model:value="state.form.workExperience.company_name"
-            isRequired
+            is-required
           >
             <b>Company Name</b>
           </FormAppControlInput>
           <FormAppControlInput
             v-model:value="state.form.workExperience.position"
-            isRequired
+            is-required
           >
             <b>Position</b>
           </FormAppControlInput>
           <label><b>Start Date</b></label>
           <VueDatePicker
-            month-picker
             v-model="state.form.workExperience.start_date"
+            month-picker
             placeholder="Select start date"
             :max-date="new Date()"
             required
@@ -123,25 +124,25 @@
             <b>End Date</b>
           </label>
           <FormAppControlInput
-            inputType="checkbox"
+            input-type="checkbox"
+            label-id="currently-working-add"
+            class="mt-2"
             @checkbox-changed="
               state.form.workExperience.currently_working = $event
             "
-            labelId="currently-working-add"
-            class="mt-2"
           >
             Currently working here
           </FormAppControlInput>
           <VueDatePicker
             v-if="!state.form.workExperience.currently_working"
+            v-model="state.form.workExperience.end_date"
             month-picker
             required
-            v-model="state.form.workExperience.end_date"
             placeholder="Select end date"
             :min-date="
               new Date(
                 state.form.workExperience.start_date.year,
-                state.form.workExperience.start_date.month
+                state.form.workExperience.start_date.month,
               )
             "
           />
@@ -151,8 +152,8 @@
       <!-- Update Work Experience Form -->
       <div v-if="showUpdateWorkExperienceForm">
         <form
-          @submit.prevent="updateMemberWorkExperience"
           class="border px-16 py-8"
+          @submit.prevent="updateMemberWorkExperience"
         >
           <div class="flex justify-end w-full">
             <img
@@ -165,21 +166,21 @@
           <FormAppControlInput
             v-model:value="state.form.workExperience.company_name"
             :value="state.form.workExperience.company_name"
-            isRequired
+            is-required
           >
             <b>Company Name</b>
           </FormAppControlInput>
           <FormAppControlInput
             v-model:value="state.form.workExperience.position"
             :value="state.form.workExperience.position"
-            isRequired
+            is-required
           >
             <b>Position</b>
           </FormAppControlInput>
           <label><b>Start Date</b></label>
           <VueDatePicker
-            month-picker
             v-model="state.form.workExperience.start_date"
+            month-picker
             placeholder="Select start date"
             :max-date="new Date()"
             required
@@ -188,26 +189,26 @@
             <b>End Date</b>
           </label>
           <FormAppControlInput
-            inputType="checkbox"
+            input-type="checkbox"
+            :is-checked="state.form.workExperience.end_date ? false : true"
+            label-id="currently-working-edit"
+            class="mt-2"
             @checkbox-changed="
               state.form.workExperience.currently_working = $event
             "
-            :isChecked="state.form.workExperience.end_date ? false : true"
-            labelId="currently-working-edit"
-            class="mt-2"
           >
             Currently working here
           </FormAppControlInput>
           <VueDatePicker
             v-if="!state.form.workExperience.currently_working"
+            v-model="state.form.workExperience.end_date"
             month-picker
             required
-            v-model="state.form.workExperience.end_date"
             placeholder="Select end date"
             :min-date="
               new Date(
                 state.form.workExperience.start_date.year,
-                state.form.workExperience.start_date.month
+                state.form.workExperience.start_date.month,
               )
             "
           />
@@ -230,8 +231,7 @@
               state.form.education = { ...defaultEducation }
             }
           "
-        >
-        </div>
+        ></div>
       </div>
       <ul v-if="props.education.length">
         <li
@@ -266,18 +266,18 @@
                     name="educationId"
                     :value="education.id"
                   />
-                  <FormAppButton btnStyle="delete-btn"></FormAppButton>
+                  <FormAppButton btn-style="delete-btn"></FormAppButton>
                 </form>
                 <!-- Update Education trigger  -->
                 <div
+                  class="edit-btn bg-editIcon"
                   @click="
                     () => {
                       showUpdateEducationForm = true
                       showAddEducationForm = false
                       state.form.education = { ...education }
                     }
-                  " 
-                  class="edit-btn bg-editIcon"
+                  "
                 ></div>
               </div>
             </div>
@@ -286,31 +286,31 @@
       </ul>
       <!-- Add Education Form -->
       <div v-if="showAddEducationForm">
-        <form @submit.prevent="addMemberEducation" class="border px-16 py-8">
+        <form class="border px-16 py-8" @submit.prevent="addMemberEducation">
           <FormAppControlInput
             v-model:value="state.form.education.institution_name"
-            isRequired
+            is-required
           >
             <b>Institution Name</b>
           </FormAppControlInput>
           <FormAppControlInput
             v-model:value="state.form.education.degree"
-            isRequired
+            is-required
           >
             <b>Degree</b>
           </FormAppControlInput>
           <label class="block"><b>Graduation Date</b></label>
           <FormAppControlInput
-            inputType="checkbox"
+            input-type="checkbox"
+            label-id="currently-studying-add"
             @checkbox-changed="state.form.education.still_studying = $event"
-            labelId="currently-studying-add"
           >
             I'm still studying
           </FormAppControlInput>
           <VueDatePicker
             v-if="!state.form.education.still_studying"
-            month-picker
             v-model="state.form.education.graduated"
+            month-picker
             placeholder="Select graduation date"
             required
           />
@@ -320,7 +320,7 @@
       </div>
       <!-- Update Education Form -->
       <div v-if="showUpdateEducationForm">
-        <form @submit.prevent="updateMemberEducation" class="border px-16 py-8">
+        <form class="border px-16 py-8" @submit.prevent="updateMemberEducation">
           <div class="flex justify-end w-full">
             <img
               src="/icons/x.svg"
@@ -332,30 +332,30 @@
           <FormAppControlInput
             v-model:value="state.form.education.institution_name"
             :value="state.form.education.institution_name"
-            isRequired
+            is-required
           >
             <b>Institution Name</b>
           </FormAppControlInput>
           <FormAppControlInput
             v-model:value="state.form.education.degree"
             :value="state.form.education.degree"
-            isRequired
+            is-required
           >
             <b>Degree</b>
           </FormAppControlInput>
           <label class="block"><b>Graduation Date</b></label>
           <FormAppControlInput
-            inputType="checkbox"
+            input-type="checkbox"
+            :is-checked="state.form.education.graduated ? false : true"
+            label-id="currently-studying-edit"
             @checkbox-changed="state.form.education.still_studying = $event"
-            :isChecked="state.form.education.graduated ? false : true"
-            labelId="currently-studying-edit"
           >
             I'm still studying
           </FormAppControlInput>
           <VueDatePicker
             v-if="!state.form.education.still_studying"
-            month-picker
             v-model="state.form.education.graduated"
+            month-picker
             placeholder="Select graduation date"
             required
           />
@@ -373,11 +373,11 @@ import '@vuepic/vue-datepicker/dist/main.css'
 const emit = defineEmits(['updateMember'])
 const showAddWorkExperienceForm = useState(
   'showAddWorkExperienceForm',
-  () => false
+  () => false,
 )
 const showUpdateWorkExperienceForm = useState(
   'showUpdateWorkExperienceForm',
-  () => false
+  () => false,
 )
 const showAddEducationForm = useState('showAddEducationForm', () => false)
 const showUpdateEducationForm = useState('showUpdateEducationForm', () => false)
@@ -385,11 +385,11 @@ const showUpdateEducationForm = useState('showUpdateEducationForm', () => false)
 const props = defineProps({
   education: {
     type: Object,
-    default: [],
+    default: () => {},
   },
   experience: {
     type: Object,
-    default: [],
+    default: () => {},
   },
   memberAuth: {
     type: Boolean,
@@ -397,7 +397,7 @@ const props = defineProps({
   },
   settings: {
     type: Object,
-    default: {},
+    default: () => {},
   },
 })
 
@@ -454,13 +454,13 @@ const addMemberWorkExperience = async () => {
     position: state.form.workExperience.position,
     start_date: new Date(
       state.form.workExperience.start_date.year,
-      state.form.workExperience.start_date.month
+      state.form.workExperience.start_date.month,
     ),
     end_date: state.form.workExperience.currently_working
       ? null
       : new Date(
           state.form.workExperience.end_date.year,
-          state.form.workExperience.end_date.month
+          state.form.workExperience.end_date.month,
         ),
   }
   await useFetch(`/api/member/create/experience`, {
@@ -514,13 +514,13 @@ const updateMemberWorkExperience = async () => {
     position: state.form.workExperience.position,
     start_date: new Date(
       state.form.workExperience.start_date.year,
-      state.form.workExperience.start_date.month
+      state.form.workExperience.start_date.month,
     ),
     end_date: state.form.workExperience.currently_working
       ? null
       : new Date(
           state.form.workExperience.end_date.year,
-          state.form.workExperience.end_date.month
+          state.form.workExperience.end_date.month,
         ),
   }
   try {
@@ -543,7 +543,7 @@ const updateMemberWorkExperience = async () => {
           state.loading = false
           console.log('something went wrong', response._data.message)
         },
-      }
+      },
     )
   } catch (error) {
     console.log('ERROR')
@@ -569,7 +569,7 @@ const addMemberEducation = async () => {
       ? null
       : new Date(
           state.form.education.graduated.year,
-          state.form.education.graduated.month
+          state.form.education.graduated.month,
         ),
   }
   await $fetch(`/api/member/create/education`, {
@@ -625,7 +625,7 @@ const updateMemberEducation = async () => {
       ? null
       : new Date(
           state.form.education.graduated.year,
-          state.form.education.graduated.month
+          state.form.education.graduated.month,
         ),
   }
   await $fetch(`/api/member/update/education/${state.form.education.id}`, {
@@ -669,11 +669,11 @@ const educationSorted = reactive({
 watchEffect(() => {
   if (props.experience)
     experienceSorted.list = props.experience.sort((a, b) =>
-      sortRules.experience(a, b)
+      sortRules.experience(a, b),
     )
   if (props.education)
     educationSorted.list = props.education.sort((a, b) =>
-      sortRules.education(a, b)
+      sortRules.education(a, b),
     )
 })
 const formatDate = (date) => {

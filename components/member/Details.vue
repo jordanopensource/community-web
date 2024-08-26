@@ -20,8 +20,9 @@
       <h3 class="heading">About</h3>
       <div v-if="memberAuth" class="flex gap-x-4 items-center">
         <MemberPermissionDropDown
-          :permissionStatus="state.settings.about"
-          targetSettings="about"
+          :permission-status="state.settings.about"
+          target-settings="about"
+          @update-member="emit('updateMember')"
         />
         <div
           class="edit-btn"
@@ -31,13 +32,13 @@
       </div>
     </div>
     <div v-if="!showUpdateAboutForm">
-      <p class="member-about">
-        {{ props.member.about ? props.member.about : '' }}
+      <p v-if="props.member.about" class="member-about">
+        {{ props.member.about }}
       </p>
-      <div v-if="props.skills.length" class="skills">
+      <div v-if="props.skills?.length" class="skills">
         <p class="heading">Skills</p>
         <ul>
-          <li v-for="(skill, index) in memberSkills" :key="`skill-${index}`">
+          <li v-for="(skill, index) in props.skills" :key="`skill-${index}`">
             {{ skill }}
           </li>
         </ul>
@@ -47,7 +48,7 @@
       <form @submit.prevent="updateMemberDetailsInfo">
         <FormAppControlInput
           v-model:value="state.form.memberAbout"
-          inputType="textarea"
+          input-type="textarea"
           :value="props.member.about"
         >
         </FormAppControlInput>
@@ -59,20 +60,19 @@
 </template>
 <script setup>
 const emit = defineEmits(['updateMember'])
-const memberSkills = ['Linux Operating System', 'File System']
 const showUpdateAboutForm = useState('showUpdateAboutForm', () => false)
 const props = defineProps({
   member: {
     type: Object,
-    default: {},
+    default: () => {},
   },
   settings: {
     type: Object,
-    default: {},
+    default: () => {},
   },
   skills: {
-    type: Object,
-    default: {},
+    type: Array,
+    default: null,
   },
   memberAuth: {
     type: Boolean,

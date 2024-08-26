@@ -4,12 +4,13 @@
     <div class="divider-slashes"></div>
     <Message
       v-if="state.error"
-      title="Error Signing In" 
+      title="Error Signing In"
       type="error"
       class="mb-4"
       :show-close-btn="false"
     >
-    The email and password you entered did not match our records. Please double-check and try again.
+      The email and password you entered did not match our records. Please
+      double-check and try again.
     </Message>
     <form @submit.prevent="login">
       <FormAppControlInput
@@ -27,7 +28,7 @@
       >
         Password
       </FormAppControlInput>
-      <NuxtLink @click="$emit('forgotPassword', true)" href="#">
+      <NuxtLink href="#" @click="$emit('forgotPassword', true)">
         Forgot Password?
       </NuxtLink>
       <FormAppButton
@@ -36,10 +37,10 @@
         type="submit"
         :disabled="state.loading"
       >
-      <div class="flex flex-row justify-center gap-x-4">
-        <div v-if="state.loading" class="loader"></div>
-        <div>Sign in</div>
-      </div>
+        <div class="flex flex-row justify-center gap-x-4">
+          <div v-if="state.loading" class="loader"></div>
+          <div>Sign in</div>
+        </div>
       </FormAppButton>
     </form>
   </div>
@@ -54,32 +55,35 @@ const form = reactive({
 })
 const state = reactive({
   loading: false,
-  error: false
+  error: false,
 })
-const login = async() => {
+const login = async () => {
   state.error = false
   state.loading = true
 
-  await signIn({
-    email: form.email,
-    password: form.password
-  }, {
-    callbackUrl: "/"
-  })
-  .catch((error) => {
-    console.error("Error while signing in: ", error)
-    state.error = true
-  })
-  .finally(async () => {
-    const member = data.value
-    if (member?.id && member.username === form.email) {
-      console.info(`${member.username} is logged in!`)
-      updateUserId(member.id)
-      isAuth().value = true
-      await useFetchMember()
-    }
-    state.loading = false
-  })
+  await signIn(
+    {
+      email: form.email,
+      password: form.password,
+    },
+    {
+      callbackUrl: '/',
+    },
+  )
+    .catch((error) => {
+      console.error('Error while signing in: ', error)
+      state.error = true
+    })
+    .finally(async () => {
+      const member = data.value
+      if (member?.id && member.username === form.email) {
+        console.info(`${member.username} is logged in!`)
+        updateUserId(member.id)
+        isAuth().value = true
+        await useFetchMember()
+      }
+      state.loading = false
+    })
 }
 </script>
 <style lang="postcss" scoped>

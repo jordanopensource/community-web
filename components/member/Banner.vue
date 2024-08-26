@@ -32,9 +32,9 @@
           <FormAppControlInput
             v-else
             v-model:value="state.file"
-            inputType="file"
-            acceptedFiles="image/*"
-            :editIcon="true"
+            input-type="file"
+            accepted-files="image/*"
+            :edit-icon="true"
             @change="uploadImage($event, 'cover')"
           />
         </div>
@@ -55,9 +55,9 @@
           <FormAppControlInput
             v-else
             v-model:value="state.file"
-            inputType="file"
-            acceptedFiles="image/*"
-            :editIcon="true"
+            input-type="file"
+            accepted-files="image/*"
+            :edit-icon="true"
             @change="uploadImage($event, 'avatar')"
           />
         </div>
@@ -92,7 +92,7 @@
             <form @submit.prevent="updateGeneralInfo">
               <FormAppControlInput
                 v-model:value="state.form.memberHeadline"
-                inputType="textarea"
+                input-type="textarea"
                 :value="props.member.headline"
               >
                 <b>Headline</b>
@@ -112,7 +112,7 @@
               <FormAppControlInput
                 v-model:value="state.form.memberPhone"
                 :value="Number(props.value.phone)"
-                inputType="tel"
+                input-type="tel"
                 placeholder="962799888777"
                 pattern="+[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{3}"
                 ><b>Phone Number</b></FormAppControlInput
@@ -123,9 +123,9 @@
         </div>
         <div
           v-if="memberAuth"
-          @click="() => (showUpdateInfoForm = !showUpdateInfoForm)"
           class="edit-btn"
           :class="showUpdateInfoForm ? 'bg-xIcon' : 'bg-editIcon'"
+          @click="() => (showUpdateInfoForm = !showUpdateInfoForm)"
         ></div>
       </div>
     </div>
@@ -137,7 +137,7 @@ const config = useRuntimeConfig()
 const props = defineProps({
   member: {
     type: Object,
-    default: {},
+    default: () => {},
   },
   memberAuth: {
     type: Boolean,
@@ -192,7 +192,7 @@ const uploadImage = async (event, imageType) => {
     {
       method: 'POST',
       body: image,
-    }
+    },
   )
     .then((response) => response.json())
     .then((parsedData) => {
