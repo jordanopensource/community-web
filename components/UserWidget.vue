@@ -63,7 +63,7 @@ const widget = reactive({
   links: [
     {
       title: 'Your Profile',
-      to: '/members/' + userId().value,
+      to: computed(() => '/members/' + userId().value),
       icon: 'ic-user',
       onClick: togglePopup,
     },
