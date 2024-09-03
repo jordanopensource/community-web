@@ -1,7 +1,7 @@
 <template>
   <div>
     <Banner banner-text="JOSA Members" />
-    <div v-if="memberDataRef" class="container">
+    <div v-if="status === 'success' && memberDataRef" class="container">
       <MemberBanner
         :member="memberDataRef.member"
         :member-auth="isUserLogged"
@@ -64,7 +64,11 @@ const user_id = route.params.id
 const isUserLogged = computed(
   () => route.params.id === userId().value && isAuth().value,
 )
-const { data: memberData, refresh } = useLazyAsyncData(async () => {
+const {
+  data: memberData,
+  status,
+  refresh,
+} = useLazyAsyncData(async () => {
   return await useFetchMember(user_id)
 })
 
