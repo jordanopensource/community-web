@@ -23,7 +23,7 @@
   "dependencies": {
     "@nuxt/vite-builder": "^3.13.1",
     "@nuxtjs/robots": "^3.0.0",
-    "@vuepic/vue-datepicker": "^9.0.2",
+    "@vuepic/vue-datepicker": "^9.0.3",
     "vue-matomo": "^4.2.0"
   }
 }
