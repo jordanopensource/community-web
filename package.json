@@ -8,7 +8,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.25.1",
     "@kevinmarrec/nuxt-pwa": "^0.17.0",
-    "@nuxtjs/sitemap": "^5.3.5",
+    "@nuxtjs/sitemap": "^6.0.1",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@sidebase/nuxt-auth": "^0.7.2",
     "@volar-plugins/vetur": "latest",
