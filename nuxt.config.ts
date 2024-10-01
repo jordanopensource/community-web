@@ -28,6 +28,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@kevinmarrec/nuxt-pwa',
@@ -35,11 +36,13 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@sidebase/nuxt-auth',
   ],
+
   css: [
     '@/assets/css/typography.css',
     '@/assets/css/form.css',
     '@/assets/css/global.css',
   ],
+
   tailwindcss: {
     cssPath: '@/assets/css/tailwind.css',
     configPath: 'tailwind.config.js',
@@ -47,17 +50,19 @@ export default defineNuxtConfig({
     injectPosition: 0,
     viewer: true,
   },
+
   plugins: [
     {
       src: '~/plugins/matomo-plugin.client.js',
       ssr: false,
     },
   ],
+
   // REF: https://v3.nuxtjs.org/guide/going-further/runtime-config/
   runtimeConfig: {
     // Keys within public, will be also exposed to the client-side
     public: {
-      communityApiUrl: 'https://community.api.josa.dev/v2',
+      communityApiUrl: '',
       targetEnv: '',
       buildCommitSha: '',
       buildCommitLink: '',
@@ -71,6 +76,7 @@ export default defineNuxtConfig({
       matomoHost: 'https://analytics.josa.ngo',
     },
   },
+
   pwa: {
     meta: {
       name: 'JOSA Community',
@@ -79,8 +85,9 @@ export default defineNuxtConfig({
       lang: 'en',
     },
   },
+
   auth: {
-    baseURL: 'https://community.api.josa.dev/v2/auth',
+    baseURL: process.env.NUXT_PUBLIC_AUTH_BASE_URL || '',
     provider: {
       type: 'local',
       endpoints: {
@@ -102,6 +109,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   build: {
     transpile: ['@vuepic/vue-datepicker'],
   },
