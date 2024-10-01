@@ -63,6 +63,7 @@ export default defineNuxtConfig({
     // Keys within public, will be also exposed to the client-side
     public: {
       communityApiUrl: '',
+      authBaseUrl: '',
       targetEnv: '',
       buildCommitSha: '',
       buildCommitLink: '',
@@ -87,25 +88,22 @@ export default defineNuxtConfig({
   },
 
   auth: {
-    baseURL: process.env.NUXT_PUBLIC_AUTH_BASE_URL || '',
+    originEnvKey: 'NUXT_PUBLIC_AUTH_BASE_URL',
+    baseURL: process.env.NUXT_PUBLIC_AUTH_BASE_URL ?? '',
     provider: {
       type: 'local',
       endpoints: {
-        signIn: { path: '/login', method: 'post' },
-        signOut: { path: '/logout', method: 'get' },
-        getSession: { path: '/', method: 'get' },
+        signIn: { path: 'login', method: 'post' },
+        signOut: { path: 'logout', method: 'get' },
+        getSession: { path: '', method: 'get' },
       },
       token: {
         signInResponseTokenPointer: '/access_token',
         cookieName: 'access_token',
         type: 'Bearer',
         maxAgeInSeconds: 60 * 60 * 24,
-      },
-      sessionDataType: {
-        id: 'string',
-        username: 'string',
-        iat: 'number',
-        exp: 'number',
+        secureCookieAttribute: true,
+        httpOnlyCookieAttribute: true, // NOTE: disable in local development
       },
     },
   },
