@@ -62,7 +62,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Keys within public, will be also exposed to the client-side
     public: {
-      communityApiUrl: 'https://community.api.prod.josa.ngo/v2',
+      communityApiUrl: '',
       targetEnv: '',
       buildCommitSha: '',
       buildCommitLink: '',
