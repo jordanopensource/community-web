@@ -105,6 +105,14 @@ export default defineNuxtConfig({
         secureCookieAttribute: true,
         httpOnlyCookieAttribute: true, // NOTE: disable in local development
       },
+      session: {
+        dataType: {
+          id: 'string',
+          username: 'string',
+          iat: 'number',
+          exp: 'number',
+        },
+      },
     },
   },
 
