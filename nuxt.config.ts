@@ -89,7 +89,7 @@ export default defineNuxtConfig({
 
   auth: {
     originEnvKey: 'NUXT_PUBLIC_AUTH_BASE_URL',
-    baseURL: process.env.NUXT_PUBLIC_AUTH_BASE_URL ?? '',
+    baseURL: 'https://community.api.prod.josa.ngo/v2/auth/',
     provider: {
       type: 'local',
       endpoints: {
@@ -104,6 +104,14 @@ export default defineNuxtConfig({
         maxAgeInSeconds: 60 * 60 * 24,
         secureCookieAttribute: true,
         httpOnlyCookieAttribute: true, // NOTE: disable in local development
+      },
+      session: {
+        dataType: {
+          id: 'string',
+          username: 'string',
+          iat: 'number',
+          exp: 'number',
+        },
       },
     },
   },
