@@ -117,6 +117,14 @@ export default defineNuxtConfig({
           exp: 'number',
         },
       },
+      session: {
+        dataType: {
+          id: 'string',
+          username: 'string',
+          iat: 'number',
+          exp: 'number',
+        },
+      },
     },
   },
 
