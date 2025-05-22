@@ -35,6 +35,7 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
     '@sidebase/nuxt-auth',
+    'nuxt-api-party',
   ],
 
   css: [
@@ -57,6 +58,14 @@ export default defineNuxtConfig({
       ssr: false,
     },
   ],
+
+  apiParty: {
+    endpoints: {
+      api: {
+        url: '',
+      },
+    },
+  },
 
   // REF: https://v3.nuxtjs.org/guide/going-further/runtime-config/
   runtimeConfig: {
@@ -89,7 +98,8 @@ export default defineNuxtConfig({
 
   auth: {
     originEnvKey: 'NUXT_PUBLIC_AUTH_BASE_URL',
-    baseURL: 'https://community.api.prod.josa.ngo/v2/auth/',
+    // baseURL: 'https://community.api.prod.josa.ngo/v2/auth/',
+    baseURL: 'http://localhost:5000/auth/',
     provider: {
       type: 'local',
       endpoints: {
