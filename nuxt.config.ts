@@ -98,8 +98,7 @@ export default defineNuxtConfig({
 
   auth: {
     originEnvKey: 'NUXT_PUBLIC_AUTH_BASE_URL',
-    // baseURL: 'https://community.api.prod.josa.ngo/v2/auth/',
-    baseURL: 'http://localhost:5000/auth/',
+    baseURL: 'https://community.api.prod.josa.ngo/v2/auth/',
     provider: {
       type: 'local',
       endpoints: {
