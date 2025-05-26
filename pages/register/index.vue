@@ -41,54 +41,57 @@
   </div>
 </template>
 <script setup>
-import { ref, reactive } from 'vue'
-// definePageMeta({
-//   middleware: ['register'],
-// })
-const config = useRuntimeConfig()
-const step = ref(1)
-let formData = reactive({})
-if (!config.public.targetEnv === 'development') {
-  navigateTo('/')
-}
-const nextStep = (data) => {
-  formData = { ...formData, ...data }
-  step.value++
-}
+  import { ref, reactive } from 'vue'
+  const config = useRuntimeConfig()
+  const step = ref(1)
+  let formData = reactive({})
+  if (!config.public.targetEnv === 'development') {
+    navigateTo('/')
+  }
+  const nextStep = (data) => {
+    formData = { ...formData, ...data }
+    step.value++
+  }
 
-const submitForm = (data) => {
-  formData = { ...formData, ...data }
-  fetch(`${config.public.communityApiUrl}/submission/`, {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify(formData),
-  })
-    .then((res) => {
-      console.log(res)
-      step.value++
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
+  const submitForm = async (data) => {
+    formData = { ...formData, ...data }
+
+    await $api(
+      `submission/`,
+      {
+        method: 'POST',
+        body: formData,
+      },
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
+    )
+      .then((res) => {
+        console.log(res)
+        step.value++
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 </script>
 <style lang="postcss" scoped>
-.main {
-  @apply container;
-  @apply my-14;
-  @apply flex flex-col lg:flex-row;
-}
-.main,
-.form-container {
-  @apply py-10;
-}
+  .main {
+    @apply container;
+    @apply my-14;
+    @apply flex flex-col lg:flex-row;
+  }
+  .main,
+  .form-container {
+    @apply py-10;
+  }
 
-.form-container {
-  @apply bg-white;
-  @apply px-10;
-  flex-grow: 1;
-}
+  .form-container {
+    @apply bg-white;
+    @apply px-10;
+    flex-grow: 1;
+  }
 </style>

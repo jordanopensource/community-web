@@ -8,22 +8,24 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.25.1",
     "@kevinmarrec/nuxt-pwa": "^0.17.0",
-    "@nuxtjs/sitemap": "^6.0.1",
+    "@nuxtjs/sitemap": "^7.3.0",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@sidebase/nuxt-auth": "^0.9.3",
     "@volar-plugins/vetur": "latest",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint": "^9.27.0",
+    "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-vue": "^9.28.0",
+    "eslint-plugin-vue": "^10.1.0",
     "nuxt": "^3.13.1",
+    "nuxt-api-party": "^2.2.2",
     "prettier": "^3.3.3"
   },
   "dependencies": {
     "@nuxt/vite-builder": "^3.13.1",
-    "@nuxtjs/robots": "^4.1.6",
+    "@nuxtjs/robots": "^5.2.10",
     "@vuepic/vue-datepicker": "^9.0.3",
+    "qs": "^6.14.0",
     "vue-matomo": "^4.2.0"
   }
 }

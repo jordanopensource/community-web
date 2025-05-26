@@ -76,104 +76,104 @@
   </div>
 </template>
 <script setup>
-import { reactive } from 'vue'
+  import { reactive } from 'vue'
 
-const state = reactive({
-  isOpen: true,
-  name: '',
-  noneJosaMembers: false,
-  selected: '',
-})
-
-const sortItems = [
-  {
-    value: 'member_since,DESC',
-    text: 'Member since (Newest)',
-  },
-  {
-    value: 'member_since,ASC',
-    text: 'Member since (Oldest)',
-  },
-  {
-    value: 'name,ASC',
-    text: 'By Name (A → Z)',
-  },
-  {
-    value: 'name,DESC',
-    text: 'By Name (Z → A)',
-  },
-]
-
-const emit = defineEmits(['sortMembers', 'searchMember', 'filterMembers'])
-
-const onCheck = (event) => {
-  state.noneJosaMembers = event
-  emit('filterMembers', event)
-}
-
-const onSubmit = () => {
-  emit('searchMember', state.name)
-}
-const onSelect = () => {
-  emit('sortMembers', state.selected)
-}
-const scrollToView = () => {
-  document.getElementById('members-found-heading').scrollIntoView({
-    block: 'start',
-    behavior: 'smooth',
+  const state = reactive({
+    isOpen: true,
+    name: '',
+    noneJosaMembers: false,
+    selected: '',
   })
-}
+
+  const sortItems = [
+    {
+      value: 'member_since,DESC',
+      text: 'Member since (Newest)',
+    },
+    {
+      value: 'member_since,ASC',
+      text: 'Member since (Oldest)',
+    },
+    {
+      value: 'name,ASC',
+      text: 'By Name (A → Z)',
+    },
+    {
+      value: 'name,DESC',
+      text: 'By Name (Z → A)',
+    },
+  ]
+
+  const emit = defineEmits(['sortMembers', 'searchMember', 'filterMembers'])
+
+  const onCheck = (event) => {
+    state.noneJosaMembers = event
+    emit('filterMembers', event)
+  }
+
+  const onSubmit = () => {
+    emit('searchMember', state.name)
+  }
+  const onSelect = () => {
+    emit('sortMembers', state.selected)
+  }
+  const scrollToView = () => {
+    document.getElementById('members-found-heading').scrollIntoView({
+      block: 'start',
+      behavior: 'smooth',
+    })
+  }
 </script>
 <style lang="postcss" scoped>
-.filter-container {
-  @apply bg-white p-4;
-  margin: 0 0;
-  margin-bottom: 2rem;
+  .filter-container {
+    @apply bg-white p-4;
+    margin: 0 0;
+    margin-bottom: 2rem;
 
-  @media screen and (min-width: 1032px) {
-    margin: 72px 0;
+    @media screen and (min-width: 1032px) {
+      margin: 72px 0;
+    }
   }
-}
-.form-wrapper {
-  @apply h-fit;
-}
-
-.expand-button {
-  transition-duration: 0.5s;
-  transform: rotate(0deg);
-  @apply cursor-pointer  outline-none lg:hidden;
-}
-
-.expand-button-collapsed {
-  transition-duration: 0.5s;
-  transform: rotate(-90deg);
-  @apply cursor-pointer ml-2 outline-none lg:hidden;
-}
-
-.filter-collapsed {
-  @apply px-2 pb-0 pt-3;
-  margin-top: 0;
-  margin-left: auto;
-  margin-right: 0;
-  margin-bottom: 2rem;
-  background-color: #e3e7e9;
-  width: fit-content;
-}
-
-.filter-icon {
-  width: 1rem;
-  margin-right: 0.6rem;
-}
-
-.filter-button-container {
-  display: flex;
-  flex-direction: row;
-}
-
-.filter-head {
-  cursor: pointer;
-  @media screen and (min-width: 1024px) {
-    pointer-events: none;
+  .form-wrapper {
+    @apply h-fit;
   }
-}
+
+  .expand-button {
+    transition-duration: 0.5s;
+    transform: rotate(0deg);
+    @apply cursor-pointer  outline-none lg:hidden;
+  }
+
+  .expand-button-collapsed {
+    transition-duration: 0.5s;
+    transform: rotate(-90deg);
+    @apply cursor-pointer ml-2 outline-none lg:hidden;
+  }
+
+  .filter-collapsed {
+    @apply px-2 pb-0 pt-3;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: 0;
+    margin-bottom: 2rem;
+    background-color: #e3e7e9;
+    width: fit-content;
+  }
+
+  .filter-icon {
+    width: 1rem;
+    margin-right: 0.6rem;
+  }
+
+  .filter-button-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .filter-head {
+    cursor: pointer;
+    @media screen and (min-width: 1024px) {
+      pointer-events: none;
+    }
+  }
 </style>

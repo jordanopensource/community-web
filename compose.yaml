@@ -1,0 +1,49 @@
+services:
+  # Nuxt Frontend
+  # web:
+  #   container_name: community-web
+  #   build:
+  #     context: .
+  #   environment:
+  #     NUXT_COMMUNITY_API_URL: http://api:8080
+  #     PORT: 3000
+  #     HOST: '0.0.0.0'
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - ./:/app/
+  #   command: npm run dev
+
+  # Nest Backend
+  api:
+    container_name: community-api
+    image: josaorg/community-api:latest
+    env_file: .env
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+      - DATABASE_NAME=hub_dev
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      # - TARGET_ENV='development'
+    depends_on:
+      - db
+      - redis
+    # command: npm run start:dev
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+  db:
+    container_name: community-db
+    image: postgres:14.3
+    ports:
+      - '6543:5432'
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=hub_dev
