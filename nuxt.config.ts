@@ -35,6 +35,7 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
     '@sidebase/nuxt-auth',
+    'nuxt-api-party',
   ],
 
   css: [
@@ -57,6 +58,14 @@ export default defineNuxtConfig({
       ssr: false,
     },
   ],
+
+  apiParty: {
+    endpoints: {
+      api: {
+        url: '',
+      },
+    },
+  },
 
   // REF: https://v3.nuxtjs.org/guide/going-further/runtime-config/
   runtimeConfig: {
