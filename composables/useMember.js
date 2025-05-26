@@ -75,13 +75,12 @@ export const updateMember = (member) => {
  * @returns { Promise<MemberData> }
  */
 export const useFetchMember = async (memberId = userId().value) => {
-  const apiUrl = useRuntimeConfig().public.communityApiUrl
   const { token } = useAuth()
 
   if (!memberId) throw new Error('userId is required')
 
   try {
-    const data = await $fetch(`${apiUrl}/member/${memberId}`, {
+    const data = await $api(`/member/${memberId}`, {
       headers: {
         Authorization:
           token.value && memberId === userId().value ? token.value : null,
