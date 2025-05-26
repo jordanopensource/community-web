@@ -7,11 +7,12 @@
       <HomeDetails class="mt-28" />
       <!-- Become a member -->
       <Banner
-        bannerText="Already a JOSA Member?"
-        :whiteBackground="true"
-        :enableContainer="false"
+        banner-text="Already a JOSA Member?"
+        :white-background="true"
+        :enable-container="false"
       />
       <HomeCallToAction />
     </div>
   </div>
 </template>
+<script setup></script>

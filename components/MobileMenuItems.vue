@@ -3,26 +3,65 @@
     <ul class="mobile-menu">
       <li
         class="py-4 border-gray"
-        v-if="config.public.TARGET_ENV === 'development'"
+        v-if="config.public.targetEnv === 'development'"
       >
-        <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
+        <NuxtLink
+          @click="
+            () => {
+              emit('toggleNav')
+            }
+          "
+          to="/register"
+          class="nav-link"
+          >Join JOSA</NuxtLink
+        >
       </li>
       <li class="py-4 border-gray">
-        <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
+        <NuxtLink
+          @click="
+            () => {
+              emit('toggleNav')
+            }
+          "
+          to="/members"
+          class="nav-link"
+          >JOSA Members</NuxtLink
+        >
       </li>
       <li
         class="py-4 border-gray"
-        v-if="config.public.TARGET_ENV === 'development'"
+        v-if="config.public.targetEnv === 'development'"
       >
-        <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
+        <NuxtLink
+          @click="
+            () => {
+              emit('toggleNav')
+            }
+          "
+          to="/missions"
+          class="nav-link"
+          >Contribute</NuxtLink
+        >
       </li>
-      <!-- <li class="py-4">
-        <NuxtLink id="login" to="/login" class="nav-link">Sign In</NuxtLink>
-      </li> -->
+      <li class="py-4">
+        <NuxtLink
+          @click="
+            () => {
+              emit('toggleNav')
+            }
+          "
+          id="login"
+          to="/login"
+          class="nav-link"
+          v-if="!isAuth().value"
+          >Sign In</NuxtLink
+        >
+      </li>
     </ul>
   </div>
 </template>
 <script setup>
+const emit = defineEmits(['toggleNav'])
 const config = useRuntimeConfig()
 const props = defineProps({
   isOpen: Boolean,
@@ -51,11 +90,11 @@ li a {
 }
 
 #login {
-  @apply text-josa-blue border-josa-blue p-2 pt-1 pb-1;
+  @apply text-community-blue border-community-blue p-2 pt-1 pb-1;
   border-width: thin;
 }
 
 #login:hover {
-  @apply text-josa-warm-grey-light;
+  @apply text-community-grey-light;
 }
 </style>

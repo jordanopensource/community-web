@@ -1,6 +1,8 @@
 <template>
   <div class="input-control">
-    <label><slot /></label>
+    <label>
+      <slot />
+    </label>
     <div class="dropdown-wrapper">
       <div v-if="state.selectedItem" class="selected-item">
         <img
@@ -91,7 +93,7 @@ const props = defineProps({
 
 const onSubmit = async () => {
   await fetch(
-    `${config.public.COMMUNITY_API_URL}/member/search?q=${state.searchQuery}`
+    `${config.public.communityApiUrl}/member/search?q=${state.searchQuery}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -118,6 +120,7 @@ const selectedItem = (item) => {
 input {
   @apply mb-0 !important;
 }
+
 .dropdown-wrapper {
   @apply w-full relative;
   height: 45vh;
@@ -139,6 +142,7 @@ input {
 
   .options {
     border: 1px solid #e0dddb;
+
     ul {
       @apply list-none;
       @apply overflow-y-auto;
@@ -149,8 +153,9 @@ input {
       border-bottom: 1px solid #e0dddb;
       @apply m-0 p-3;
     }
+
     li:hover {
-      @apply bg-josa-blue text-josa-warm-grey-light cursor-pointer;
+      @apply bg-community-blue text-community-grey-light cursor-pointer;
     }
   }
 }

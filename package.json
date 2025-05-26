@@ -6,21 +6,26 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.17.0",
-    "@kevinmarrec/nuxt-pwa": "^0.7.1",
-    "@nuxtjs/tailwindcss": "^5.0.2",
+    "@babel/eslint-parser": "^7.25.1",
+    "@kevinmarrec/nuxt-pwa": "^0.17.0",
+    "@nuxtjs/sitemap": "^7.3.0",
+    "@nuxtjs/tailwindcss": "^6.12.1",
+    "@sidebase/nuxt-auth": "^0.9.3",
     "@volar-plugins/vetur": "latest",
-    "eslint": "^8.13.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-nuxt": "^3.2.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vue": "^8.6.0",
-    "nuxt": "^3.0.0-rc.11",
-    "prettier": "^2.6.2"
+    "eslint": "^9.27.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-vue": "^10.1.0",
+    "nuxt": "^3.13.1",
+    "nuxt-api-party": "^2.2.2",
+    "prettier": "^3.3.3"
   },
   "dependencies": {
-    "@nuxt/vite-builder": "^3.0.0-rc.11",
-    "@nuxtjs/device": "github:Redemption198/device-module",
-    "nuxt-healthcheck": "^1.0.1"
+    "@nuxt/vite-builder": "^3.13.1",
+    "@nuxtjs/robots": "^5.2.10",
+    "@vuepic/vue-datepicker": "^9.0.3",
+    "qs": "^6.14.0",
+    "vue-matomo": "^4.2.0"
   }
 }

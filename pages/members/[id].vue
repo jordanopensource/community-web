@@ -1,39 +1,85 @@
 <template>
   <div>
-    <Banner bannerText="JOSA Members" />
-    <div class="container">
-      <MemberBanner v-if="!pendingMember" :member="memberData.member" />
+    <Banner banner-text="JOSA Members" />
+    <div v-if="status === 'success' && memberDataRef" class="container">
+      <MemberBanner
+        :member="memberDataRef.member"
+        :member-auth="isUserLogged"
+        @update-member="() => refresh()"
+      />
       <div class="flex">
         <div class="flex flex-col w-full">
           <div class="block lg:hidden">
-            <MemberCard v-if="!pendingMember" :member="memberData.member" />
+            <MemberCard :member="memberDataRef.member" />
           </div>
-          <MemberDetails v-if="!pendingMember" :member="memberData.member" />
+          <MemberDetails
+            v-if="memberDataRef.member.about || isUserLogged"
+            :member="memberDataRef.member"
+            :settings="memberDataRef.settings"
+            :member-auth="isUserLogged"
+            @update-member="() => refresh()"
+          />
           <MemberExperience
-            v-if="memberData.experience.length || memberData.education.length"
-            :experience="memberData.experience"
-            :education="memberData.education"
+            v-if="
+              memberDataRef.experience.length ||
+              memberDataRef.education.length ||
+              isUserLogged
+            "
+            :experience="memberDataRef.experience"
+            :education="memberDataRef.education"
+            :member-auth="isUserLogged"
+            :settings="memberDataRef.settings"
+            @update-member="() => refresh()"
           />
           <MemberContribution
-            v-if="!pendingMember && memberData.contributions.length"
-            :contributions="memberData.contributions"
+            v-if="
+              memberDataRef.contributions.length ||
+              memberDataRef.open_source_contributions.github_contributions
+                .length ||
+              Object.keys(
+                memberDataRef.open_source_contributions.wikimedia_contributions,
+              ).length ||
+              isUserLogged
+            "
+            :contributions="memberDataRef.contributions"
+            :opensource-contributions="memberDataRef.open_source_contributions"
+            :settings="memberDataRef.settings"
+            :github-user-name="memberDataRef.member.github_user"
+            :wiki-media-user-name="memberDataRef.member.wikimedia_user"
           />
         </div>
         <div class="hidden lg:block">
-          <MemberCard v-if="!pendingMember" :member="memberData.member" />
+          <MemberCard :member="memberDataRef.member" />
         </div>
       </div>
+    </div>
+    <div v-else class="container flex flex-row justify-center h-40">
+      <div class="loader self-center"></div>
     </div>
   </div>
 </template>
 <script setup>
-const config = useRuntimeConfig()
 const route = useRoute()
 const user_id = route.params.id
-
-const { data: memberData, pending: pendingMember } = await useFetch(
-  `${config.public.COMMUNITY_API_URL}/member/${user_id}`
+const isUserLogged = computed(
+  () => route.params.id === userId().value && isAuth().value,
 )
+const {
+  data: memberData,
+  status,
+  refresh,
+} = useLazyAsyncData(async () => {
+  return await useFetchMember(user_id)
+})
+
+const memberDataRef = computed(() => memberData.value)
+
+onMounted(() => {
+  refresh()
+})
+watch(isUserLogged, () => {
+  refresh()
+})
 </script>
 
 <style scoped lang="postcss">

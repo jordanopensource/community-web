@@ -4,7 +4,7 @@
     :class="[!props.whiteBackground ? 'black-background' : 'white-background']"
   >
     <div :class="[props.enableContainer && 'container']">
-      <div class="divider-slashes">
+      <div class="banner-background">
         <h1
           class="banner-header"
           :class="
@@ -25,13 +25,21 @@ const props = defineProps({
 })
 </script>
 <style lang="postcss" scoped>
-.black-background {
-  @apply bg-josa-black;
-  @apply text-josa-warm-grey-light;
+.banner-background {
+  @apply bg-slashes;
+  @apply bg-repeat;
+  @apply bg-right bg-top;
+  /* @apply bg-cover; */
 }
+
+.black-background {
+  @apply bg-community-black;
+  @apply text-community-grey-light;
+}
+
 .white-background {
-  @apply bg-josa-warm-grey-light;
-  @apply text-josa-black;
+  @apply bg-community-grey-light;
+  @apply text-community-black;
 }
 
 /* .banner-header {
