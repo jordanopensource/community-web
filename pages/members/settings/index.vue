@@ -15,7 +15,7 @@
 </template>
 <script setup>
 definePageMeta({
-  middleware: 'auth',
+  middleware: 'sidebase-auth',
 })
 const url = `/api/member/?id=${userId().value}`
 const { data, status } = await useLazyFetch(url)
