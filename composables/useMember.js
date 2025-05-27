@@ -76,8 +76,8 @@ export const updateMember = (member) => {
  */
 export const useFetchMember = async (memberId) => {
   const { token } = useAuth()
-  // Get the current authenticated user's ID ONCE at the beginning.
   const currentAuthenticatedUserId = userId().value
+  const memberDataRef = useMemberData()
 
   // Determine the actual memberId to fetch.
   // If memberId is not provided (undefined), use the current authenticated user's ID.
@@ -87,11 +87,16 @@ export const useFetchMember = async (memberId) => {
   if (!memberIdToFetch) {
     // This error is thrown if memberIdToFetch is not provided (or is undefined)
     // AND currentAuthenticatedUserId is null.
-    throw new Error('userId is required to fetch a member profile.')
+    console.error(
+      'useFetchMember: userId is required to fetch a member profile. No memberId provided and currentAuthenticatedUserId is null.',
+    )
+    return null // Or throw new Error('userId is required to fetch a member profile.');
   }
 
   // Determine if we are fetching the currently authenticated user's own profile
-  const isOwnProfile = memberIdToFetch === currentAuthenticatedUserId
+  const isOwnProfile =
+    memberIdToFetch === currentAuthenticatedUserId &&
+    currentAuthenticatedUserId !== null
 
   try {
     const data = await $api(`/member/${memberIdToFetch}`, {
@@ -101,13 +106,31 @@ export const useFetchMember = async (memberId) => {
       },
     })
 
-    // Use pre-calculated isOwnProfile
+    // Use pre-calculated isOwnProfile and the hoisted memberDataRef
     if (isOwnProfile) {
-      updateMember(data)
+      // Directly update the .value of the ref obtained from useMemberData()
+      if (data) {
+        memberDataRef.value = data
+      } else {
+        // If data is null/undefined (e.g., API returned error or no content),
+        // you might want to clear the memberDataRef or handle it specifically.
+        // For now, if data is null, updateMember would have set it to null.
+        memberDataRef.value = null
+        console.warn(
+          `useFetchMember: Fetched data is null/undefined for own profile (ID: ${memberIdToFetch}). Member state set to null.`,
+        )
+      }
     }
     return data
   } catch (error) {
-    console.error('Error fetching member profile:', error)
+    console.error(
+      `Error fetching member profile for ID ${memberIdToFetch}:`,
+      error,
+    )
+    // It's important to also clear or reset state if the fetch fails for the current user
+    if (isOwnProfile) {
+      memberDataRef.value = null
+    }
     return null
   }
 }
