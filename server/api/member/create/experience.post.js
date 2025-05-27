@@ -1,8 +1,7 @@
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig()
+  const sessionCookie = getValidatedSessionCookie(event)
   const body = await readBody(event)
-  const sessionCookie = getCookie(event, `${config.public.sessionCookieName}`)
-  const apiUrl = `${config.public.communityApiUrl}/experience`
+
   const uploadOptions = {
     method: 'POST',
     body: body,
@@ -12,7 +11,5 @@ export default defineEventHandler(async (event) => {
     },
   }
 
-  const response = await $fetch.raw(apiUrl, uploadOptions)
-
-  return response?._data
+  return await $api('/experience', uploadOptions)
 })
