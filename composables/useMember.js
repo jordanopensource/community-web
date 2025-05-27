@@ -74,19 +74,37 @@ export const updateMember = (member) => {
  * @param { string } memberId
  * @returns { Promise<MemberData> }
  */
-export const useFetchMember = async (memberId = userId().value) => {
+export const useFetchMember = async (memberId) => {
   const { token } = useAuth()
+  // Get the current authenticated user's ID ONCE at the beginning.
+  const currentAuthenticatedUserId = userId().value
 
-  if (!memberId) throw new Error('userId is required')
+  // Determine the actual memberId to fetch.
+  // If memberId is not provided (undefined), use the current authenticated user's ID.
+  const memberIdToFetch =
+    memberId !== undefined ? memberId : currentAuthenticatedUserId
+
+  if (!memberIdToFetch) {
+    // This error is thrown if memberIdToFetch is not provided (or is undefined)
+    // AND currentAuthenticatedUserId is null.
+    throw new Error('userId is required to fetch a member profile.')
+  }
+
+  // Determine if we are fetching the currently authenticated user's own profile
+  const isOwnProfile = memberIdToFetch === currentAuthenticatedUserId
 
   try {
-    const data = await $api(`/member/${memberId}`, {
+    const data = await $api(`/member/${memberIdToFetch}`, {
       headers: {
-        Authorization:
-          token.value && memberId === userId().value ? token.value : null,
+        // Use hoisted/pre-calculated values
+        Authorization: token.value && isOwnProfile ? token.value : null,
       },
     })
-    if (memberId === userId()) updateMember(data)
+
+    // Use pre-calculated isOwnProfile
+    if (isOwnProfile) {
+      updateMember(data)
+    }
     return data
   } catch (error) {
     console.error('Error fetching member profile:', error)
