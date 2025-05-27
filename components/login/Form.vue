@@ -9,8 +9,12 @@
       class="mb-4"
       :show-close-btn="false"
     >
-      The email and password you entered did not match our records. Please
-      double-check and try again.
+      <span class="text-community-blue">Error Status code: {{ state.errorCode }}</span>
+      <br />
+      <span v-if="state.errorMessage"> {{ state.errorMessage }}</span>
+      <span v-else>
+        An unexpected error occurred. Please try again later.
+      </span>
     </Message>
     <form @submit.prevent="login">
       <FormAppControlInput
@@ -56,6 +60,8 @@ const form = reactive({
 const state = reactive({
   loading: false,
   error: false,
+  errorMessage: '',
+  errorCode: '',
 })
 const login = async () => {
   state.error = false
@@ -71,7 +77,9 @@ const login = async () => {
     },
   )
     .catch((error) => {
-      console.error('Error while signing in: ', error)
+      console.error('Error [AUTH | LOGIN]:', error.status, error.message)
+      state.errorCode = error.status
+      state.errorMessage = error.message.split(':')[3]?.trim().split(' ')[1]?.trim() || ''
       state.error = true
     })
     .finally(async () => {
