@@ -85,7 +85,6 @@ const login = async () => {
     .finally(async () => {
       const member = data.value
       if (member?.id && member.username === form.email) {
-        console.info(`${member.username} is logged in!`)
         updateUserId(member.id)
         isAuth().value = true
         await useFetchMember()
