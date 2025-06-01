@@ -92,7 +92,7 @@
         console.error('Error [AUTH | LOGIN]:', error.status, error.message)
         state.errorCode = error.status
         state.errorMessage =
-          error.message.split(':')[3]?.trim().split(' ')[1]?.trim() || ''
+          error.message.split(':')[1]?.trim() || 'Login failed'
         state.error = true
       })
       .finally(async () => {
