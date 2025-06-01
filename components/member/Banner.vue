@@ -185,8 +185,8 @@ const uploadImage = async (event, imageType) => {
   const { files } = await event.target
   const image = new FormData()
   image.append('file', files[0], files[0].name)
-  await fetch(
-    `${config.public.communityApiUrl}/upload/members/${imageType}/${
+  await $api(
+    `/upload/members/${imageType}/${
       userId().value
     }`,
     {

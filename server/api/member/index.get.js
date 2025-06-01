@@ -1,9 +1,8 @@
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
-  const config = useRuntimeConfig()
-  const sessionCookie = getCookie(event, `${config.public.sessionCookieName}`)
+  const sessionCookie = getValidatedSessionCookie(event)
 
-  const url = `${config.public.communityApiUrl}/member/${query.id}`
+  const url = `/member/${query.id}`
   const options = {
     method: 'GET',
     headers: {
@@ -13,6 +12,5 @@ export default defineEventHandler(async (event) => {
     },
   }
 
-  const response = await $fetch.raw(url, options)
-  return response._data
+  return await $api(url, options)
 })

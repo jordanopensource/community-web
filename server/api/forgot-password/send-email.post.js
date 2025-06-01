@@ -9,7 +9,6 @@ export default defineEventHandler(async (event) => {
     },
     body: body,
   }
-  const url = `${config.public.communityApiUrl}/auth/forgot-password/`
-  const response = await $fetch.raw(url, options)
-  return response._data
+  const url = `/auth/forgot-password/`
+  return await $api(url, options)
 })

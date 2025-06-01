@@ -66,9 +66,9 @@ const reset = async () => {
   if (state.passwordsMatch) {
     state.loading = true
     const token = useRoute().query.token
-    const url = `${config.public.communityApiUrl}/auth/reset-password?token=${token}`
+    const url = `/auth/reset-password?token=${token}`
 
-    await $fetch.raw(url, {
+    await $api(url, {
       method: 'PATCH',
       body: JSON.stringify({
         password: form.password_1,

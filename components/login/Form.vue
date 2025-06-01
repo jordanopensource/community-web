@@ -9,8 +9,14 @@
       class="mb-4"
       :show-close-btn="false"
     >
-      The email and password you entered did not match our records. Please
-      double-check and try again.
+      <span class="text-community-blue"
+        >Error Status code: {{ state.errorCode }}</span
+      >
+      <br />
+      <span v-if="state.errorMessage"> {{ state.errorMessage }}</span>
+      <span v-else>
+        An unexpected error occurred. Please try again later.
+      </span>
     </Message>
     <form @submit.prevent="login">
       <FormAppControlInput
@@ -46,67 +52,75 @@
   </div>
 </template>
 <script setup>
-const emit = defineEmits(['forgotPassword'])
-const { data, signIn } = useAuth()
+  const emit = defineEmits(['forgotPassword'])
 
-const form = reactive({
-  email: '',
-  password: '',
-})
-const state = reactive({
-  loading: false,
-  error: false,
-})
-const login = async () => {
-  state.error = false
-  state.loading = true
+  const { refresh } = useAuth()
+  const form = reactive({
+    email: '',
+    password: '',
+  })
+  const state = reactive({
+    loading: false,
+    error: false,
+    errorMessage: '',
+    errorCode: '',
+  })
+  const login = async () => {
+    state.error = false
+    state.loading = true
 
-  await signIn(
-    {
-      email: form.email,
-      password: form.password,
-    },
-    {
-      callbackUrl: '/',
-    },
-  )
-    .catch((error) => {
-      console.error('Error while signing in: ', error)
-      state.error = true
+    await $fetch('/api/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: form.email,
+        password: form.password,
+      }),
     })
-    .finally(async () => {
-      const member = data.value
-      if (member?.id && member.username === form.email) {
-        console.info(`${member.username} is logged in!`)
-        updateUserId(member.id)
-        isAuth().value = true
-        await useFetchMember()
-      }
-      state.loading = false
-    })
-}
+      .then(async (response) => {
+        const memberSession = response.session
+        if (memberSession?.id && memberSession.username === form.email) {
+          await updateUserId(memberSession.id)
+          // Refresh Nuxt Auth state to sync with cookies
+          await refresh()
+          await useFetchMember(memberSession.id)
+          // NOTE: External navigation is required to avoid issues with Nuxt's internal routing for full reload behavior
+          await navigateTo(response.redirectTo || '/', { external: true })
+
+        }
+      })
+      .catch((error) => {
+        console.error('Error [AUTH | LOGIN]:', error.status, error.message)
+        state.errorCode = error.status
+        state.errorMessage =
+          error.message.split(':')[1]?.trim() || 'Login failed'
+        state.error = true
+      })
+      .finally(async () => {
+        state.loading = false
+      })
+  }
 </script>
 <style lang="postcss" scoped>
-.divider-slashes {
-  @apply mt-5 mb-10;
-  @apply h-3;
-}
-div.container {
-  @apply bg-white;
-  @apply my-5 md:my-10;
-  @apply p-5 md:p-10;
-  @apply rounded-lg;
-  @apply md:text-lg;
-  max-width: 480px;
-}
-.form-submit {
-  @apply w-full;
-  @apply rounded-lg;
-}
-form a {
-  @apply block w-full;
-  @apply text-right;
-  @apply text-community-blue;
-  @apply mb-10;
-}
+  .divider-slashes {
+    @apply mt-5 mb-10;
+    @apply h-3;
+  }
+  div.container {
+    @apply bg-white;
+    @apply my-5 md:my-10;
+    @apply p-5 md:p-10;
+    @apply rounded-lg;
+    @apply md:text-lg;
+    max-width: 480px;
+  }
+  .form-submit {
+    @apply w-full;
+    @apply rounded-lg;
+  }
+  form a {
+    @apply block w-full;
+    @apply text-right;
+    @apply text-community-blue;
+    @apply mb-10;
+  }
 </style>

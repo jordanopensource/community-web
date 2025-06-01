@@ -108,6 +108,7 @@ export default defineNuxtConfig({
         maxAgeInSeconds: 60 * 60 * 24,
         secureCookieAttribute: true,
         httpOnlyCookieAttribute: process.env.NODE_ENV === 'production',
+<<<<<<< HEAD
       },
       session: {
         dataType: {
@@ -116,6 +117,8 @@ export default defineNuxtConfig({
           iat: 'number',
           exp: 'number',
         },
+=======
+>>>>>>> 2cf8e0d (Fix: nuxt auth (#254))
       },
       session: {
         dataType: {

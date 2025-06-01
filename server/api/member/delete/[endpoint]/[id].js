@@ -1,8 +1,7 @@
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig()
+  const sessionCookie = getValidatedSessionCookie(event)
   const { endpoint, id } = event.context.params
-  const sessionCookie = getCookie(event, `${config.public.sessionCookieName}`)
-  const apiUrl = `${config.public.communityApiUrl}/${endpoint}/${id}`
+  const apiUrl = `/${endpoint}/${id}`
   const uploadOptions = {
     method: 'DELETE',
     headers: {
@@ -11,7 +10,5 @@ export default defineEventHandler(async (event) => {
     },
   }
 
-  const response = await $fetch.raw(apiUrl, uploadOptions)
-
-  return response?._data
+  return await $api(apiUrl, uploadOptions)
 })

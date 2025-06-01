@@ -1,9 +1,7 @@
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig()
   const body = await readBody(event)
-
-  const sessionCookie = getCookie(event, `${config.public.sessionCookieName}`)
-  const apiUrl = `${config.public.communityApiUrl}/upload/members/cover/`
+  const sessionCookie = getValidatedSessionCookie(event)
+  const apiUrl = `/upload/members/cover/`
   const uploadOptions = {
     method: 'POST',
     body: body,
@@ -12,6 +10,6 @@ export default defineEventHandler(async (event) => {
       Authorization: `Bearer ${sessionCookie}`,
     },
   }
-  const response = await fetch(apiUrl, uploadOptions)
+  const response = await $api(apiUrl, uploadOptions)
   return response
 })
