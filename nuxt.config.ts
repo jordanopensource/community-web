@@ -10,7 +10,6 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
-          hid: 'description',
           name: 'description',
           content:
             'Join JOSA to not only develop soft and organizational skills, but become part of a dynamic and exceptional network of geeks and agents of change by giving back to the community.',
@@ -20,7 +19,6 @@ export default defineNuxtConfig({
       ],
       link: [
         {
-          hid: 'icon',
           rel: 'icon',
           type: 'image/x-icon',
           href: '/favicon.ico',
@@ -48,7 +46,6 @@ export default defineNuxtConfig({
     cssPath: '@/assets/css/tailwind.css',
     configPath: 'tailwind.config.js',
     exposeConfig: false,
-    injectPosition: 0,
     viewer: true,
   },
 
@@ -81,7 +78,6 @@ export default defineNuxtConfig({
       buildRepoLink: '',
       buildTimestamp: '',
       debug: '',
-      sessionCookieName: 'access_token',
       matomoSiteId: 13,
       matomoHost: 'https://analytics.josa.ngo',
     },
@@ -98,13 +94,12 @@ export default defineNuxtConfig({
 
   auth: {
     originEnvKey: 'NUXT_PUBLIC_AUTH_BASE_URL',
-    baseURL: 'https://community.api.prod.josa.ngo/v2/auth/',
     provider: {
       type: 'local',
       endpoints: {
-        signIn: { path: 'login', method: 'post' },
-        signOut: { path: 'logout', method: 'get' },
-        getSession: { path: '', method: 'get' },
+        signIn: { path: '/login', method: 'post' },
+        signOut: { path: '/logout', method: 'get' },
+        getSession: { path: '/', method: 'get' },
       },
       token: {
         signInResponseTokenPointer: '/access_token',
@@ -112,7 +107,7 @@ export default defineNuxtConfig({
         type: 'Bearer',
         maxAgeInSeconds: 60 * 60 * 24,
         secureCookieAttribute: true,
-        httpOnlyCookieAttribute: true, // NOTE: disable in local development
+        httpOnlyCookieAttribute: process.env.NODE_ENV === 'production',
       },
       session: {
         dataType: {

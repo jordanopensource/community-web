@@ -23,8 +23,8 @@ const state = reactive({
 })
 
 const verifyToken = async () => {
-  const url = `${config.public.communityApiUrl}/auth/verify?token=${state.token}`
-  $fetch.raw(url, {
+  const url = `/auth/verify?token=${state.token}`
+  $api(url, {
     onResponse({ response }) {
       state.isValid = response._data.success
     },

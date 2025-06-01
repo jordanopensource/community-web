@@ -55,7 +55,7 @@ const emit = defineEmits(['setCategories'])
 
 const getMissions = async () => {
   state.loading = true
-  let url = `${config.public.communityApiUrl}/mission/page/${state.page}?`
+  let url = `/mission/page/${state.page}?`
 
   if (props.selectedMissionCriteria) {
     url += `${props.selectedMissionCriteria?.key}=${props.selectedMissionCriteria?.value}&`
@@ -73,7 +73,7 @@ const getMissions = async () => {
     url += `title=${state.searchedMission}&`
   }
 
-  fetch(url)
+  $api(url)
     .then((response) => response.json())
     .then((data) => {
       state.missions = Object.create(data.paginate?.items)
