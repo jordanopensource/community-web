@@ -20,6 +20,9 @@
         />
       </div>
       <div class="form-container">
+      <label v-if="step < 4" class="text-community-red text-xs lg:text-sm font-bold mb-4">
+        Fields that are marked with an asterisk (*) are required.
+      </label>
         <RegisterPhaseOne
           v-if="step === 1"
           class="form-wrapper"
