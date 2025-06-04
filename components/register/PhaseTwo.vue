@@ -24,11 +24,26 @@
   </div>
 </template>
 <script setup>
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
+
+// Define props to receive initial data
+const props = defineProps({
+  initialData: {
+    type: Object,
+    default: () => ({})
+  }
+})
 
 const form = reactive({
   help_josa: '',
   josa_helps: '',
+})
+
+// Populate form with initial data if provided
+onMounted(() => {
+  if (props.initialData) {
+    Object.assign(form, props.initialData)
+  }
 })
 
 const emit = defineEmits(['toggleNext'])

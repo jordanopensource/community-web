@@ -28,15 +28,30 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+
+// Define props to receive initial data
+const props = defineProps({
+  initialData: {
+    type: Object,
+    default: () => ({})
+  }
+})
 
 const referral = ref(0)
+
+// Populate form with initial data if provided
+onMounted(() => {
+  if (props.initialData?.vouched_byId) {
+    referral.value = props.initialData.vouched_byId
+  }
+})
 
 const assignReferralValue = (referralID) => (referral.value = referralID)
 
 const emit = defineEmits(['toggleSubmit'])
 
 const onSubmit = () => {
-  emit('toggleSubmit', { vouched_by: referral.value.id })
+  emit('toggleSubmit', { vouched_byId: referral.value.id })
 }
 </script>

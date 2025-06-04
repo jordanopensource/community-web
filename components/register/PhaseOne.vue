@@ -71,20 +71,31 @@
   </div>
 </template>
 <script setup>
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
+
+// Define props to receive initial data
+const props = defineProps({
+  initialData: {
+    type: Object,
+    default: () => ({})
+  }
+})
 
 const form = reactive({
   first_name_en: '',
-  // first_middle_name_en: '',
-  // second_middle_name_en: '',
   last_name_en: '',
   first_name_ar: '',
-  // first_middle_name_ar: '',
-  // second_middle_name_ar: '',
   last_name_ar: '',
   phone: '',
   email: '',
   github_user: '',
+})
+
+// Populate form with initial data if provided
+onMounted(() => {
+  if (props.initialData) {
+    Object.assign(form, props.initialData)
+  }
 })
 
 const emit = defineEmits(['toggleNext'])
