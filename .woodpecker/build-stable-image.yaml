@@ -39,7 +39,7 @@ steps:
     image: josaorg/pre-commit-runner
     settings:
       args: "--all-files"
-      skip: "end-of-file-fixer, yamllint"
+      skip: "end-of-file-fixer, yamllint, no-commit-to-branch"
 
   # Build stable image (main branch only)
   - name: build-stable-image

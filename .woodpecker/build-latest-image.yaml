@@ -38,7 +38,7 @@ steps:
     image: josaorg/pre-commit-runner
     settings:
       args: "--all-files"
-      skip: "end-of-file-fixer, yamllint"
+      skip: "end-of-file-fixer, yamllint, no-commit-to-branch"
 
   # Build latest image (development and other branches)
   - name: build-latest-image
