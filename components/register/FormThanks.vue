@@ -32,10 +32,17 @@
         <p class="contact-info">
           Questions? Feel free to <a href="https://josa.ngo/contact-us" class="contact-link">contact us</a> anytime.
         </p>
+        <button @click="closeRegistration" class="button button-flat button-blue-full">Go Back to the homepage</button>
       </div>
     </div>
   </div>
 </template>
+<script setup>
+  const emit = defineEmits(['closeRegistration'])
+  const closeRegistration = () => {
+    emit('closeRegistration')
+  }
+</script>
 <style lang="postcss" scoped>
 .thank-you-container {
   @apply flex flex-col lg:flex-row items-center justify-center min-h-[60vh] gap-8 lg:gap-12 p-6 lg:p-12;
