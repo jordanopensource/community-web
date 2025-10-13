@@ -91,13 +91,6 @@ const form = reactive({
   github_user: '',
 })
 
-// Populate form with initial data if provided
-onMounted(() => {
-  if (props.initialData) {
-    Object.assign(form, props.initialData)
-  }
-})
-
 const emit = defineEmits(['toggleNext'])
 const onSubmit = () => {
   emit('toggleNext', form)

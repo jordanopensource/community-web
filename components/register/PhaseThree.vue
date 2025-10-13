@@ -40,13 +40,6 @@ const props = defineProps({
 
 const referral = ref(0)
 
-// Populate form with initial data if provided
-onMounted(() => {
-  if (props.initialData?.vouched_byId) {
-    referral.value = props.initialData.vouched_byId
-  }
-})
-
 const assignReferralValue = (referralID) => (referral.value = referralID)
 
 const emit = defineEmits(['toggleSubmit'])

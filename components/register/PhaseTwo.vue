@@ -39,12 +39,6 @@ const form = reactive({
   josa_helps: '',
 })
 
-// Populate form with initial data if provided
-onMounted(() => {
-  if (props.initialData) {
-    Object.assign(form, props.initialData)
-  }
-})
 
 const emit = defineEmits(['toggleNext'])
 const onSubmit = () => {
