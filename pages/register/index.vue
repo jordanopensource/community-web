@@ -54,7 +54,7 @@
           :initialData="formData"
           @toggleSubmit="(formData) => submitForm(formData)"
         />
-        <RegisterFormThanks v-else />
+        <RegisterFormThanks v-else @closeRegistration="() => closeRegistration()" />
       </div>
     </div>
   </div>
@@ -130,18 +130,21 @@
       },
     )
       .then((res) => {
-        console.log(res)
         step.value = 4 // Move to thank you page
         // Clear all form data after successful submission
         // This will clear both form data and step data to prepare for next use
-        setTimeout(() => {
-          originalClearAllData()
-          storageCheckTrigger.value++
-        }, 300000) // Give time for thank you page to render (5 minutes)
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
       })
+  }
+
+  const closeRegistration = () => {
+    // Clear all form data after successful submission
+    // This will clear both form data and step data to prepare for next use
+    originalClearAllData()
+    storageCheckTrigger.value++
+    navigateTo('/')
   }
 </script>
 <style lang="postcss" scoped>
