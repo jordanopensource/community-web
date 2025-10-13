@@ -82,15 +82,11 @@ export const useFormPersistence = (storageKey, initialData = {}) => {
   }
 
   // Watch for changes and auto-save
-  watch(
-    formData,
-    (newData) => {
-      if (isLoaded.value) {
-        saveToStorage(newData)
-      }
-    },
-    { deep: true },
-  )
+  watch(formData, (newData) => {
+    if (isLoaded.value) {
+      saveToStorage(newData)
+    }
+  })
 
   // Load data on mount
   onMounted(() => {
