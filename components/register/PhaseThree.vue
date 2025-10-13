@@ -28,7 +28,7 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 // Define props to receive initial data
 const props = defineProps({

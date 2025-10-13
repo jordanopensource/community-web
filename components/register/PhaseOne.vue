@@ -71,7 +71,7 @@
   </div>
 </template>
 <script setup>
-import { reactive, onMounted } from 'vue'
+import { reactive } from 'vue'
 
 // Define props to receive initial data
 const props = defineProps({
