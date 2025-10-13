@@ -81,9 +81,7 @@
   </div>
 </template>
 <script setup>
-import { reactive, computed, onMounted, ref, nextTick } from 'vue'
-
-const config = useRuntimeConfig()
+import { reactive, computed, ref } from 'vue'
 
 // Define emit events
 const emit = defineEmits(['emitSelected'])
@@ -225,10 +223,6 @@ const selectedItem = (item) => {
   emit('emitSelected', state.selectedItem)
 }
 
-// Load members on component mount for better UX
-onMounted(() => {
-  loadAllMembers()
-})
 </script>
 <style lang="postcss" scoped>
 input {
