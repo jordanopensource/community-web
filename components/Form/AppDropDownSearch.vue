@@ -22,17 +22,22 @@
       <div class="dropdown-popover">
         <form @submit.prevent="onSubmit">
           <input
+            ref="searchInput"
             class="input-field"
             type="text"
             :placeholder="placeholderText"
             v-model="state.searchQuery"
+            @focus="onFocus"
+            @blur="onBlur"
+            @input="onInput"
           />
           <svg
-            @submit="onSubmit"
+            @click="onSubmit"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             width="24"
             height="24"
+            class="cursor-pointer"
           >
             <path fill="none" d="M0 0h24v24H0z" />
             <path
@@ -42,11 +47,15 @@
           </svg>
         </form>
         <div class="options" :class="state.isVisible ? 'visible' : 'invisible'">
-          <ul>
+          <div v-if="state.loading" class="loading p-4 text-center">
+            <div class="loader mx-auto"></div>
+            <span class="text-sm text-gray-500">Loading members...</span>
+          </div>
+          <ul v-else-if="filteredMembers.length">
             <li
               @click="selectedItem(member)"
-              v-for="(member, index) in state.members"
-              :key="`member-${index}`"
+              v-for="(member, index) in filteredMembers"
+              :key="`member-${member.id || index}`"
               class="flex flex-row"
             >
               <img
@@ -63,14 +72,16 @@
               </span>
             </li>
           </ul>
+          <div v-else-if="state.searchQuery && !state.loading" class="no-results p-4 text-center text-gray-500">
+            No members found matching "{{ state.searchQuery }}"
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import { reactive, computed } from 'vue'
-const config = useRuntimeConfig()
+import { reactive, computed, ref } from 'vue'
 
 // Define emit events
 const emit = defineEmits(['emitSelected'])
@@ -80,8 +91,13 @@ const state = reactive({
   searchQuery: '',
   selectedItem: null,
   isVisible: false,
-  members: [],
+  allMembers: [], // Cache all members
+  loading: false,
+  membersLoaded: false, // Track if we've loaded members
+  focusTimeout: null, // For debouncing blur events
 })
+
+const searchInput = ref(null)
 
 // Define passed props
 const props = defineProps({
@@ -91,30 +107,122 @@ const props = defineProps({
   },
 })
 
-const onSubmit = async () => {
-  await $api(
-    `/member/search?q=${state.searchQuery}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      state.members = Object.assign([], data)
-    })
+// Computed property for filtered members
+const filteredMembers = computed(() => {
+  if (!state.searchQuery.trim()) {
+    return state.allMembers
+  }
 
-  if (state.members.length) {
-    state.isVisible = true
-  } else {
+  const query = state.searchQuery.toLowerCase()
+  return state.allMembers.filter(member => {
+    const firstName = member.first_name_en?.toLowerCase() || ''
+    const lastName = member.last_name_en?.toLowerCase() || ''
+    const fullName = `${firstName} ${lastName}`
+
+    return firstName.includes(query) ||
+           lastName.includes(query) ||
+           fullName.includes(query)
+  })
+})
+
+// Load all members (called once on component mount or first focus)
+const loadAllMembers = async () => {
+  if (state.membersLoaded || state.loading) return
+
+  state.loading = true
+
+  try {
+    // Use the correct paginated API endpoint
+    const data = await $api('/member/page/1?is_none_josa_member=false')
+    state.allMembers = data?.items || []
+    state.membersLoaded = true
+  } catch (error) {
+    console.error('Error loading members:', error)
+    state.allMembers = []
+  } finally {
+    state.loading = false
+  }
+}
+
+// Search for specific members (when user types and hits enter)
+const searchMembers = async (query) => {
+  if (!query.trim()) {
+    return
+  }
+
+  state.loading = true
+
+  try {
+    // Use the correct paginated API endpoint with name filter
+    const data = await $api(`/member/page/1?is_none_josa_member=false&name=${encodeURIComponent(query)}`)
+
+    // Merge search results with cached members (avoid duplicates)
+    const searchResults = data?.items || []
+    const existingIds = new Set(state.allMembers.map(m => m.id))
+    const newMembers = searchResults.filter(m => !existingIds.has(m.id))
+
+    state.allMembers = [...state.allMembers, ...newMembers]
+  } catch (error) {
+    console.error('Error searching members:', error)
+  } finally {
+    state.loading = false
+  }
+}
+
+// Handle input focus - show dropdown and load members if needed
+const onFocus = async () => {
+  // Clear any pending blur timeout
+  if (state.focusTimeout) {
+    clearTimeout(state.focusTimeout)
+    state.focusTimeout = null
+  }
+
+  await loadAllMembers()
+  state.isVisible = true
+}
+
+// Handle input blur - hide dropdown after a short delay
+const onBlur = () => {
+  // Delay hiding to allow clicks on dropdown items
+  state.focusTimeout = setTimeout(() => {
     state.isVisible = false
+  }, 200)
+}
+
+// Handle input changes - filter existing members
+const onInput = () => {
+  // Show dropdown if hidden and there's content
+  if (!state.isVisible && state.searchQuery.trim()) {
+    state.isVisible = true
+  }
+
+  // If dropdown is visible, we don't need to do anything else
+  // The computed filteredMembers will handle the filtering
+}
+
+// Handle form submission (Enter key) - search for more members
+const onSubmit = async () => {
+  if (state.searchQuery.trim()) {
+    await searchMembers(state.searchQuery.trim())
+    state.isVisible = true
   }
 }
 
 // Event Callback function to assign the selected value and emit the value back
 const selectedItem = (item) => {
   state.selectedItem = item
-  state.isVisible = !state.isVisible
+  state.isVisible = false
   state.searchQuery = ''
+
+  // Clear any pending blur timeout
+  if (state.focusTimeout) {
+    clearTimeout(state.focusTimeout)
+    state.focusTimeout = null
+  }
 
   emit('emitSelected', state.selectedItem)
 }
+
 </script>
 <style lang="postcss" scoped>
 input {
@@ -142,6 +250,8 @@ input {
 
   .options {
     border: 1px solid #e0dddb;
+    max-height: 300px;
+    overflow-y: auto;
 
     ul {
       @apply list-none;
@@ -157,6 +267,36 @@ input {
     li:hover {
       @apply bg-community-blue text-community-grey-light cursor-pointer;
     }
+
+    li:last-child {
+      border-bottom: none;
+    }
   }
+
+  .loading {
+    @apply flex flex-col items-center gap-2;
+  }
+
+  .loader {
+    @apply w-6 h-6 border-2 border-gray-300 border-t-community-blue rounded-full animate-spin;
+  }
+
+  .no-results {
+    @apply text-sm italic;
+  }
+}
+
+/* Ensure dropdown appears above other elements */
+.dropdown-popover {
+  z-index: 1000;
+}
+
+/* Hide dropdown when invisible */
+.options.invisible {
+  @apply hidden;
+}
+
+.options.visible {
+  @apply block;
 }
 </style>

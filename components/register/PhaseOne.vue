@@ -47,8 +47,9 @@
         v-model:value="form.phone"
         inputType="tel"
         :isRequired="true"
-        placeholder="962799888777"
-        pattern="+[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{3}"
+        placeholder="+962799888777"
+        pattern="\+[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{3}"
+        title="Please enter phone number in format: +962799888777"
         >Phone Number</FormAppControlInput
       >
       <FormAppControlInput
@@ -72,14 +73,18 @@
 <script setup>
 import { reactive } from 'vue'
 
+// Define props to receive initial data
+const props = defineProps({
+  initialData: {
+    type: Object,
+    default: () => ({})
+  }
+})
+
 const form = reactive({
   first_name_en: '',
-  // first_middle_name_en: '',
-  // second_middle_name_en: '',
   last_name_en: '',
   first_name_ar: '',
-  // first_middle_name_ar: '',
-  // second_middle_name_ar: '',
   last_name_ar: '',
   phone: '',
   email: '',

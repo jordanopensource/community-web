@@ -26,10 +26,19 @@
 <script setup>
 import { reactive } from 'vue'
 
+// Define props to receive initial data
+const props = defineProps({
+  initialData: {
+    type: Object,
+    default: () => ({})
+  }
+})
+
 const form = reactive({
   help_josa: '',
   josa_helps: '',
 })
+
 
 const emit = defineEmits(['toggleNext'])
 const onSubmit = () => {
