@@ -83,8 +83,7 @@
           // Refresh Nuxt Auth state to sync with cookies
           await refresh()
           await useFetchMember(memberSession.id)
-          // NOTE: External navigation is required to avoid issues with Nuxt's internal routing for full reload behavior
-          await navigateTo(response.redirectTo || '/', { external: true })
+          await navigateTo(response.redirectTo || '/')
 
         }
       })
