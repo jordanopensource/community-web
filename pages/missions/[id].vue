@@ -14,7 +14,7 @@ const config = useRuntimeConfig()
 const route = useRoute()
 const MISSION_ID = route.params.id
 
-const { data: missionData, status } = await useFetch(
-  `${config.public.communityApiUrl}/mission/${MISSION_ID}`,
+const { data: missionData, status } = await $api(
+  `/mission/${MISSION_ID}`,
 )
 </script>

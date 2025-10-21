@@ -30,6 +30,14 @@
 <script setup>
 import { ref } from 'vue'
 
+// Define props to receive initial data
+const props = defineProps({
+  initialData: {
+    type: Object,
+    default: () => ({})
+  }
+})
+
 const referral = ref(0)
 
 const assignReferralValue = (referralID) => (referral.value = referralID)
@@ -37,6 +45,6 @@ const assignReferralValue = (referralID) => (referral.value = referralID)
 const emit = defineEmits(['toggleSubmit'])
 
 const onSubmit = () => {
-  emit('toggleSubmit', { vouched_by: referral.value.id })
+  emit('toggleSubmit', { vouched_byId: referral.value.id })
 }
 </script>

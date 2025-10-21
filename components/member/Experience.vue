@@ -576,7 +576,7 @@ const addMemberEducation = async () => {
     method: 'POST',
     body: JSON.stringify(bodyData),
     onResponse({ response }) {
-      if (response._data.success) {
+      if (response.ok) {
         state.error = false
         state.success = true
         state.loading = false

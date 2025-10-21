@@ -10,7 +10,7 @@
     "@kevinmarrec/nuxt-pwa": "^0.17.0",
     "@nuxtjs/sitemap": "^7.3.0",
     "@nuxtjs/tailwindcss": "^6.12.1",
-    "@sidebase/nuxt-auth": "^0.9.3",
+    "@sidebase/nuxt-auth": "^0.10.1",
     "@volar-plugins/vetur": "latest",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",

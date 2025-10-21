@@ -14,11 +14,17 @@
         :type="props.inputType"
         class="checkbox form-check-input border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
       />
-      <label class="items-center" :for="props.labelId"> <slot /></label>
+      <label class="items-center" :for="props.labelId">
+        <slot />
+        <span v-if="props.isRequired" class="required-asterisk">*</span>
+      </label>
     </div>
     <div v-else>
       <div v-if="$props.showSlot">
-        <label> <slot /></label>
+        <label>
+          <slot />
+          <span v-if="props.isRequired" class="required-asterisk">*</span>
+        </label>
       </div>
       <div
         v-if="props.inputType !== 'textarea' && props.inputType !== 'file'"
@@ -33,6 +39,7 @@
           :type="state.showPassword ? 'text' : props.inputType"
           :pattern="props.pattern"
           :value="props.value"
+          :title="props.title"
           class="interactive-control"
           :class="props.showPasswordIcon ? 'hide-right-border' : ''"
           @focusin="state.pwActive = true"
@@ -62,6 +69,7 @@
           :placeholder="props.placeholder"
           :type="state.showPassword ? 'text' : props.inputType"
           :pattern="props.pattern"
+          :title="props.title"
           class="interactive-control"
           :class="props.editIcon ? 'input-file-edit-icon' : ''"
           @focusin="state.pwActive = true"
@@ -74,6 +82,7 @@
         rows="5"
         @input="$emit('update:value', $event.target.value)"
         :required="props.isRequired"
+        :title="props.title"
         >{{ props.value }}</textarea
       >
     </div>
@@ -96,7 +105,8 @@ const props = defineProps({
   value: { default: '' },
   width: { type: String, default: '' },
   labelId: { type: String, default: '' },
-  acceptedFiles: {type: String, default: ''}
+  acceptedFiles: {type: String, default: ''},
+  title: { type: String, default: '' }
 })
 
 const state = reactive({
@@ -190,5 +200,10 @@ input.input-file-edit-icon {
 }
 .file-edit-container:hover {
   background-color: rgb(11 150 171 / 0.8);
+}
+
+.required-asterisk {
+  @apply text-community-red ml-1;
+  font-weight: bold;
 }
 </style>
