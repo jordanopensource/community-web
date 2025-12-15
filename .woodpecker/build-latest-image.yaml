@@ -8,7 +8,7 @@ when:
 
 variables:
   - &registry_url "https://registry.cloud.josa.ngo"
-  - &docker_repo "registry.cloud.josa.ngo/community-web"
+  - &docker_repo "library/josaorg/community-web"
   - &slack_channel "builds"
   # Success message template
   - &success_message >
