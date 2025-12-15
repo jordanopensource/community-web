@@ -53,9 +53,9 @@ steps:
         - ${CI_COMMIT_SHA:-latest}
         - stable
       username:
-        from_secret: DOCKER_HUB_USERNAME
+        from_secret: REGISTRY_USERNAME
       password:
-        from_secret: DOCKER_HUB_PASSWORD
+        from_secret: REGISTRY_SECRET
       build_args:
         CI_REPO: "${CI_REPO}"
         CI_REPO_NAME: "${CI_REPO_NAME}"
