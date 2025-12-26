@@ -1,15 +1,13 @@
 <template>
   <div
     class="py-20 lg:py-36"
-    :class="[!props.whiteBackground ? 'black-background' : 'white-background']"
+    :class="!props.whiteBackground ? 'bg-community-black text-community-grey-light' : 'bg-community-grey-light text-community-black'"
   >
     <div :class="[props.enableContainer && 'container']">
-      <div class="banner-background">
+      <div class="bg-slashes bg-repeat bg-right bg-top">
         <h1
-          class="banner-header"
-          :class="
-            !props.whiteBackground ? 'black-background' : 'white-background'
-          "
+          class="text-4xl inline pr-16 lg:pr-20"
+          :class="!props.whiteBackground ? 'bg-community-black text-community-grey-light' : 'bg-community-grey-light text-community-black'"
         >
           {{ props.bannerText }}
         </h1>
@@ -24,34 +22,3 @@ const props = defineProps({
   enableContainer: { type: Boolean, default: true },
 })
 </script>
-<style lang="postcss" scoped>
-.banner-background {
-  @apply bg-slashes;
-  @apply bg-repeat;
-  @apply bg-right bg-top;
-  /* @apply bg-cover; */
-}
-
-.black-background {
-  @apply bg-community-black;
-  @apply text-community-grey-light;
-}
-
-.white-background {
-  @apply bg-community-grey-light;
-  @apply text-community-black;
-}
-
-/* .banner-header {
-  @apply leading-5 lg:leading-10;
-  @apply text-3xl lg:text-5xl tracking-normal font-normal;
-  @apply inline;
-  @apply pr-4;
-} */
-
-.banner-header {
-  @apply text-4xl;
-  @apply inline;
-  @apply pr-16 lg:pr-20;
-}
-</style>

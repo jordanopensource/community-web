@@ -3,8 +3,8 @@
     <label>
       <slot />
     </label>
-    <div class="dropdown-wrapper">
-      <div v-if="state.selectedItem" class="selected-item">
+    <div class="w-full relative" style="height: 45vh;">
+      <div v-if="state.selectedItem" class="flex flex-row">
         <img
           class="w-1/12"
           alt="avatar"
@@ -19,7 +19,7 @@
           {{ state.selectedItem.last_name_en }}</span
         >
       </div>
-      <div class="dropdown-popover">
+      <div class="absolute top-24 left-0 right-0 bg-white z-[1000]">
         <form @submit.prevent="onSubmit">
           <input
             ref="searchInput"
@@ -37,7 +37,7 @@
             viewBox="0 0 24 24"
             width="24"
             height="24"
-            class="cursor-pointer"
+            class="absolute top-3 right-3 cursor-pointer"
           >
             <path fill="none" d="M0 0h24v24H0z" />
             <path
@@ -46,17 +46,18 @@
             />
           </svg>
         </form>
-        <div class="options" :class="state.isVisible ? 'visible' : 'invisible'">
-          <div v-if="state.loading" class="loading p-4 text-center">
-            <div class="loader mx-auto"></div>
+        <div :class="state.isVisible ? 'block' : 'hidden'" style="border: 1px solid #e0dddb; max-height: 300px; overflow-y: auto;">
+          <div v-if="state.loading" class="flex flex-col items-center gap-2 p-4 text-center">
+            <div class="w-6 h-6 border-2 border-gray-300 border-t-community-blue rounded-full animate-spin mx-auto"></div>
             <span class="text-sm text-gray-500">Loading members...</span>
           </div>
-          <ul v-else-if="filteredMembers.length">
+          <ul v-else-if="filteredMembers.length" class="list-none overflow-y-auto max-h-44">
             <li
               @click="selectedItem(member)"
               v-for="(member, index) in filteredMembers"
               :key="`member-${member.id || index}`"
-              class="flex flex-row"
+              class="flex flex-row m-0 p-3 hover:bg-community-blue hover:text-community-grey-light hover:cursor-pointer"
+              style="border-bottom: 1px solid #e0dddb;"
             >
               <img
                 class="w-1/12"
@@ -72,7 +73,7 @@
               </span>
             </li>
           </ul>
-          <div v-else-if="state.searchQuery && !state.loading" class="no-results p-4 text-center text-gray-500">
+          <div v-else-if="state.searchQuery && !state.loading" class="text-sm italic p-4 text-center text-gray-500">
             No members found matching "{{ state.searchQuery }}"
           </div>
         </div>
@@ -226,77 +227,10 @@ const selectedItem = (item) => {
 </script>
 <style lang="postcss" scoped>
 input {
-  @apply mb-0 !important;
+  margin-bottom: 0 !important;
 }
 
-.dropdown-wrapper {
-  @apply w-full relative;
-  height: 45vh;
-}
-
-.selected-item {
-  @apply flex flex-row;
-}
-
-.dropdown-popover {
-  @apply absolute;
-  @apply top-24 left-0 right-0;
-  @apply bg-white;
-
-  svg {
-    @apply absolute;
-    @apply top-3 right-3;
-  }
-
-  .options {
-    border: 1px solid #e0dddb;
-    max-height: 300px;
-    overflow-y: auto;
-
-    ul {
-      @apply list-none;
-      @apply overflow-y-auto;
-      @apply max-h-44;
-    }
-
-    li {
-      border-bottom: 1px solid #e0dddb;
-      @apply m-0 p-3;
-    }
-
-    li:hover {
-      @apply bg-community-blue text-community-grey-light cursor-pointer;
-    }
-
-    li:last-child {
-      border-bottom: none;
-    }
-  }
-
-  .loading {
-    @apply flex flex-col items-center gap-2;
-  }
-
-  .loader {
-    @apply w-6 h-6 border-2 border-gray-300 border-t-community-blue rounded-full animate-spin;
-  }
-
-  .no-results {
-    @apply text-sm italic;
-  }
-}
-
-/* Ensure dropdown appears above other elements */
-.dropdown-popover {
-  z-index: 1000;
-}
-
-/* Hide dropdown when invisible */
-.options.invisible {
-  @apply hidden;
-}
-
-.options.visible {
-  @apply block;
+li:last-child {
+  border-bottom: none !important;
 }
 </style>

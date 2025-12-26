@@ -1,16 +1,12 @@
 <template>
-  <div class="slash-separator"></div>
+  <div class="relative mt-24 slash-separator"></div>
 </template>
-<style lang="postcss" scoped>
-.slash-separator {
-  @apply relative;
-  @apply mt-24;
-}
+<style scoped>
 .slash-separator:before {
   --border-width: 6px;
   --stripe-distance: 10px;
-  @apply h-3;
-  @apply absolute;
+  height: 0.75rem;
+  position: absolute;
   content: '';
   left: calc(var(--border-width) * -1);
   right: calc(var(--border-width) * -1);

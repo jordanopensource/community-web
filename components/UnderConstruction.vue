@@ -6,12 +6,7 @@
       alt="under constructions"
     />
     <div class="text-center">
-      <p>This section of the site is still under construction</p>
+      <p class="my-8">This section of the site is still under construction</p>
     </div>
   </div>
 </template>
-<style lang="postcss" scoped>
-p {
-  @apply my-8;
-}
-</style>

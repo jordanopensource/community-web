@@ -2,7 +2,7 @@
   <div class="input-control" :class="props.width ? props.width : ''">
     <div
       v-if="props.inputType === 'checkbox'"
-      class="checkbox-container inline"
+      class="flex items-start inline"
     >
       <input
         :id="props.labelId"
@@ -12,18 +12,18 @@
         :required="props.isRequired"
         :placeholder="props.placeholder"
         :type="props.inputType"
-        class="checkbox form-check-input border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+        class="checkbox form-check-input border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer opacity-0 absolute"
       />
-      <label class="items-center" :for="props.labelId">
+      <label class="flex cursor-pointer items-start" :for="props.labelId">
         <slot />
-        <span v-if="props.isRequired" class="required-asterisk">*</span>
+        <span v-if="props.isRequired" class="text-community-red ml-1 font-bold">*</span>
       </label>
     </div>
     <div v-else>
       <div v-if="$props.showSlot">
         <label>
           <slot />
-          <span v-if="props.isRequired" class="required-asterisk">*</span>
+          <span v-if="props.isRequired" class="text-community-red ml-1 font-bold">*</span>
         </label>
       </div>
       <div
@@ -40,8 +40,8 @@
           :pattern="props.pattern"
           :value="props.value"
           :title="props.title"
-          class="interactive-control"
-          :class="props.showPasswordIcon ? 'hide-right-border' : ''"
+          class="inline rounded-r-none"
+          :class="props.showPasswordIcon ? 'border-r-0' : ''"
           @focusin="state.pwActive = true"
           @focusout="state.pwActive = false"
         />
@@ -70,8 +70,8 @@
           :type="state.showPassword ? 'text' : props.inputType"
           :pattern="props.pattern"
           :title="props.title"
-          class="interactive-control"
-          :class="props.editIcon ? 'input-file-edit-icon' : ''"
+          class="inline rounded-r-none"
+          :class="props.editIcon ? 'absolute top-0 left-0 opacity-0 cursor-pointer bg-editIconWhite bg-cover' : ''"
           @focusin="state.pwActive = true"
           @focusout="state.pwActive = false"
           :accept="props.acceptedFiles"
@@ -114,21 +114,9 @@ const state = reactive({
   pwActive: false,
 })
 </script>
-<style lang="postcss" scoped>
+<style scoped>
 .input-control input.checkbox {
-  @apply w-fit !important;
-}
-
-.checkbox-container {
-  @apply flex items-start;
-}
-
-.checkbox-container label {
-  @apply flex cursor-pointer items-start;
-}
-
-.checkbox-container input[type='checkbox'] {
-  @apply cursor-pointer opacity-0 absolute;
+  width: fit-content !important;
 }
 
 .checkbox-container label::before {
@@ -150,9 +138,6 @@ const state = reactive({
   background-color: #0c97ac;
   border-color: #0c97ac;
 }
-.interactive-control {
-  @apply inline rounded-r-none;
-}
 
 .eye-icon {
   @apply block w-8;
@@ -161,7 +146,7 @@ const state = reactive({
   height: 46.5px;
   background-size: 18px;
   border: 0.8px solid rgb(224, 221, 219);
-  @apply border-l-0;
+  border-left: 0;
 }
 @media screen and (min-width: 768px) {
   .eye-icon {
@@ -177,33 +162,28 @@ const state = reactive({
 .eye-icon.focusBg {
   background-color: #f7f6f5;
 }
-input.hide-right-border {
-  @apply border-r-0;
-}
 
-input.input-file-edit-icon {
-  @apply absolute top-0 left-0 opacity-0 cursor-pointer;
-  @apply bg-editIconWhite bg-cover;
-}
 .file-edit-container {
-  @apply bg-editIconWhite bg-center bg-no-repeat;
-  @apply p-4 w-2 h-2;
-  @apply border rounded-full;
+  padding: 1rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-image: url('/icons/edit-white.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid;
+  border-radius: 9999px;
   background-size: 1rem;
   background-color: rgb(11 150 171 / 0.2);
 }
 @media (max-width: 640px) {
   .file-edit-container {
-    @apply p-2 w-1 h-1;
+    padding: 0.5rem;
+    width: 0.25rem;
+    height: 0.25rem;
     background-size: 0.5rem;
-}
+  }
 }
 .file-edit-container:hover {
   background-color: rgb(11 150 171 / 0.8);
-}
-
-.required-asterisk {
-  @apply text-community-red ml-1;
-  font-weight: bold;
 }
 </style>

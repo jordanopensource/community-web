@@ -1,7 +1,7 @@
 <template>
-  <footer class="footer-section">
-    <div class="footer-container">
-      <div class="credit-container">
+  <footer class="bg-community-black lg:h-64 w-full">
+    <div class="container bg-community-black text-white lg:flex h-full items-center lg:justify-between">
+      <div class="flex items-center pt-12 lg:pt-0">
         <img
           class="h-5"
           src=" /icons/icon-small-coded.svg"
@@ -29,8 +29,8 @@
           loading="lazy"
         />
       </div>
-      <div class="info-container">
-        <div class="social-media-container">
+      <div class="lg:flex pb-12 lg:pb-0 pt-5 lg:pt-0">
+        <div class="flex items-center justify-end lg:px-5">
           <a
             href="https://github.com/jordanopensource"
             target="_blank"
@@ -72,7 +72,7 @@
             />
           </a>
         </div>
-        <div class="copyright-container">
+        <div class="text-right pt-5 lg:pt-0">
           <img
             class="h-4 inline"
             src=" /icons/icon-small-cc.svg"
@@ -81,7 +81,7 @@
             height="16"
             loading="lazy"
           />
-          <span class="copyright-text"
+          <span class="text-xs lg:text-sm font-light ml-2"
             >{{ new Date().getFullYear() }}, JOSA - Jordan Open Source Association</span
           >
         </div>
@@ -89,38 +89,3 @@
     </div>
   </footer>
 </template>
-
-<style lang="postcss" scoped>
-.footer-section {
-  @apply bg-community-black;
-  @apply lg:h-64 w-full;
-}
-
-.footer-container {
-  @apply container;
-  @apply bg-community-black text-white;
-  @apply lg:flex h-full items-center lg:justify-between;
-}
-
-.credit-container {
-  @apply flex items-center;
-  @apply pt-12 lg:pt-0;
-}
-
-.info-container {
-  @apply lg:flex pb-12 lg:pb-0 pt-5 lg:pt-0;
-}
-
-.social-media-container {
-  @apply flex items-center justify-end lg:px-5;
-}
-
-.copyright-container {
-  @apply text-right pt-5 lg:pt-0;
-
-  .copyright-text {
-    @apply text-xs lg:text-sm font-light;
-    @apply ml-2;
-  }
-}
-</style>

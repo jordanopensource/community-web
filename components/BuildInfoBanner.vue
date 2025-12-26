@@ -1,6 +1,6 @@
 <template>
-  <div class="banner" id="bannerClosed" v-if="!state.bannerClosed">
-    <div class="container">
+  <div class="w-full z-20 text-white" style="background-color: #019ec3" id="bannerClosed" v-if="!state.bannerClosed">
+    <div class="container flex items-center justify-between">
       <div class="flex items-center gap-x-4">
         <span>🔨</span>
         <p>
@@ -27,7 +27,7 @@
           <span class="font-bold"> Environment: </span>
           {{ config.public.targetEnv }}
         </p>
-        <button class="bannerBtn" @click="closeBanner">
+        <button class="text-white" @click="closeBanner">
           <img
             class="w-9 h-9"
             src="/icons/lm-icon-close.png"
@@ -48,20 +48,3 @@ const closeBanner = () => {
   state.bannerClosed = true
 }
 </script>
-<style lang="postcss" scoped>
-.banner p,
-.banner a,
-.banner button {
-  @apply text-white;
-}
-
-.banner {
-  background-color: #019ec3;
-  @apply w-full;
-  @apply z-20;
-}
-
-.banner .container {
-  @apply flex items-center justify-between;
-}
-</style>
