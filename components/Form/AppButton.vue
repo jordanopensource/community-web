@@ -1,5 +1,5 @@
 <template>
-  <button class="button" :class="btnStyle" v-bind="$attrs">
+  <button class="button disabled:bg-josa-grey" :class="btnStyle" v-bind="$attrs">
     <slot />
   </button>
 </template>
@@ -12,9 +12,3 @@ const props = defineProps({
   },
 })
 </script>
-
-<style scoped lang="postcss">
-.button:disabled {
-  @apply bg-josa-grey;
-}
-</style>

@@ -11,7 +11,7 @@
       />
       <i
         v-if="props.showCloseBtn"
-        class="close-icon w-5 h-5 bg-contain"
+        class="w-5 h-5 bg-contain bg-xIcon cursor-pointer"
         @click="state.shown = false"
       >
       </i>
@@ -45,11 +45,5 @@ const state = reactive({
   background-color: rgba(11, 150, 171, 0.1);
   border-color: #0b96ab;
   color: #0b96ab;
-}
-.close-icon {
-  @apply bg-xIcon;
-}
-.close-icon:hover {
-  cursor: pointer;
 }
 </style>

@@ -9,14 +9,14 @@
       <div class="flex flex-row items-center">
         <input type="hidden" name="nonce" />
         <input
-          class="input-container flex-shrink-0 early-access-email"
+          class="input-container flex-shrink-0 w-4/5"
           type="email"
           name="email"
           required
           placeholder="E-mail"
         />
         <input
-          class="button-flat submit-button grow w-auto"
+          class="button-flat grow w-auto bg-[#0c97ac] text-white"
           type="submit"
           value="&rarr;"
         />
@@ -31,13 +31,7 @@
     </form>
   </div>
 </template>
-<style lang="postcss" scoped>
-.early-access-email {
-  @apply w-4/5 !important;
-}
 
-.submit-button {
-  background-color: #0c97ac;
-  color: white;
-}
-</style>
+<script setup>
+</script>
+

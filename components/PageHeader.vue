@@ -1,43 +1,43 @@
 <template>
-  <header>
-    <nav>
-      <div class="container">
-        <div class="nav-bar">
+  <header class="bg-community-black-darker">
+    <nav class="bg-community-black-darker">
+      <div class="container bg-community-black-darker">
+        <div class="flex items-center py-6 md:py-12">
           <NuxtLink id="brand" to="/" class="flex flex-row items-end z-10">
             <img
-              class="w-36 h-10"
+              class="w-36 h-10 max-[400px]:h-8 max-[400px]:w-auto"
               src=" /logo/logo.svg"
               alt="Jordan Open Source Association Logo"
               width="128"
               height="40"
               loading="eager"
             />
-            <span class="community text-xl text-community-grey-light italic">
+            <span class="text-xl max-[400px]:text-lg text-community-grey-light italic">
               .community
             </span>
           </NuxtLink>
-          <ul class="menu">
+          <ul class="text-white hidden font-medium text-lg lg:text-xl lg:flex justify-end w-full items-center">
             <li
               v-if="config.public.targetEnv === 'development'"
-              class="menu-item"
+              class="inline-block lg:mx-2"
             >
-              <NuxtLink to="/register" class="nav-link">Join JOSA</NuxtLink>
+              <NuxtLink to="/register" class="uppercase transition-all duration-300 ease-linear">Join JOSA</NuxtLink>
             </li>
-            <li class="menu-item">
-              <NuxtLink to="/members" class="nav-link">JOSA Members</NuxtLink>
+            <li class="inline-block lg:mx-2">
+              <NuxtLink to="/members" class="uppercase transition-all duration-300 ease-linear">JOSA Members</NuxtLink>
             </li>
             <li
               v-if="config.public.targetEnv === 'development'"
-              class="menu-item"
+              class="inline-block lg:mx-2"
             >
-              <NuxtLink to="/missions" class="nav-link">Contribute</NuxtLink>
+              <NuxtLink to="/missions" class="uppercase transition-all duration-300 ease-linear">Contribute</NuxtLink>
             </li>
-            <li class="menu-item">
+            <li class="inline-block lg:mx-2">
               <NuxtLink
                 v-if="!token && !isAuth().value"
                 id="login"
                 to="/login"
-                class="nav-link"
+                class="uppercase transition-all duration-300 ease-linear text-community-blue border-community-blue ml-3 p-2 pt-1 pb-1 hover:text-community-grey-light"
                 >Sign In</NuxtLink
               >
               <UserWidget v-else />
@@ -67,46 +67,8 @@ onMounted(() => {
   state.isOpen = false
 })
 </script>
-<style lang="postcss" scoped>
-* {
-  @apply bg-community-black-darker;
-}
-
-li a {
-  text-transform: uppercase;
-  transition: all 0.3s ease 0s;
-}
-
-.nav-bar {
-  @apply flex items-center;
-  @apply py-6 md:py-12;
-}
-
-.menu {
-  @apply text-white hidden font-medium text-lg lg:text-xl;
-  @apply lg:flex justify-end w-full items-center;
-
-  .menu-item {
-    @apply inline-block lg:mx-2;
-  }
-}
-
+<style scoped>
 #login {
-  @apply text-community-blue border-community-blue ml-3 p-2 pt-1 pb-1;
   border-width: thin;
-}
-
-#login:hover {
-  @apply text-community-grey-light;
-}
-
-@media screen and (max-width: 400px) {
-  img {
-    @apply h-8 w-auto;
-  }
-
-  .community {
-    @apply text-lg;
-  }
 }
 </style>
