@@ -6,24 +6,24 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.25.1",
+    "@babel/eslint-parser": "^7.28.5",
     "@kevinmarrec/nuxt-pwa": "^0.17.0",
-    "@nuxtjs/sitemap": "^7.3.0",
-    "@nuxtjs/tailwindcss": "^6.12.1",
-    "@sidebase/nuxt-auth": "^0.10.1",
+    "@nuxtjs/sitemap": "^7.4.8",
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "@sidebase/nuxt-auth": "^1.1.1",
     "@volar-plugins/vetur": "latest",
-    "eslint": "^9.27.0",
-    "eslint-config-prettier": "^10.1.5",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-nuxt": "^4.0.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-vue": "^10.1.0",
-    "nuxt": "^3.13.1",
-    "nuxt-api-party": "^2.2.2",
-    "prettier": "^3.3.3"
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-vue": "^10.6.2",
+    "nuxt": "^3.20.1",
+    "nuxt-api-party": "^3.4.2",
+    "prettier": "^3.7.4"
   },
   "dependencies": {
-    "@nuxt/vite-builder": "^3.13.1",
-    "@nuxtjs/robots": "^5.2.10",
+    "@nuxt/vite-builder": "^3.20.1",
+    "@nuxtjs/robots": "^5.6.1",
     "@vuepic/vue-datepicker": "^9.0.3",
     "qs": "^6.14.0",
     "vue-matomo": "^4.2.0"
