@@ -1,3 +1,4 @@
+
 export default defineNuxtRouteMiddleware(async (to, from) => {
   if (to.name === 'members-settings' && !from.name) {
     return navigateTo('/')
