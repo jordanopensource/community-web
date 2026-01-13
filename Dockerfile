@@ -1,10 +1,10 @@
 # set global args
-ARG USER=node CI_REPO  CI_REPO_NAME  CI_REPO_URL  CI_COMMIT_SHA  CI_COMMIT_REF  CI_PIPELINE_URL  CI_PIPELINE_CREATED  CI_PREV_PIPELINE_URL CI_PIPELINE_NUMBER
+ARG NODE_VERSION=24 USER=node CI_REPO  CI_REPO_NAME  CI_REPO_URL  CI_COMMIT_SHA  CI_COMMIT_REF  CI_PIPELINE_URL  CI_PIPELINE_CREATED  CI_PREV_PIPELINE_URL CI_PIPELINE_NUMBER
 
 ###########
 # BUILDER #
 ###########
-FROM node:22.15.0 AS builder
+FROM node:${NODE_VERSION} AS builder
 
 # copy build context and install dependencinpm res
 WORKDIR /workspace
@@ -17,7 +17,7 @@ RUN npm run build
 ###########
 # PROJECT #
 ###########
-FROM node:22-slim
+FROM node:${NODE_VERSION}-slim
 
 # pass the global args
 ARG USER
