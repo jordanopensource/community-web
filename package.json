@@ -24,7 +24,7 @@
   "dependencies": {
     "@nuxt/vite-builder": "^4",
     "@nuxtjs/robots": "^5",
-    "@vuepic/vue-datepicker": "^9",
+    "@vuepic/vue-datepicker": "^12",
     "qs": "^6",
     "vue-matomo": "^4"
   }
