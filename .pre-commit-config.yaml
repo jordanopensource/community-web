@@ -1,11 +1,11 @@
-default_stages: [commit]
+default_stages: [pre-commit]
 repos:
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v3.29.0
     hooks:
       - id: commitizen
   - repo: https://github.com/jordanopensource/pre-commit-hooks
-    rev: v0.4.2
+    rev: v0.4.5
     hooks:
       - id: validate-eslint
   - repo: https://github.com/gitleaks/gitleaks
